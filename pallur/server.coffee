@@ -107,7 +107,7 @@ server = http.createServer (request, response) ->
         route = app.router.routes[url.split('?')[0]]
         if route
             console.log "#{request.method} #{url}".bold
-            route request, response
+            route request, response, urlib.parse(request.url, true).query
         else
             # Public resource?
             console.log "#{request.method} #{url}".grey
