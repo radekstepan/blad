@@ -11,7 +11,10 @@
     "less": "1.3.x",
     "mime": "1.2.x",
     "eco": "latest",
-    "mongodb": "latest"
+    "mongodb": "latest",
+    "mocha": "latest",
+    "should": "latest",
+    "request": "latest"
   },
   "private": true,
   "repository": {

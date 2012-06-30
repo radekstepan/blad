@@ -4,9 +4,7 @@ app = require('./pallur/server.coffee').app
 urlib = require 'url'
 
 app.router.get "/api/type", (request, response, params) ->
-    for key, value of Type
-        if key is params.type
-            console.log (new Type[key]()).fields
+    response.write 'success'
     response.end()
 
 app.start()
@@ -19,3 +17,6 @@ class Type.Plain
         'main': # A unique identifier for this field.
             'type': 'textarea' # What content will this hold.
             'description': 'This is the page text.' # Description for the client.
+
+# For testing.
+exports.app = app

@@ -20,10 +20,13 @@ catch err
 
 # -------------------------------------------------------------------
 # Init and start the server.
-app.start = ->
+app.start = (logging=true) ->
+    # Shall we log?
+    CONFIG.log = logging
+
     startServer = ->
         server.listen port
-        console.log "Listening on port #{port}".green.bold
+        log "Listening on port #{port}".green.bold
 
     if process.env.PORT? # Heroku
         port = process.env.PORT
@@ -53,6 +56,11 @@ app.start = ->
 
             startServer()
 
+# Stop server programatically.
+app.stop = ->
+    server.on "close", -> process.exit()
+    server.close()
+
 # -------------------------------------------------------------------
 # Routes.
 app.router = 'routes': {}
@@ -62,7 +70,7 @@ app.router.get = (route, callback) -> app.router.routes[route] = callback
 # Eco template rendering and helpers.
 app.render = (response, filename, data={}) ->
     fs.readFile "#{__dirname}/templates/#{filename}.eco", "utf8", (err, template) ->
-        return log err, response if err
+        return error err, response if err
 
         resource = eco.render template, data
 
@@ -76,10 +84,10 @@ app.render = (response, filename, data={}) ->
 # LESS CSS rendering.
 css = (response, path) ->
     fs.readFile path, "utf8", (err, f) ->
-        return log err, response if err
+        return error err, response if err
 
         less.render f, (err, resource) ->
-            return log err, response if err
+            return error err, response if err
 
             # Info header about the source.
             t = resource.split("\n") ; t.splice(0, 0, "/* #{path} */\n") ; resource = t.join("\n")
@@ -91,9 +99,11 @@ css = (response, path) ->
             response.end()
 
 # -------------------------------------------------------------------
-# Error 404 logging.
-log = (error, response) ->
-    console.log new String(error.message).red
+# Logging and errors.
+log = (message) -> if CONFIG.log then console.log message
+
+error = (error, response) ->
+    log new String(error.message).red
     response.writeHead 404
     response.end()
 
@@ -106,11 +116,11 @@ server = http.createServer (request, response) ->
     if request.method is 'GET'
         route = app.router.routes[url.split('?')[0]]
         if route
-            console.log "#{request.method} #{url}".bold
+            log "#{request.method} #{url}".bold
             route request, response, urlib.parse(request.url, true).query
         else
             # Public resource?
-            console.log "#{request.method} #{url}".grey
+            log "#{request.method} #{url}".grey
 
             file = "#{__dirname}#{url}"
             # LESS?
@@ -120,7 +130,7 @@ server = http.createServer (request, response) ->
                 fs.stat file, (err, stat) ->
                     if err
                         # 404.
-                        console.log "#{url} not found".red
+                        log "#{url} not found".red
                         response.writeHead 404
                         response.end()
                     else
@@ -140,9 +150,9 @@ server = http.createServer (request, response) ->
                                 'ETag':           etag
 
                             util.pump fs.createReadStream(file), response, (err) ->
-                                return log err, response if err
+                                return error err, response if err
     
-    else log { 'message': 'No matching route' }, response
+    else error { 'message': 'No matching route' }, response
 
 # Make the app externally available.
 exports.app = app
