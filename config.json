@@ -1,0 +1,18 @@
+{
+    "development": {
+        "port": 1118,
+        "mongodb": {
+            "db": "blad",
+            "port": 27017,
+            "host": "localhost"
+        }
+    },
+    "production": {
+        "host": "app.herokuapp.com",
+        "mongodb": {
+            "db": "app",
+            "port": 10098,
+            "host": "staff.mongohq.com"
+        }
+    }
+}
