@@ -1,2 +1,2 @@
 # Blað
-A form based CMS.
+A forms based node.js CMS.
