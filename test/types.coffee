@@ -5,7 +5,7 @@ app = require('../app.coffee').app
 
 url = 'http://127.0.0.1:1118'
 
-describe "some test", ->
+describe "page types", ->
     
     before -> app.start false
 
