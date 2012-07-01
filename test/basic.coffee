@@ -22,7 +22,6 @@ describe "basic actions", ->
                         'url': "/documents/#{i}"
                 , (error, response, body) ->
                     response.statusCode.should.equal 201
-                    body.should.equal 'success'
                     if i is 1 then done()
 
         it 'should be able to retrieve the document', (done) ->
