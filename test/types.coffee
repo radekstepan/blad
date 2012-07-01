@@ -16,3 +16,9 @@ describe "page types", ->
             request.get "#{url}/api/type?type=Plain", (error, response, body) ->
                 body.should.equal 'success'
                 done()
+
+    describe "this case #2", ->
+        it 'should be successful #2', (done) ->
+            request.post "#{url}/api/document", (error, response, body) ->
+                body.should.equal 'success'
+                done()

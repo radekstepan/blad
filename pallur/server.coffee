@@ -63,8 +63,9 @@ app.stop = ->
 
 # -------------------------------------------------------------------
 # Routes.
-app.router = 'routes': {}
-app.router.get = (route, callback) -> app.router.routes[route] = callback
+app.router = 'routes': { 'GET': {}, 'POST': {} }
+app.router.get = (route, callback) -> app.router.routes.GET[route] = callback
+app.router.post = (route, callback) -> app.router.routes.POST[route] = callback
 
 # -------------------------------------------------------------------
 # Eco template rendering and helpers.
@@ -112,47 +113,49 @@ error = (error, response) ->
 server = http.createServer (request, response) ->
 
     url = request.url.toLowerCase()
+    route = app.router.routes[request.method][url.split('?')[0]]
+    
+    # Do we know this route?
+    if route
+        log "#{request.method} #{url}".bold
+        route request, response, urlib.parse(request.url, true).query
+    else
+        switch request.method
+            when 'GET'
+                # Public resource?
+                log "#{request.method} #{url}".grey
 
-    if request.method is 'GET'
-        route = app.router.routes[url.split('?')[0]]
-        if route
-            log "#{request.method} #{url}".bold
-            route request, response, urlib.parse(request.url, true).query
-        else
-            # Public resource?
-            log "#{request.method} #{url}".grey
-
-            file = "#{__dirname}#{url}"
-            # LESS?
-            if file[-9...] is '.less.css'
-                css response, file.replace('.less.css', '.less')
-            else
-                fs.stat file, (err, stat) ->
-                    if err
-                        # 404.
-                        log "#{url} not found".red
-                        response.writeHead 404
-                        response.end()
-                    else
-                        # Cache control.
-                        mtime = stat.mtime
-                        etag = stat.size + '-' + Date.parse(mtime)
-                        response.setHeader('Last-Modified', mtime);
-
-                        if request.headers['if-none-match'] is etag
-                            response.statusCode = 304
+                file = "#{__dirname}#{url}"
+                # LESS?
+                if file[-9...] is '.less.css'
+                    css response, file.replace('.less.css', '.less')
+                else
+                    fs.stat file, (err, stat) ->
+                        if err
+                            # 404.
+                            log "#{url} not found".red
+                            response.writeHead 404
                             response.end()
                         else
-                            # Stream file.
-                            response.writeHead 200,
-                                'Content-Type':   mime.lookup file
-                                'Content-Length': stat.size
-                                'ETag':           etag
+                            # Cache control.
+                            mtime = stat.mtime
+                            etag = stat.size + '-' + Date.parse(mtime)
+                            response.setHeader('Last-Modified', mtime);
 
-                            util.pump fs.createReadStream(file), response, (err) ->
-                                return error err, response if err
-    
-    else error { 'message': 'No matching route' }, response
+                            if request.headers['if-none-match'] is etag
+                                response.statusCode = 304
+                                response.end()
+                            else
+                                # Stream file.
+                                response.writeHead 200,
+                                    'Content-Type':   mime.lookup file
+                                    'Content-Length': stat.size
+                                    'ETag':           etag
+
+                                util.pump fs.createReadStream(file), response, (err) ->
+                                    return error err, response if err
+            else
+                error { 'message': 'No matching route' }, response
 
 # Make the app externally available.
 exports.app = app
