@@ -21,45 +21,47 @@ catch err
 
 # -------------------------------------------------------------------
 # Init and start the server.
-app.start = (logging=true) ->
+app.start = ->
     # Shall we log?
-    CONFIG.log = logging
-
-    startServer = ->
-        server.listen port
-        log "Listening on port #{port}".green.bold
+    CONFIG.log = !(process.env.NODE_ENV is 'test')
 
     if process.env.PORT? # Heroku
         port = process.env.PORT
         host = CONFIG.production.host
-        db = new mongodb.Db(CONFIG.production.mongodb.db,
+        app.db = new mongodb.Db(CONFIG.production.mongodb.db,
             new mongodb.Server(CONFIG.production.mongodb.host, CONFIG.production.mongodb.port,
                 'auto_reconnect': true
             )
         )
-        db.open (err) ->
+        app.db.open (err) ->
             throw err.message.red if err
-            db.authenticate process.env.MONGOHQ_USER, process.env.MONGOHQ_PASSWORD, (err) ->
+            app.db.authenticate process.env.MONGOHQ_USER, process.env.MONGOHQ_PASSWORD, (err) ->
                 throw err.message.red if err
 
-                startServer()
+            server.listen port
+            log "Listening on port #{port}".green.bold
+            app.ready = true
 
     else # Local development.
         port = CONFIG.development.port
         host = CONFIG.development.host
-        db = new mongodb.Db(CONFIG.development.mongodb.db,
+        app.db = new mongodb.Db(CONFIG.development.mongodb.db,
             new mongodb.Server(CONFIG.development.mongodb.host, CONFIG.development.mongodb.port,
                 'auto_reconnect': true
             )
         )
-        db.open (err, db) ->
+        app.db.open (err) ->
             throw err.message.red if err
 
-            startServer()
+            server.listen port
+            log "Listening on port #{port}".green.bold
+            app.ready = true
 
 # Stop server programatically.
-app.stop = ->
-    server.on "close", -> process.exit()
+app.stop = (cb) ->
+    server.on "close", ->
+        process.exit()
+        cb()
     server.close()
 
 # -------------------------------------------------------------------

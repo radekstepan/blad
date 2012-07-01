@@ -4,11 +4,25 @@ querystring = require 'querystring'
 
 app = require('../app.coffee').app
 
-describe "basic document actions", ->
-    
-    before -> app.start false
+url = 'http://127.0.0.1:1118'
 
-    # after -> app.stop()
+describe "basic document actions", ->
+
+    beforeEach (done) ->
+        app.start()
+        
+        do check = ->
+            if !app.ready? then setTimeout(check, 0)
+            else
+                app.db.collection 'test', (error, collection) ->
+                    done(error) if error
+                    collection.remove {}, (error, removed) ->
+                        collection.find({}).toArray (error, results) ->
+                            console.log results
+                            throw "Fuck sake this should be empty" if results.length isnt 0
+                            done()
+
+    #after (done) -> app.stop -> done()
 
     describe "create document", ->
         it 'should return 201', (done) ->
@@ -16,39 +30,45 @@ describe "basic document actions", ->
                 request.post
                     'headers':
                         "content-type": "application/x-www-form-urlencoded"
-                    'url': "http://127.0.0.1:1118/api/documents"
+                    'url': "#{url}/api/documents"
                     'body': querystring.stringify
                         'type': 'basic'
-                        'id':   "document-#{i}"
+                        '_id':   "document-#{i}"
                         'url':  "/documents/#{i}"
                 , (error, response, body) ->
+                    done(error) if error
+
                     response.statusCode.should.equal 201
                     if i is 1 then done()
 
         it 'should be able to retrieve the document', (done) ->
             for i in [ 0...2 ] then do (i) ->
-                request.get "http://127.0.0.1:1118/documents/#{i}"
+                request.get "#{url}/documents/#{i}"
                 , (error, response, body) ->
+                    done(error) if error
+
                     response.statusCode.should.equal 200
                     body.should.equal "document-#{i}"
                     if i is 1 then done()
 
     describe "retrieve all documents", ->
         it 'should get all of them', (done) ->
-            request.get "http://127.0.0.1:1118/api/documents"
+            request.get "#{url}/api/documents"
             , (error, response, body) ->
+                done(error) if error
+
                 response.statusCode.should.equal 200
 
-                # Sort the documents for us.
+                # Parse documents.
                 documents = JSON.parse body
 
                 documents.should.includeEql
                     "type": "basic"
-                    "id":   "document-0"
+                    "_id":   "document-0"
                     "url":  "/documents/0"
                 documents.should.includeEql
                     "type": "basic"
-                    "id":  "document-1"
+                    "_id":  "document-1"
                     "url": "/documents/1"
 
                 done()
