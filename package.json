@@ -14,7 +14,8 @@
     "mongodb": "latest",
     "mocha": "latest",
     "should": "latest",
-    "request": "latest"
+    "request": "latest",
+    "marked": "latest"
   },
   "private": true,
   "repository": {

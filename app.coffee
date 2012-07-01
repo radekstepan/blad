@@ -2,6 +2,7 @@
 app = require('./pallur/server.coffee').app
 
 eco = require 'eco'
+marked = require 'marked'
 
 # Get all documents.
 app.router.get "/api/documents", (request, response, params) ->
@@ -12,9 +13,16 @@ app.router.get "/api/documents", (request, response, params) ->
 
 # Create the document and map it to a url.
 app.router.post "/api/documents", (request, response, params) ->
-    Blað.save new BasicDocument params
+    switch params.type
+        when 'basic'
+            Blað.save new BasicDocument params
+            response.writeHead 201
+        when 'markdown'
+            Blað.save new MarkdownDocument params
+            response.writeHead 201
+        else
+            response.writeHead 404
 
-    response.writeHead 201
     response.end()
 
 app.start()
@@ -53,3 +61,8 @@ class BasicDocument extends Blað.Type
         eco.render @template,
             'id':  @id
             'url': @url
+
+class MarkdownDocument extends Blað.Type
+
+    # Presentation for the document.
+    render: -> marked @content

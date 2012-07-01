@@ -4,11 +4,11 @@ querystring = require 'querystring'
 
 app = require('../app.coffee').app
 
-describe "basic actions", ->
+describe "basic document actions", ->
     
     before -> app.start false
 
-    after -> app.stop()
+    # after -> app.stop()
 
     describe "create document", ->
         it 'should return 201', (done) ->
@@ -18,8 +18,9 @@ describe "basic actions", ->
                         "content-type": "application/x-www-form-urlencoded"
                     'url': "http://127.0.0.1:1118/api/documents"
                     'body': querystring.stringify
-                        'id':  "document-#{i}"
-                        'url': "/documents/#{i}"
+                        'type': 'basic'
+                        'id':   "document-#{i}"
+                        'url':  "/documents/#{i}"
                 , (error, response, body) ->
                     response.statusCode.should.equal 201
                     if i is 1 then done()
@@ -42,9 +43,11 @@ describe "basic actions", ->
                 documents = JSON.parse body
 
                 documents.should.includeEql
-                    "id":  "document-0"
-                    "url": "/documents/0"
+                    "type": "basic"
+                    "id":   "document-0"
+                    "url":  "/documents/0"
                 documents.should.includeEql
+                    "type": "basic"
                     "id":  "document-1"
                     "url": "/documents/1"
 
