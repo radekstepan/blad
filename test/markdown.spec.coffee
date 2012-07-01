@@ -8,21 +8,17 @@ url = 'http://127.0.0.1:1118'
 
 describe "markdown document actions", ->
 
-    beforeEach (done) ->
+    before (done) ->
         app.start()
         
-        do check = ->
-            if !app.ready? then setTimeout(check, 0)
-            else
-                app.db.collection 'test', (error, collection) ->
-                    done(error) if error
-                    collection.remove {}, (error, removed) ->
-                        collection.find({}).toArray (error, results) ->
-                            console.log results
-                            throw "Fuck sake this should be empty" if results.length isnt 0
-                            done()
-
-    #after (done) -> app.stop -> done()
+        setTimeout ( ->
+            app.db.collection 'test', (error, collection) ->
+                done(error) if error
+                collection.remove {}, (error, removed) ->
+                    collection.find({}).toArray (error, results) ->
+                        results.length.should.equal 0
+                        done()
+        ), 10
 
     describe "create document", ->
         it 'should return 201', (done) ->
@@ -54,6 +50,8 @@ describe "markdown document actions", ->
 
                 # Parse documents.
                 documents = JSON.parse body
+
+                documents.length.should.equal 1
 
                 documents.should.includeEql
                     'type':    'markdown'

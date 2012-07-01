@@ -55,7 +55,6 @@ app.start = ->
 
             server.listen port
             log "Listening on port #{port}".green.bold
-            app.ready = true
 
 # Stop server programatically.
 app.stop = (cb) ->

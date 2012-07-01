@@ -37,7 +37,7 @@ Blað.documents = (cb) ->
 Blað.save = (doc, cb) ->
     Blað.documents (collection) ->
         collection.insert doc,
-            'safe': false
+            'safe': true
         , (err, records) ->
             cb records[0].url
 
