@@ -1,13 +1,18 @@
 #!/usr/bin/env coffee
 app = require('./pallur/server.coffee').app
 
-urlib = require 'url'
-
-app.router.get "/api/type", (request, response, params) ->
-    response.write 'success'
+# Get all documents.
+app.router.get "/api/documents", (request, response, params) ->
+    response.writeHead 200,
+        "Content-Type": "application/json"
+    response.write JSON.stringify Blað.storage
     response.end()
 
-app.router.post "/api/document", (request, response, params) ->
+# Create the document and map it to a url.
+app.router.post "/api/documents", (request, response, params) ->
+    Blað.save new BasicDocument params
+
+    response.writeHead 201
     response.write 'success'
     response.end()    
 
@@ -19,12 +24,21 @@ exports.app = app
 # -------------------------------------------------------------------
 
 Blað = {}
+Blað.storage = []
 
-Blað.storage = {}
+# Save new document.
+Blað.save = (doc) ->
+    Blað.storage.push doc
 
+    app.router.get doc.url, (request, response, params) ->
+        response.write doc.id
+        response.end()
+
+# Document types.
 class Blað.Type
 
-class Basic extends Blað.Type
-    
-    id:  null
-    url: null
+    constructor: (params) ->
+        for key, value of params
+            @[key] = value
+
+class BasicDocument extends Blað.Type

@@ -7,6 +7,7 @@ colors  = require 'colors'
 mime    = require 'mime'
 less    = require 'less'
 mongodb = require 'mongodb'
+qs      = require 'querystring'
 
 app = {}
 
@@ -118,7 +119,14 @@ server = http.createServer (request, response) ->
     # Do we know this route?
     if route
         log "#{request.method} #{url}".bold
-        route request, response, urlib.parse(request.url, true).query
+
+        switch request.method
+            when 'GET'
+                route request, response, urlib.parse(request.url, true).query
+            when 'POST'
+                body = ''
+                request.on "data", (data) -> body += data
+                request.on "end", -> route request, response, qs.parse body
     else
         switch request.method
             when 'GET'
