@@ -27,7 +27,7 @@ describe "markdown document actions", ->
                     "content-type": "application/x-www-form-urlencoded"
                 'url': "#{url}/api/documents"
                 'body': querystring.stringify
-                    'type':    'markdown'
+                    'type':    'MarkdownDocument'
                     '_id':      "markdown"
                     'url':     "/documents/markdown"
                     'content': "__hello__"
@@ -54,7 +54,7 @@ describe "markdown document actions", ->
                 documents.length.should.equal 1
 
                 documents.should.includeEql
-                    'type':    'markdown'
+                    'type':    'MarkdownDocument'
                     "_id":      "markdown"
                     "url":     "/documents/markdown"
                     "content": "__hello__"

@@ -28,7 +28,7 @@ describe "basic document actions", ->
                         "content-type": "application/x-www-form-urlencoded"
                     'url': "#{url}/api/documents"
                     'body': querystring.stringify
-                        'type': 'basic'
+                        'type': 'BasicDocument'
                         '_id':   "document-#{i}"
                         'url':  "/documents/#{i}"
                 , (error, response, body) ->
@@ -61,11 +61,11 @@ describe "basic document actions", ->
                 documents.length.should.equal 2
 
                 documents.should.includeEql
-                    "type": "basic"
+                    "type": "BasicDocument"
                     "_id":   "document-0"
                     "url":  "/documents/0"
                 documents.should.includeEql
-                    "type": "basic"
+                    "type": "BasicDocument"
                     "_id":  "document-1"
                     "url": "/documents/1"
 

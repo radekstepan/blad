@@ -50,17 +50,10 @@ Blað.get = (request, response, params) ->
     Blað.documents (collection) ->
         collection.findOne
             'url': request.url.toLowerCase()
-        , (err, document) ->
-            if document and not err
-                # Instantiate the type.
-                switch document.type
-                    when 'basic'
-                        doc = new BasicDocument document
-                    when 'markdown'
-                        doc = new MarkdownDocument document
-
+        , (err, record) ->
+            if record and not err
                 # Render.
-                response.write doc?.render()
+                response.write (new Blað.types[record.type](record))?.render()
                 response.end()
             else
                 # 404, should not happen...
@@ -68,6 +61,8 @@ Blað.get = (request, response, params) ->
                 response.end()
 
 # Document types.
+Blað.types = {}
+
 class Blað.Type
 
     constructor: (params) ->
@@ -85,7 +80,11 @@ class BasicDocument extends Blað.Type
             '_id': @_id
             'url': @url
 
+Blað.types.BasicDocument = BasicDocument
+
 class MarkdownDocument extends Blað.Type
 
     # Presentation for the document.
     render: -> marked @content
+
+Blað.types.MarkdownDocument = MarkdownDocument
