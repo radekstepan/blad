@@ -12,7 +12,7 @@
     "mime": "1.2.x",
     "eco": "latest",
     "mongodb": "latest",
-    "jasmine-node": "latest",
+    "mocha": "latest",
     "should": "latest",
     "request": "latest",
     "marked": "latest"
