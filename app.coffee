@@ -1,9 +1,6 @@
 #!/usr/bin/env coffee
 app = require('./pallur/server.coffee').app
 
-eco = require 'eco'
-marked = require 'marked'
-
 # Get all documents.
 app.router.get "/api/documents", (request, response, params) ->
     Blað.documents (collection) ->
@@ -21,9 +18,6 @@ app.router.post "/api/documents", (request, response, params) ->
         response.end()
 
 app.start()
-
-# For testing.
-exports.app = app
 
 # -------------------------------------------------------------------
 
@@ -69,22 +63,8 @@ class Blað.Type
         for key, value of params
             @[key] = value
 
-class BasicDocument extends Blað.Type
+# -------------------------------------------------------------------
 
-    # Eco template.
-    template: '<%= @_id %>'
-
-    # Presentation for the document.
-    render: ->
-        eco.render @template,
-            '_id': @_id
-            'url': @url
-
-Blað.types.BasicDocument = BasicDocument
-
-class MarkdownDocument extends Blað.Type
-
-    # Presentation for the document.
-    render: -> marked @content
-
-Blað.types.MarkdownDocument = MarkdownDocument
+# Expose.
+exports.app = app
+exports.Blað = Blað

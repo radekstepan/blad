@@ -2,9 +2,30 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-app = require('../app.coffee').app
+exported = require('../app.coffee')
+app = exported.app
+Blað = exported.Blað
 
 url = 'http://127.0.0.1:1118'
+
+# -------------------------------------------------------------------
+
+eco = require 'eco'
+
+class BasicDocument extends Blað.Type
+
+    # Eco template.
+    template: '<%= @_id %>'
+
+    # Presentation for the document.
+    render: ->
+        eco.render @template,
+            '_id': @_id
+            'url': @url
+
+Blað.types.BasicDocument = BasicDocument
+
+# -------------------------------------------------------------------
 
 describe "basic document actions", ->
 

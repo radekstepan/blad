@@ -2,9 +2,24 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-app = require('../app.coffee').app
+exported = require('../app.coffee')
+app = exported.app
+Blað = exported.Blað
 
 url = 'http://127.0.0.1:1118'
+
+# -------------------------------------------------------------------
+
+marked = require 'marked'
+
+class MarkdownDocument extends Blað.Type
+
+    # Presentation for the document.
+    render: -> marked @content
+
+Blað.types.MarkdownDocument = MarkdownDocument
+
+# -------------------------------------------------------------------
 
 describe "markdown document actions", ->
 
