@@ -18,7 +18,7 @@ describe "markdown document actions", ->
                     collection.find({}).toArray (error, results) ->
                         results.length.should.equal 0
                         done()
-        ), 10
+        ), 100
 
     describe "create document", ->
         it 'should return 201', (done) ->

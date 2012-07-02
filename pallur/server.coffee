@@ -57,10 +57,8 @@ app.start = ->
             log "Listening on port #{port}".green.bold
 
 # Stop server programatically.
-app.stop = (cb) ->
-    server.on "close", ->
-        process.exit()
-        cb()
+app.stop = ->
+    server.on "close", -> process.exit()
     server.close()
 
 # -------------------------------------------------------------------
