@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8" />
 
-    <title>Chaplin.js Boilerplate Application</title>
+    <title>Blað CMS</title>
 
     <link rel="stylesheet" href="public/css/foundation3.css">
     <link rel="stylesheet" href="public/css/style.css">
@@ -12,24 +12,58 @@
 <body>
     <div id="top">
         <div class="row">
-            <div class="twelve columns">
-                <a class="small blue nice button download" href="https://github.com/radekstepan/chaplin-boilerplate">GitHub</a>
-                <a class="name" href="https://github.com/chaplinjs/chaplin">Chaplin.js</a>
+            <div class="two columns">
+                <a class="name" href="/">Blað CMS</a>
+            </div>
+            <div class="five columns">
+                <input type="text" placeholder="Search documents...">
+            </div>
+            <div class="two column">
+                <a class="small blue nice button right new"><span class="icon-plus-sign"></span>New</a></a>
             </div>
         </div>
     </div>
 
-    <header>
-        <div class="row">
-            <div class="twelve columns">
-                <h1>Chaplin.js Boilerplate Application</h1>
-                <h4>This is a boilerplate application built with <a href="https://github.com/chaplinjs/chaplin">Chaplin.js</a>,
-                    an application structure on top of <a href="http://backbonejs.org/">Backbone.js</a> using
-                    <a href="https://github.com/sstephenson/eco/">eco</a> templating and
-                    <a href="http://foundation.zurb.com/">Foundation</a> CSS framework.</h4>
-            </div>
+    <div class="row">
+        <div class="twelve columns">
+            <table id="table">
+                <tbody>
+                    <tr>
+                        <td><strong><a href="#">/publications</a></strong></td>
+                        <td>Lists publications by the Micklem group</td>
+                    </tr>
+                    <tr>
+                        <td><strong><a href="#">/events</a></strong></td>
+                        <td>Upcoming events fetched from RSS</td>
+                    </tr>
+                    <tr>
+                        <td><strong><a href="#">/people</a></strong></td>
+                        <td>Group members and their profiles</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form>
+                <label>This is a label.</label>
+                <input type="text" placeholder="Standard Input">
+
+                <label>Address</label>
+                <input type="text" class="twelve" placeholder="Street">
+                
+                <div class="row">
+                    <div class="six columns">
+                        <input type="text" placeholder="City">
+                    </div>
+                    <div class="three columns">
+                        <input type="text" placeholder="State">
+                    </div>
+                    <div class="three columns">
+                        <input type="text" placeholder="ZIP">
+                    </div>
+                </div>
+            </form>
         </div>
-    </header>
+    </div>
 
     <div class="row">
         <div class="twelve columns">
