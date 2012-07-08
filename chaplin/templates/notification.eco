@@ -1,0 +1,4 @@
+<div class="alert-box success">
+    This is an alert box.
+    <a class="close">&times;</a>
+</div>

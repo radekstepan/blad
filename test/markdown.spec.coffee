@@ -2,7 +2,7 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-exported = require('../app.coffee')
+exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
 

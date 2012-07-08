@@ -2,6 +2,12 @@
 
 app = require('./pallur/server.coffee').app
 
+app.router.get "/", (request, response, params) ->
+    app.render response, 'index', {}
+
+# -------------------------------------------------------------------
+# API
+
 # Get all documents.
 app.router.get "/api/documents", (request, response, params) ->
     Blað.documents (collection) ->
