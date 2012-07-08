@@ -10,7 +10,7 @@ define [
 
         # Set your application name here so the document title is set to
         # “Controller title – Site title” (see Layout#adjustTitle)
-        title: 'Chaplin Example Application'
+        title: 'Blað CMS API Client'
 
         initialize: ->
             super

@@ -26,47 +26,6 @@
 
     <div class="row">
         <div class="twelve columns">
-            <table id="table">
-                <tbody>
-                    <tr>
-                        <td><strong><a href="#">/publications</a></strong></td>
-                        <td>Lists publications by the Micklem group</td>
-                    </tr>
-                    <tr>
-                        <td><strong><a href="#">/events</a></strong></td>
-                        <td>Upcoming events fetched from RSS</td>
-                    </tr>
-                    <tr>
-                        <td><strong><a href="#">/people</a></strong></td>
-                        <td>Group members and their profiles</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <form>
-                <label>This is a label.</label>
-                <input type="text" placeholder="Standard Input">
-
-                <label>Address</label>
-                <input type="text" class="twelve" placeholder="Street">
-                
-                <div class="row">
-                    <div class="six columns">
-                        <input type="text" placeholder="City">
-                    </div>
-                    <div class="three columns">
-                        <input type="text" placeholder="State">
-                    </div>
-                    <div class="three columns">
-                        <input type="text" placeholder="ZIP">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="twelve columns">
             <div id="app"></div>
         </div>
     </div>
