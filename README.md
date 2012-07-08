@@ -1,19 +1,19 @@
 # Blað
 A forms based node.js CMS.
 
-## Compile Chaplin.js client app
+## Chaplin.js client app
 
 ```bash
 $ ./client.sh
 ```
 
-### Run Pallur server app
+## Pallur server app
 
 ```bash
 $ ./server.sh
 ```
 
-### Run Mocha test suite
+## Mocha test suite
 
 ```bash
 $ ./test.sh
