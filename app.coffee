@@ -1,4 +1,5 @@
 #!/usr/bin/env coffee
+
 app = require('./pallur/server.coffee').app
 
 # Get all documents.

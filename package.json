@@ -1,25 +1,21 @@
 {
-  "name": "blad",
-  "author": "Radek <dev@radekstepan.com>",
-  "version": "0.0.2",
-  "engines": {
-    "node": "0.6.x"
-  },
-  "dependencies": {
-    "coffee-script": "latest",
-    "colors": "0.6.0",
-    "less": "1.3.x",
-    "mime": "1.2.x",
-    "eco": "latest",
-    "mongodb": "latest",
-    "mocha": "latest",
-    "should": "latest",
-    "request": "latest",
-    "marked": "latest"
-  },
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/radekstepan/blad.git"
-  }
+    "name": "blad",
+    "author": "Radek <dev@radekstepan.com>",
+    "version": "0.0.2",
+    "engines": {
+        "node": "0.6.x"
+    },
+    "dependencies": {
+        "coffee-script": "latest",
+        "eco": "latest",
+        "marked": "latest",
+        "mocha": "latest",
+        "should": "latest",
+        "request": "latest"
+    },
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/radekstepan/blad.git"
+    }
 }
