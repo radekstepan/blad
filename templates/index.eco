@@ -15,11 +15,8 @@
             <div class="two columns">
                 <a class="name" href="/">Blað CMS</a>
             </div>
-            <div class="five columns">
-                <input type="text" placeholder="Search documents...">
-            </div>
             <div class="two column">
-                <a class="small blue nice button right new"><span class="icon-plus-sign"></span>New</a></a>
+                <a href="/new" class="small blue nice button right new">New Document</a></a>
             </div>
         </div>
     </div>
@@ -35,7 +32,7 @@
 // Configure the AMD module loader
 requirejs.config({
     // The path where your JavaScripts are located
-    baseUrl: './public/js/',
+    baseUrl: '/public/js/',
     // Specify the paths of vendor libraries
     paths: {
         'jquery':     'vendor/jquery-1.7.2',

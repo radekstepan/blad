@@ -1,0 +1,18 @@
+<h2><%= @type %> <%= @id %></h2>
+
+<input type="hidden" name="type" value="<%= @type %>">
+
+<div class="row">
+    <div class="six columns">
+        <label>Unique identifier</label>
+        <input type="text" placeholder="document-name" name="id" value="<%= @id %>">
+    </div>
+    <div class="six columns">
+        <label>URL</label>
+        <input type="text" placeholder="/" name="url" value="<%= @url %>">
+    </div>
+</div>
+
+<div class="row">
+    <a class="save success button right">Save</a>
+</div>

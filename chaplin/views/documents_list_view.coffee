@@ -1,7 +1,7 @@
 define [
     'chaplin'
-    'views/document_view'
-], (Chaplin, DocumentView) ->
+    'views/document_list_view'
+], (Chaplin, DocumentListView) ->
 
     class DocumentsListView extends Chaplin.CollectionView
 
@@ -18,4 +18,4 @@ define [
         # must overwrite.
         getView: (item) ->
             # Instantiate an item view
-            new DocumentView model: item
+            new DocumentListView model: item

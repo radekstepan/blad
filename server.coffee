@@ -7,7 +7,6 @@ app.router.get "/", (request, response, params) ->
 
 # -------------------------------------------------------------------
 # API
-
 # Get all documents.
 app.router.get "/api/documents", (request, response, params) ->
     Blað.documents (collection) ->
@@ -16,15 +15,34 @@ app.router.get "/api/documents", (request, response, params) ->
             response.write JSON.stringify docs
             response.end()
 
-# Create the document and map it to a url.
-app.router.post "/api/documents", (request, response, params) ->
+# Get a document.
+app.router.get "/api/document", (request, response, params) ->
+    Blað.documents (collection) ->
+        collection.findOne '_id': params.id, (err, doc) ->
+            response.writeHead 200, "Content-Type": "application/json"
+            response.write JSON.stringify doc
+            response.end()
+
+editSave = (request, response, params) ->
+    # Replace `id` with `_id`.
+    console.log params
     Blað.save params, (url) ->
         Blað.map url
 
         response.writeHead 201
         response.end()
 
+# Save a new document and map it to a url.
+app.router.post "/api/document", editSave
+# Edit an existing document and map it to a url.
+app.router.put "/api/document", editSave
+
 app.start()
+
+app.router.get "/reset", (request, response, params) ->
+    app.db.collection 'documents', (error, collection) ->
+        collection.remove {}, (error, removed) ->
+            response.end()
 
 # -------------------------------------------------------------------
 

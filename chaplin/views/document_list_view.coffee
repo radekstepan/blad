@@ -1,14 +1,14 @@
 define [
     'chaplin'
-    'templates/document'
+    'templates/document_row'
 ], (Chaplin) ->
 
-    class DocumentView extends Chaplin.View
+    class DocumentListView extends Chaplin.View
 
         tagName: 'tr'
 
         # Template name on global `JST` object.
-        templateName: 'document'
+        templateName: 'document_row'
         
         # Automatically render after initialization
         autoRender: true

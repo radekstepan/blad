@@ -4,4 +4,6 @@ define ->
     # `match` is match method of the Router
     (match) ->
 
-        match '', 'Documents#show'
+        match '', 				'documents#index'
+        match 'edit/:document', 'documents#edit'
+        match 'new',            'documents#new'

@@ -47,7 +47,7 @@ describe "basic document actions", ->
                 request.post
                     'headers':
                         "content-type": "application/x-www-form-urlencoded"
-                    'url': "#{url}/api/documents"
+                    'url': "#{url}/api/document"
                     'body': querystring.stringify
                         'type': 'BasicDocument'
                         '_id':   "document-#{i}"

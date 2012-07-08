@@ -40,7 +40,7 @@ describe "markdown document actions", ->
             request.post
                 'headers':
                     "content-type": "application/x-www-form-urlencoded"
-                'url': "#{url}/api/documents"
+                'url': "#{url}/api/document"
                 'body': querystring.stringify
                     'type':    'MarkdownDocument'
                     '_id':      "markdown"

@@ -1,1 +1,0 @@
-<td><strong><a href="#"><%= @url %></a></strong></td>
