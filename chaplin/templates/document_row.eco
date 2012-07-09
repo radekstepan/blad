@@ -1,1 +1,1 @@
-<td><strong><a href="/edit/<%= @id %>"><%= @url %></a></strong></td>
+<td><strong><a href="/edit/<%= @_id %>"><%= @url %></a></strong></td>

@@ -8,8 +8,7 @@ define [
 
     class DocumentsController extends Chaplin.Controller
 
-        historyURL: (params) ->
-            if params.id then "edit/#{params.id}" else ''
+        historyURL: (params) -> ''
 
         index: (params) ->
             @collection = new Documents()
@@ -19,7 +18,7 @@ define [
                     @view = new DocumentsListView 'collection': collection
 
         edit: (params) ->
-            @model = new Document 'id': params.document
+            @model = new Document '_id': params._id
             @model.fetch
                 'success': (model) ->
                     @view = new DocumentEditView 'model': model

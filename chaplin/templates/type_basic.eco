@@ -1,11 +1,11 @@
-<h2><%= @type %> <%= @id %></h2>
+<h2><%= @type %> <%= @_id %></h2>
 
 <input type="hidden" name="type" value="<%= @type %>">
 
 <div class="row">
     <div class="six columns">
         <label>Unique identifier</label>
-        <input type="text" placeholder="document-name" name="id" value="<%= @id %>">
+        <input type="text" placeholder="document-name" name="_id" value="<%= @_id %>">
     </div>
     <div class="six columns">
         <label>URL</label>

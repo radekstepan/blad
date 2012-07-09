@@ -4,10 +4,10 @@
 
     <title>Blað CMS</title>
 
-    <link rel="stylesheet" href="public/css/foundation3.css">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="css/foundation3.css">
+    <link rel="stylesheet" href="css/style.css">
 
-    <script src="public/js/vendor/require-2.0.2.js"></script>
+    <script src="js/vendor/require-2.0.2.js"></script>
 </head>
 <body>
     <div id="top">
@@ -32,7 +32,7 @@
 // Configure the AMD module loader
 requirejs.config({
     // The path where your JavaScripts are located
-    baseUrl: '/public/js/',
+    baseUrl: '/js/',
     // Specify the paths of vendor libraries
     paths: {
         'jquery':     'vendor/jquery-1.7.2',

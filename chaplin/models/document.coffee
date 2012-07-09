@@ -9,4 +9,4 @@ define [
         defaults:
             'type': 'basic'
 
-        url: -> "/api/document?id=#{@id}"
+        url: -> '/api/document?_id=' + @get '_id'

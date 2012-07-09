@@ -1,12 +1,15 @@
 {
     "name": "blad",
     "author": "Radek <dev@radekstepan.com>",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "node": "0.6.x"
     },
     "dependencies": {
         "coffee-script": "latest",
+        "flatiron": "latest",
+        "union": "latest",
+        "connect": "latest",
         "eco": "latest",
         "marked": "latest",
         "mocha": "latest",

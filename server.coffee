@@ -1,82 +1,129 @@
 #!/usr/bin/env coffee
 
-app = require('./pallur/server.coffee').app
+flatiron = require 'flatiron'
+connect  = require 'connect'
+mongodb  = require 'mongodb'
+urlib    = require 'url'
+eco      = require 'eco'
+fs       = require 'fs'
 
-app.router.get "/", (request, response, params) ->
-    app.render response, 'index', {}
+app = flatiron.app
+app.use flatiron.plugins.http,
+    'before': [
+        connect.favicon()
+        connect.static './public'
+    ]
+
+app.start 1118, (err) ->
+    throw err if err
+    app.log.info "Listening on port #{app.server.address().port}"
 
 # -------------------------------------------------------------------
-# API
+# Plugins.
+app.use
+    name: "eco-templating"
+    attach: (options) ->
+        app.eco = (filename, data, cb) ->
+            fs.readFile "./templates/#{filename}.eco", "utf8", (err, template) ->
+                throw err if err
+
+                cb eco.render template, data
+
+# Start.
+mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
+    throw err if err
+    app.log.info "Fired up MongoDB"
+
+    app.use
+        name: "mongodb"
+        attach: (options) ->
+            app.db = (cb) ->
+                db.collection 'documents', (err, collection) ->
+                    throw err if err
+                    cb collection
+
+# -------------------------------------------------------------------
+# Bootstrap the CMS frontend.
+app.router.path "/", ->
+    @get ->
+        app.log.info "Bootstrapping app"
+
+        app.eco 'index', {}, (html) =>
+            @res.writeHead 200,
+                'content-type':  'text/html'
+                'content-length': html.length
+            @res.write html
+            @res.end()
+
 # Get all documents.
-app.router.get "/api/documents", (request, response, params) ->
-    Blað.documents (collection) ->
-        collection.find().toArray (err, docs) ->
-            response.writeHead 200, "Content-Type": "application/json"
-            response.write JSON.stringify docs
-            response.end()
+app.router.path "/api/documents", ->
+    @get ->
+        app.log.info "Get all documents"
 
-# Get a document.
-app.router.get "/api/document", (request, response, params) ->
-    Blað.documents (collection) ->
-        collection.findOne '_id': params.id, (err, doc) ->
-            response.writeHead 200, "Content-Type": "application/json"
-            response.write JSON.stringify doc
-            response.end()
+        app.db (collection) =>
+            collection.find().toArray (err, docs) =>
+                throw err if err
+                @res.writeHead 200, "content-type": "application/json"
+                @res.write JSON.stringify docs
+                @res.end()
 
-editSave = (request, response, params) ->
-    # Replace `id` with `_id`.
-    console.log params
-    Blað.save params, (url) ->
-        Blað.map url
+# Get/update/create a document.
+app.router.path "/api/document", ->
+    @get ->
+        app.log.info "Get a document"
 
-        response.writeHead 201
-        response.end()
+        app.db (collection) =>
+            params = urlib.parse(@req.url, true).query
+            collection.findOne '_id': params._id, (err, doc) =>
+                @res.writeHead 200, "content-type": "application/json"
+                @res.write JSON.stringify doc
+                @res.end()
 
-# Save a new document and map it to a url.
-app.router.post "/api/document", editSave
-# Edit an existing document and map it to a url.
-app.router.put "/api/document", editSave
+    editSave = ->
+        app.log.info "Edit/create a document"
+        
+        Blað.save @req.body, (url) =>
+            Blað.map url
 
-app.start()
+            @res.writeHead 201
+            @res.end()
 
-app.router.get "/reset", (request, response, params) ->
-    app.db.collection 'documents', (error, collection) ->
-        collection.remove {}, (error, removed) ->
-            response.end()
+    @post editSave
+    @put editSave
+
+app.router.path "/reset", ->
+    @get ->
+        app.db (collection) =>
+            collection.remove {}, (err, removed) =>
+                throw err if err
+                @res.end()
 
 # -------------------------------------------------------------------
-
+# Blað.
 Blað = {}
-
-# MongoDB collection connection.
-Blað.documents = (cb) ->
-    app.db.collection process.env.NODE_ENV or 'documents', (err, collection) -> cb collection unless err
 
 # Save/update a document.
 Blað.save = (doc, cb) ->
-    Blað.documents (collection) ->
+    app.db (collection) ->
         collection.insert doc,
-            'safe': true
+            'safe': false
         , (err, records) ->
+            throw err if err
             cb records[0].url
 
 # Map a document to a public URL.
-Blað.map = (url) -> app.router.get url, Blað.get
+Blað.map = (url) => app.router.path url, Blað.get
 
 # Retrieve publicly mapped document.
-Blað.get = (request, response, params) ->
-    # Get the doc from the db.
-    Blað.documents (collection) ->
-        collection.findOne
-            'url': request.url.toLowerCase()
-        , (err, record) ->
-            if record and not err
-                # Render.
+Blað.get = ->
+    @get ->
+        # Get the doc from the db.
+        app.db (collection) =>
+            collection.findOne
+                'url': @req.url.toLowerCase()
+            , (err, record) ->
+                throw err if err
                 response.write (new Blað.types[record.type](record))?.render()
-                response.end()
-            else
-                # 404, should not happen...
-                response.writeHead 404
                 response.end()
 
 # Document types.
@@ -87,8 +134,6 @@ class Blað.Type
     constructor: (params) ->
         for key, value of params
             @[key] = value
-
-# -------------------------------------------------------------------
 
 # Expose.
 exports.app = app
