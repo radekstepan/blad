@@ -8,33 +8,13 @@ Blað = exported.Blað
 
 url = 'http://127.0.0.1:1118'
 
-# -------------------------------------------------------------------
-
-eco = require 'eco'
-
-class BasicDocument extends Blað.Type
-
-    # Eco template.
-    template: '<%= @_id %>'
-
-    # Presentation for the document.
-    render: ->
-        eco.render @template,
-            '_id': @_id
-            'url': @url
-
-Blað.types.BasicDocument = BasicDocument
-
-# -------------------------------------------------------------------
-
 describe "basic document actions", ->
 
     before (done) ->
         app.start()
         
         setTimeout ( ->
-            app.db.collection 'test', (error, collection) ->
-                done(error) if error
+            app.db (collection) ->
                 collection.remove {}, (error, removed) ->
                     collection.find({}).toArray (error, results) ->
                         results.length.should.equal 0
@@ -45,10 +25,8 @@ describe "basic document actions", ->
         it 'should return 201', (done) ->
             for i in [ 0...2 ] then do (i) ->
                 request.post
-                    'headers':
-                        "content-type": "application/x-www-form-urlencoded"
                     'url': "#{url}/api/document"
-                    'body': querystring.stringify
+                    'form':
                         'type': 'BasicDocument'
                         '_id':   "document-#{i}"
                         'url':  "/documents/#{i}"

@@ -4,8 +4,9 @@ flatiron = require 'flatiron'
 connect  = require 'connect'
 mongodb  = require 'mongodb'
 urlib    = require 'url'
-eco      = require 'eco'
 fs       = require 'fs'
+eco      = require 'eco'
+marked   = require 'marked'
 
 app = flatiron.app
 app.use flatiron.plugins.http,
@@ -16,7 +17,7 @@ app.use flatiron.plugins.http,
 
 app.start 1118, (err) ->
     throw err if err
-    app.log.info "Listening on port #{app.server.address().port}"
+    app.log.info "Listening on port #{app.server.address().port}".green if process.env.NODE_ENV isnt 'test'
 
 # -------------------------------------------------------------------
 # Plugins.
@@ -32,13 +33,13 @@ app.use
 # Start.
 mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
     throw err if err
-    app.log.info "Fired up MongoDB"
+    app.log.info "Fired up MongoDB".green if process.env.NODE_ENV isnt 'test'
 
     app.use
         name: "mongodb"
         attach: (options) ->
             app.db = (cb) ->
-                db.collection 'documents', (err, collection) ->
+                db.collection process.env.NODE_ENV or 'documents', (err, collection) ->
                     throw err if err
                     cb collection
 
@@ -46,7 +47,7 @@ mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
 # Bootstrap the CMS frontend.
 app.router.path "/", ->
     @get ->
-        app.log.info "Bootstrapping app"
+        app.log.info "Bootstrapping app" if process.env.NODE_ENV isnt 'test'
 
         app.eco 'index', {}, (html) =>
             @res.writeHead 200,
@@ -58,7 +59,7 @@ app.router.path "/", ->
 # Get all documents.
 app.router.path "/api/documents", ->
     @get ->
-        app.log.info "Get all documents"
+        app.log.info "Get all documents" if process.env.NODE_ENV isnt 'test'
 
         app.db (collection) =>
             collection.find().toArray (err, docs) =>
@@ -70,7 +71,7 @@ app.router.path "/api/documents", ->
 # Get/update/create a document.
 app.router.path "/api/document", ->
     @get ->
-        app.log.info "Get a document"
+        app.log.info "Get a document" if process.env.NODE_ENV isnt 'test'
 
         app.db (collection) =>
             params = urlib.parse(@req.url, true).query
@@ -80,10 +81,13 @@ app.router.path "/api/document", ->
                 @res.end()
 
     editSave = ->
-        app.log.info "Edit/create a document"
+        app.log.info "Edit/create a document" if process.env.NODE_ENV isnt 'test'
         
         Blað.save @req.body, (url) =>
-            Blað.map url
+            app.log.info "Mapping url " + url.blue if process.env.NODE_ENV isnt 'test'
+
+            # Map a document to a public URL.
+            app.router.path url, Blað.get
 
             @res.writeHead 201
             @res.end()
@@ -111,9 +115,6 @@ Blað.save = (doc, cb) ->
             throw err if err
             cb records[0].url
 
-# Map a document to a public URL.
-Blað.map = (url) => app.router.path url, Blað.get
-
 # Retrieve publicly mapped document.
 Blað.get = ->
     @get ->
@@ -121,10 +122,14 @@ Blað.get = ->
         app.db (collection) =>
             collection.findOne
                 'url': @req.url.toLowerCase()
-            , (err, record) ->
+            , (err, record) =>
                 throw err if err
-                response.write (new Blað.types[record.type](record))?.render()
-                response.end()
+
+                app.log.info 'Serving document ' + JSON.stringify(record).blue if process.env.NODE_ENV isnt 'test'
+
+                @res.writeHead 200, "content-type": "text/html"
+                @res.write (new Blað.types[record.type]?(record))?.render()
+                @res.end()
 
 # Document types.
 Blað.types = {}
@@ -134,6 +139,27 @@ class Blað.Type
     constructor: (params) ->
         for key, value of params
             @[key] = value
+
+
+class BasicDocument extends Blað.Type
+
+    # Eco template.
+    template: '<%= @_id %>'
+
+    # Presentation for the document.
+    render: ->
+        eco.render @template,
+            '_id': @_id
+            'url': @url
+
+Blað.types.BasicDocument = BasicDocument
+
+class MarkdownDocument extends Blað.Type
+
+    # Presentation for the document.
+    render: -> marked @content
+
+Blað.types.MarkdownDocument = MarkdownDocument
 
 # Expose.
 exports.app = app

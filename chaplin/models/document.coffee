@@ -7,6 +7,6 @@ define [
         idAttribute: "_id"
 
         defaults:
-            'type': 'basic'
+            'type': 'BasicDocument'
 
         url: -> '/api/document?_id=' + @get '_id'

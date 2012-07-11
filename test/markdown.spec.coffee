@@ -8,27 +8,13 @@ Blað = exported.Blað
 
 url = 'http://127.0.0.1:1118'
 
-# -------------------------------------------------------------------
-
-marked = require 'marked'
-
-class MarkdownDocument extends Blað.Type
-
-    # Presentation for the document.
-    render: -> marked @content
-
-Blað.types.MarkdownDocument = MarkdownDocument
-
-# -------------------------------------------------------------------
-
 describe "markdown document actions", ->
 
     before (done) ->
         app.start()
         
         setTimeout ( ->
-            app.db.collection 'test', (error, collection) ->
-                done(error) if error
+            app.db (collection) ->
                 collection.remove {}, (error, removed) ->
                     collection.find({}).toArray (error, results) ->
                         results.length.should.equal 0
@@ -38,10 +24,8 @@ describe "markdown document actions", ->
     describe "create document", ->
         it 'should return 201', (done) ->
             request.post
-                'headers':
-                    "content-type": "application/x-www-form-urlencoded"
                 'url': "#{url}/api/document"
-                'body': querystring.stringify
+                'form':
                     'type':    'MarkdownDocument'
                     '_id':      "markdown"
                     'url':     "/documents/markdown"

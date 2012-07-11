@@ -1,7 +1,7 @@
 define [
     'chaplin'
     'models/document'
-    'templates/type_basic'
+    'templates/type_BasicDocument'
 ], (Chaplin, Document) ->
 
     # Used for editing and creating new documents
