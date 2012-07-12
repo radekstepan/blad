@@ -1,15 +1,16 @@
 define [
     'chaplin'
     'models/document'
-    'templates/type_BasicDocument'
-], (Chaplin, Document) ->
+    'views/document_custom_view'
+    'templates/document_edit'
+], (Chaplin, Document, DocumentCustomView) ->
 
-    # Used for editing and creating new documents
+    # Used for editing and creating new documents.
     class DocumentEditView extends Chaplin.View
 
         tagName: 'form'
 
-        # Automatically append to the DOM on render
+        # Automatically append to the DOM on render.
         container: '#app'
 
         # Clear existing.
@@ -18,18 +19,30 @@ define [
         # Automatically render after initialization
         autoRender: true
 
-        getTemplateFunction: -> JST['type_' + @model.get('type')]
+        getTemplateFunction: -> JST['document_edit']
 
         initialize: (params) ->
             @model = params?.model or new Document()
+
+        # Render the custom document template.
+        afterRender: ->
+            super
+
             @delegate 'click', '.save', @saveHandler
+            @delegate 'change', '.changeType', @changeTypeHandler
+            
+            new DocumentCustomView 'model': @model
 
         saveHandler: =>
             # Get the form fields.
-            attributes = {}
-            for field in $(@el).serialize().split('&') then do (field) ->
-                [key, value] = field.split('=')
-                attributes[key] = decodeURIComponent value
+            attr = {}
+            for object in $(@el).serializeArray()
+                attr[object.name] = object.value
             
             # Save them.
-            @model.save attributes
+            @model.save attr
+
+        # Call me to reload the View with different type.
+        changeTypeHandler: (e) ->
+            @model.set 'type', $(e.target).find('option:selected').text()
+            @render()

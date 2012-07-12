@@ -1,6 +1,7 @@
 #!/usr/bin/env coffee
 
 flatiron = require 'flatiron'
+union    = require 'union'
 connect  = require 'connect'
 mongodb  = require 'mongodb'
 urlib    = require 'url'
@@ -53,18 +54,6 @@ mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
 
 
 # -------------------------------------------------------------------
-# Bootstrap the CMS frontend.
-app.router.path "/", ->
-    @get ->
-        app.log.info "Bootstrapping app" if process.env.NODE_ENV isnt 'test'
-
-        app.eco 'index', {}, (html) =>
-            @res.writeHead 200,
-                'content-type':  'text/html'
-                'content-length': html.length
-            @res.write html
-            @res.end()
-
 # Get all documents.
 app.router.path "/api/documents", ->
     @get ->
@@ -92,6 +81,7 @@ app.router.path "/api/document", ->
 
     editSave = ->
         doc = @req.body
+
         if doc._id?
             # Editing existing.
             app.log.info "Edit document " + doc._id.blue if process.env.NODE_ENV isnt 'test'
@@ -156,7 +146,7 @@ Blað.get = ->
             , (err, record) =>
                 throw err if err
 
-                app.log.info 'Serving document ' + JSON.stringify(record).blue if process.env.NODE_ENV isnt 'test'
+                app.log.info 'Serving document ' + new String(record._id).blue if process.env.NODE_ENV isnt 'test'
 
                 @res.writeHead 200, "content-type": "text/html"
                 @res.write (new Blað.types[record.type]?(record))?.render()
@@ -188,7 +178,7 @@ Blað.types.BasicDocument = BasicDocument
 class MarkdownDocument extends Blað.Type
 
     # Presentation for the document.
-    render: -> marked @content
+    render: -> marked @markup
 
 Blað.types.MarkdownDocument = MarkdownDocument
 

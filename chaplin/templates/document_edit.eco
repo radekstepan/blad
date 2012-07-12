@@ -1,0 +1,24 @@
+<!-- head -->
+<h2><%= @type %> <%= @name %></h2>
+
+<% if @_id: %>
+    <input type="hidden" name="_id" value="<%= @_id %>">
+<% end %>
+
+<div class="row">
+    <div class="three columns">
+        <label>Document type</label>
+        <select class="changeType" name="type">
+            <option value="BasicDocument" <% if @type is 'BasicDocument': %>selected="selected"<% end %>>BasicDocument</option>
+            <option value="MarkdownDocument" <% if @type is 'MarkdownDocument': %>selected="selected"<% end %>>MarkdownDocument</option>
+        </select>
+    </div>
+</div>
+
+<!-- custom type fields -->
+<div class="row" id="custom"></div>
+
+<!-- save -->
+<div class="row">
+    <a class="save success button right">Save</a>
+</div>
