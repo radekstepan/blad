@@ -5,8 +5,9 @@ define [
 
     class DocumentsListView extends Chaplin.CollectionView
 
-        tagName:   'table'
-        id:        'table'
+        tagName: 'ul'
+
+        className: 'list'
 
         # Automatically append to the DOM on render
         container: '#app'
@@ -18,7 +19,6 @@ define [
         autoRender: true
 
         # The most important method a class inheriting from CollectionView
-        # must overwrite.
         getView: (item) ->
             # Instantiate an item view
-            new DocumentListView model: item
+            new DocumentListView 'model': item

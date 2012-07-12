@@ -5,12 +5,9 @@ define [
 
     class DocumentListView extends Chaplin.View
 
-        tagName: 'tr'
+        tagName: 'li'
 
         # Template name on global `JST` object.
         templateName: 'document_row'
-        
-        # Automatically render after initialization
-        autoRender: true
 
         getTemplateFunction: -> JST[@templateName]
