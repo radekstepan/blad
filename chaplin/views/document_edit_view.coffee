@@ -12,6 +12,9 @@ define [
         # Automatically append to the DOM on render
         container: '#app'
 
+        # Clear existing.
+        containerMethod: 'html'
+
         # Automatically render after initialization
         autoRender: true
 
