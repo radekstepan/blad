@@ -20,7 +20,7 @@ app.start 1118, (err) ->
     app.log.info "Listening on port #{app.server.address().port}".green if process.env.NODE_ENV isnt 'test'
 
 # -------------------------------------------------------------------
-# Plugins.
+# Eco templating.
 app.use
     name: "eco-templating"
     attach: (options) ->
@@ -30,11 +30,12 @@ app.use
 
                 cb eco.render template, data
 
-# Start.
+# Start MongoDB.
 mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
     throw err if err
     app.log.info "Fired up MongoDB".green if process.env.NODE_ENV isnt 'test'
 
+    # Add a collection plugin.
     app.use
         name: "mongodb"
         attach: (options) ->
@@ -42,6 +43,14 @@ mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
                 db.collection process.env.NODE_ENV or 'documents', (err, collection) ->
                     throw err if err
                     cb collection
+
+    # Map all existing documents.
+    app.db (collection) ->
+        collection.find().toArray (err, docs) ->
+            throw err if err
+            for doc in docs
+                app.router.path doc.url, Blað.get
+
 
 # -------------------------------------------------------------------
 # Bootstrap the CMS frontend.
