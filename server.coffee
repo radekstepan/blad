@@ -80,25 +80,37 @@ app.router.path "/api/documents", ->
 # Get/update/create a document.
 app.router.path "/api/document", ->
     @get ->
-        app.log.info "Get a document" if process.env.NODE_ENV isnt 'test'
+        params = urlib.parse(@req.url, true).query
+
+        app.log.info "Get document " + params._id.blue if process.env.NODE_ENV isnt 'test'
 
         app.db (collection) =>
-            params = urlib.parse(@req.url, true).query
-            collection.findOne '_id': params._id, (err, doc) =>
+            collection.findOne '_id': mongodb.ObjectID.createFromHexString(params._id), (err, doc) =>
                 @res.writeHead 200, "content-type": "application/json"
                 @res.write JSON.stringify doc
                 @res.end()
 
     editSave = ->
-        app.log.info "Edit/create a document" if process.env.NODE_ENV isnt 'test'
-        
-        Blað.save @req.body, (url) =>
+        doc = @req.body
+        if doc._id?
+            # Editing existing.
+            app.log.info "Edit document " + doc._id.blue if process.env.NODE_ENV isnt 'test'
+            # Convert _id to object.
+            doc._id = mongodb.ObjectID.createFromHexString doc._id
+            cb = => @res.writeHead 200
+        else
+            # Creating a new one.
+            app.log.info "Create new document" if process.env.NODE_ENV isnt 'test'
+            cb = => @res.writeHead 201
+
+        # One command to save.
+        Blað.save doc, (url) =>
             app.log.info "Mapping url " + url.blue if process.env.NODE_ENV isnt 'test'
 
             # Map a document to a public URL.
             app.router.path url, Blað.get
 
-            @res.writeHead 201
+            cb()
             @res.end()
 
     @post editSave
@@ -118,11 +130,21 @@ Blað = {}
 # Save/update a document.
 Blað.save = (doc, cb) ->
     app.db (collection) ->
-        collection.insert doc,
-            'safe': false
-        , (err, records) ->
-            throw err if err
-            cb records[0].url
+        if doc._id?
+            # Update.
+            collection.update '_id': doc._id
+            , doc
+            , 'safe': true
+            , (err) ->
+                throw err if err
+                cb doc.url
+        else
+            # Insert.
+            collection.insert doc,
+                'safe': true
+            , (err, records) ->
+                throw err if err
+                cb records[0].url
 
 # Retrieve publicly mapped document.
 Blað.get = ->
