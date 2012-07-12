@@ -2,8 +2,9 @@ define [
     'chaplin'
     'models/document'
     'views/document_custom_view'
+    'views/message_view'
     'templates/document_edit'
-], (Chaplin, Document, DocumentCustomView) ->
+], (Chaplin, Document, DocumentCustomView, MessageView) ->
 
     # Used for editing and creating new documents.
     class DocumentEditView extends Chaplin.View
@@ -31,6 +32,8 @@ define [
             @delegate 'click', '.save', @saveHandler
             @delegate 'change', '.changeType', @changeTypeHandler
             
+            @model.bind 'sync', @successHandler
+            
             new DocumentCustomView 'model': @model
 
         saveHandler: =>
@@ -46,3 +49,9 @@ define [
         changeTypeHandler: (e) ->
             @model.set 'type', $(e.target).find('option:selected').text()
             @render()
+
+        # If model was synced OK.
+        successHandler: (model) ->
+            new MessageView
+                'type': 'success'
+                'text': "Document #{model.get('name')} saved."

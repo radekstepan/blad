@@ -1,0 +1,4 @@
+<div class="alert-box <%= @type %>">
+  <%= @text %>
+  <a class="close">&times;</a>
+</div>
