@@ -1,6 +1,7 @@
 define [
     'chaplin'
     'templates/type_BasicDocument'
+    'templates/type_HasChildrenDocument'
     'templates/type_ImageDocument'
     'templates/type_MarkdownDocument'
 ], (Chaplin) ->

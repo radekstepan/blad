@@ -139,12 +139,16 @@ Blað.save = (doc, cb) ->
 # Retrieve publicly mapped document.
 Blað.get = ->
     @get ->
-        # Get the doc from the db.
+        # Get the doc(s) from the db. We want to get the whole 'group'.
         app.db (collection) =>
-            collection.findOne
-                'url': @req.url.toLowerCase()
-            , (err, record) =>
+            collection.find({'url': new RegExp('^' + @req.url.toLowerCase())}, {'sort': 'url'}).toArray (err, docs) =>
                 throw err if err
+
+                record = docs[0]
+                
+                # Any children?
+                if docs.length > 1
+                    record.children = (d for d in docs[1...docs.length])
 
                 app.log.info 'Serving document ' + new String(record._id).blue if process.env.NODE_ENV isnt 'test'
 
@@ -174,6 +178,12 @@ class BasicDocument extends Blað.Type
             'url': @url
 
 Blað.types.BasicDocument = BasicDocument
+
+class HasChildrenDocument extends Blað.Type
+
+    render: -> JSON.stringify @children
+
+Blað.types.HasChildrenDocument = HasChildrenDocument
 
 class ImageDocument extends Blað.Type
 

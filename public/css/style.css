@@ -14,6 +14,8 @@ ul.list { list-style-type:none; }
 ul.list li { border-bottom:1px solid #DDD; padding:4px 8px; }
 ul.list li:nth-child(even) { background:#F9F9F9 }
 
+ul.list span.type { font-size:10px; font-weight:normal; margin-left:14px; }
+
 #app { margin-top:10px; }
 #app .row { margin-bottom:6px; }
 
