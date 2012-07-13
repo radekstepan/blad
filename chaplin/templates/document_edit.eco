@@ -10,6 +10,7 @@
         <label>Document type</label>
         <select class="changeType" name="type">
             <option value="BasicDocument" <% if @type is 'BasicDocument': %>selected="selected"<% end %>>BasicDocument</option>
+            <option value="ImageDocument" <% if @type is 'ImageDocument': %>selected="selected"<% end %>>ImageDocument</option>
             <option value="MarkdownDocument" <% if @type is 'MarkdownDocument': %>selected="selected"<% end %>>MarkdownDocument</option>
         </select>
     </div>

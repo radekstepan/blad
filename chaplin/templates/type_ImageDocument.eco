@@ -7,3 +7,9 @@
     <label>URL</label>
     <input type="text" placeholder="/" name="url" value="<%= @url %>">
 </div>
+
+<div class="twelve columns">
+    <label>Image</label>
+    <img src="" class="preview" style="display:none" />
+    <input type="file" name="image" class="image" />
+</div>

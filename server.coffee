@@ -175,6 +175,13 @@ class BasicDocument extends Blað.Type
 
 Blað.types.BasicDocument = BasicDocument
 
+class ImageDocument extends Blað.Type
+
+    # Render the image.
+    render: -> "<img src='#{@image}' />"
+
+Blað.types.ImageDocument = ImageDocument
+
 class MarkdownDocument extends Blað.Type
 
     # Presentation for the document.
