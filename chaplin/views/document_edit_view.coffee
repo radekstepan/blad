@@ -40,6 +40,7 @@ define [
             # Get the form fields.
             attr = {}
             for object in $(@el).serializeArray()
+                console.log object
                 attr[object.name] = object.value
             
             # Save them.

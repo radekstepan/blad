@@ -10,6 +10,6 @@
 
 <div class="twelve columns">
     <label>Image</label>
-    <img src="" class="preview" style="display:none" />
-    <input type="file" name="image" class="image" />
+    <input type="hidden" name="image" />
+    <input type="file" data-target="image" />
 </div>

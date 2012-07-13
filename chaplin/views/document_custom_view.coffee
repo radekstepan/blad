@@ -23,24 +23,15 @@ define [
 
         afterRender: ->
             super
-            # Any image uploads?
-            if @model.get('type') is 'ImageDocument'
-                @delegate 'change', '.image', @loadImageHandler
 
-        loadImageHandler: (e) ->
-            target = $(e.target)[0]
+            # Do we have any file uploads? Attach handlers...
+            @delegate 'change', '[type="file"]', @loadFileHandler
 
-            return if target.files.length is 0
-
-            oFile = target.files[0]
-
-            rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i
-
-            unless rFilter.test(oFile.type)
-                return console.log "You must select a valid image file!"
-            
-            oFReader = new FileReader()
-
-            oFReader.readAsDataURL oFile
-
-            oFReader.onload = (oFREvent) => $(@el).find('.preview').attr('src', oFREvent.target.result).show()
+        # Onchange form file input fields.
+        loadFileHandler: (e) ->
+            file = new FileReader()
+            file.readAsDataURL $(e.target)[0].files[0]
+            file.onload = (event) =>
+                # Set base64 encoded string into target hidden input field.
+                target = $(e.target).attr('data-target')
+                $(@el).find("input[name=#{target}]").val(event.target.result)
