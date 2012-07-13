@@ -6,6 +6,7 @@
 <% end %>
 
 <div class="row">
+    <!-- the type -->
     <div class="three columns">
         <label>Document type</label>
         <select class="changeType" name="type">
@@ -13,6 +14,11 @@
             <option value="ImageDocument" <% if @type is 'ImageDocument': %>selected="selected"<% end %>>ImageDocument</option>
             <option value="MarkdownDocument" <% if @type is 'MarkdownDocument': %>selected="selected"<% end %>>MarkdownDocument</option>
         </select>
+    </div>
+    <!-- the description -->
+    <div class="nine columns">
+        <label>Description</label>
+        <input type="text" name="description" value="<%= @description %>">
     </div>
 </div>
 
