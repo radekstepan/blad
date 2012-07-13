@@ -60,7 +60,7 @@ app.router.path "/api/documents", ->
         app.log.info "Get all documents" if process.env.NODE_ENV isnt 'test'
 
         app.db (collection) =>
-            collection.find().toArray (err, docs) =>
+            collection.find({}, 'sort': 'url').toArray (err, docs) =>
                 throw err if err
                 @res.writeHead 200, "content-type": "application/json"
                 @res.write JSON.stringify docs
