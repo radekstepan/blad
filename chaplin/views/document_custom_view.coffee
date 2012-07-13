@@ -35,4 +35,4 @@ define [
             file.onload = (event) =>
                 # Set base64 encoded string into target hidden input field.
                 target = $(e.target).attr('data-target')
-                $(@el).find("input[name=#{target}]").val(event.target.result)
+                $(@el).find("[name=#{target}]").val(event.target.result)

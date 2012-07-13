@@ -9,6 +9,9 @@ define [
     # Used for editing and creating new documents.
     class DocumentEditView extends Chaplin.View
 
+        # Contains links to elements to clear before each model save.
+        clearThese: []
+
         tagName: 'form'
 
         # Automatically append to the DOM on render.
@@ -32,26 +35,41 @@ define [
             @delegate 'click', '.save', @saveHandler
             @delegate 'change', '.changeType', @changeTypeHandler
             
-            @model.bind 'sync', @successHandler
-            
             new DocumentCustomView 'model': @model
 
         saveHandler: =>
             # Get the form fields.
             attr = {}
-            for object in $(@el).serializeArray()
+            for object in $("#{@container} #{@tagName}").serializeArray()
                 attr[object.name] = object.value
             
+            # Clear existing error messages if present.
+            $(@container).find("#{@tagName} .error").removeClass('error')
+            for element in @clearThese
+                element.remove()
+
             # Save them.
-            @model.save attr
+            @model.save attr,
+                'wait': true
+                'success': (model, response) ->
+                    new MessageView
+                        'type': 'success'
+                        'text': "Document #{model.get('name')} saved."
+                'error': (model, response) =>
+                    # Highlight the fields that failed validation.
+                    for field, message of JSON.parse response.responseText
+                        # Find nearest `<div>`.
+                        div = $(@container).find("#{@tagName} [name=#{field}]").closest('div')
+                        div.addClass('error')
+                        div.append small = $('<small/>', 'text': message)
+
+                        @clearThese.push small
+
+                    new MessageView
+                        'type': 'alert'
+                        'text': "You no want dis."
 
         # Call me to reload the View with different type.
         changeTypeHandler: (e) ->
             @model.set 'type', $(e.target).find('option:selected').text()
             @render()
-
-        # If model was synced OK.
-        successHandler: (model) ->
-            new MessageView
-                'type': 'success'
-                'text': "Document #{model.get('name')} saved."

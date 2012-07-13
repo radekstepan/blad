@@ -75,6 +75,8 @@ app.router.path "/api/document", ->
 
         app.db (collection) =>
             collection.findOne '_id': mongodb.ObjectID.createFromHexString(params._id), (err, doc) =>
+                throw err if err
+                
                 @res.writeHead 200, "content-type": "application/json"
                 @res.write JSON.stringify doc
                 @res.end()
@@ -87,21 +89,35 @@ app.router.path "/api/document", ->
             app.log.info "Edit document " + doc._id.blue if process.env.NODE_ENV isnt 'test'
             # Convert _id to object.
             doc._id = mongodb.ObjectID.createFromHexString doc._id
-            cb = => @res.writeHead 200
+            cb = => @res.writeHead 200, "content-type": "application/json"
         else
             # Creating a new one.
             app.log.info "Create new document" if process.env.NODE_ENV isnt 'test'
-            cb = => @res.writeHead 201
+            cb = => @res.writeHead 201, "content-type": "application/json"
 
         # One command to save.
-        Blað.save doc, (url) =>
-            app.log.info "Mapping url " + url.blue if process.env.NODE_ENV isnt 'test'
+        Blað.save doc, (err, reply) =>
+            if err
+                app.log.info "I am different...".red if process.env.NODE_ENV isnt 'test'
 
-            # Map a document to a public URL.
-            app.router.path url, Blað.get
+                @res.writeHead 400, "content-type": "application/json"
+                @res.write JSON.stringify reply
+                @res.end()
+            
+            else
+                app.log.info "Mapping url " + reply.blue if process.env.NODE_ENV isnt 'test'
 
-            cb()
-            @res.end()
+                # Map a document to a public URL.
+                app.router.path reply, Blað.get
+
+                # Stringify the new document so Backbone can see what has changed.
+                app.db (collection) =>
+                    collection.findOne 'url': reply, (err, doc) =>
+                        throw err if err
+                        
+                        cb()
+                        @res.write JSON.stringify doc
+                        @res.end()
 
     @post editSave
     @put editSave
@@ -120,21 +136,32 @@ Blað = {}
 # Save/update a document.
 Blað.save = (doc, cb) ->
     app.db (collection) ->
+        # Check that the URL is unique and has not been elsewhere besides us.
         if doc._id?
             # Update.
-            collection.update '_id': doc._id
-            , doc
-            , 'safe': true
-            , (err) ->
+            collection.find( '$or': [ { 'url': doc.url }, { '_id': doc._id } ] ).toArray (err, docs) =>
                 throw err if err
-                cb doc.url
+
+                if docs.length isnt 1 then cb true, 'url': 'Is in use already'
+                else
+                    collection.update '_id': doc._id
+                        , doc
+                        , 'safe': true
+                        , (err) ->
+                            throw err if err
+                            cb false, doc.url
         else
             # Insert.
-            collection.insert doc,
-                'safe': true
-            , (err, records) ->
+            collection.find('url': doc.url).toArray (err, docs) =>
                 throw err if err
-                cb records[0].url
+
+                if docs.length isnt 0 then cb true, 'url': 'Is in use already'
+                else
+                    collection.insert doc,
+                        'safe': true
+                    , (err, records) ->
+                        throw err if err
+                        cb false, records[0].url
 
 # Retrieve publicly mapped document.
 Blað.get = ->
