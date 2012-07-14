@@ -58,7 +58,7 @@ define [
                 'success': (model, response) ->
                     new MessageView
                         'type': 'success'
-                        'text': "Document #{model.get('name')} saved."
+                        'text': "Document #{model.get('url')} saved."
                 'error': (model, response) =>
                     # Highlight the fields that failed validation.
                     for field, message of JSON.parse response.responseText

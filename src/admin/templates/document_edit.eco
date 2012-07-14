@@ -1,5 +1,5 @@
 <!-- head -->
-<h2><%= @type %> <%= @name %></h2>
+<h2><%= @type %> <%= @url %></h2>
 
 <% if @_id: %>
     <input type="hidden" name="_id" value="<%= @_id %>">
@@ -15,8 +15,13 @@
             <% end %>
         </select>
     </div>
+    <!-- the url -->
+    <div class="five columns">
+        <label>URL</label>
+        <input type="text" placeholder="/" name="url" value="<%= @url %>">
+    </div>
     <!-- the description -->
-    <div class="nine columns">
+    <div class="four columns">
         <label>Description</label>
         <input type="text" name="description" value="<%= @description %>">
     </div>
