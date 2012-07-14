@@ -59,10 +59,14 @@ define [
             # Save them.
             @model.save attr,
                 'wait': true
-                'success': (model, response) ->
+                'success': (model, response) =>
+                    # Re-render the view.
+                    @render()
+                    # Show a success message.
                     new MessageView
                         'type': 'success'
                         'text': "Document #{model.get('url')} saved."
+                
                 'error': (model, response) =>
                     # Highlight the fields that failed validation.
                     for field, message of JSON.parse response.responseText
