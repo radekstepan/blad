@@ -1,6 +1,6 @@
 class ImageDocument extends Blað.Type
 
     # Render the image.
-    render: -> "<img src='#{@image}' />"
+    render: (done) -> done 'image': @image
 
 Blað.types.ImageDocument = ImageDocument

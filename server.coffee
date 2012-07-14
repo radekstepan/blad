@@ -24,11 +24,9 @@ app.start 1118, (err) ->
 app.use
     name: "eco-templating"
     attach: (options) ->
-        app.eco = (filename, data, cb) ->
-            fs.readFile "./src/site/#{filename}.eco", "utf8", (err, template) ->
-                throw err if err
-
-                cb eco.render template, data
+        app.eco = (path, data, cb) ->
+            fs.readFile "./src/site/#{path}.eco", "utf8", (err, template) ->
+                if err then cb err, {} else cb undefined, eco.render template, data
 
 # Start MongoDB.
 mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
@@ -178,15 +176,35 @@ Blað.get = ->
 
                 app.log.info 'Serving document ' + new String(record._id).blue if process.env.NODE_ENV isnt 'test'
 
-                @res.writeHead 200, "content-type": "text/html"
-                @res.write (new Blað.types[record.type]?(record))?.render() or ''
-                @res.end()
+                # Do we have this type?
+                if Blað.types[record.type]?
+                    presenter = new Blað.types[record.type](record)
+                    # Give us the data.
+                    presenter.render (context) =>
+                        # Render as HTML.
+                        app.eco "#{record.type}/template", context, (err, html) =>
+                            if err
+                                @res.writeHead 500
+                                @res.write err.message
+                            else
+                                @res.writeHead 200, "content-type": "text/html"
+                                @res.write html
+                            
+                            @res.end()
+                else
+                    @res.writeHead 500
+                    @res.write 'Non existent document type'
+                    @res.end()
 
 # Document types.
 Blað.types = {}
 
 class Blað.Type
 
+    # Needs to be overriden.
+    render: (done) -> done {}
+
+    # Expand model on us.
     constructor: (params) ->
         for key, value of params
             @[key] = value
