@@ -134,13 +134,15 @@ Blað = {}
 Blað.save = (doc, cb) ->
     # Prefix URL with a forward slash if not present.
     if doc.url[0] isnt '/' then doc.url = '/' + doc.url
+    # Remove trailing slash if present.
+    if doc.url.length > 1 and doc.url[-1...] is '/' then doc.url = doc.url[...-1]
     # Are we trying to map to core URLs?
     if doc.url.match(new RegExp("^/admin|^/api", 'i'))?
         cb true, 'url': 'Is in use by core application'
     else
         # Is the URL mappable?
-        m = doc.url.match(new RegExp("^(?:\/[^\s]*)?$"), 'i')
-        if !m or m.length isnt 1 then cb true, 'url': 'Does that look valid to you?'
+        m = doc.url.match(new RegExp(/^\/(\S*)$/))
+        if !m then cb true, 'url': 'Does that look valid to you?'
         else
             app.db (collection) ->
                 # Check that the URL is unique and has not been elsewhere besides us.
@@ -186,8 +188,7 @@ Blað.get = ->
                 record = docs[0]
                 
                 # Any children?
-                if docs.length > 1
-                    record.children = (d for d in docs[1...docs.length])
+                if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
 
                 app.log.info 'Serving document ' + new String(record._id).blue if process.env.NODE_ENV isnt 'test'
 
@@ -221,6 +222,14 @@ Blað.get = ->
 Blað.types = {}
 
 class Blað.Type
+
+    # Provides children for a certain depth.
+    children: (n) ->
+        return {} unless @_children
+        if n?
+            ( child for child in @_children when child.url.replace(@url, '').split('/').length is n + 2 )
+        else
+            @_children
 
     # Needs to be overriden.
     render: (done) -> done {}
