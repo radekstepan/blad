@@ -43,9 +43,10 @@ describe "basic document actions", ->
                 request.post
                     'url': "#{url}/api/document"
                     'form':
-                        'type': 'BasicDocument'
-                        'name': "document-#{i}"
-                        'url':  "/documents/#{i}"
+                        'type':   'BasicDocument'
+                        'name':   "document-#{i}"
+                        'url':    "/documents/#{i}"
+                        'public': true
                 , (error, response, body) ->
                     done(error) if error
 
@@ -85,12 +86,14 @@ describe "basic document actions", ->
                     delete doc._id ; clean.push doc
 
                 clean.should.includeEql
-                    "type": "BasicDocument"
-                    "name": "document-0"
-                    "url":  "/documents/0"
+                    "type":   "BasicDocument"
+                    "name":   "document-0"
+                    "url":    "/documents/0"
+                    'public': true
                 clean.should.includeEql
-                    "type": "BasicDocument"
-                    "name": "document-1"
-                    "url":  "/documents/1"
+                    "type":   "BasicDocument"
+                    "name":   "document-1"
+                    "url":    "/documents/1"
+                    'public': true
 
                 done()

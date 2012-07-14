@@ -42,6 +42,7 @@ describe "document that has children actions", ->
                     'type':   'HasChildrenDocument'
                     'name':   "parent"
                     'url':    "/group1"
+                    'public': true
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()

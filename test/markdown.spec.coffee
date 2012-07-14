@@ -45,6 +45,7 @@ describe "markdown document actions", ->
                     'name':   "markdown"
                     'url':    "/documents/markdown"
                     'markup': "__hello__"
+                    'public': true
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -79,5 +80,6 @@ describe "markdown document actions", ->
                     "name":   "markdown"
                     "url":    "/documents/markdown"
                     "markup": "__hello__"
+                    'public': true
 
                 done()

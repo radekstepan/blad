@@ -69,15 +69,30 @@ app.router.path "/api/document", ->
     @get ->
         params = urlib.parse(@req.url, true).query
 
-        app.log.info "Get document " + params._id.blue if process.env.NODE_ENV isnt 'test'
+        # We can request a document using '_id' or 'url'.
+        if !params._id? and !params.url?
+            @res.writeHead 404, "content-type": "application/json"
+            @res.write JSON.stringify 'message': 'Use `_id` or `url` to fetch the document'
+            @res.end()
+        else
+            # Which one are we using then?
+            if params._id?
+                value = mongodb.ObjectID.createFromHexString params._id
+                query = '_id': value
+            else
+                value = decodeURIComponent params.url
+                query = 'url': value
 
-        app.db (collection) =>
-            collection.findOne '_id': mongodb.ObjectID.createFromHexString(params._id), (err, doc) =>
-                throw err if err
-                
-                @res.writeHead 200, "content-type": "application/json"
-                @res.write JSON.stringify doc
-                @res.end()
+            app.log.info "Get document " + value.blue if process.env.NODE_ENV isnt 'test'
+
+            # Actual grab.
+            app.db (collection) =>
+                collection.findOne query, (err, doc) =>
+                    throw err if err
+                    
+                    @res.writeHead 200, "content-type": "application/json"
+                    @res.write JSON.stringify doc
+                    @res.end()
 
     editSave = ->
         doc = @req.body
@@ -146,6 +161,13 @@ Blað.save = (doc, cb) ->
         if !m then cb true, 'url': 'Does that look valid to you?'
         else
             app.db (collection) ->
+                # Do we have the `public` attr?
+                if doc.public?
+                    # Coerce boolean.
+                    switch doc.public
+                        when 'true'  then doc.public = true
+                        when 'false' then doc.public = false
+
                 # Check that the URL is unique and has not been elsewhere besides us.
                 if doc._id?
                     # Update.
