@@ -179,7 +179,7 @@ Blað.get = ->
                 app.log.info 'Serving document ' + new String(record._id).blue if process.env.NODE_ENV isnt 'test'
 
                 @res.writeHead 200, "content-type": "text/html"
-                @res.write (new Blað.types[record.type]?(record))?.render()
+                @res.write (new Blað.types[record.type]?(record))?.render() or ''
                 @res.end()
 
 # Document types.
