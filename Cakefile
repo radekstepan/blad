@@ -3,16 +3,17 @@
 fs  = require 'fs'
 cs  = require 'coffee-script'
 eco = require 'eco'
+require 'colors'
 
-task "compile", "compile server and client code with custom document types", ->
+task "compile", "compile API server and admin client code", ->
     server = (done) ->
         # Core server code.
         codez = [ fs.readFileSync('./server.coffee', "utf-8") ]
 
         # Custom presenters.
-        walk './custom', (files) ->
+        walk './src/site', (files) ->
             for file in files when file.match /presenter\.coffee/
-                console.log file
+                console.log file.grey
                 codez.push fs.readFileSync(file, "utf-8")
 
             # Write it all.
@@ -22,32 +23,33 @@ task "compile", "compile server and client code with custom document types", ->
 
     client = (done) ->
         # Client side code.
-        walk './chaplin', (files) ->
+        walk './src/admin', (files) ->
             for file in files
-                console.log file
+                console.log file.grey
                 if file.match /\.eco/
                     name = file.split('/').pop()
                     js = uglify "JST['#{name}'] = " + eco.precompile fs.readFileSync file, "utf-8"
-                    write file.replace('./chaplin', './public/js').replace('.eco', '.js'), js
+                    write file.replace('./src/admin', './public/admin/js').replace('.eco', '.js'), js
                 else if file.match /\.coffee/
                     js = cs.compile fs.readFileSync(file, "utf-8"), 'bare': 'on'
-                    write file.replace('./chaplin', './public/js').replace('.coffee', '.js'), js
+                    write file.replace('./src/admin', './public/admin/js').replace('.coffee', '.js'), js
 
             done()
     
     forms = (done) ->
         # Custom document forms.
-        walk './custom', (files) ->
+        walk './src/site', (files) ->
             tml = []
             for file in files when file.match /form\.eco/
+                console.log file.grey
                 js = eco.precompile fs.readFileSync file, "utf-8"
                 p = file.split('/') ; name = p[p.length-2]
                 tml.push uglify "JST['form_#{name}.eco'] = #{js}"
-            write './public/js/templates/document_forms.js', tml.join("\n")
+            write './public/admin/js/templates/document_forms.js', tml.join("\n")
             done()
 
     queue [ server, client, forms ], (out) ->
-        console.log 'All is done.'
+        console.log 'All is well.'.green
 
 # -------------------------------------------------------------------
 

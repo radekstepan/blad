@@ -25,7 +25,7 @@ app.use
     name: "eco-templating"
     attach: (options) ->
         app.eco = (filename, data, cb) ->
-            fs.readFile "./templates/#{filename}.eco", "utf8", (err, template) ->
+            fs.readFile "./src/site/#{filename}.eco", "utf8", (err, template) ->
                 throw err if err
 
                 cb eco.render template, data
@@ -121,7 +121,7 @@ app.router.path "/api/document", ->
     @post editSave
     @put editSave
 
-app.router.path "/reset", ->
+app.router.path "/admin/reset", ->
     @get ->
         app.db (collection) =>
             collection.remove {}, (err, removed) =>

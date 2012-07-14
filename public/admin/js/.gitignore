@@ -1,5 +1,4 @@
 controllers/
-lib/
 models/
 views/
 *.js

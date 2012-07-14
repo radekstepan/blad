@@ -13,10 +13,10 @@
     <div id="top">
         <div class="row">
             <div class="two columns">
-                <a class="name" href="/">Blað CMS</a>
+                <a class="name" href="/admin">Blað CMS</a>
             </div>
             <div class="two column">
-                <a href="/new" class="small blue nice button right new">New Document</a></a>
+                <a href="/admin/new" class="small blue nice button right new">New Document</a></a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 // Configure the AMD module loader
 requirejs.config({
     // The path where your JavaScripts are located
-    baseUrl: '/js/',
+    baseUrl: '/admin/js/',
     // Specify the paths of vendor libraries
     paths: {
         'jquery':     'vendor/jquery-1.7.2',
