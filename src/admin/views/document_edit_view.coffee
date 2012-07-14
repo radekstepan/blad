@@ -45,7 +45,11 @@ define [
             # Get the form fields.
             attr = {}
             for object in $("#{@container} #{@tagName}").serializeArray()
-                attr[object.name] = object.value
+                # Coerce string to boolean when possible.
+                switch object.value
+                    when 'true' then attr[object.name] = true
+                    when 'false' then attr[object.name] = false
+                    else attr[object.name] = object.value
             
             # Clear existing error messages if present.
             $(@container).find("#{@tagName} .error").removeClass('error')

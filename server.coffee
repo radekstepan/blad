@@ -42,11 +42,12 @@ mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
                     throw err if err
                     cb collection
 
-    # Map all existing documents.
+    # Map all existing public documents.
     app.db (collection) ->
-        collection.find().toArray (err, docs) ->
+        collection.find('public': true).toArray (err, docs) ->
             throw err if err
             for doc in docs
+                app.log.info "Mapping url " + doc.url.blue if process.env.NODE_ENV isnt 'test'
                 app.router.path doc.url, Blað.get
 
 
@@ -102,10 +103,24 @@ app.router.path "/api/document", ->
                 @res.end()
             
             else
-                app.log.info "Mapping url " + reply.blue if process.env.NODE_ENV isnt 'test'
-
-                # Map a document to a public URL.
-                app.router.path reply, Blað.get
+                if doc.public
+                    # Map a document to a public URL.
+                    app.log.info "Mapping url " + reply.blue if process.env.NODE_ENV isnt 'test'
+                    app.router.path reply, Blað.get
+                else
+                    # Unmap if we were mapped before.
+                    app.log.info "Delete url " + reply.yellow if process.env.NODE_ENV isnt 'test'
+                    # A bit of hairy tweaking.
+                    if reply is '/' then delete app.router.routes.get
+                    else
+                        # Multiple levels deep?
+                        r = app.router.routes
+                        parts = reply.split '/'
+                        for i in [1...parts.length]
+                            if i + 1 is parts.length
+                                delete r[parts.pop()]
+                            else
+                                r = r[parts[i]]
 
                 # Stringify the new document so Backbone can see what has changed.
                 app.db (collection) =>

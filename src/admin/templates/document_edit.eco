@@ -1,5 +1,16 @@
 <!-- head -->
-<h2><%= @type %> <%= @url %></h2>
+<h2>
+    <%= @type %>
+    <% if @url: %>
+        <% if @public: %>
+            <a href="<%= @url %>" target="_new">
+                <%= @url %> <span class="external icon-external-link"></span>
+            </a>
+        <% else: %>
+            <%= @url %>
+        <% end %>
+    <% end %>
+</h2>
 
 <% if @_id: %>
     <input type="hidden" name="_id" value="<%= @_id %>">
@@ -16,9 +27,17 @@
         </select>
     </div>
     <!-- the url -->
-    <div class="five columns">
+    <div class="four columns">
         <label>URL</label>
         <input type="text" placeholder="/" name="url" value="<%= @url %>">
+    </div>
+    <!-- published status -->
+    <div class="one columns">
+        <label>Public</label>
+        <select name="public">
+            <option value="true" <% if @public: %>selected="selected"<% end %>>Yes</option>
+            <option value="false" <% if !@public: %>selected="selected"<% end %>>No</option>
+        </select>
     </div>
     <!-- the description -->
     <div class="four columns">
