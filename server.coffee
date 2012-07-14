@@ -132,37 +132,48 @@ Blað = {}
 
 # Save/update a document.
 Blað.save = (doc, cb) ->
+    # Prefix URL with a forward slash if not present.
+    if doc.url[0] isnt '/' then doc.url = '/' + doc.url
     # Are we trying to map to core URLs?
     if doc.url.match(new RegExp("^/admin|^/api", 'i'))?
         cb true, 'url': 'Is in use by core application'
     else
-        app.db (collection) ->
-            # Check that the URL is unique and has not been elsewhere besides us.
-            if doc._id?
-                # Update.
-                collection.find( '$or': [ { 'url': doc.url }, { '_id': doc._id } ] ).toArray (err, docs) =>
-                    throw err if err
+        # Is the URL mappable?
+        m = doc.url.match(new RegExp("^(?:\/[^\s]*)?$"), 'i')
+        if !m or m.length isnt 1 then cb true, 'url': 'Does that look valid to you?'
+        else
+            app.db (collection) ->
+                # Check that the URL is unique and has not been elsewhere besides us.
+                if doc._id?
+                    # Update.
+                    collection.find(
+                        '$or': [
+                            { 'url': doc.url },
+                            { '_id': doc._id }
+                        ]
+                    ).toArray (err, docs) =>
+                        throw err if err
 
-                    if docs.length isnt 1 then cb true, 'url': 'Is in use already'
-                    else
-                        collection.update '_id': doc._id
-                            , doc
-                            , 'safe': true
-                            , (err) ->
+                        if docs.length isnt 1 then cb true, 'url': 'Is in use already'
+                        else
+                            collection.update '_id': doc._id
+                                , doc
+                                , 'safe': true
+                                , (err) ->
+                                    throw err if err
+                                    cb false, doc.url
+                else
+                    # Insert.
+                    collection.find('url': doc.url).toArray (err, docs) =>
+                        throw err if err
+
+                        if docs.length isnt 0 then cb true, 'url': 'Is in use already'
+                        else
+                            collection.insert doc,
+                                'safe': true
+                            , (err, records) ->
                                 throw err if err
-                                cb false, doc.url
-            else
-                # Insert.
-                collection.find('url': doc.url).toArray (err, docs) =>
-                    throw err if err
-
-                    if docs.length isnt 0 then cb true, 'url': 'Is in use already'
-                    else
-                        collection.insert doc,
-                            'safe': true
-                        , (err, records) ->
-                            throw err if err
-                            cb false, records[0].url
+                                cb false, records[0].url
 
 # Retrieve publicly mapped document.
 Blað.get = ->
