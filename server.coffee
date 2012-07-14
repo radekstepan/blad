@@ -93,7 +93,7 @@ app.router.path "/api/document", ->
             app.log.info "Create new document" if process.env.NODE_ENV isnt 'test'
             cb = => @res.writeHead 201, "content-type": "application/json"
 
-        # One command to save.
+        # One command to save/update and optionaly unmap.
         Blað.save doc, (err, reply) =>
             if err
                 app.log.info "I am different...".red if process.env.NODE_ENV isnt 'test'
@@ -107,20 +107,6 @@ app.router.path "/api/document", ->
                     # Map a document to a public URL.
                     app.log.info "Mapping url " + reply.blue if process.env.NODE_ENV isnt 'test'
                     app.router.path reply, Blað.get
-                else
-                    # Unmap if we were mapped before.
-                    app.log.info "Delete url " + reply.yellow if process.env.NODE_ENV isnt 'test'
-                    # A bit of hairy tweaking.
-                    if reply is '/' then delete app.router.routes.get
-                    else
-                        # Multiple levels deep?
-                        r = app.router.routes
-                        parts = reply.split '/'
-                        for i in [1...parts.length]
-                            if i + 1 is parts.length
-                                delete r[parts.pop()]
-                            else
-                                r = r[parts[i]]
 
                 # Stringify the new document so Backbone can see what has changed.
                 app.db (collection) =>
@@ -173,6 +159,11 @@ Blað.save = (doc, cb) ->
 
                         if docs.length isnt 1 then cb true, 'url': 'Is in use already'
                         else
+                            # Unmap the original URL if it was public.
+                            old = docs.pop()
+                            if old.public then Blað.unmap old.url
+
+                            # Update the collection.
                             collection.update '_id': doc._id
                                 , doc
                                 , 'safe': true
@@ -232,6 +223,22 @@ Blað.get = ->
                     @res.writeHead 500
                     @res.write 'Non existent document type'
                     @res.end()
+
+# Unmap document from router.
+Blað.unmap = (url) ->
+    app.log.info "Delete url " + url.yellow if process.env.NODE_ENV isnt 'test'
+
+    # A bit of hairy tweaking.
+    if url is '/' then delete app.router.routes.get
+    else
+        # Multiple levels deep?
+        r = app.router.routes
+        parts = url.split '/'
+        for i in [1...parts.length]
+            if i + 1 is parts.length
+                r[parts.pop()].get = undefined
+            else
+                r = r[parts[i]]
 
 # Document types.
 Blað.types = {}
