@@ -11,8 +11,22 @@ eco      = require 'eco'
 app = flatiron.app
 app.use flatiron.plugins.http,
     'before': [
+        # Have a nice favicon.
         connect.favicon()
+        # Static file serving.
         connect.static './public'
+        # Authorize all calls to the API.
+        (req, res, next) ->
+            if req.url.match(new RegExp("^/api", 'i'))
+                # Is key provided?
+                if !req.headers['x-blad-apikey']?
+                    res.writeHead 403
+                    res.write 'Invalid `X-Blad-ApiKey`'
+                    res.end()
+                else
+                    next()
+            else
+                next()
     ]
 
 app.start 1118, (err) ->

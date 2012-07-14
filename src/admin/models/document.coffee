@@ -12,6 +12,12 @@ define [
 
         url: -> '/api/document?_id=' + @get '_id'
 
+        # Add custom header with API key.
+        sync: (method, model, options) ->
+            options = options or {}
+            options.headers = 'X-Blad-ApiKey': 'admin'
+            Backbone.sync method, @, options
+
         # Modify the attributes of a document on presenter code.
         getAttributes: ->
             _.extend
