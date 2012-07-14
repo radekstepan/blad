@@ -1,4 +1,5 @@
 controllers/
 models/
 views/
-*.js
+application.js
+routes.js

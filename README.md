@@ -5,7 +5,7 @@ The idea was to create a RESTful CMS API that would be edited using a client sid
 
 ## Start the service and admin app
 
-We wrap the compilation of user code and core code using cake, but first, dependencies need to be met.
+We wrap the compilation of user code and core code using `cake` but first, dependencies need to be met.
 
 ```bash
 $ npm install -d
