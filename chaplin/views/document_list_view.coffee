@@ -8,6 +8,6 @@ define [
         tagName: 'li'
 
         # Template name on global `JST` object.
-        templateName: 'document_row'
+        templateName: 'document_row.eco'
 
         getTemplateFunction: -> JST[@templateName]

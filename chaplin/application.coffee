@@ -19,6 +19,7 @@ define [
             # Initialize core components
             @initDispatcher()
             @initLayout()
+            @initTemplates()
             @initMediator()
 
             # Application-specific scaffold
@@ -41,6 +42,11 @@ define [
             # Use an application-specific Layout class. Currently this adds
             # no features to the standard Chaplin Layout, it’s an empty placeholder.
             @layout = new Layout {@title}
+
+        # Create a namespace for templates.
+        # ---------------------------------            
+        initTemplates: ->
+            window.JST = {}
 
         # Instantiate common controllers
         # ------------------------------

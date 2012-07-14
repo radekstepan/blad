@@ -7,7 +7,6 @@ mongodb  = require 'mongodb'
 urlib    = require 'url'
 fs       = require 'fs'
 eco      = require 'eco'
-marked   = require 'marked'
 
 app = flatiron.app
 app.use flatiron.plugins.http,
@@ -191,40 +190,6 @@ class Blað.Type
     constructor: (params) ->
         for key, value of params
             @[key] = value
-
-
-class BasicDocument extends Blað.Type
-
-    # Eco template.
-    template: '<%= @_id %>'
-
-    # Presentation for the document.
-    render: ->
-        eco.render @template,
-            '_id': @_id
-            'url': @url
-
-Blað.types.BasicDocument = BasicDocument
-
-class HasChildrenDocument extends Blað.Type
-
-    render: -> JSON.stringify @children or {}
-
-Blað.types.HasChildrenDocument = HasChildrenDocument
-
-class ImageDocument extends Blað.Type
-
-    # Render the image.
-    render: -> "<img src='#{@image}' />"
-
-Blað.types.ImageDocument = ImageDocument
-
-class MarkdownDocument extends Blað.Type
-
-    # Presentation for the document.
-    render: -> marked @markup
-
-Blað.types.MarkdownDocument = MarkdownDocument
 
 # Expose.
 exports.app = app

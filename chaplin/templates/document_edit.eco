@@ -10,10 +10,9 @@
     <div class="three columns">
         <label>Document type</label>
         <select class="changeType" name="type">
-            <option value="BasicDocument" <% if @type is 'BasicDocument': %>selected="selected"<% end %>>BasicDocument</option>
-            <option value="HasChildrenDocument" <% if @type is 'HasChildrenDocument': %>selected="selected"<% end %>>HasChildrenDocument</option>
-            <option value="ImageDocument" <% if @type is 'ImageDocument': %>selected="selected"<% end %>>ImageDocument</option>
-            <option value="MarkdownDocument" <% if @type is 'MarkdownDocument': %>selected="selected"<% end %>>MarkdownDocument</option>
+            <% for type in @_types: %>
+                <option value="<%= type %>" <% if @type is type: %>selected="selected"<% end %>><%= type %></option>
+            <% end %>
         </select>
     </div>
     <!-- the description -->

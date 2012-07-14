@@ -6,7 +6,7 @@ define [
     class MessageView extends Chaplin.View
 
         # Template name on global `JST` object.
-        templateName: 'message'
+        templateName: 'message.eco'
 
         # Automatically prepend before the DOM on render.
         container: '#app'

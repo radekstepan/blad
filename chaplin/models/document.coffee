@@ -12,10 +12,17 @@ define [
         url: -> '/api/document?_id=' + @get '_id'
 
         # Modify the attributes of a document on presenter code.
-        getAttributes: -> _.extend(@attrDescription(), @attributes)
+        getAttributes: ->
+            _.extend
+                '_description': @attrDescription()
+                '_types':       @attrTypes()
+            , @attributes
 
         # Format labels in a description, accessed with `_description`.
         attrDescription: ->
             return {} unless @get('description')?
-            
-            '_description': @get('description').replace /label:(\S*)/g, '<span class="radius label">$1</span>'
+            @get('description').replace /label:(\S*)/g, '<span class="radius label">$1</span>'
+
+        # Determine available doc types based on JST forms.
+        attrTypes: ->
+            ( key[5...key.length - 4] for key, value of window.JST when key.indexOf('form_') is 0 )

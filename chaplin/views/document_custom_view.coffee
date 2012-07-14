@@ -1,9 +1,6 @@
 define [
     'chaplin'
-    'templates/type_BasicDocument'
-    'templates/type_HasChildrenDocument'
-    'templates/type_ImageDocument'
-    'templates/type_MarkdownDocument'
+    'templates/document_forms' # Will be generated server side. Do not attempt custom.
 ], (Chaplin) ->
 
     # A view for the custom document fields
@@ -18,7 +15,7 @@ define [
         # Automatically render after initialization
         autoRender: true
 
-        getTemplateFunction: -> JST['type_' + @model.get('type')]
+        getTemplateFunction: -> JST["form_#{@model.get('type')}.eco"]
 
         initialize: (params) -> @model = params.model
 

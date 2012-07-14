@@ -4,6 +4,7 @@ define [
     'views/document_custom_view'
     'views/message_view'
     'templates/document_edit'
+    'templates/document_forms'
 ], (Chaplin, Document, DocumentCustomView, MessageView) ->
 
     # Used for editing and creating new documents.
@@ -23,7 +24,10 @@ define [
         # Automatically render after initialization
         autoRender: true
 
-        getTemplateFunction: -> JST['document_edit']
+        # Template name on global `JST` object.
+        templateName: 'document_edit.eco'
+
+        getTemplateFunction: -> JST[@templateName]
 
         initialize: (params) ->
             @model = params?.model or new Document()
