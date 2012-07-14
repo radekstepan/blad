@@ -180,16 +180,22 @@ Blað.get = ->
                 if Blað.types[record.type]?
                     presenter = new Blað.types[record.type](record)
                     # Give us the data.
-                    presenter.render (context) =>
-                        # Render as HTML.
-                        app.eco "#{record.type}/template", context, (err, html) =>
-                            if err
-                                @res.writeHead 500
-                                @res.write err.message
-                            else
-                                @res.writeHead 200, "content-type": "text/html"
-                                @res.write html
-                            
+                    presenter.render (context, template=true) =>
+                        if template
+                            # Render as HTML using template.
+                            app.eco "#{record.type}/template", context, (err, html) =>
+                                if err
+                                    @res.writeHead 500
+                                    @res.write err.message
+                                else
+                                    @res.writeHead 200, "content-type": "text/html"
+                                    @res.write html
+                                
+                                @res.end()
+                        else
+                            # Render as is, JSON.
+                            @res.writeHead 200, "content-type": "application/json"
+                            @res.write JSON.stringify context
                             @res.end()
                 else
                     @res.writeHead 500

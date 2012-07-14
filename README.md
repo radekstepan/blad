@@ -1,20 +1,15 @@
 # Blað
-A forms based node.js CMS.
+A forms based [node.js](http://nodejs.org/) CMS ala [SilverStripe](http://www.silverstripe.com/), but smaller.
 
-## Chaplin.js client app
+The idea was to create a RESTful CMS API that would be edited using a client side app. On the backend, we use [flatiron](http://flatironjs.org/) and on the frontend [chaplin](https://github.com/chaplinjs/chaplin) that itself wraps [Backbone.js](http://documentcloud.github.com/backbone/).
 
-```bash
-$ ./client.sh
-```
+## Start the service and admin app
 
-## Pallur server app
+We wrap the compilation of user code and core code using cake, but first, dependencies need to be met.
 
 ```bash
+$ npm install -d
 $ ./server.sh
 ```
 
-## Mocha test suite
-
-```bash
-$ ./test.sh
-```
+Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin).

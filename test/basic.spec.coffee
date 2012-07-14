@@ -6,6 +6,22 @@ exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
 
+# -------------------------------------------------------------------
+
+class BasicDocument extends Blað.Type
+
+    # Render as JSON as is.
+    render: (done) ->
+        done
+            'type': @type
+            'name': @name
+            'url':  @url
+        , false
+
+Blað.types.BasicDocument = BasicDocument
+
+# -------------------------------------------------------------------
+
 url = 'http://127.0.0.1:1118'
 
 describe "basic document actions", ->
@@ -28,7 +44,7 @@ describe "basic document actions", ->
                     'url': "#{url}/api/document"
                     'form':
                         'type': 'BasicDocument'
-                        '_id':   "document-#{i}"
+                        'name': "document-#{i}"
                         'url':  "/documents/#{i}"
                 , (error, response, body) ->
                     done(error) if error
@@ -43,7 +59,12 @@ describe "basic document actions", ->
                     done(error) if error
 
                     response.statusCode.should.equal 200
-                    body.should.equal "document-#{i}"
+                    response.headers['content-type'].should.equal 'application/json'
+                    body.should.equal JSON.stringify
+                        'type': 'BasicDocument'
+                        'name': "document-#{i}"
+                        'url':  "/documents/#{i}"
+                    
                     if i is 1 then done()
 
     describe "retrieve all documents", ->
@@ -59,13 +80,17 @@ describe "basic document actions", ->
 
                 documents.length.should.equal 2
 
-                documents.should.includeEql
+                clean = []
+                for doc in documents
+                    delete doc._id ; clean.push doc
+
+                clean.should.includeEql
                     "type": "BasicDocument"
-                    "_id":   "document-0"
+                    "name": "document-0"
                     "url":  "/documents/0"
-                documents.should.includeEql
+                clean.should.includeEql
                     "type": "BasicDocument"
-                    "_id":  "document-1"
-                    "url": "/documents/1"
+                    "name": "document-1"
+                    "url":  "/documents/1"
 
                 done()

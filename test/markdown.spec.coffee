@@ -6,6 +6,21 @@ exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
 
+# -------------------------------------------------------------------
+
+marked = require 'marked'
+
+class MarkdownDocument extends Blað.Type
+
+    render: (done) ->
+        done
+            'html': marked @markup
+        , false
+
+Blað.types.MarkdownDocument = MarkdownDocument
+
+# -------------------------------------------------------------------
+
 url = 'http://127.0.0.1:1118'
 
 describe "markdown document actions", ->
@@ -26,10 +41,10 @@ describe "markdown document actions", ->
             request.post
                 'url': "#{url}/api/document"
                 'form':
-                    'type':    'MarkdownDocument'
-                    '_id':      "markdown"
-                    'url':     "/documents/markdown"
-                    'content': "__hello__"
+                    'type':   'MarkdownDocument'
+                    'name':   "markdown"
+                    'url':    "/documents/markdown"
+                    'markup': "__hello__"
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -37,8 +52,13 @@ describe "markdown document actions", ->
         it 'should be able to retrieve the document', (done) ->
             request.get "#{url}/documents/markdown"
             , (error, response, body) ->
+                done(error) if error
+
                 response.statusCode.should.equal 200
-                body.trim().should.equal '<p><strong>hello</strong></p>'
+                response.headers['content-type'].should.equal 'application/json'
+                body.should.equal JSON.stringify
+                    'html': "<p><strong>hello</strong></p>\n"
+                
                 done()
 
     describe "retrieve all documents", ->
@@ -52,10 +72,12 @@ describe "markdown document actions", ->
 
                 documents.length.should.equal 1
 
+                delete documents[0]._id
+
                 documents.should.includeEql
-                    'type':    'MarkdownDocument'
-                    "_id":      "markdown"
-                    "url":     "/documents/markdown"
-                    "content": "__hello__"
+                    'type':   'MarkdownDocument'
+                    "name":   "markdown"
+                    "url":    "/documents/markdown"
+                    "markup": "__hello__"
 
                 done()
