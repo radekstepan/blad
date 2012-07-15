@@ -89,6 +89,9 @@ app.router.path "/auth", ->
             throw error if error
 
             body = JSON.parse(body)
+
+            console.log body
+
             if body.status is 'okay'
                 # Authorize.
                 if body.email is email

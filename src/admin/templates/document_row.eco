@@ -3,10 +3,10 @@
 
 <!-- url and link to edit document -->
 <% if @public: %>
-    <strong><a href="/edit/<%= @_id %>"><%= @url %></a></strong>
+    <strong><a href="edit/<%= @_id %>"><%= @url %></a></strong>
     <a href="<%= @url %>" target="_new" class="external icon-external-link"></a>
 <% else: %>
-    <strong><a class="private" href="/edit/<%= @_id %>"><%= @url %></a></strong>
+    <strong><a class="private" href="edit/<%= @_id %>"><%= @_url %></a></strong>
 <% end %>
 
 <!-- the type of the document -->

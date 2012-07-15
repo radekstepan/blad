@@ -58,12 +58,15 @@ define [
             @auth (isSignedIn, @apiKey) =>
                 if isSignedIn
                     # Register all routes and start routing
-                    @initRouter routes, 'pushState': no
+                    @initRouter routes
 
                     # Freeze the application instance to prevent further changes
                     Object.freeze? this
                 else
-                    console.log res
+                    # Let us know...
+                    $('#app').append $ '<div/>',
+                        'class': 'alert-box alert'
+                        'text':  res.message
 
         # Override standard layout initializer
         # ------------------------------------
