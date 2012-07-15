@@ -4,9 +4,14 @@ flatiron = require 'flatiron'
 union    = require 'union'
 connect  = require 'connect'
 mongodb  = require 'mongodb'
+request  = require 'request'
+crypto   = require 'crypto'
 urlib    = require 'url'
 fs       = require 'fs'
 eco      = require 'eco'
+
+salt = 'Q?RAf!CAkus?ejuCruKu'
+email = 'radek.stepan@gmail.com'
 
 app = flatiron.app
 app.use flatiron.plugins.http,
@@ -21,10 +26,16 @@ app.use flatiron.plugins.http,
                 # Is key provided?
                 if !req.headers['x-blad-apikey']?
                     res.writeHead 403
-                    res.write 'Invalid `X-Blad-ApiKey`'
+                    res.write '`X-Blad-ApiKey` needs to be provided in headers of all API requests'
                     res.end()
                 else
-                    next()
+                    # Is the key valid?
+                    if crypto.createHash('md5').update(email + salt).digest('hex') is req.headers['x-blad-apikey']                   
+                        next()
+                    else
+                        res.writeHead 403
+                        res.write 'Invalid `X-Blad-ApiKey` authorization'
+                        res.end()
             else
                 next()
     ]
@@ -64,6 +75,67 @@ mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
                 app.log.info "Mapping url " + doc.url.blue if process.env.NODE_ENV isnt 'test'
                 app.router.path doc.url, Blað.get
 
+# -------------------------------------------------------------------
+# BrowserID auth.
+app.router.path "/auth/login", ->
+    @get ->
+        @res.writeHead 200, 'text/html'
+        @res.write """
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>BrowserID consumer example</title>
+                </head>
+                <body>
+                    <a class='signin' href='#'><img src='https://login.persona.org/i/sign_in_blue.png' /></a>
+                    <div id='you'></div>
+                    <script src='http://code.jquery.com/jquery-1.7.2.min.js' type='text/javascript'></script>
+                    <script src='https://browserid.org/include.js' type='text/javascript'></script>
+                    <script type='text/javascript'>
+                        $(".signin").on("click", function() {
+                            navigator.id.get(function(assertion) {
+                                if (assertion) {
+                                    $.ajax({
+                                        url: "/auth/authenticate",
+                                        type: "POST",
+                                        data: {assertion: assertion},
+                                        success: function(data) {
+                                            $("#you").html(data);
+                                        },
+                                        error: function(data) {
+                                            $("#you").html(data);
+                                        }
+                                    });
+                                } else {
+                                    alert("Sign in canceled.");
+                                }
+                            });
+                            return false;
+                        });
+                    </script>
+                </body>
+            </html>"""
+        @res.end()
+
+# Authenticate.
+app.router.path "/auth/authenticate", ->
+    @post ->
+        request.post
+            'url': "https://browserid.org/verify"
+            'form':
+                'assertion': @req.body.assertion
+                'audience':  "http://127.0.0.1:1118"
+        , (error, response, body) =>
+            throw error if error
+
+            body = JSON.parse(body)
+            if body.status is 'okay'
+                @res.writeHead 200
+                # Create API Key from email and salt.
+                @res.write crypto.createHash('md5').update(body.email + salt).digest('hex')
+            else
+                @res.writeHead 403
+            @res.end()
 
 # -------------------------------------------------------------------
 # Get all documents.

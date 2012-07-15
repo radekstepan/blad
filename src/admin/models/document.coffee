@@ -15,7 +15,7 @@ define [
         # Add custom header with API key.
         sync: (method, model, options) ->
             options = options or {}
-            options.headers = 'X-Blad-ApiKey': 'admin'
+            options.headers = 'X-Blad-ApiKey': '836f05bcb41b62ee335fc8b06dc8e629'
             Backbone.sync method, @, options
 
         # Modify the attributes of a document on presenter code.
