@@ -22,6 +22,11 @@ define [
                 [k, v] = cookie.split '='
                 if k is 'X-Blad-ApiKey' then return signedIn true, v
 
+            # Show a message during sign-in.
+            $('#app').append $ '<div/>',
+                'class': 'alert-box'
+                'text':  'Signing-in to Persona.org (Mozilla), make sure pop-ups are allowed'
+
             # Need to auth with the server.
             navigator.id.get (assertion) ->
                 if assertion
@@ -55,8 +60,11 @@ define [
             @initMediator()
 
             # Authenticate and authorize the user.
-            @auth (isSignedIn, @apiKey) =>
+            @auth (isSignedIn, res) =>
                 if isSignedIn
+                    # Save the response API key.
+                    @apiKey = res
+
                     # Register all routes and start routing
                     @initRouter routes
 
