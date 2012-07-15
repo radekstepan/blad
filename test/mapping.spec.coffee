@@ -47,6 +47,8 @@ describe "document URL un-/mapping", ->
                     'type':   'DummyDocument'
                     'url':    "/"
                     'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 root = JSON.parse(body)._id
@@ -72,6 +74,8 @@ describe "document URL un-/mapping", ->
                     'type':   'DummyDocument'
                     'url':    "/child"
                     'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 child = JSON.parse(body)._id
@@ -96,6 +100,8 @@ describe "document URL un-/mapping", ->
                     'type':   'DummyDocument'
                     'url':    "/"
                     'public': false
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 
@@ -135,6 +141,8 @@ describe "document URL un-/mapping", ->
                     'type':   'DummyDocument'
                     'url':    "/child/another-child"
                     'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -158,6 +166,8 @@ describe "document URL un-/mapping", ->
                     'type':   'DummyDocument'
                     'url':    "/child"
                     'public': false
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 

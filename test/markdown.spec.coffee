@@ -46,6 +46,8 @@ describe "markdown document actions", ->
                     'url':    "/documents/markdown"
                     'markup': "__hello__"
                     'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -64,7 +66,10 @@ describe "markdown document actions", ->
 
     describe "retrieve all documents", ->
         it 'should get all of them', (done) ->
-            request.get "#{url}/api/documents"
+            request.get
+                'url': "#{url}/api/documents"
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 

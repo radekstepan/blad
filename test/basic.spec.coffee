@@ -47,6 +47,8 @@ describe "basic document actions", ->
                         'name':   "document-#{i}"
                         'url':    "/documents/#{i}"
                         'public': true
+                    'headers':
+                        'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
                 , (error, response, body) ->
                     done(error) if error
 
@@ -70,7 +72,10 @@ describe "basic document actions", ->
 
     describe "retrieve all documents", ->
         it 'should get all of them', (done) ->
-            request.get "#{url}/api/documents"
+            request.get
+                'url': "#{url}/api/documents"
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 done(error) if error
 

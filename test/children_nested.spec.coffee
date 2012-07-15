@@ -45,6 +45,8 @@ describe "document that has children actions", ->
                     'name':   "parent"
                     'url':    "/group1"
                     'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -57,6 +59,8 @@ describe "document that has children actions", ->
                     'type':   'HasChildrenDocument'
                     'name':   "child0"
                     'url':    "/group1/child0"
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -69,6 +73,8 @@ describe "document that has children actions", ->
                     'type':   'HasChildrenDocument'
                     'name':   "child1"
                     'url':    "/group1/rubbish/child1"
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
