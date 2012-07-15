@@ -10,12 +10,16 @@ define [
             'type':   'BasicDocument'
             'public': true
 
-        url: -> '/api/document?_id=' + @get '_id'
+        url: ->
+            if @get('_id')?
+                '/api/document?_id=' + @get '_id'
+            else
+                '/api/document'
 
         # Add custom header with API key.
         sync: (method, model, options) ->
             options = options or {}
-            options.headers = 'X-Blad-ApiKey': '836f05bcb41b62ee335fc8b06dc8e629'
+            options.headers = 'X-Blad-ApiKey': window.app.apiKey
             Backbone.sync method, @, options
 
         # Modify the attributes of a document on presenter code.

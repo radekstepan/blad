@@ -10,7 +10,7 @@ define [
         # Add custom header with API key.
         sync: (method, model, options) ->
             options = options or {}
-            options.headers = 'X-Blad-ApiKey': '836f05bcb41b62ee335fc8b06dc8e629'
+            options.headers = 'X-Blad-ApiKey': window.app.apiKey
             Backbone.sync method, @, options
 
         model: Document

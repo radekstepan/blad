@@ -77,49 +77,9 @@ mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
 
 # -------------------------------------------------------------------
 # BrowserID auth.
-app.router.path "/auth/login", ->
-    @get ->
-        @res.writeHead 200, 'text/html'
-        @res.write """
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>BrowserID consumer example</title>
-                </head>
-                <body>
-                    <a class='signin' href='#'><img src='https://login.persona.org/i/sign_in_blue.png' /></a>
-                    <div id='you'></div>
-                    <script src='http://code.jquery.com/jquery-1.7.2.min.js' type='text/javascript'></script>
-                    <script src='https://browserid.org/include.js' type='text/javascript'></script>
-                    <script type='text/javascript'>
-                        $(".signin").on("click", function() {
-                            navigator.id.get(function(assertion) {
-                                if (assertion) {
-                                    $.ajax({
-                                        url: "/auth/authenticate",
-                                        type: "POST",
-                                        data: {assertion: assertion},
-                                        success: function(data) {
-                                            $("#you").html(data);
-                                        },
-                                        error: function(data) {
-                                            $("#you").html(data);
-                                        }
-                                    });
-                                } else {
-                                    alert("Sign in canceled.");
-                                }
-                            });
-                            return false;
-                        });
-                    </script>
-                </body>
-            </html>"""
-        @res.end()
-
-# Authenticate.
-app.router.path "/auth/authenticate", ->
+app.router.path "/auth", ->
     @post ->
+        # Authenticate.
         request.post
             'url': "https://browserid.org/verify"
             'form':
@@ -130,11 +90,25 @@ app.router.path "/auth/authenticate", ->
 
             body = JSON.parse(body)
             if body.status is 'okay'
-                @res.writeHead 200
-                # Create API Key from email and salt.
-                @res.write crypto.createHash('md5').update(body.email + salt).digest('hex')
+                # Authorize.
+                if body.email is email
+                    app.log.info "#{body.email} identity verified".green if process.env.NODE_ENV isnt 'test'
+                    # Create API Key from email and salt for the client.
+                    @res.writeHead 200, 'application/json'
+                    @res.write JSON.stringify
+                        'email': body.email
+                        'key':   crypto.createHash('md5').update(body.email + salt).digest('hex')
+                else
+                    app.log.info "#{body.email} tried to access the API".red if process.env.NODE_ENV isnt 'test'
+                    @res.writeHead 403, 'application/json'
+                    @res.write JSON.stringify
+                        'message': "Your email #{body.email} is not authorized to access the app"
             else
-                @res.writeHead 403
+                # Pass on the authentication error response to the client.
+                app.log.info body.message.red if process.env.NODE_ENV isnt 'test'
+                @res.writeHead 403, 'application/json'
+                @res.write JSON.stringify body
+            
             @res.end()
 
 # -------------------------------------------------------------------
@@ -169,7 +143,7 @@ app.router.path "/api/document", ->
                 value = decodeURIComponent params.url
                 query = 'url': value
 
-            app.log.info "Get document " + value.blue if process.env.NODE_ENV isnt 'test'
+            app.log.info "Get document " + new String(value).blue if process.env.NODE_ENV isnt 'test'
 
             # Actual grab.
             app.db (collection) =>
@@ -239,7 +213,7 @@ Blað.save = (doc, cb) ->
     # Remove trailing slash if present.
     if doc.url.length > 1 and doc.url[-1...] is '/' then doc.url = doc.url[...-1]
     # Are we trying to map to core URLs?
-    if doc.url.match(new RegExp("^/admin|^/api", 'i'))?
+    if doc.url.match(new RegExp("^/admin|^/api|^/auth", 'i'))?
         cb true, 'url': 'Is in use by core application'
     else
         # Is the URL mappable?

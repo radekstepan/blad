@@ -16,7 +16,7 @@
                 <a class="name" href="/admin">Blað CMS</a>
             </div>
             <div class="two column">
-                <a href="/admin/new" class="small blue nice button right new">New Document</a></a>
+                <a href="/new" class="small blue nice button right new">New Document</a></a>
             </div>
         </div>
     </div>
@@ -40,7 +40,8 @@ requirejs.config({
         'backbone':   'vendor/backbone-0.9.2',
         'chaplin':    'vendor/chaplin',
         'foundation': 'vendor/foundation',
-        'modernizr':  'vendor/modernizr.foundation'
+        'modernizr':  'vendor/modernizr.foundation',
+        'browserid':  'vendor/browserid'
     },
     // Underscore and Backbone are not AMD-capable per default,
     // so we need to use the AMD wrapping of RequireJS
@@ -61,10 +62,10 @@ requirejs.config({
     //, urlArgs: 'bust=' +  (new Date()).getTime()
 });
 
-// Bootstrap the application
-require(['application', 'foundation'], function (Application) {
-    var app = new Application();
-    app.initialize();
+// Bootstrap the application requiring Foundation3 and BrowserID
+require(['application', 'foundation', 'browserid'], function (Application) {
+    window.app = new Application();
+    window.app.initialize();
 });
 </script>
 

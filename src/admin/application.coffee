@@ -12,6 +12,38 @@ define [
         # “Controller title – Site title” (see Layout#adjustTitle)
         title: 'Blað CMS'
 
+        # Store the X-Blad-ApiKey here. Application is global.
+        apiKey: undefined
+
+        # Authenticate and authorize the client.
+        auth: (signedIn) ->
+            # Check for saved cookie.
+            for cookie in document.cookie.split ';'
+                [k, v] = cookie.split '='
+                if k is 'X-Blad-ApiKey' then return signedIn true, v
+
+            # Need to auth with the server.
+            navigator.id.get (assertion) ->
+                if assertion
+                    $.ajax
+                        url: "/auth"
+                        type: "POST"
+                        data:
+                            'assertion': assertion
+                        
+                        success: (data) ->
+                            key = JSON.parse(data).key
+                            
+                            # Save cookie for 24h.
+                            d = new Date() ; d.setDate d.getDate() + 1 ; d = d.toUTCString()
+                            document.cookie = "X-Blad-ApiKey=#{key};expires=#{d}"
+                            
+                            signedIn true, key
+                        
+                        error: (data) -> signedIn false, data
+                else
+                    signedIn false, 'message': 'Cancelled sign-in'
+
         initialize: ->
             super
             #console.debug 'HelloWorldApplication#initialize'
@@ -22,19 +54,16 @@ define [
             @initTemplates()
             @initMediator()
 
-            # Application-specific scaffold
-            @initControllers()
+            # Authenticate and authorize the user.
+            @auth (isSignedIn, @apiKey) =>
+                if isSignedIn
+                    # Register all routes and start routing
+                    @initRouter routes, 'pushState': no
 
-            # Register all routes and start routing
-            @initRouter routes
-            # You might pass Router/History options as the second parameter.
-            # Chaplin enables pushState per default and Backbone uses / as
-            # the root per default. You might change that in the options
-            # if necessary:
-            # @initRouter routes, pushState: false, root: '/subdir/'
-
-            # Freeze the application instance to prevent further changes
-            Object.freeze? this
+                    # Freeze the application instance to prevent further changes
+                    Object.freeze? this
+                else
+                    console.log res
 
         # Override standard layout initializer
         # ------------------------------------
@@ -47,16 +76,6 @@ define [
         # ---------------------------------            
         initTemplates: ->
             window.JST = {}
-
-        # Instantiate common controllers
-        # ------------------------------
-        initControllers: ->
-            # These controllers are active during the whole application runtime.
-            # You don’t need to instantiate all controllers here, only special
-            # controllers which do not to respond to routes. They may govern models
-            # and views which are needed the whole time, for example header, footer
-            # or navigation views.
-            # e.g. new NavigationController()
 
         # Create additional mediator properties
         # -------------------------------------

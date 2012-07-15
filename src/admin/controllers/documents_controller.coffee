@@ -10,6 +10,7 @@ define [
 
         historyURL: (params) -> ''
 
+        # List all documents.
         index: (params) ->
             @collection = new Documents()
             @collection.fetch
@@ -17,11 +18,13 @@ define [
                 'success': (collection, response) ->
                     @view = new DocumentsListView 'collection': collection
 
+        # Edit a document.
         edit: (params) ->
             @model = new Document '_id': params._id
             @model.fetch
                 'success': (model) ->
                     @view = new DocumentEditView 'model': model
 
+        # Create a new document.
         new: (params) ->
             @view = new DocumentEditView()
