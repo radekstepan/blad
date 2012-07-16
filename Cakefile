@@ -109,6 +109,15 @@ uglify = (input) ->
 
 # Write to file.
 write = (path, text, mode = "w") ->
-    fs.open path, mode, 0o0666, (err, id) ->
-        throw err if err
-        fs.write id, text, null, "utf8"
+    writeFile = (path) ->
+        fs.open path, mode, 0o0666, (err, id) ->
+            throw err if err
+            fs.write id, text, null, "utf8"
+
+    # Create the directory if it does not exist first.
+    dir = path.split('/').reverse()[1...].reverse().join('/')
+    if dir isnt '.'
+        fs.mkdir dir, 0o0777, ->
+            writeFile path
+    else
+        writeFile path
