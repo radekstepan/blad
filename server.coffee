@@ -328,6 +328,13 @@ Blað.types = {}
 
 class Blað.Type
 
+    # Returns top level documents.
+    menu: (cb) ->
+        app.db (collection) =>
+            collection.find({'url': new RegExp("^\/([^/|\s]*)$")}, {'sort': 'url'}).toArray (err, docs) =>
+                throw err if err
+                cb docs
+
     # Provides children for a certain depth.
     children: (n) ->
         return {} unless @_children
