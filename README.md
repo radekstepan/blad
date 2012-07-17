@@ -13,3 +13,13 @@ $ ./server.sh
 ```
 
 Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin).
+
+## Mocha test suite
+
+To run the tests execute the following.
+
+```bash
+$ ./test.sh
+```
+
+A `test` collection in MongoDB will be created and cleared before each spec run.

@@ -39,6 +39,46 @@ describe "document URL un-/mapping", ->
 
     root = undefined
 
+    describe "should not allow mapping to app routes", ->
+        it "should return 400 for /auth", (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'DummyDocument'
+                    'url':    "/auth"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+            , (error, response, body) ->
+                response.statusCode.should.equal 400
+                done()
+
+        it "should return 400 for /admin", (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'DummyDocument'
+                    'url':    "/admin/whatever"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+            , (error, response, body) ->
+                response.statusCode.should.equal 400
+                done()
+
+        it "should return 400 for /api", (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'DummyDocument'
+                    'url':    "/api/"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+            , (error, response, body) ->
+                response.statusCode.should.equal 400
+                done()
+
     describe "create root public document", ->
         it 'should return 201', (done) ->
             request.post
@@ -89,6 +129,19 @@ describe "document URL un-/mapping", ->
                 response.statusCode.should.equal 200
                 response.headers['content-type'].should.equal 'application/json'
                 
+                done()
+
+        it "should return 400 for existing map", (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'DummyDocument'
+                    'url':    "/child"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+            , (error, response, body) ->
+                response.statusCode.should.equal 400
                 done()
 
     describe "update root document to private", ->
