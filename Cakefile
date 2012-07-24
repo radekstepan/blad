@@ -8,7 +8,7 @@ require 'colors'
 task "compile", "compile API server and admin client code", ->
     server = (done) ->
         # Core server code.
-        codez = [ fs.readFileSync('./server.coffee', "utf-8") ]
+        codez = [ fs.readFileSync('./server.coffee', "utf-8") ]
 
         # Custom presenters.
         walk './src/site', (files) ->
