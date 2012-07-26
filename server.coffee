@@ -39,6 +39,14 @@ app.use flatiron.plugins.http,
             else
                 next()
     ]
+    'onError': (err, req, res) ->
+        # Trying to reach a 'page' on admin
+        if err.status is 404 and req.url.match(new RegExp("^/admin", 'i'))?
+            res.redirect '/admin', 301
+        else
+            res.writeHead 404, 'application/json'
+            res.write JSON.stringify err
+            res.end()
 
 app.start 1118, (err) ->
     throw err if err
