@@ -24,3 +24,5 @@ ul.list span.type { font-size:10px; font-weight:normal; margin-left:18px; }
 
 select { font-size:14px; height:32px; border:1px solid #CCC; color:rgba(0, 0, 0, 0.75); }
 textarea { height:195px; }
+
+pre { margin-bottom:10px; font-size:12px; }
