@@ -5,6 +5,9 @@ querystring = require 'querystring'
 exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
+config = exported.config
+
+config.BrowserID.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -44,7 +47,7 @@ describe "document that has children actions", ->
                     'url':    "/group1"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -59,7 +62,7 @@ describe "document that has children actions", ->
                         'name':   "child#{i}"
                         'url':    "/group1/child#{i}"
                     'headers':
-                        'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                        'x-blad-apikey': '@dummy'
                 , (error, response, body) ->
                     response.statusCode.should.equal 201
                     if i is 3 then done()

@@ -5,6 +5,9 @@ querystring = require 'querystring'
 exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
+config = exported.config
+
+config.BrowserID.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -38,7 +41,7 @@ describe "sitemap.xml", ->
                     'url':    "/one"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -52,7 +55,7 @@ describe "sitemap.xml", ->
                     'url':    "/two"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -66,7 +69,7 @@ describe "sitemap.xml", ->
                     'url':    "/three"
                     'public': false
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()

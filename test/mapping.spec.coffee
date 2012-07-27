@@ -5,6 +5,9 @@ querystring = require 'querystring'
 exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
+config = exported.config
+
+config.BrowserID.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -48,7 +51,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/auth"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 400
                 done()
@@ -61,7 +64,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/admin/whatever"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 400
                 done()
@@ -74,7 +77,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/api/"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 400
                 done()
@@ -87,7 +90,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/sitemap.xml"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 400
                 done()
@@ -101,7 +104,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 root = JSON.parse(body)._id
@@ -128,7 +131,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/child"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 child = JSON.parse(body)._id
@@ -152,7 +155,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/child"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 400
                 done()
@@ -167,7 +170,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/"
                     'public': false
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 
@@ -208,7 +211,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/child/another-child"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 201
                 done()
@@ -233,7 +236,7 @@ describe "document URL un-/mapping", ->
                     'url':    "/child"
                     'public': false
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 

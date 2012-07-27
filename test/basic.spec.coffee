@@ -5,6 +5,9 @@ querystring = require 'querystring'
 exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
+config = exported.config
+
+config.BrowserID.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -48,7 +51,7 @@ describe "basic document actions", ->
                         'url':    "/documents/#{i}"
                         'public': true
                     'headers':
-                        'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                        'x-blad-apikey': '@dummy'
                 , (error, response, body) ->
                     done(error) if error
 
@@ -75,7 +78,7 @@ describe "basic document actions", ->
             request.get
                 'url': "#{url}/api/documents"
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 done(error) if error
 

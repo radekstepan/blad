@@ -5,6 +5,9 @@ querystring = require 'querystring'
 exported = require('../server.coffee')
 app = exported.app
 Blað = exported.Blað
+config = exported.config
+
+config.BrowserID.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -44,7 +47,7 @@ describe "menu document actions", ->
                     'url':    "/"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 done(error) if error
                 response.statusCode.should.equal 201
@@ -60,7 +63,7 @@ describe "menu document actions", ->
                     'url':    "/yup/"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 done(error) if error
                 response.statusCode.should.equal 201
@@ -76,7 +79,7 @@ describe "menu document actions", ->
                     'url':    "/whatever/dude"
                     'public': true
                 'headers':
-                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+                    'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 done(error) if error
                 response.statusCode.should.equal 201

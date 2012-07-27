@@ -389,6 +389,7 @@ class Blað.Type
         for key, value of params
             @[key] = value
 
-# Expose.
-exports.app = app
-exports.Blað = Blað
+# Expose for testing.
+exports.app = app       # So we can start the app.
+exports.config = config # So we can inject our own API key.
+exports.Blað = Blað     # So we can inject our own document types.
