@@ -7,7 +7,7 @@ app = exported.app
 Blað = exported.Blað
 config = exported.config
 
-config.BrowserID.hashes = [ '@dummy' ]
+config.browserid.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ Blað.types.DummyDocument = DummyDocument
 
 # -------------------------------------------------------------------
 
-url = 'http://127.0.0.1:1118'
+url = "http://127.0.0.1:#{config.port}"
 
 describe "document URL un-/mapping", ->
 

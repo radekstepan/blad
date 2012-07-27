@@ -1,5 +1,7 @@
 {
-    "BrowserID": {
+    "port": 1118,
+    "mongodb": "mongodb://localhost:27017/documents",
+    "browserid": {
         "provider": "https://browserid.org/verify",
         "salt":     "Q?RAf!CAkus?ejuCruKu",
         "users": [

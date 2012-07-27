@@ -7,7 +7,7 @@ app = exported.app
 Blað = exported.Blað
 config = exported.config
 
-config.BrowserID.hashes = [ '@dummy' ]
+config.browserid.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ Blað.types.SitemapDocument = SitemapDocument
 
 # -------------------------------------------------------------------
 
-url = 'http://127.0.0.1:1118'
+url = "http://127.0.0.1:#{config.port}"
 
 describe "sitemap.xml", ->
 
@@ -82,8 +82,8 @@ describe "sitemap.xml", ->
 
                 matches = ( match.replace(/<lastmod>.+?<\/lastmod>/, '') for match in body.match /<url>(.+?)<\/url>/g )
 
-                matches.should.includeEql '<url><loc>http://127.0.0.1:1118/one</loc></url>'
-                matches.should.includeEql '<url><loc>http://127.0.0.1:1118/two</loc></url>'
-                matches.should.not.includeEql '<url><loc>http://127.0.0.1:1118/three</loc></url>'
+                matches.should.includeEql "<url><loc>#{url}/one</loc></url>"
+                matches.should.includeEql "<url><loc>#{url}/two</loc></url>"
+                matches.should.not.includeEql "<url><loc>#{url}/three</loc></url>"
 
                 done()

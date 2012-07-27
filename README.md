@@ -7,7 +7,9 @@ The idea was to create a RESTful CMS API that would be edited using a client sid
 
 ## Start the service and admin app
 
-Configure the `salt` and emails of `users` that are allowed access to the admin area in `config.json`.
+Configure the `salt` and emails of `users` that are allowed access to the admin area and `port` number for the server and uri for `mongodb` in `config.json`.
+
+Install [MongoDB](http://www.mongodb.org/display/DOCS/Quickstart) and start the service.
 
 We wrap the compilation of user code and core code using `cake` but first, dependencies need to be met.
 
@@ -16,7 +18,7 @@ $ npm install -d
 $ ./server.sh
 ```
 
-Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin).
+Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin) and modify port number as appropriate.
 
 ## Creating custom document types
 

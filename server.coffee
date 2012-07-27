@@ -14,17 +14,22 @@ eco      = require 'eco'
 config = JSON.parse fs.readFileSync './config.json'
 
 # Validate file.
-if not config.BrowserID? or
-  not config.BrowserID.provider? or
-    not config.BrowserID.salt? or
-      not config.BrowserID.users? or
-        not config.BrowserID.users instanceof Array
-            throw 'You need to create a valid `BrowserID` section in the config file'
+if not config.browserid? or
+  not config.browserid.provider? or
+    not config.browserid.salt? or
+      not config.browserid.users? or
+        not config.browserid.users instanceof Array
+            throw 'You need to create a valid `browserid` section in the config file'
+if not config.port? or
+    typeof config.port isnt 'number'
+        throw 'You need to specify the `port` to use by the server in the config file'
+if not config.mongodb?
+    throw 'You need to specify the `mongodb` uri in the config file'
 
 # Create create hashes of salt + user emails.
-config.BrowserID.hashes = []
-for email in config.BrowserID.users
-    config.BrowserID.hashes.push crypto.createHash('md5').update(email + config.BrowserID.salt).digest('hex')
+config.browserid.hashes = []
+for email in config.browserid.users
+    config.browserid.hashes.push crypto.createHash('md5').update(email + config.browserid.salt).digest('hex')
 
 app = flatiron.app
 app.use flatiron.plugins.http,
@@ -43,7 +48,7 @@ app.use flatiron.plugins.http,
                     res.end()
                 else
                     # Is the key valid?
-                    if req.headers['x-blad-apikey'] in config.BrowserID.hashes
+                    if req.headers['x-blad-apikey'] in config.browserid.hashes
                         next()
                     else
                         res.writeHead 403
@@ -60,7 +65,7 @@ app.use flatiron.plugins.http,
             # Go Union!
             union.errorHandler err, req, res
 
-app.start 1118, (err) ->
+app.start config.port, (err) ->
     throw err if err
     app.log.info "Listening on port #{app.server.address().port}".green if process.env.NODE_ENV isnt 'test'
 
@@ -74,7 +79,7 @@ app.use
                 if err then cb err, {} else cb undefined, eco.render template, data
 
 # Start MongoDB.
-mongodb.Db.connect "mongodb://localhost:27017/documents", (err, db) ->
+mongodb.Db.connect config.mongodb, (err, db) ->
     throw err if err
     app.log.info "Fired up MongoDB".green if process.env.NODE_ENV isnt 'test'
 
@@ -101,7 +106,7 @@ app.router.path "/auth", ->
     @post ->
         # Authenticate.
         request.post
-            'url': config.BrowserID.provider
+            'url': config.browserid.provider
             'form':
                 'assertion': @req.body.assertion
                 'audience':  "http://#{@req.headers.host}"
@@ -112,13 +117,13 @@ app.router.path "/auth", ->
             
             if body.status is 'okay'
                 # Authorize.
-                if body.email in config.BrowserID.users
+                if body.email in config.browserid.users
                     app.log.info 'Identity verified for ' + body.email.green if process.env.NODE_ENV isnt 'test'
                     # Create API Key from email and salt for the client.
                     @res.writeHead 200, 'application/json'
                     @res.write JSON.stringify
                         'email': body.email
-                        'key':   crypto.createHash('md5').update(body.email + config.BrowserID.salt).digest('hex')
+                        'key':   crypto.createHash('md5').update(body.email + config.browserid.salt).digest('hex')
                 else
                     app.log.info "#{body.email} tried to access the API".red if process.env.NODE_ENV isnt 'test'
                     @res.writeHead 403, 'application/json'
@@ -235,13 +240,6 @@ app.router.path "/api/document", ->
 
     @post editSave
     @put editSave
-
-app.router.path "/admin/reset", ->
-    @get ->
-        app.db (collection) =>
-            collection.remove {}, (err, removed) =>
-                throw err if err
-                @res.end()
 
 # -------------------------------------------------------------------
 # Blað.
@@ -396,5 +394,5 @@ class Blað.Type
 
 # Expose for testing.
 exports.app = app       # So we can start the app.
-exports.config = config # So we can inject our own API key.
+exports.config = config # So we can inject our own API key and see which port to use.
 exports.Blað = Blað     # So we can inject our own document types.
