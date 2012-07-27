@@ -1,0 +1,9 @@
+{
+    "BrowserID": {
+        "provider": "https://browserid.org/verify",
+        "salt":     "Q?RAf!CAkus?ejuCruKu",
+        "users": [
+            "radek.stepan@gmail.com"
+        ]
+    }
+}

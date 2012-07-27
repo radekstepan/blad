@@ -31,19 +31,18 @@ define [
             navigator.id.get (assertion) ->
                 if assertion
                     $.ajax
-                        url: "/auth"
-                        type: "POST"
+                        url:      '/auth'
+                        type:     'POST'
+                        dataType: 'json'
                         data:
                             'assertion': assertion
                         
                         success: (data) ->
-                            key = JSON.parse(data).key
-                            
                             # Save cookie for 24h.
                             d = new Date() ; d.setDate d.getDate() + 1 ; d = d.toUTCString()
-                            document.cookie = "X-Blad-ApiKey=#{key};expires=#{d}"
+                            document.cookie = "X-Blad-ApiKey=#{data.key};expires=#{d}"
                             
-                            signedIn true, key
+                            signedIn true, data.key
                         
                         error: (data) -> signedIn false, data
                 else

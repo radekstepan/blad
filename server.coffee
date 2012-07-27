@@ -10,8 +10,21 @@ urlib    = require 'url'
 fs       = require 'fs'
 eco      = require 'eco'
 
-salt = 'Q?RAf!CAkus?ejuCruKu'
-email = 'radek.stepan@gmail.com'
+# Read the config file.
+config = JSON.parse fs.readFileSync './config.json'
+
+# Validate file.
+if not config.BrowserID? or
+  not config.BrowserID.provider? or
+    not config.BrowserID.salt? or
+      not config.BrowserID.users? or
+        not config.BrowserID.users instanceof Array
+            throw 'You need to create a valid `BrowserID` section in the config file'
+
+# Create create hashes of salt + user emails.
+config.BrowserID.hashes = []
+for email in config.BrowserID.users
+    config.BrowserID.hashes.push crypto.createHash('md5').update(email + config.BrowserID.salt).digest('hex')
 
 app = flatiron.app
 app.use flatiron.plugins.http,
@@ -30,7 +43,7 @@ app.use flatiron.plugins.http,
                     res.end()
                 else
                     # Is the key valid?
-                    if crypto.createHash('md5').update(email + salt).digest('hex') is req.headers['x-blad-apikey']                   
+                    if req.headers['x-blad-apikey'] in config.BrowserID.hashes
                         next()
                     else
                         res.writeHead 403
@@ -88,10 +101,10 @@ app.router.path "/auth", ->
     @post ->
         # Authenticate.
         request.post
-            'url': "https://browserid.org/verify"
+            'url': config.BrowserID.provider
             'form':
                 'assertion': @req.body.assertion
-                'audience':  "http://127.0.0.1:1118"
+                'audience':  "http://#{@req.headers.host}"
         , (error, response, body) =>
             throw error if error
 
@@ -99,13 +112,13 @@ app.router.path "/auth", ->
             
             if body.status is 'okay'
                 # Authorize.
-                if body.email is email
-                    app.log.info "#{body.email} identity verified".green if process.env.NODE_ENV isnt 'test'
+                if body.email in config.BrowserID.users
+                    app.log.info 'Identity verified for ' + body.email.green if process.env.NODE_ENV isnt 'test'
                     # Create API Key from email and salt for the client.
                     @res.writeHead 200, 'application/json'
                     @res.write JSON.stringify
                         'email': body.email
-                        'key':   crypto.createHash('md5').update(body.email + salt).digest('hex')
+                        'key':   crypto.createHash('md5').update(body.email + config.BrowserID.salt).digest('hex')
                 else
                     app.log.info "#{body.email} tried to access the API".red if process.env.NODE_ENV isnt 'test'
                     @res.writeHead 403, 'application/json'
