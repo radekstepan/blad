@@ -44,9 +44,8 @@ app.use flatiron.plugins.http,
         if err.status is 404 and req.url.match(new RegExp("^/admin", 'i'))?
             res.redirect '/admin', 301
         else
-            res.writeHead 404, 'application/json'
-            res.write JSON.stringify err
-            res.end()
+            # Go Union!
+            union.errorHandler err, req, res
 
 app.start 1118, (err) ->
     throw err if err
@@ -119,6 +118,24 @@ app.router.path "/auth", ->
                 @res.write JSON.stringify body
             
             @res.end()
+
+# -------------------------------------------------------------------
+# Sitemap.xml
+app.router.path "/sitemap.xml", ->
+    @get ->
+        app.log.info "Get sitemap.xml" if process.env.NODE_ENV isnt 'test'
+
+        # Give me all public documents.
+        app.db (collection) =>
+            collection.find('public': true).toArray (err, docs) =>
+                throw err if err
+
+                xml = '<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                xml += ( "<url><loc>http://#{@req.headers.host}#{doc.url}</loc></url>" for doc in docs ).join('') + '</urlset>'
+
+                @res.writeHead 200, "content-type": "application/xml"
+                @res.write xml
+                @res.end()
 
 # -------------------------------------------------------------------
 # Get all documents.
@@ -222,7 +239,7 @@ Blað.save = (doc, cb) ->
     # Remove trailing slash if present.
     if doc.url.length > 1 and doc.url[-1...] is '/' then doc.url = doc.url[...-1]
     # Are we trying to map to core URLs?
-    if doc.url.match(new RegExp("^/admin|^/api|^/auth", 'i'))?
+    if doc.url.match(new RegExp("^/admin|^/api|^/auth|^/sitemap.xml", 'i'))?
         cb true, 'url': 'Is in use by core application'
     else
         # Is the URL mappable?

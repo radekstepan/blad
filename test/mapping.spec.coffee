@@ -79,6 +79,19 @@ describe "document URL un-/mapping", ->
                 response.statusCode.should.equal 400
                 done()
 
+        it "should return 400 for /sitemap.xml", (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'DummyDocument'
+                    'url':    "/sitemap.xml"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '836f05bcb41b62ee335fc8b06dc8e629'
+            , (error, response, body) ->
+                response.statusCode.should.equal 400
+                done()
+
     describe "create root public document", ->
         it 'should return 201', (done) ->
             request.post
