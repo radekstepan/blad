@@ -82,6 +82,7 @@ describe "markdown document actions", ->
                 documents.length.should.equal 1
 
                 delete documents[0]._id
+                delete documents[0].modified
 
                 documents.should.includeEql
                     'type':   'MarkdownDocument'

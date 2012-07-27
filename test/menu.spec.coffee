@@ -100,7 +100,9 @@ describe "menu document actions", ->
 
                 clean = []
                 for doc in documents
-                    delete doc._id ; clean.push doc
+                    delete doc._id
+                    delete doc.modified
+                    clean.push doc
 
                 clean.should.includeEql
                     "type":   "MenuDocument"

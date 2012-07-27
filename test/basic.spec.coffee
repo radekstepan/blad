@@ -91,7 +91,13 @@ describe "basic document actions", ->
 
                 clean = []
                 for doc in documents
-                    delete doc._id ; clean.push doc
+                    # Do we actually have them?
+                    (doc._id?).should.be.true
+                    (doc.modified?).should.be.true
+                    # Delete them now.
+                    delete doc._id
+                    delete doc.modified
+                    clean.push doc
 
                 clean.should.includeEql
                     "type":   "BasicDocument"

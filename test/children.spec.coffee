@@ -78,7 +78,9 @@ describe "document that has children actions", ->
 
                 clean = []
                 for doc in children.all
-                    delete doc._id ; clean.push doc
+                    delete doc._id
+                    delete doc.modified
+                    clean.push doc
 
                 clean.should.includeEql
                     "type": "HasChildrenDocument"

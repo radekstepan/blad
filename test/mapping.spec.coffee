@@ -174,7 +174,10 @@ describe "document URL un-/mapping", ->
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 
-                body.should.equal JSON.stringify
+                body = JSON.parse body
+                delete body.modified
+
+                body.should.eql
                     '_id':    root
                     'type':   'DummyDocument'
                     'url':    "/"
@@ -240,7 +243,10 @@ describe "document URL un-/mapping", ->
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 
-                body.should.equal JSON.stringify
+                body = JSON.parse body
+                delete body.modified
+
+                body.should.eql
                     '_id':    child
                     'type':   'DummyDocument'
                     'url':    "/child"

@@ -80,7 +80,7 @@ describe "sitemap.xml", ->
             , (error, response, body) ->
                 response.statusCode.should.equal 200
 
-                matches = body.match /<url>(.+?)<\/url>/g
+                matches = ( match.replace(/<lastmod>.+?<\/lastmod>/, '') for match in body.match /<url>(.+?)<\/url>/g )
 
                 matches.should.includeEql '<url><loc>http://127.0.0.1:1118/one</loc></url>'
                 matches.should.includeEql '<url><loc>http://127.0.0.1:1118/two</loc></url>'

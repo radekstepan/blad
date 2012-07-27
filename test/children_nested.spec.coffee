@@ -93,7 +93,9 @@ describe "document that has children actions", ->
 
                 clean = []
                 for doc in children.lvl0
-                    delete doc._id ; clean.push doc
+                    delete doc._id
+                    delete doc.modified
+                    clean.push doc
 
                 clean.should.includeEql
                     "type": "HasChildrenDocument"
@@ -102,7 +104,9 @@ describe "document that has children actions", ->
 
                 clean = []
                 for doc in children.lvl1
-                    delete doc._id ; clean.push doc
+                    delete doc._id
+                    delete doc.modified
+                    clean.push doc
 
                 clean.should.includeEql
                     "type": "HasChildrenDocument"
