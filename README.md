@@ -7,6 +7,8 @@ The idea was to create a RESTful CMS API that would be edited using a client sid
 
 ## Start the service and admin app
 
+Configure the `salt` and emails of `users` that are allowed access to the admin area in `config.json`.
+
 We wrap the compilation of user code and core code using `cake` but first, dependencies need to be met.
 
 ```bash
@@ -15,26 +17,6 @@ $ ./server.sh
 ```
 
 Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin).
-
-## Mocha test suite
-
-To run the tests execute the following.
-
-```bash
-$ ./test.sh
-```
-
-A `test` collection in MongoDB will be created and cleared before each spec run. Make sure the server app is switched off in order to run the tests. If you receive a lot of timeouts during testing, increase the amount of ms in the `before` function:
-
-```coffeescript
-setTimeout ( ->
-    app.db (collection) ->
-        collection.remove {}, (error, removed) ->
-            collection.find({}).toArray (error, results) ->
-                results.length.should.equal 0
-                done()
-), 100
-```
 
 ## Creating custom document types
 
@@ -92,3 +74,23 @@ Extending the `Blað.Type` class gives us the following helpers:
 Represented by a `template.eco` file.
 
 This file is populated with a context coming from the presenter. In the above Markdown example, we have passed only the `html` key - value forward.
+
+## Mocha test suite
+
+To run the tests execute the following.
+
+```bash
+$ ./test.sh
+```
+
+A `test` collection in MongoDB will be created and cleared before each spec run. Make sure the server app is switched off in order to run the tests. If you receive a lot of timeouts during testing, increase the amount of ms in the `before` function:
+
+```coffeescript
+setTimeout ( ->
+    app.db (collection) ->
+        collection.remove {}, (error, removed) ->
+            collection.find({}).toArray (error, results) ->
+                results.length.should.equal 0
+                done()
+), 100
+```
