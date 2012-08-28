@@ -11,11 +11,15 @@ Configure the `salt` and emails of `users` that are allowed access to the admin 
 
 Install [MongoDB](http://www.mongodb.org/display/DOCS/Quickstart) and start the service.
 
+```bash
+$ sudo mongod
+```
+
 We wrap the compilation of user code and core code using `cake` but first, dependencies need to be met.
 
 ```bash
 $ npm install -d
-$ ./server.sh
+$ npm start
 ```
 
 Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin) and modify port number as appropriate.
@@ -82,17 +86,15 @@ This file is populated with a context coming from the presenter. In the above Ma
 To run the tests execute the following.
 
 ```bash
-$ ./test.sh
+$ npm test
 ```
 
-A `test` collection in MongoDB will be created and cleared before each spec run. Make sure the server app is switched off in order to run the tests. If you receive a lot of timeouts during testing, increase the amount of ms in the `before` function:
+A `test` collection in MongoDB will be created and cleared before each spec run. Make sure the server app is switched off in order to run the tests.
 
 ```coffeescript
-setTimeout ( ->
-    app.db (collection) ->
-        collection.remove {}, (error, removed) ->
-            collection.find({}).toArray (error, results) ->
-                results.length.should.equal 0
-                done()
-), 100
+app.db (collection) ->
+    collection.remove {}, (error, removed) ->
+        collection.find({}).toArray (error, results) ->
+            results.length.should.equal 0
+            done()
 ```

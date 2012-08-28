@@ -79,26 +79,32 @@ app.use
                 if err then cb err, {} else cb undefined, eco.render template, data
 
 # Start MongoDB.
-mongodb.Db.connect config.mongodb, (err, db) ->
-    throw err if err
-    app.log.info "Fired up MongoDB".green if process.env.NODE_ENV isnt 'test'
-
-    # Add a collection plugin.
-    app.use
-        name: "mongodb"
-        attach: (options) ->
-            app.db = (cb) ->
-                db.collection process.env.NODE_ENV or 'documents', (err, collection) ->
+db = null
+# Add a collection plugin.
+app.use
+    name: "mongodb"
+    attach: (options) ->
+        app.db = (done) ->
+            collection = (done) ->
+                db.collection process.env.NODE_ENV or 'documents', (err, coll) ->
                     throw err if err
-                    cb collection
+                    done coll
 
-    # Map all existing public documents.
-    app.db (collection) ->
-        collection.find('public': true).toArray (err, docs) ->
-            throw err if err
-            for doc in docs
-                app.log.info "Mapping url " + doc.url.blue if process.env.NODE_ENV isnt 'test'
-                app.router.path doc.url, Blað.get
+            unless db?
+                mongodb.Db.connect config.mongodb, (err, connection) ->
+                    db = connection
+                    throw err if err
+                    collection done
+            else
+                collection done
+
+# Map all existing public documents.
+app.db (collection) ->
+    collection.find('public': true).toArray (err, docs) ->
+        throw err if err
+        for doc in docs
+            app.log.info "Mapping url " + doc.url.blue if process.env.NODE_ENV isnt 'test'
+            app.router.path doc.url, Blað.get
 
 # -------------------------------------------------------------------
 # BrowserID auth.

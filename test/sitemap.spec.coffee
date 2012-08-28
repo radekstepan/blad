@@ -24,13 +24,11 @@ describe "sitemap.xml", ->
     before (done) ->
         app.start()
         
-        setTimeout ( ->
-            app.db (collection) ->
-                collection.remove {}, (error, removed) ->
-                    collection.find({}).toArray (error, results) ->
-                        results.length.should.equal 0
-                        done()
-        ), 100
+        app.db (collection) ->
+            collection.remove {}, (error, removed) ->
+                collection.find({}).toArray (error, results) ->
+                    results.length.should.equal 0
+                    done()
 
     describe "create a public document", ->
         it 'should return 201', (done) ->

@@ -32,13 +32,11 @@ describe "document URL un-/mapping", ->
     before (done) ->
         app.start()
         
-        setTimeout ( ->
-            app.db (collection) ->
-                collection.remove {}, (error, removed) ->
-                    collection.find({}).toArray (error, results) ->
-                        results.length.should.equal 0
-                        done()
-        ), 100
+        app.db (collection) ->
+            collection.remove {}, (error, removed) ->
+                collection.find({}).toArray (error, results) ->
+                    results.length.should.equal 0
+                    done()
 
     root = undefined
 
