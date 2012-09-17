@@ -44,14 +44,25 @@ For example, the Markdown document type has a `<textarea>` defined like so:
 
 Notice that to display the already saved version of that field, we use eco markup that populates a variable by the `name` of the field.
 
+#### Files
+
 File upload fields are a special case that need to have two fields defined. One for the actual `type="file"` and one for a place where the field will be loaded client side:
 
 ```eco
 <input type="hidden" name="image" value="<%= @image %>" />
-<input type="file" data-target="image" />
+<input type="file" data-custom="file" data-target="image" />
 ```
 
 The attribute `data-target`, then, specifies which field to populate with base64 encoded version of the file client side.
+
+#### Dates
+
+By the same token, we use [Kronic](https://github.com/xaviershay/kronic) to work with nicely formatted dates. To make use of this library, define the date fields like so:
+
+```eco
+<input type="hidden" name="published" value="<%= @published or (new Date()).toJSON() %>" />
+<input type="text" data-custom="date" data-target="published" value="<%= Kronic.format(new Date(@published) or new Date()) %>" />
+```
 
 ### Public presenter
 

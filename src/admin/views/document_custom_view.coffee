@@ -22,8 +22,9 @@ define [
         afterRender: ->
             super
 
-            # Do we have any file uploads? Attach handlers...
-            @delegate 'change', '[type="file"]', @loadFileHandler
+            # Attach handlers...
+            @delegate 'change', '[data-custom="file"]', @loadFileHandler
+            @delegate 'change', '[data-custom="date"]', @niceDateHandler
 
         # Onchange form file input fields.
         loadFileHandler: (e) ->
@@ -33,3 +34,25 @@ define [
                 # Set base64 encoded string into target hidden input field.
                 target = $(e.target).attr('data-target')
                 $(@el).find("[name=#{target}]").val(event.target.result)
+
+        # Convert nice date into a Date form.
+        niceDateHandler: (e) ->
+            # The input field with the nice date.
+            target = $(e.target)
+            
+            # Clear existing error message if present.
+            target.closest('div').removeClass('error')
+            @error?.remove()
+
+            d = Kronic.parse target.val()
+            unless d?
+                # Show an error message.
+                # Find nearest `<div>`.
+                div = target.closest('div')
+                div.addClass('error')
+                div.append @error = $('<small/>', 'text': 'Do not understand this date')
+            else
+                # Set the serialized date.
+                j = new Date(d).toJSON()
+                t = target.attr('data-target')
+                $(@el).find("[name=#{t}]").val(j)

@@ -41,7 +41,8 @@ requirejs.config({
         'chaplin':    'vendor/chaplin',
         'foundation': 'vendor/foundation',
         'modernizr':  'vendor/modernizr.foundation',
-        'browserid':  'vendor/browserid'
+        'browserid':  'vendor/browserid',
+        'kronic':     'vendor/kronic'
     },
     // Underscore and Backbone are not AMD-capable per default,
     // so we need to use the AMD wrapping of RequireJS
@@ -62,8 +63,8 @@ requirejs.config({
     //, urlArgs: 'bust=' +  (new Date()).getTime()
 });
 
-// Bootstrap the application requiring Foundation3 and BrowserID
-require(['application', 'foundation', 'browserid'], function (Application) {
+// Bootstrap the application requiring Foundation3, BrowserID and Kronic for dates.
+require(['application', 'foundation', 'browserid', 'kronic'], function (Application) {
     window.app = new Application();
     window.app.initialize();
 });
