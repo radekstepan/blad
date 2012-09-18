@@ -4,7 +4,7 @@
 
     <link rel="stylesheet" href="/public/css/templates.css">
 
-    <title><%= @title %></title>
+    <title>Blog Holder</title>
 </head>
 <body>
     <div class="row">
@@ -16,12 +16,14 @@
 
     <div class="row">
         <div class="twelve columns" role="content">
-            <article>
-                <h1><%= @title %></h1>
-                <h6>Written by <%= @author %> on <%= @published %>.</h6>
+            <% for article in @articles: %>
+                <article>
+                    <h3><a href="<%= article.url %>"><%= article.title %></a></h3>
+                    <h6>Written by <%= article.author %> on <%= article.published %>.</h6>
 
-                <%- @article %>
-            </article>
+                    <%- article.article %>
+                </article>
+            <% end %>
         </div>
     </div>
 
