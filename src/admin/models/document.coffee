@@ -36,4 +36,4 @@ define [
 
         # Determine available doc types based on JST forms.
         attrTypes: ->
-            ( key[5...key.length - 4] for key, value of window.JST when key.indexOf('form_') is 0 )
+            ( key[5...key.length - 4] for key, value of window.JST when key.indexOf('form_') is 0 ).sort()
