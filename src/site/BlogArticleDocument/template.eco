@@ -1,0 +1,65 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="/public/css/templates.css">
+
+    <title><%= @title %></title>
+</head>
+<body>
+    <div class="row">
+        <div class="twelve columns">
+            <ul class="nav-bar">
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+                <li><a href="#">Link 4</a></li>
+            </ul>
+
+            <h1>Blog <small>This is my blog. It's awesome.</small>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="nine columns" role="content">
+            <article>
+                <h3><%= @title %></h3>
+                <h6>Written by <%= @author %> on <%= @published %>.</h6>
+
+                <%- @article %>
+            </article>
+        </div>
+
+        <aside class="three columns">
+            <h5>Categories</h5>
+            <ul class="side-nav">
+                <li><a href="#">News</a></li>
+                <li><a href="#">Code</a></li>
+                <li><a href="#">Design</a></li>
+                <li><a href="#">Fun</a></li>
+                <li><a href="#">Weasels</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer class="row">
+        <div class="twelve columns">
+            <hr />
+            <div class="row">
+                <div class="six columns">
+                    <p>&copy; Copyright no one at all. Go to town.</p>
+                </div>
+                <div class="six columns">
+                    <ul class="link-list right">
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <li><a href="#">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
