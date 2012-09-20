@@ -390,6 +390,25 @@ class Blað.Type
         else
             @_children
 
+    # Grab a parent article of this one, if present (based on URL).
+    parent: (cb) ->
+        # Split to parts.
+        parts = @url.split('/')
+        # No way parent?
+        return cb({}) unless parts.length > 2
+        # Join.
+        url = parts[0...-1].join('/')
+        # Query.
+        app.db (collection) =>
+            collection.find({'url': new RegExp('^' + url.toLowerCase())}, {'sort': 'url'}).toArray (err, docs) =>
+                throw err if err
+
+                # No parent.
+                return cb({}) unless docs.length > 0
+
+                # Return 
+                return cb docs[0]
+
     # Needs to be overriden.
     render: (done) -> done {}
 
