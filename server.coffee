@@ -390,6 +390,22 @@ class Blað.Type
         else
             @_children
 
+    # Grab siblings of this article, for example all blog articles when viewing one article (based on URL).
+    siblings: (cb) ->
+        # Split to parts.
+        parts = @url.split('/')
+        # Join.
+        url = parts[0...-1].join('/')
+        end = parts[-1...]
+
+        # Query.
+        app.db (collection) =>
+            # Find us documents that are not us, but have all but last part of the url like us and have the same depth.
+            collection.find({'url': new RegExp('^' + url.toLowerCase() + "\/(?!\/|#{end}).*")}, {'sort': 'url'}).toArray (err, docs) =>
+                throw err if err
+
+                cb(docs or [])
+
     # Grab a parent article of this one, if present (based on URL).
     parent: (cb) ->
         # Split to parts.
