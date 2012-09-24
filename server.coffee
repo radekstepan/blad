@@ -76,7 +76,12 @@ app.use
     attach: (options) ->
         app.eco = (path, data, cb) ->
             fs.readFile "./src/site/#{path}.eco", "utf8", (err, template) ->
-                if err then cb err, {} else cb undefined, eco.render template, data
+                if err then cb err, null
+                else
+                    try
+                        cb null, eco.render template, data
+                    catch e
+                        cb e, null
 
 # Start MongoDB.
 db = null
