@@ -31,20 +31,17 @@
     <div class="row">
         <div id="splash" class="twelve columns">
             <img src="public/img/splash-server.jpg" />
-            <h1>Cloud computing and blue sky research</h1>
-            <h2>Collaborating with Eastern Europe, Middle East and Far East</h2>
+            <h1><%= @splashTitle %></h1>
+            <h2><%= @splashSubtitle %></h2>
         </div>
     </div>
 
     <div class="row">
         <!-- welcome -->
         <article id="welcome" class="six columns">
-            <h1>Welcome to the Micklem group web!</h1>
-            <img src="public/img/faces-gos.jpg" />
-            <p>We are an iterdisciplinary team focused on the applications of integrative genomics approaches. Our work ranges from developing open
-            source community <a href="#">resources</a> such as the data warehouse system InterMine, to undertaking and supporting <a href="#">research
-            projects</a> in a range of areas including functional genomics, synthetic biology, and cancer research.</p>
-            <p>We have a range of student projects available, and are open to collaborations. If you're interested <a href="#">get in touch</a>!</p>
+            <h1><%= @welcomeTitle %></h1>
+            <img src="<%- @welcomeImage %>" />
+            <%- @welcomeText %>
         </article>
 
         <!-- projects -->
@@ -52,29 +49,21 @@
             <h1>Projects</h1>
 
             <ul>
+                <% for project in @sub.ProjectDocument: %>
+                    <li>
+                        <div class="row">
+                            <div class="nine columns">
+                                <h2><a href="<%= project.url %>"><%= project.title %></a></h2>
+                                <%- project.summary %>
+                            </div>
+                            <div class="three columns">
+                                <img src="<%- project.summaryImage %>" />
+                            </div>
+                        </div>
+                    </li>
+                <% end %>
                 <li>
-                    <div class="row">
-                        <div class="nine columns">
-                            <h2><a href="#">Cross-species comparative genomics</a></h2>
-                            <p>I know we might not want a blurb but I am trying to fill the space here OK? Maybe have a timeline at least.<br />2011 - 2012</p>
-                        </div>
-                        <div class="three columns">
-                            <img src="public/img/projects-comparative.png" />
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="row">
-                        <div class="nine columns">
-                            <h2><a href="#">Genetics of Toxoplasma</a></h2>
-                            <p>I know we might not want a blurb but I am trying to fill the space here OK? Maybe have a timeline at least.<br />2011 - <em>now</em></p>
-                        </div>
-                        <div class="three columns">
-                            <img src="public/img/projects-toxoplasma.png" />
-                        </div>
-                </li>
-                <li>
-                    <h4>Fore more details and a complete list, see <a href="#">Projects</a>.</h4>
+                    <h4>Fore more details and a complete list, see <a href="/projects">Projects</a>.</h4>
                 </li>
             </ul>
         </article>

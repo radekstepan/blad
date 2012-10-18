@@ -1,0 +1,37 @@
+<div class="six columns">
+    <label>Splash title</label>
+    <input type="text" name="splashTitle" value="<%- @splashTitle %>" />
+</div>
+
+<div class="six columns">
+    <label>Splash subtitle</label>
+    <input type="text" name="splashSubtitle" value="<%- @splashSubtitle %>" />
+</div>
+
+<div class="six columns">
+    <label>Welcome title</label>
+    <input type="text" name="welcomeTitle" value="<%- @welcomeTitle %>" />
+</div>
+
+<div class="six columns">
+    <label>Welcome image</label>
+    <input type="hidden" name="welcomeImage" value="<%= @welcomeImage %>" />
+    <input type="file" data-custom="file" data-target="welcomeImage" />
+</div>
+
+<div class="twelve columns">
+    <label>Welcome text</label>
+    <div class="row">
+        <div class="nine columns">
+            <textarea name="welcomeText"><%- @welcomeText %></textarea>
+        </div>
+        <div class="three columns">
+                <pre># 1<sup>st</sup> level</pre>
+                <pre>## 2<sup>nd</sup> level</pre>
+                <pre>* An item in an unordered list</pre>
+                <pre>    * A subitem</pre>
+                <pre>1. An item in an ordered list</pre>
+                <pre>*emphasis* or **strong**</pre>
+        </div>
+    </div>
+</div>
