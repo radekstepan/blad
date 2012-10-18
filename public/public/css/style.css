@@ -118,23 +118,77 @@ header#top nav a.contact {
   font-size: 16px;
   top: 69px;
 }
-#welcome h1 {
+aside.sidebar {
+  margin-bottom: 30px;
+}
+aside.sidebar h2 {
+  font-family: "Lato";
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 12px 10px;
+}
+aside.sidebar h2.bismark {
+  background: #407083;
+}
+aside.sidebar h2.patina {
+  background: #659995;
+}
+aside.sidebar h2 a {
+  color: #fff;
+}
+aside.sidebar ul {
+  list-style-type: none;
+  margin: 10px 10px 30px 10px;
+}
+aside.sidebar ul li:not(:first-child):before {
+  content: " ";
+  display: block;
+  width: 150px;
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0 12px 0;
+}
+aside.sidebar ul li h3 {
+  color: #407083;
+  font-size: 12px;
+}
+aside.sidebar ul li h3 a {
+  color: #407083;
+  text-decoration: underline;
+}
+aside.sidebar ul p {
+  font-style: normal;
+  font-size: 12px;
+  color: #7c7c7c;
+  line-height: 20px;
+}
+article.main {
+  margin-bottom: 30px;
+}
+article.main h1 {
   font-family: "Lato";
   color: #345b6a;
   font-weight: 400;
   font-size: 24px;
   margin: 8px 0 18px 0;
 }
-#welcome img {
+article.main h4 {
+  color: #656565;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 10px;
+}
+article.main img {
   float: left;
   margin: 0 25px 0 0;
 }
-#welcome p {
+article.main p {
   color: #656565;
   font-size: 13px;
   line-height: 23px;
 }
-#welcome p a {
+article.main p a {
   color: #659995;
   text-decoration: underline;
 }

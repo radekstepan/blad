@@ -1,9 +1,9 @@
-<div class="six columns">
+<div class="five columns">
     <label>Project title</label>
     <input type="text" name="title" value="<%= @title %>" />
 </div>
 
-<div class="four columns">
+<div class="three columns">
     <label>Project summary image</label>
     <input type="hidden" name="summaryImage" value="<%= @summaryImage %>" />
     <input type="file" data-custom="file" data-target="summaryImage" />
@@ -17,11 +17,36 @@
     </select>
 </div>
 
+<div class="two columns">
+    <label>Is current?</label>
+    <select name="current">
+        <option value="true" <% if @current: %>selected="selected"<% end %>>Yes</option>
+        <option value="false" <% if !@current: %>selected="selected"<% end %>>No</option>
+    </select>
+</div>
+
 <div class="twelve columns">
     <label>Project summary</label>
     <div class="row">
         <div class="nine columns">
             <textarea name="summary"><%- @summary %></textarea>
+        </div>
+        <div class="three columns">
+                <pre># 1<sup>st</sup> level</pre>
+                <pre>## 2<sup>nd</sup> level</pre>
+                <pre>* An item in an unordered list</pre>
+                <pre>    * A subitem</pre>
+                <pre>1. An item in an ordered list</pre>
+                <pre>*emphasis* or **strong**</pre>
+        </div>
+    </div>
+</div>
+
+<div class="twelve columns">
+    <label>Project page body</label>
+    <div class="row">
+        <div class="nine columns">
+            <textarea name="body"><%- @body %></textarea>
         </div>
         <div class="three columns">
                 <pre># 1<sup>st</sup> level</pre>

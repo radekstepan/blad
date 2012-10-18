@@ -4,8 +4,8 @@
 
     <title>Micklem Lab | University of Cambridge</title>
 
-    <link rel="stylesheet" href="public/css/foundation3.css">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="/public/css/foundation3.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 <body>
     <!-- head menu -->
@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns">
-            <img src="public/img/splash-server.jpg" />
+            <img src="/public/img/splash-server.jpg" />
             <h1><%= @splashTitle %></h1>
             <h2><%= @splashSubtitle %></h2>
         </div>
@@ -38,7 +38,7 @@
 
     <div class="row">
         <!-- welcome -->
-        <article id="welcome" class="six columns">
+        <article id="welcome" class="main six columns">
             <h1><%= @welcomeTitle %></h1>
             <img src="<%- @welcomeImage %>" />
             <%- @welcomeText %>
@@ -137,16 +137,16 @@
         <div class="twelve columns">
             <ul>
                 <li>
-                    <a target="_blank" href="http://www.cam.ac.uk/"><img src="public/img/logo-cam.png" /></a>
+                    <a target="_blank" href="http://www.cam.ac.uk/"><img src="/public/img/logo-cam.png" /></a>
                 </li>
                 <li>
-                    <a target="_blank" href="http://www.gen.cam.ac.uk/"><img src="public/img/logo-genetics.png" /></a>
+                    <a target="_blank" href="http://www.gen.cam.ac.uk/"><img src="/public/img/logo-genetics.png" /></a>
                 </li>
                 <li>
-                    <a target="_blank" href="http://www.sysbiol.cam.ac.uk/"><img src="public/img/logo-csbc.png" /></a>
+                    <a target="_blank" href="http://www.sysbiol.cam.ac.uk/"><img src="/public/img/logo-csbc.png" /></a>
                 </li>
                 <li>
-                    <a target="_blank" href="http://www.ccbi.cam.ac.uk/"><img src="public/img/logo-ccbi.png" /></a>
+                    <a target="_blank" href="http://www.ccbi.cam.ac.uk/"><img src="/public/img/logo-ccbi.png" /></a>
                 </li>
             </ul>
         </div>

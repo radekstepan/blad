@@ -1,1 +1,83 @@
-ProjectDocument
+<!doctype html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>Micklem Lab | University of Cambridge</title>
+
+    <link rel="stylesheet" href="/public/css/foundation3.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <!-- head menu -->
+    <header id="top">
+        <div class="row">
+            <h1>Micklem Lab</h1>
+            <h2>University <span>of</span> Cambridge</h2>
+            <nav>
+                <ul>
+                    <li><a href="/">Intro</a></li>
+                    <li><a href="/projects">Projects</a></li>
+                    <li><a href="/resources">Resources</a></li>
+                    <li><a href="/publications">Publications</a></li>
+                    <li><a href="/news">News</a></li>
+                    <li class="active"><a class="people" href="/people">People</a></li>
+                </ul>
+                <a class="contact" href="/contacts">Contact team</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- callout hero banner -->
+    <div class="row">
+        <div id="splash" class="twelve columns">
+            <img src="/public/img/splash-server.jpg" />
+            <h1>Projects</h1>
+            <h2>Here be our projects that we have done</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <aside class="sidebar three columns">
+            <h2 class="bismark">Other current projects</h2>
+            <nav>
+                <ul>
+                    <% for project in @projects: %>
+                        <li>
+                            <h3><a href="<%= project.url %>"><%= project.title %></a></h3>
+                            <%- project.summary %>
+                        </li>
+                    <% end %>
+                </ul>
+            </nav>
+            <h2 class="patina"><a href="#">Past projects</a></h2>
+        </aside>
+
+        <!-- main content -->
+        <article class="main nine columns">
+            <h1><%= @title %></h1>
+
+            <%- @body %>
+        </article>
+    </div>
+
+    <!-- footer links -->
+    <footer class="row">
+        <div class="twelve columns">
+            <ul>
+                <li>
+                    <a target="_blank" href="http://www.cam.ac.uk/"><img src="/public/img/logo-cam.png" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.gen.cam.ac.uk/"><img src="/public/img/logo-genetics.png" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.sysbiol.cam.ac.uk/"><img src="/public/img/logo-csbc.png" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.ccbi.cam.ac.uk/"><img src="/public/img/logo-ccbi.png" /></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
