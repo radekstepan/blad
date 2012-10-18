@@ -1,5 +1,0 @@
-<div class="twelve columns">
-    <label>Image</label>
-    <input type="hidden" name="image" value="<%= @image %>" />
-    <input type="file" data-custom="file" data-target="image" />
-</div>
