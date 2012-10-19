@@ -7,7 +7,7 @@ define [
         idAttribute: "_id"
 
         defaults:
-            'type':   'BasicDocument'
+            'type':   'BasicDocument' # always present, coming from the `server.coffee`
             'public': true
 
         url: ->

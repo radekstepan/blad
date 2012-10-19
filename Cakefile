@@ -40,11 +40,17 @@ task "compile", "compile API server and admin client code", ->
         # Custom document forms.
         walk './src/site', (files) ->
             tml = []
+
+            # Inject a BasicDocument form first.
+            tml.push uglify "JST['form_BasicDocument.eco'] = #{eco.precompile("")}"
+
+            # Do user's files.
             for file in files when file.match /form\.eco/
                 console.log file.grey
                 js = eco.precompile fs.readFileSync file, "utf-8"
                 p = file.split('/') ; name = p[p.length-2]
                 tml.push uglify "JST['form_#{name}.eco'] = #{js}"
+
             write './public/admin/js/templates/document_forms.js', tml.join("\n")
             done()
 

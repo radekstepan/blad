@@ -476,6 +476,14 @@ class Blað.Type
         for key, value of params
             @[key] = value
 
+# A type that is always present, the default.
+class BasicDocument extends Blað.Type
+
+    # Presentation for the document.
+    render: (done) -> done @, false
+
+Blað.types.BasicDocument = BasicDocument
+
 # Expose for testing.
 exports.app = app       # So we can start the app.
 exports.config = config # So we can inject our own API key and see which port to use.
