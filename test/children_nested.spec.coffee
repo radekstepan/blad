@@ -112,3 +112,41 @@ describe "document that has children actions", ->
                     "url":  "/group1/rubbish/child1"
 
                 done()
+
+    describe "create root document", ->
+        it 'should return 201', (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'HasChildrenDocument'
+                    'name':   "parent"
+                    'url':    "/"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '@dummy'
+            , (error, response, body) ->
+                response.statusCode.should.equal 201
+                done()
+
+    describe "retrieve the root", ->
+        it 'should give us group1 document only', (done) ->
+            request.get "#{url}/"
+            , (error, response, body) ->
+                response.statusCode.should.equal 200
+
+                # Parse response.
+                children = JSON.parse(body)
+
+                children.lvl0.length.should.equal 1
+
+                clean = children.lvl0.pop()
+                delete clean._id
+                delete clean.modified
+
+                clean.should.eql
+                    "type": "HasChildrenDocument"
+                    "name": "parent"
+                    "url":  "/group1"
+                    "public": true
+
+                done()

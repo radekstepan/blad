@@ -12,7 +12,7 @@ class HomeDocument extends Blað.Type
 
         # Children documents.
         @sub = {}
-        for page in @children 0
+        for page in @children 1 # not direct descendants
             @sub[page.type] ?= []
 
             # Sub parsing.

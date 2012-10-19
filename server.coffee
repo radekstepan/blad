@@ -429,7 +429,7 @@ class Blað.Type
     children: (n) ->
         return {} unless @_children
         if n?
-            ( child for child in @_children when child.url.replace(@url, '').split('/').length is n + 2 )
+            ( child for child in @_children when ( if @url is '/' then child.url else child.url.replace(@url, '') ).split('/').length is n + 2 )
         else
             @_children
 
