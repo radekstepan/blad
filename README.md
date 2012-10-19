@@ -24,6 +24,22 @@ $ npm start
 
 Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin) and modify port number as appropriate.
 
+### Stopping
+
+We use the fabulous module [forever](https://github.com/nodejitsu/forever) to automatically restart the service if it fails. This is useful as we cannot automatically handle all asynchronous exceptions that happen in the app. To list all running processes, execute:
+
+```bash
+$ node_modules/.bin/forever list
+```
+
+To **stop** the service, execute:
+
+```bash
+$ node_modules/.bin/forever stop 0
+```
+
+You can read more about the process in [this guide](http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever).
+
 ## Creating custom document types
 
 Create a new folder with the type name in `./src/site`. Each type consists of three files:

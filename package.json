@@ -1,7 +1,7 @@
 {
     "name": "blad",
     "author": "Radek <dev@radekstepan.com>",
-    "version": "1.1.4",
+    "version": "1.2.0",
     "engines": {
         "node": "0.6.x"
     },
@@ -19,7 +19,8 @@
         "request": "2.9.203",
         "uglify-js": "1.3.2",
         "crypto": "0.0.3",
-        "colors": "0.6.0-1"
+        "colors": "0.6.0-1",
+        "forever": "0.10.0"
     },
     "private": true,
     "repository": {
@@ -27,7 +28,7 @@
         "url": "https://github.com/radekstepan/blad.git"
     },
     "scripts": {
-        "start": "./node_modules/.bin/cake compile ; node server.js",
+        "start": "./node_modules/.bin/cake compile ; ./node_modules/.bin/forever start server.js",
         "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha --compilers coffee:coffee-script --ui bdd --reporter spec"
     }
 }
