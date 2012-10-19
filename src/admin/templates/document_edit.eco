@@ -50,6 +50,12 @@
 <div class="row" id="custom"></div>
 
 <!-- save -->
-<div class="row">
+<div class="row">    
+    <!-- save -->
     <a class="save success button right">Save</a>
+
+    <!-- delete -->
+    <% if @_id: %>
+        <a class="delete alert button ĺeft">Delete</a>
+    <% end %>
 </div>

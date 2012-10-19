@@ -40,6 +40,14 @@ $ node_modules/.bin/forever stop 0
 
 You can read more about the process in [this guide](http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever).
 
+### Debugging
+
+If you want to see all the message from the server when dealing with requests and do not want to auto-restart the app on an exception, use:
+
+```bash
+$ ./node_modules/.bin/cake compile ; node server.js
+```
+
 ## Creating custom document types
 
 Create a new folder with the type name in `./src/site`. Each type consists of three files:

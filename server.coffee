@@ -252,6 +252,44 @@ app.router.path "/api/document", ->
     @post editSave
     @put editSave
 
+    # Remove a document.
+    @delete ->
+        params = urlib.parse(@req.url, true).query
+
+        # We can request a document using '_id' or 'url'.
+        if !params._id? and !params.url?
+            @res.writeHead 404, "content-type": "application/json"
+            @res.write JSON.stringify 'message': 'Use `_id` or `url` to specify the document'
+            @res.end()
+        else
+            # Which one are we using then?
+            if params._id?
+                value = mongodb.ObjectID.createFromHexString params._id
+                query = '_id': value
+            else
+                value = decodeURIComponent params.url
+                query = 'url': value
+
+            app.log.info "Delete document " + new String(value).blue if process.env.NODE_ENV isnt 'test'
+
+            # Find and delete.
+            app.db (collection) =>
+                # Do we have the document?
+                collection.findAndModify query, [], {}, 'remove': true, (err, doc) =>
+                    throw err if err
+
+                    # Did this doc actually exist?
+                    if doc
+                        # Unmap the url.
+                        Blað.unmap doc.url
+
+                        # Respond in kind.
+                        @res.writeHead 200, "content-type": "application/json"
+                        @res.end()
+                    else
+                        @res.writeHead 404, "content-type": "application/json"
+                        @res.end()
+
 # -------------------------------------------------------------------
 # Blað.
 Blað = {}

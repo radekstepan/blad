@@ -37,6 +37,7 @@ define [
             super
 
             @delegate 'click', '.save', @saveHandler
+            @delegate 'click', '.delete', @deleteHandler
             @delegate 'change', '.changeType', @changeTypeHandler
             
             new DocumentCustomView 'model': @model
@@ -80,6 +81,19 @@ define [
                     new MessageView
                         'type': 'alert'
                         'text': "You no want dis."
+
+        deleteHandler: =>
+            if confirm 'Are you sure you want to delete this document?'
+                @model.destroy
+                    'success': (model, response) ->
+                        new MessageView
+                            'type': 'success'
+                            'text': "Document #{model.get('url')} deleted. Reload the page."
+                    
+                    'error': (model, response) ->
+                        new MessageView
+                            'type': 'alert'
+                            'text': "You no want dis."
 
         # Call me to reload the View with different type.
         changeTypeHandler: (e) ->
