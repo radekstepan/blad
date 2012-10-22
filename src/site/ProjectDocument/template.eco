@@ -16,11 +16,11 @@
             <nav>
                 <ul>
                     <li><a href="/">Intro</a></li>
-                    <li><a href="/projects">Projects</a></li>
+                    <li class="active"><a href="/projects">Projects</a></li>
                     <li><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
-                    <li class="active"><a class="people" href="/people">People</a></li>
+                    <li><a class="people" href="/people">People</a></li>
                 </ul>
                 <a class="contact" href="/contacts">Contact team</a>
             </nav>
