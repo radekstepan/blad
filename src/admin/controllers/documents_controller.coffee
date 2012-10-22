@@ -11,19 +11,19 @@ define [
         historyURL: (params) -> ''
 
         # List all documents.
-        index: (params) ->
+        index: (params={}) ->
             @collection = new Documents()
             @collection.fetch
                 'error': (collection, response) -> throw response
                 'success': (collection, response) ->
-                    @view = new DocumentsListView 'collection': collection
+                    @view = new DocumentsListView 'collection': collection, 'message': params?.message
 
         # Edit a document.
-        edit: (params) ->
+        edit: (params={}) ->
             @model = new Document '_id': params._id
             @model.fetch
                 'success': (model) ->
-                    @view = new DocumentEditView 'model': model
+                    @view = new DocumentEditView 'model': model, 'message': params?.message
 
         # Create a new document.
         new: (params) ->

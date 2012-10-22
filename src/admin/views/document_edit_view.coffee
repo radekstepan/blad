@@ -30,17 +30,27 @@ define [
         getTemplateFunction: -> JST[@templateName]
 
         initialize: (params) ->
+            @subviews ?= []
+
             @model = params?.model or new Document()
+
+            # Any message to display?
+            if params?.message? then @message = params.message
 
         # Render the custom document template.
         afterRender: ->
             super
 
+            @undelegate()
+
             @delegate 'click', '.save', @saveHandler
             @delegate 'click', '.delete', @deleteHandler
             @delegate 'change', '.changeType', @changeTypeHandler
             
-            new DocumentCustomView 'model': @model
+            @subviews.push new DocumentCustomView 'model': @model
+
+            # Show a message?
+            if @message? then @subviews.push new MessageView @message
 
         saveHandler: =>
             # Get the form fields.
@@ -61,12 +71,14 @@ define [
             @model.save attr,
                 'wait': true
                 'success': (model, response) =>
-                    # Re-render the view.
-                    @render()
-                    # Show a success message.
-                    new MessageView
-                        'type': 'success'
-                        'text': "Document #{model.get('url')} saved."
+                    # Pass an extra message to display.
+                    Chaplin.mediator.publish '!startupController', 'documents', 'edit',
+                        '_id': response._id
+                        'message':
+                            'type': 'success'
+                            'text': "Document #{model.get('url')} saved."
+                    # Change the URL too so we can click on 'New Document' button again.
+                    Chaplin.mediator.publish '!router:changeURL', "admin/edit/#{response._id}"
                 
                 'error': (model, response) =>
                     # Highlight the fields that failed validation.
@@ -78,7 +90,7 @@ define [
 
                         @clearThese.push small
 
-                    new MessageView
+                    @subviews.push new MessageView
                         'type': 'alert'
                         'text': "You no want dis."
 
@@ -86,12 +98,16 @@ define [
             if confirm 'Are you sure you want to delete this document?'
                 @model.destroy
                     'success': (model, response) ->
-                        new MessageView
-                            'type': 'success'
-                            'text': "Document #{model.get('url')} deleted. Reload the page."
+                        # Go back to index.
+                        Chaplin.mediator.publish '!startupController', 'documents', 'index',
+                            'message':
+                                'type': 'success'
+                                'text': "Document #{model.get('url')} deleted."
+                        # Change the URL too.
+                        Chaplin.mediator.publish '!router:changeURL', "admin/"
                     
                     'error': (model, response) ->
-                        new MessageView
+                        @subviews.push new MessageView
                             'type': 'alert'
                             'text': "You no want dis."
 

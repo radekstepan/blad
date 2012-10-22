@@ -194,7 +194,14 @@ app.router.path "/api/document", ->
         else
             # Which one are we using then?
             if params._id?
-                value = mongodb.ObjectID.createFromHexString params._id
+                try
+                    value = mongodb.ObjectID.createFromHexString params._id
+                catch e
+                    @res.writeHead 404, "content-type": "application/json"
+                    @res.write JSON.stringify 'message': 'The `_id` parameter is not a valid MongoDB id'
+                    @res.end()
+                    return
+
                 query = '_id': value
             else
                 value = decodeURIComponent params.url
@@ -264,7 +271,14 @@ app.router.path "/api/document", ->
         else
             # Which one are we using then?
             if params._id?
-                value = mongodb.ObjectID.createFromHexString params._id
+                try
+                    value = mongodb.ObjectID.createFromHexString params._id
+                catch e
+                    @res.writeHead 404, "content-type": "application/json"
+                    @res.write JSON.stringify 'message': 'The `_id` parameter is not a valid MongoDB id'
+                    @res.end()
+                    return
+                
                 query = '_id': value
             else
                 value = decodeURIComponent params.url

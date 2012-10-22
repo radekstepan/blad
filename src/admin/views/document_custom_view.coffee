@@ -17,7 +17,9 @@ define [
 
         getTemplateFunction: -> JST["form_#{@model.get('type')}.eco"]
 
-        initialize: (params) -> @model = params.model
+        initialize: (params) ->
+            @model = params.model
+            @subviews ?= []
 
         afterRender: ->
             super

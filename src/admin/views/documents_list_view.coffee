@@ -1,7 +1,8 @@
 define [
     'chaplin'
     'views/document_list_view'
-], (Chaplin, DocumentListView) ->
+    'views/message_view'
+], (Chaplin, DocumentListView, MessageView) ->
 
     class DocumentsListView extends Chaplin.CollectionView
 
@@ -22,3 +23,15 @@ define [
         getView: (item) ->
             # Instantiate an item view
             new DocumentListView 'model': item
+
+        initialize: (params) ->
+            super
+            
+            # Any message to display?
+            if params?.message? then @message = params.message
+
+        afterRender: ->
+            super
+
+            # Show a message?
+            if @message? then new MessageView @message

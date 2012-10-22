@@ -11,3 +11,4 @@ define [
         templateName: 'document_row.eco'
 
         getTemplateFunction: -> JST[@templateName]
+
