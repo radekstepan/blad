@@ -24,17 +24,24 @@ class HomeDocument extends Blað.Type
                 else
                     @sub[page.type].push page
 
-        # Fetch the latest tweet.
-        request @twitter, (err, res, body) =>
-            if !err and res.statusCode is 200
-                tweets = JSON.parse body
-                if tweets.length is 1
-                    tweet = tweets.pop()
-                    @tweet =
-                        'text': tweet.text
-                        'date': kronic.format new Date(tweet.created_at)
-                        'id':   tweet.id_str
+        # Check if data in store is old.
+        if @store.isOld 'tweet', 1, 'day'
+            # Fetch the latest tweet.
+            request @twitter, (err, res, body) =>
+                if err or res.statusCode isnt 200 then done @
+                    
+                tweet = JSON.parse(body).pop()
 
+                # Cache the new data.
+                @store.save 'tweet', tweet, =>
+                    # Get the tweet, add ago time and render.
+                    @tweet = @store.get 'tweet'
+                    @tweet.ago = kronic.format new Date @tweet.created_at
+                    done @
+        else
+            # Get the tweet, add ago time and render.
+            @tweet = @store.get 'tweet'
+            @tweet.ago = kronic.format new Date @tweet.created_at
             done @
 
 Blað.types.HomeDocument = HomeDocument

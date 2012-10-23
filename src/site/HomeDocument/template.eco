@@ -120,8 +120,8 @@
 
                 <ul>
                     <li>
-                        <h2><a target="_blank" href="http://twitter.com/intermineorg/statuses/<%= @tweet.id %>"><%= @tweet.text %></a></h2>
-                        <p><%= @tweet.date %></p>
+                        <h2><a target="_blank" href="http://twitter.com/intermineorg/statuses/<%= @tweet.id_str %>"><%= @tweet.text %></a></h2>
+                        <p><%= @tweet.ago %></p>
                     </li>
                     <li>
                         <h4>For more news visit our <a target="_blank" href="http://intermine.org/blog">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</h4>
