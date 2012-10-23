@@ -498,6 +498,8 @@ class Blað.Type
         @store =
             # Get a key optionally on an object.
             get: (key, obj) =>
+                app.log.info 'Cache used for ' + key.grey if process.env.NODE_ENV isnt 'test'
+
                 if obj? then obj.cache[key]?.value
                 else @cache?[key]?.value
 
