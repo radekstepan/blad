@@ -350,9 +350,13 @@ Blað.save = (doc, cb) ->
                             old = docs.pop()
                             if old.public then Blað.unmap old.url
 
+                            # Get the id and remove the key as we cannot modify that one.
+                            _id = doc._id
+                            delete doc._id
+
                             # Update the collection.
-                            collection.update '_id': doc._id
-                                , doc
+                            collection.update '_id': _id
+                                , { '$set': doc } # run an update only to not remove cache etc.
                                 , 'safe': true
                                 , (err) ->
                                     throw err if err

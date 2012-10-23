@@ -116,6 +116,31 @@ Represented by a `template.eco` file.
 
 This file is populated with a context coming from the presenter. In the above Markdown example, we have passed only the `html` key - value forward.
 
+## Caching
+
+Sometimes new data may be fetched from within the Presenter and one would like to cache these for say a day. The following shows a workflow from within the Presneter's `render()` function.
+
+1. We check if data under a specific key is old. The second parameter represents a time in milliseconds after which to consider a key value pair to be old. One could also pass a third paramter passing in which unit the previous parameter is.
+1. If all data is fresh we get a data saved under a key. We could also pass a context/document as the second parameter. This is useful if we want to retrieve cache for a sibling, child document etc.
+1. If data is old, we save the new data returning the result in a callback.
+
+```coffeescript
+    # Check if data in store is old.
+    if @store.isOld 'data', 300
+        # Update with new info and render back.
+        @store.save 'data', 'new information', =>
+            done
+                'data': @store.get('data')
+                'was':  'old'
+            , false
+    else
+        # Nope, all fresh.
+        done
+            'data': @store.get('data')
+            'was':  'fresh'
+        , false
+```
+
 ## Mocha test suite
 
 To run the tests execute the following.
