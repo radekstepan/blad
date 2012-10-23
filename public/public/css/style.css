@@ -192,6 +192,23 @@ article.main p a {
   color: #659995;
   text-decoration: underline;
 }
+article.main table {
+  border: none;
+}
+article.main table td {
+  vertical-align: middle;
+}
+article.main table td a {
+  color: #659995;
+  text-decoration: underline;
+}
+article.main table td span.author {
+  white-space: nowrap;
+}
+article.main table td span.author:not(:last-child):after {
+  content: ", ";
+  display: "block";
+}
 article.callout {
   margin-bottom: 30px;
 }

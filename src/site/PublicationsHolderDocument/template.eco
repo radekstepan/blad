@@ -37,25 +37,34 @@
     </div>
 
     <div class="row">
-        <aside class="sidebar three columns">
-            <h2 class="bismark">Publications</h2>
-            <nav>
-                <ul>
-                    <% for publication in @publications: %>
-                        <li>
-                            <h3><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%= publication.Id %>"><%= publication.Title %></a></h3>
-                            <p><%= publication.FullJournalName %></p>
-                        </li>
-                    <% end %>
-                </ul>
-            </nav>
-        </aside>
-
         <!-- main content -->
-        <article class="main nine columns">
+        <article class="main twelve columns">
             <h1><%= @title %></h1>
 
-            <p><code>Lorem ipsum...</code></p>
+            <table>
+                <tbody>
+                <% for publication in @publications: %>
+                    <tr>
+                        <td><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%= publication.Id %>"><%= publication.Title %></a></td>
+                        <td style="white-space:nowrap"><%= publication.PubDate %></td>
+                        <td><%= publication.FullJournalName %></td>
+                        <td>
+                            <% if publication.Authors.length > 5: %>
+                                <% for i in [0...4]: %>
+                                    <span class="author"><%= publication.Authors[i] %></span>
+                                <% end %>
+                                &hellip;
+                                <span class="author"><%= publication.Authors.pop() %></span>
+                            <% else: %>
+                                <% for author in publication.Authors: %>
+                                    <span class="author"><%= author %></span>
+                                <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
         </article>
     </div>
 
