@@ -1,9 +1,9 @@
-<div class="six columns">
+<div class="five columns">
     <label>Grant title</label>
     <input type="text" name="title" value="<%= @title %>" />
 </div>
 
-<div class="four columns">
+<div class="three columns">
     <label>Grant summary image</label>
     <input type="hidden" name="summaryImage" value="<%= @summaryImage %>" />
     <input type="file" data-custom="file" data-target="summaryImage" />
@@ -14,6 +14,14 @@
     <select name="home">
         <option value="true" <% if @home: %>selected="selected"<% end %>>Yes</option>
         <option value="false" <% if !@home: %>selected="selected"<% end %>>No</option>
+    </select>
+</div>
+
+<div class="two columns">
+    <label>Is current?</label>
+    <select name="current">
+        <option value="true" <% if @current: %>selected="selected"<% end %>>Yes</option>
+        <option value="false" <% if !@current: %>selected="selected"<% end %>>No</option>
     </select>
 </div>
 

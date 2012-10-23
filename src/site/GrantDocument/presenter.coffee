@@ -3,9 +3,9 @@ marked = require 'marked'
 class GrantDocument extends Blað.Type
 
     render: (done) ->
-        # Get other grnats.
+        # Get other grants.
         @siblings (grants) =>
-            @grants = ( (p.summary = marked p.summary ; p) for p in grants )
+            @grants = ( (g.summary = marked g.summary ; g) for g in grants )
 
             # Markdown.
             @body = marked @body
