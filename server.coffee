@@ -485,10 +485,53 @@ class Blað.Type
     # Needs to be overriden.
     render: (done) -> done {}
 
-    # Expand model on us.
     constructor: (params) ->
+        # Expand model on us but apply a blacklist.
         for key, value of params
-            @[key] = value
+            @[key] = value unless key in [ 'store', 'menu', 'children', 'siblings', 'parent', 'render', 'constructor' ]
+
+        # Store of objects under `cache` key so we get context of this object.
+        @store =
+            # Get a key optionally on an object.
+            get: (key, obj) =>
+                if obj? then obj.cache[key]?.value
+                else @cache?[key]?.value
+
+            # Save key value pair to the cache.
+            save: (key, value, done) =>
+                # Need to init?
+                @cache ?= {}
+                # Locally update the object.
+                @cache[key] =
+                    'value': value
+                    'modified': (new Date()).toJSON()
+                
+                # Update the object in the db.
+                app.db (collection) =>
+                    # Update the collection.
+                    collection.update '_id': @_id # what if someone changes this in the Presenter?
+                        , { '$set': { 'cache': @cache } }
+                        , 'safe': true
+                        , (err) ->
+                            throw err if err
+                            done()
+
+            # Check if cache is too old given the time interval passed.
+            isOld: (key, ms, interval='ms') =>
+                # Adjust the interval.
+                switch interval
+                    when 's', 'second', 'seconds' then ms = 1e3 * ms
+                    when 'm', 'minute', 'minutes' then ms = 6e4 * ms
+                    when 'h', 'hour', 'hours' then ms = 3.6e6 * ms
+                    when 'd', 'day', 'days' then ms = 28.64e7 * ms
+                    when 'w', 'week', 'weeks' then ms = 6.048e8 * ms
+                    when 'm', 'month', 'months' then ms = 1.8144e10 * ms
+
+                # Is the key even present?
+                if @cache? and @cache[key]?
+                    return new Date().getTime() - ms > new Date(@cache[key].modified).getTime()
+                else
+                    true
 
 # A type that is always present, the default.
 class BasicDocument extends Blað.Type

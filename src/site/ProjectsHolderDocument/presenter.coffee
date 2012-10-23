@@ -42,7 +42,7 @@ class ProjectsHolderDocument extends Blað.Type
                     docs.push doc
                     doc = {} ; authors = []
                 when 'Id'
-                    doc.id = tag.Text
+                    doc.Id = tag.Text
                     tag = {}
                 when 'Item'
                     switch tag.Name

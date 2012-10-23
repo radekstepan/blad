@@ -43,7 +43,7 @@
                 <ul>
                     <% for publication in @publications: %>
                         <li>
-                            <h3><a href="#"><%= publication.Title %></a></h3>
+                            <h3><a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/<%= publication.Id %>"><%= publication.Title %></a></h3>
                             <p><%= publication.FullJournalName %></p>
                         </li>
                     <% end %>
