@@ -16,7 +16,7 @@
             <nav>
                 <ul>
                     <li><a href="/">Intro</a></li>
-                    <li class="active"><a href="/projects">Projects</a></li>
+                    <li><a href="/projects">Projects</a></li>
                     <li><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
@@ -31,30 +31,15 @@
     <div class="row">
         <div id="splash" class="twelve columns">
             <img src="/public/img/splash-server.jpg" />
-            <h1>Projects</h1>
-            <h2>Here be our projects that we have done</h2>
+            <h1>Dummy page</h1>
+            <h2>No content here for now</h2>
         </div>
     </div>
 
     <div class="row">
-        <aside class="sidebar three columns">
-            <h2 class="bismark">All current projects</h2>
-            <nav>
-                <ul>
-                    <% for project in @projects: %>
-                        <li>
-                            <h3><a href="<%= project.url %>"><%= project.title %></a></h3>
-                            <%- project.summary %>
-                        </li>
-                    <% end %>
-                </ul>
-            </nav>
-            <h2 class="patina"><a href="#">Past projects</a></h2>
-        </aside>
-
         <!-- main content -->
-        <article class="main nine columns">
-            <%- @body %>
+        <article class="main twelve columns">
+            <h1><%= @url %></h1>
         </article>
     </div>
 

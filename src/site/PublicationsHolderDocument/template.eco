@@ -17,7 +17,6 @@
                 <ul>
                     <li><a href="/">Intro</a></li>
                     <li><a href="/projects">Projects</a></li>
-                    <li><a href="/grants">Grants</a></li>
                     <li><a href="/resources">Resources</a></li>
                     <li class="active"><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
