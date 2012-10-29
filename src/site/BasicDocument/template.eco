@@ -27,19 +27,11 @@
         </div>
     </header>
 
-    <!-- callout hero banner -->
-    <div class="row">
-        <div id="splash" class="twelve columns">
-            <img src="/public/img/splash-server.jpg" />
-            <h1>Dummy page</h1>
-            <h2>No content here for now</h2>
-        </div>
-    </div>
-
-    <div class="row">
+    <div class="row bismark">
         <!-- main content -->
         <article class="main twelve columns">
-            <h1><%= @url %></h1>
+            <h1><%= @title %></h1>
+            <%- @body %>
         </article>
     </div>
 

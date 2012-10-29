@@ -1,0 +1,21 @@
+<div class="six columns">
+    <label>Page title</label>
+    <input type="text" name="title" value="<%= @title %>" />
+</div>
+
+<div class="twelve columns">
+    <label>Page body</label>
+    <div class="row">
+        <div class="nine columns">
+            <textarea name="body"><%- @body %></textarea>
+        </div>
+        <div class="three columns">
+                <pre># 1<sup>st</sup> level</pre>
+                <pre>## 2<sup>nd</sup> level</pre>
+                <pre>* An item in an unordered list</pre>
+                <pre>    * A subitem</pre>
+                <pre>1. An item in an ordered list</pre>
+                <pre>*emphasis* or **strong**</pre>
+        </div>
+    </div>
+</div>

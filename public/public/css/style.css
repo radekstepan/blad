@@ -94,7 +94,7 @@ header#top nav a.contact {
   border-radius: 3px;
 }
 #splash {
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   color: #fff;
   padding: 13px;
   font-family: "Lato";
@@ -119,6 +119,7 @@ header#top nav a.contact {
   top: 69px;
 }
 aside.sidebar {
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 aside.sidebar h2 {
@@ -163,6 +164,7 @@ aside.sidebar ul p {
   line-height: 20px;
 }
 article.main {
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 article.main h1 {
@@ -357,4 +359,7 @@ div.row.shakespeare a {
 }
 .article h4 {
   margin-left: 5px;
+}
+iframe.map {
+  margin-top: 20px;
 }
