@@ -17,10 +17,10 @@
                 <ul>
                     <li><a href="/">Intro</a></li>
                     <li><a href="/projects">Projects</a></li>
-                    <li><a href="/resources">Resources</a></li>
+                    <li class="<%= if @url is '/resources' then 'active' else '' %>"><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
-                    <li><a class="people" href="/people">People</a></li>
+                    <li class="<%= if @url is '/people' then 'active' else '' %>"><a class="people" href="/people">People</a></li>
                 </ul>
                 <a class="contact" href="/contacts">Contact team</a>
             </nav>
