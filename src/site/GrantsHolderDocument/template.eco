@@ -22,7 +22,7 @@
                     <li><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
                 </ul>
-                <a class="contact" href="/contacts">Contact team</a>
+                <a class="contact" href="/contacts">Contacts</a>
             </nav>
         </div>
     </header>
