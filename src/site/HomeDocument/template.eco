@@ -45,7 +45,7 @@
         </article>
 
         <!-- projects -->
-        <article id="projects" class="callout strikemaster six columns">
+        <article id="projects" class="callout rouge six columns">
             <h1>Projects</h1>
 
             <ul>

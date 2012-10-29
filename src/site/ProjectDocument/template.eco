@@ -36,9 +36,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row rouge">
         <aside class="sidebar three columns">
-            <h2 class="bismark">Other current projects</h2>
+            <h2 class="primary">Other current projects</h2>
             <nav>
                 <ul>
                     <% for project in @projects: %>
@@ -49,7 +49,7 @@
                     <% end %>
                 </ul>
             </nav>
-            <h2 class="patina"><a href="#">Past projects</a></h2>
+            <h2 class="secondary"><a href="#">Past projects</a></h2>
         </aside>
 
         <!-- main content -->

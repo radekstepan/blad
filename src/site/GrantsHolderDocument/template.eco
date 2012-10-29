@@ -36,9 +36,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row patina">
         <aside class="sidebar three columns">
-            <h2 class="bismark">All current grants</h2>
+            <h2 class="primary">All current grants</h2>
             <nav>
                 <ul>
                     <% for grant in @grants: %>

@@ -254,12 +254,12 @@ article.callout ul p {
   line-height: 20px;
   margin-top: 6px;
 }
-article.callout.strikemaster h1 {
-  background: #9f5e86;
+article.callout.rouge h1 {
+  background: #9f3e7a;
 }
-article.callout.strikemaster h2,
-article.callout.strikemaster h3,
-article.callout.strikemaster a {
+article.callout.rouge h2,
+article.callout.rouge h3,
+article.callout.rouge a {
   color: #9f5e86;
 }
 article.callout.bismark h1 {
@@ -276,7 +276,7 @@ article.callout.patina h1 {
 article.callout.patina h2,
 article.callout.patina h3,
 article.callout.patina a {
-  color: #456563;
+  color: #659995;
 }
 article.callout.shakespeare h1 {
   background: #5fb1d2;
@@ -284,7 +284,7 @@ article.callout.shakespeare h1 {
 article.callout.shakespeare h2,
 article.callout.shakespeare h3,
 article.callout.shakespeare a {
-  color: #456563;
+  color: #5fb1d2;
 }
 #news h1 {
   background-image: url("../img/birdie.png");
@@ -308,4 +308,31 @@ footer ul {
 footer ul li {
   display: inline-block;
   margin: 0 14px;
+}
+div.row.rouge h1 {
+  color: #9f5e86;
+}
+div.row.rouge a {
+  color: #9f5e86;
+}
+div.row.rouge aside.sidebar h2 {
+  background: #9f3e7a;
+}
+div.row.rouge aside.sidebar h2.secondary {
+  background: #9f5e86;
+}
+div.row.rouge aside.sidebar h2 a {
+  color: #fff;
+}
+div.row.patina h1 {
+  color: #659995;
+}
+div.row.patina a {
+  color: #659995;
+}
+div.row.patina aside.sidebar h2 {
+  background: #659995;
+}
+div.row.bismark a {
+  color: #345b6a;
 }
