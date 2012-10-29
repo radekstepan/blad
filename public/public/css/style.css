@@ -217,6 +217,7 @@ article.main table td span.author:not(:last-child):after {
   display: "block";
 }
 article.callout {
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 article.callout h1 {
