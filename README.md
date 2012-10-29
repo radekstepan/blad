@@ -85,7 +85,7 @@ By the same token, we use [Kronic](https://github.com/xaviershay/kronic) to work
 
 ```eco
 <input type="hidden" name="published" value="<%= @published or (new Date()).toJSON() %>" />
-<input type="text" data-custom="date" data-target="published" value="<%= Kronic.format(new Date(@published) or new Date()) %>" />
+<input type="text" data-custom="date" data-target="published" value="<%= if @published then Kronic.format(new Date(@published)) else 'Today' %>" />
 ```
 
 ### Public presenter

@@ -172,6 +172,11 @@ article.main h1 {
   font-size: 24px;
   margin: 8px 0 18px 0;
 }
+article.main h2 {
+  font-family: "Lato";
+  font-size: 20px;
+  font-weight: 400;
+}
 article.main h4 {
   color: #656565;
   font-weight: 400;
@@ -335,4 +340,21 @@ div.row.patina aside.sidebar h2 {
 }
 div.row.bismark a {
   color: #345b6a;
+}
+div.row.shakespeare h1,
+div.row.shakespeare h2 {
+  color: #5fb1d2;
+}
+div.row.shakespeare a {
+  color: #5fb1d2;
+}
+.article {
+  margin-bottom: 20px;
+}
+.article h2,
+.article h4 {
+  display: inline-block;
+}
+.article h4 {
+  margin-left: 5px;
 }
