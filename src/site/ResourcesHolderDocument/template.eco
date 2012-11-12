@@ -45,9 +45,16 @@
                 <p>Current resources:</p>
                 <ul>
                     <% for resource in @resources: %>
-                        <li>
-                            <a target="_blank" href="<%= resource.link %>"><%= resource.title %></a>
-                            <%- resource.summary %>
+                        <li class="row">
+                            <div class="two columns">
+                                <a target="_blank" href="<%= resource.link %>">
+                                    <img src="<%- resource.image  %>" title="<%= resource.title %> logo" />
+                                </a>
+                            </div>
+                            <div class="ten columns">
+                                <a target="_blank" href="<%= resource.link %>"><%= resource.title %></a>
+                                <%- resource.summary %>
+                            </div>
                         </li>
                     <% end %>
                 </ul>

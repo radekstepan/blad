@@ -3,9 +3,15 @@
     <input type="text" name="title" value="<%= @title %>" />
 </div>
 
-<div class="seven columns">
+<div class="four columns">
     <label>Resource URL</label>
     <input type="text" name="link" value="<%= @link %>" />
+</div>
+
+<div class="three columns">
+    <label>Resource image</label>
+    <input type="hidden" name="image" value="<%= @image %>" />
+    <input type="file" data-custom="file" data-target="image" />
 </div>
 
 <div class="twelve columns">
