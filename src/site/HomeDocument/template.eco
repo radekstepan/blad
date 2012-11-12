@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns">
-            <img src="/public/img/splash-server.jpg" />
+            <img src="/public/img/splashes/server.jpg" />
             <h1><%= @splashTitle %></h1>
             <h2><%= @splashSubtitle %></h2>
         </div>
@@ -48,7 +48,7 @@
         <article id="projects" class="callout rouge six columns">
             <h1>Projects</h1>
 
-            <ul style="overflow-y:auto;overflow-x:hidden;height:300px;margin-right:0">
+            <ul style="overflow-y:auto;overflow-x:hidden;height:200px;margin-right:0">
                 <% for project in @sub.ProjectDocument: %>
                     <li style="margin-right:5px">
                         <div class="row">

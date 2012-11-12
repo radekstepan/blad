@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns">
-            <img src="/public/img/splash-server.jpg" />
+            <img src="/public/img/splashes/tubes.jpg" />
             <h1>Publications</h1>
             <h2>Fetched from PubMed</h2>
         </div>

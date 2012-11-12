@@ -17,7 +17,7 @@
                 <ul>
                     <li><a href="/">Intro</a></li>
                     <li><a href="/projects">Projects</a></li>
-                    <li><a href="/resources">Resources</a></li>
+                    <li class="active"><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
@@ -29,33 +29,29 @@
 
     <!-- callout hero banner -->
     <div class="row">
-        <div id="splash" class="twelve columns">
-            <img src="/public/img/splashes/server.jpg" />
-            <h1>Grants</h1>
-            <h2>Those that have been awarded to us and are current</h2>
+        <div id="splash" class="twelve columns dark">
+            <img src="/public/img/splashes/sunflower.jpg" />
+            <h1>Resources</h1>
+            <h2>Here be our resources that are available</h2>
         </div>
     </div>
 
     <div class="row patina">
-        <aside class="sidebar three columns">
-            <h2 class="primary">Other current grants</h2>
-            <nav>
+        <!-- main content -->
+        <article class="main twelve columns">
+            <h1>Resources</h1>
+
+            <% if @resources.length isnt 0: %>
+                <p>Current resources:</p>
                 <ul>
-                    <% for grant in @grants: %>
+                    <% for resource in @resources: %>
                         <li>
-                            <h3><a href="<%= grant.url %>"><%= grant.title %></a></h3>
-                            <%- grant.summary %>
+                            <a target="_blank" href="<%= resource.link %>"><%= resource.title %></a>
+                            <%- resource.summary %>
                         </li>
                     <% end %>
                 </ul>
-            </nav>
-        </aside>
-
-        <!-- main content -->
-        <article class="main nine columns">
-            <h1><%= @title %></h1>
-
-            <%- @body %>
+            <% end %>
         </article>
     </div>
 

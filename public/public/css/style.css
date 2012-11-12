@@ -118,6 +118,10 @@ header#top nav a.contact {
   font-size: 16px;
   top: 69px;
 }
+#splash.dark h1,
+#splash.dark h2 {
+  color: #334d4b;
+}
 aside.sidebar {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -197,9 +201,15 @@ article.main p {
   line-height: 23px;
   margin: 10px 0;
 }
-article.main p a {
+article.main a {
   color: #659995;
   text-decoration: underline;
+}
+article.main ul {
+  list-style-type: none;
+}
+article.main ul li {
+  font-size: 13px;
 }
 article.main table {
   border: none;

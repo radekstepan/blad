@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns">
-            <img src="/public/img/splash-server.jpg" />
+            <img src="/public/img/splashes/server.jpg" />
             <h1>News Archive</h1>
             <h2>Where old articles come to die</h2>
         </div>

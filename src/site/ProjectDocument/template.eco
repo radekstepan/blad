@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns">
-            <img src="/public/img/splash-server.jpg" />
+            <img src="/public/img/splashes/stomach.jpg" />
             <h1>Projects</h1>
             <h2>Here be our projects that we have done</h2>
         </div>
