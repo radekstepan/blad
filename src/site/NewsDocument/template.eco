@@ -41,7 +41,7 @@
         <article class="main twelve columns">
             <h1><%= @title %></h1>
 
-            <%= @body %>
+            <%- @body %>
         </article>
     </div>
 

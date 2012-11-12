@@ -48,9 +48,9 @@
         <article id="projects" class="callout rouge six columns">
             <h1>Projects</h1>
 
-            <ul>
+            <ul style="overflow-y:auto;overflow-x:hidden;height:300px;margin-right:0">
                 <% for project in @sub.ProjectDocument: %>
-                    <li>
+                    <li style="margin-right:5px">
                         <div class="row">
                             <div class="nine columns">
                                 <h2><a href="<%= project.url %>"><%= project.title %></a></h2>
@@ -62,10 +62,9 @@
                         </div>
                     </li>
                 <% end %>
-                <li>
-                    <h4>Fore more details and a complete list, see <a href="/projects">Projects</a>.</h4>
-                </li>
             </ul>
+
+            <h4>Fore more details and a complete list, see <a href="/projects">Projects</a>.</h4>
         </article>
     </div>
 

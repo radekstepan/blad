@@ -178,6 +178,7 @@ article.main h2 {
   font-family: "Lato";
   font-size: 20px;
   font-weight: 400;
+  margin: 8px 0 18px 0;
 }
 article.main h4 {
   color: #656565;
@@ -194,6 +195,7 @@ article.main p {
   color: #656565;
   font-size: 13px;
   line-height: 23px;
+  margin: 10px 0;
 }
 article.main p a {
   color: #659995;
@@ -240,6 +242,7 @@ article.callout h4 {
   color: #7c7c7c;
   font-weight: 400;
   font-size: 13px;
+  padding: 5px 10px;
 }
 article.callout a {
   color: #7d4166;

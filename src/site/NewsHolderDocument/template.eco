@@ -50,7 +50,11 @@
             <% end %>
 
             <% if @archive: %>
-                <strong><a href="/news/archive">News Archive</a></strong>
+                <div class="row">
+                    <div class="twelve columns">
+                        <strong><a href="/news/archive">News Archive</a></strong>
+                    </div>
+                </div>
             <% end %>
         </article>
     </div>
