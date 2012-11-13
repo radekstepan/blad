@@ -215,11 +215,12 @@ article.main a {
   color: #659995;
   text-decoration: underline;
 }
+article.main li {
+  color: #656565;
+  font-size: 13px;
+}
 article.main ul {
   list-style-type: none;
-}
-article.main ul li {
-  font-size: 13px;
 }
 article.main table {
   border: none;
@@ -374,6 +375,16 @@ div.row.patina aside.sidebar h2 {
   background: #659995;
 }
 div.row.bismark a {
+  color: #345b6a;
+}
+div.row.bismark aside.sidebar h2 {
+  color: #fff;
+  background: #407083;
+}
+div.row.bismark aside.sidebar h2 a {
+  color: #fff;
+}
+div.row.bismark aside.sidebar h3 {
   color: #345b6a;
 }
 div.row.shakespeare h1,

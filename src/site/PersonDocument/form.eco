@@ -1,5 +1,15 @@
+<div class="six columns">
+    <label>Person name</label>
+    <input type="text" name="name" value="<%= @name %>" />
+</div>
+
+<div class="six columns">
+    <label>Person position</label>
+    <input type="text" name="position" value="<%= @position %>" />
+</div>
+
 <div class="twelve columns">
-    <label>Page body</label>
+    <label>Person page body</label>
     <div class="row">
         <div class="nine columns">
             <textarea name="body"><%- @body %></textarea>
