@@ -24,6 +24,11 @@ shadow(a, b)
 h1, h2, h3, h4, p
     margin: 0
 
+code
+    font-weight: 400
+    background: inherit
+    font-size: 13px
+
 header#top
     color: #FFF
     border-top: 3px solid #4c7370
@@ -191,6 +196,11 @@ article.main
         font-weight: 400
         margin: 8px 0 18px 0
 
+    h3
+        color: #656565
+        font-weight: 400
+        font-size: 18px
+
     h4
         color: #656565
         font-weight: 400
@@ -200,7 +210,7 @@ article.main
 
     img
         float: left
-        margin: 0 25px 0 0
+        margin: 0 25px 10px 0
 
     p
         color: #656565
@@ -267,6 +277,15 @@ article.callout
     ul
         list-style-type: none
         margin: 10px
+
+        &.scrollbar
+            overflow-y: auto
+            overflow-x: hidden
+            height: 200px
+            margin-right: 0
+
+            li
+                margin-right: 5px
 
         li
             &:not(:first-child):before
@@ -374,6 +393,17 @@ div.row
         
         a
             color: #5fb1d2
+
+        aside.sidebar
+            h2
+                color: #FFF
+                background: #5fb1d2
+
+                &.secondary
+                    background: #87B4C7
+
+                a
+                    color: #FFF
 
 .article
     h2, h4

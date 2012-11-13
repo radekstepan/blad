@@ -15,14 +15,14 @@
             <h2>University <span>of</span> Cambridge</h2>
             <nav>
                 <ul>
-                    <li><a href="/">Intro</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/projects">Projects</a></li>
                     <li class="active"><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
                 </ul>
-                <a class="contact" href="/contacts">Contacts</a>
+                <a class="contact" href="/contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -32,17 +32,14 @@
         <div id="splash" class="twelve columns dark">
             <img src="/public/img/splashes/sunflower.jpg" />
             <h1>Resources</h1>
-            <h2>Here be our resources that are available</h2>
+            <h2>Intermine-based data warehouses</h2>
         </div>
     </div>
 
     <div class="row patina">
         <!-- main content -->
         <article class="main twelve columns">
-            <h1>Resources</h1>
-
             <% if @resources.length isnt 0: %>
-                <p>Current resources:</p>
                 <ul>
                     <% for resource in @resources: %>
                         <li class="row">

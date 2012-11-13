@@ -15,26 +15,17 @@
             <h2>University <span>of</span> Cambridge</h2>
             <nav>
                 <ul>
-                    <li><a href="/">Intro</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/projects">Projects</a></li>
                     <li><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li class="active"><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
                 </ul>
-                <a class="contact" href="/contacts">Contacts</a>
+                <a class="contact" href="/contact">Contact</a>
             </nav>
         </div>
     </header>
-
-    <!-- callout hero banner -->
-    <div class="row">
-        <div id="splash" class="twelve columns">
-            <img src="/public/img/splashes/dna.jpg" />
-            <h1>News article</h1>
-            <h2>Here be an article</h2>
-        </div>
-    </div>
 
     <div class="row shakespeare">
         <!-- main content -->

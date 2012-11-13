@@ -15,22 +15,22 @@
             <h2>University <span>of</span> Cambridge</h2>
             <nav>
                 <ul>
-                    <li class="active"><a href="/">Intro</a></li>
+                    <li class="active"><a href="/">Home</a></li>
                     <li><a href="/projects">Projects</a></li>
                     <li><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
                 </ul>
-                <a class="contact" href="/contacts">Contacts</a>
+                <a class="contact" href="/contact">Contact</a>
             </nav>
         </div>
     </header>
 
     <!-- callout hero banner -->
     <div class="row">
-        <div id="splash" class="twelve columns">
-            <img src="/public/img/splashes/server.jpg" />
+        <div id="splash" class="dark twelve columns">
+            <img class="right" src="/public/img/splashes/network-alt.jpg" />
             <h1><%= @splashTitle %></h1>
             <h2><%= @splashSubtitle %></h2>
         </div>
@@ -48,9 +48,9 @@
         <article id="projects" class="callout rouge six columns">
             <h1>Projects</h1>
 
-            <ul style="overflow-y:auto;overflow-x:hidden;height:200px;margin-right:0">
+            <ul class="scrollbar">
                 <% for project in @sub.ProjectDocument: %>
-                    <li style="margin-right:5px">
+                    <li>
                         <div class="row">
                             <div class="nine columns">
                                 <h2><a href="<%= project.url %>"><%= project.title %></a></h2>
@@ -92,7 +92,7 @@
             <article id="grants" class="callout patina">
                 <h1>Grants</h1>
 
-                <ul>
+                <ul class="scrollbar">
                     <% for grant in @sub.GrantDocument: %>
                         <li>
                             <div class="row">
@@ -120,7 +120,7 @@
                         <p><%= @tweet.ago %></p>
                     </li>
                     <li>
-                        <h4>For more news visit our <a target="_blank" href="http://intermine.org/blog">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</h4>
+                        <h4>For more news visit our <a href="/news">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</h4>
                     </li>
                 </ul>
             </article>

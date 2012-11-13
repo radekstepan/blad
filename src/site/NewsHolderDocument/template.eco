@@ -15,14 +15,14 @@
             <h2>University <span>of</span> Cambridge</h2>
             <nav>
                 <ul>
-                    <li><a href="/">Intro</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/projects">Projects</a></li>
                     <li><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li class="active"><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
                 </ul>
-                <a class="contact" href="/contacts">Contacts</a>
+                <a class="contact" href="/contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -32,28 +32,37 @@
         <div id="splash" class="twelve columns">
             <img src="/public/img/splashes/dna.jpg" />
             <h1>News</h1>
-            <h2>Latest from the greatest</h2>
+            <h2>Latest news articles</h2>
         </div>
     </div>
 
     <div class="row shakespeare">
+        <aside class="sidebar three columns">
+            <h2 class="primary">Latest news</h2>
+            <nav>
+                <ul>
+                    <% for article in @articles: %>
+                        <li>
+                            <h3><a href="<%= article.url %>"><%= article.title %></a></h3>
+                            <p><%= article.published %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            </nav>
+            <% if @archive: %>
+                <h2 class="secondary"><a href="/news/archive">News archive</a></h2>
+            <% end %>
+        </aside>
+
         <!-- main content -->
-        <article class="main twelve columns">
+        <article class="main nine columns">
             <h1>Latest news articles</h1>
 
             <% for article in @articles: %>
-                <div class="six columns article">
+                <div class="twelve columns article">
                     <h2><%= article.title %></h2>
                     <h4><%= article.published %></h4>
                     <%- article.body %>
-                </div>
-            <% end %>
-
-            <% if @archive: %>
-                <div class="row">
-                    <div class="twelve columns">
-                        <strong><a href="/news/archive">News Archive</a></strong>
-                    </div>
                 </div>
             <% end %>
         </article>
