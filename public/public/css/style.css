@@ -165,6 +165,7 @@ aside.sidebar ul li h3 {
 aside.sidebar ul li h3 a {
   color: #407083;
   text-decoration: underline;
+  line-height: 20px;
 }
 aside.sidebar ul p {
   font-style: normal;
