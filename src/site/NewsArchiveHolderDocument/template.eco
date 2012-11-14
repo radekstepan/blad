@@ -37,9 +37,23 @@
     </div>
 
     <div class="row shakespeare">
+        <aside class="sidebar three columns">
+            <h2 class="primary">Archive news</h2>
+            <nav>
+                <ul>
+                    <% for article in @articles: %>
+                        <li>
+                            <h3><a href="<%= article.url %>"><%= article.title %></a></h3>
+                            <p><%= article.published %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            </nav>
+        </aside>
+
         <!-- main content -->
-        <article class="main twelve columns">
-            <h1>News Archive</h1>
+        <article class="main nine columns">
+            <h1>Archive news articles</h1>
 
             <% for article in @articles: %>
                 <div class="twelve columns article">
