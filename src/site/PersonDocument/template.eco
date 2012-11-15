@@ -59,7 +59,19 @@
         <article class="main nine columns">
             <h1><%= @name %></h1>
             <h2><%= @position %></h2>
-            <%- @body %>
+
+            <% if @image: %>
+                <div class="row">
+                    <div class="nine columns">
+                        <%- @body %>
+                    </div>
+                    <div class="three columns">
+                        <img src="<%- @image %>" />
+                    </div>
+                </div>
+            <% else: %>
+                <%- @body %>
+            <% end %>
         </article>
     </div>
 

@@ -8,6 +8,12 @@
     <input type="text" name="position" value="<%= @position %>" />
 </div>
 
+<div class="three columns">
+    <label>Person image</label>
+    <input type="hidden" name="image" value="<%= @image %>" />
+    <input type="file" data-custom="file" data-target="image" />
+</div>
+
 <div class="twelve columns">
     <label>Person page body</label>
     <div class="row">
