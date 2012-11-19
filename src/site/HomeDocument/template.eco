@@ -48,8 +48,8 @@
         <article id="projects" class="callout rouge six columns">
             <h1>Projects</h1>
 
-            <ul class="scrollbar">
-                <% for project in @sub.ProjectDocument: %>
+            <ul>
+                <% for project in @sub.ProjectDocument[0...2]: %>
                     <li>
                         <div class="row">
                             <div class="nine columns">
@@ -92,8 +92,8 @@
             <article id="grants" class="callout patina">
                 <h1>Funding</h1>
 
-                <ul class="scrollbar">
-                    <% for grant in @sub.GrantDocument: %>
+                <ul>
+                    <% for grant in @sub.GrantDocument[0...2]: %>
                         <li>
                             <div class="row">
                                 <div class="nine columns">
