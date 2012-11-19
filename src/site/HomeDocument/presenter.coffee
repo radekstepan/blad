@@ -25,8 +25,9 @@ class HomeDocument extends Blað.Type
             parseDate = (date) ->
                 return 0 if date is 0
                 [ year, month, day] = date.split(' ')
-                day = day or 1
-                kronic.parse([ day, month, year ].join(' ')).getTime()
+                month = month or 'Jan' ; day = day or 1
+                p = kronic.parse([ day, month, year ].join(' '))
+                if p then p.getTime() else 0
 
             if parseDate(b.published) > parseDate(a.published) then 1
             else -1

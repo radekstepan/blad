@@ -1,4 +1,5 @@
 request = require 'request'
+kronic = require 'kronic-node'
 sax = require('sax').parser(true)
 
 class PublicationsHolderDocument extends Blað.Type
@@ -18,6 +19,18 @@ class PublicationsHolderDocument extends Blað.Type
                     request @eSummary + ids.join(','), (err, res, body) =>
                         if err or res.statusCode isnt 200 then done @
                         @xmlToPubs body, (pubmed) =>
+
+                            # Reverse chronological order sort.
+                            pubmed = pubmed.sort (a, b) ->
+                                parseDate = (date) ->
+                                    return 0 if date is 0
+                                    [ year, month, day] = date.split(' ')
+                                    month = month or 'Jan' ; day = day or 1
+                                    p = kronic.parse([ day, month, year ].join(' '))
+                                    if p then p.getTime() else 0
+
+                                if parseDate(b.PubDate) > parseDate(a.PubDate) then 1
+                                else -1
 
                             # Cache the new data.
                             @store.save 'pubmed', pubmed, =>
