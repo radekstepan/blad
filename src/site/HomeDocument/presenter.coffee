@@ -46,6 +46,10 @@ class HomeDocument extends Blað.Type
                 else
                     @sub[page.type].push page
 
+        # Randomize projects and funding.
+        @sub.ProjectDocument = randomArray @sub.ProjectDocument
+        @sub.GrantDocument = randomArray @sub.GrantDocument
+
         # Check if data in store is old.
         if @store.isOld 'tweet', 1, 'day'
             # Fetch the latest tweet.
@@ -67,3 +71,15 @@ class HomeDocument extends Blað.Type
             done @
 
 Blað.types.HomeDocument = HomeDocument
+
+# Seed array randomly.
+randomArray = (arr) ->
+    i = arr.length
+    return [] if i is 0
+    while --i
+        j = Math.floor(Math.random() * (i + 1))
+        tempi = arr[i]
+        tempj = arr[j]
+        arr[i] = tempj
+        arr[j] = tempi
+    arr

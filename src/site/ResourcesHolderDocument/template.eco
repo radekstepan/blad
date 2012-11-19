@@ -40,21 +40,23 @@
         <!-- main content -->
         <article class="main twelve columns">
             <% if @resources.length isnt 0: %>
-                <ul>
-                    <% for resource in @resources: %>
-                        <li class="row">
-                            <div class="two columns">
-                                <a target="_blank" href="<%= resource.link %>">
-                                    <img src="<%- resource.image  %>" title="<%= resource.title %> logo" />
-                                </a>
-                            </div>
-                            <div class="ten columns">
-                                <a target="_blank" href="<%= resource.link %>"><%= resource.title %></a>
-                                <%- resource.summary %>
-                            </div>
-                        </li>
-                    <% end %>
-                </ul>
+                <table>
+                    <tbody>
+                        <% for resource in @resources: %>
+                            <tr>
+                                <td>
+                                    <a target="_blank" href="<%= resource.link %>">
+                                        <img src="<%- resource.image  %>" title="<%= resource.title %> logo" />
+                                    </a>
+                                </td>
+                                <td>
+                                    <a target="_blank" href="<%= resource.link %>"><%= resource.title %></a>
+                                    <%- resource.summary %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
             <% end %>
         </article>
     </div>
