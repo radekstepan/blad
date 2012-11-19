@@ -78,32 +78,30 @@
                 <p><%- @interests %></p>
             <% end %>
 
-            <% if @pubTitle0: %>
+            <% if @publications.length isnt 0: %>
                 <h2>Selected publications</h2>
 
                 <table>
                     <tbody>
-                    <% for i in [0...3]: %>
-                        <% if @["pubTitle#{i}"]: %>
+                    <% for publication in @publications: %>
                         <tr>
-                            <td><a target="_blank" href="<%= @["pubURL#{i}"] %>"><%= @["pubTitle#{i}"] %></a></td>
-                            <td style="white-space:nowrap"><%= @["pubDate#{i}"] %></td>
-                            <td><%= @["pubJournal#{i}"] %></td>
+                            <td><a target="_blank" href="<%= publication.link %>"><%= publication.title %></a></td>
+                            <td style="white-space:nowrap"><%= publication.published %></td>
+                            <td><%= publication.journal %></td>
                             <td>
-                                <% if @["pubAuthors#{i}"].split(', ').length > 5: %>
+                                <% if publication.authors.split(', ').length > 5: %>
                                     <% for j in [0...4]: %>
-                                        <span class="author"><%= @["pubAuthors#{i}"].split(', ')[j] %></span>
+                                        <span class="author"><%= publication.authors.split(', ')[j] %></span>
                                     <% end %>
                                     &hellip;
-                                    <span class="author"><%= @["pubAuthors#{i}"].split(', ').pop() %></span>
+                                    <span class="author"><%= publication.authors.split(', ').pop() %></span>
                                 <% else: %>
-                                    <% for author in @["pubAuthors#{i}"].split(', '): %>
+                                    <% for author in publication.authors.split(', '): %>
                                         <span class="author"><%= author %></span>
                                     <% end %>
                                 <% end %>
                             </td>
                         </tr>
-                        <% end %>
                     <% end %>
                     </tbody>
                 </table>
