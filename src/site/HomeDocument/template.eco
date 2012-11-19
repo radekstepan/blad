@@ -90,7 +90,7 @@
         <div class="six columns">
             <!-- grants -->
             <article id="grants" class="callout patina">
-                <h1>Grants</h1>
+                <h1>Funding</h1>
 
                 <ul class="scrollbar">
                     <% for grant in @sub.GrantDocument: %>

@@ -31,14 +31,14 @@
     <div class="row">
         <div id="splash" class="twelve columns">
             <img src="/public/img/splashes/gluglo.jpg" />
-            <h1>Grants</h1>
-            <h2>Those that have been awarded to us and are current</h2>
+            <h1>Funding</h1>
+            <h2>Current funding sources</h2>
         </div>
     </div>
 
     <div class="row patina">
         <aside class="sidebar three columns">
-            <h2 class="primary">Other current grants</h2>
+            <h2 class="primary">Other current funding</h2>
             <nav>
                 <ul>
                     <% for grant in @grants: %>
@@ -60,7 +60,7 @@
                     <tbody>
                         <% for row in @table: %>
                             <tr>
-                                <td><%= row.key %></td>
+                                <td><strong><%= row.key %></strong></td>
                                 <td><%= row.value %></td>
                             </tr>
                         <% end %>

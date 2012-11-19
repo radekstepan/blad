@@ -38,10 +38,10 @@
 
     <div class="row bismark">
         <aside class="sidebar three columns">
-            <h2 class="primary">Group members</h2>
+            <h2 class="primary">Group member pages</h2>
             <nav>
                 <ul>
-                    <% for person in @people: %>
+                    <% for person in @people when person.public: %>
                         <li>
                             <% if person.public: %>
                                 <h3><a href="<%= person.url %>"><%= person.name %></a></h3>
@@ -58,6 +58,19 @@
         <!-- main content -->
         <article class="main nine columns">
             <%- @body %>
+
+            <ul>
+                <% for person in @people: %>
+                    <li>
+                        <% if person.public: %>
+                            <strong><a href="<%= person.url %>"><%= person.name %></a></strong>,
+                        <% else: %>
+                            <strong><%= person.name %></strong>,
+                        <% end %>
+                        <%= person.position %>
+                    </li>
+                <% end %>
+            </ul>
         </article>
     </div>
 

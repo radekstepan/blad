@@ -57,6 +57,37 @@
             <h1><%= @title %></h1>
 
             <%- @body %>
+
+            <% if @pubTitle0: %>
+                <h2>Publications</h2>
+
+                <table>
+                    <tbody>
+                    <% for i in [0...3]: %>
+                        <% if @["pubTitle#{i}"]: %>
+                        <tr>
+                            <td><a target="_blank" href="<%= @["pubURL#{i}"] %>"><%= @["pubTitle#{i}"] %></a></td>
+                            <td style="white-space:nowrap"><%= @["pubDate#{i}"] %></td>
+                            <td><%= @["pubJournal#{i}"] %></td>
+                            <td>
+                                <% if @["pubAuthors#{i}"].split(', ').length > 5: %>
+                                    <% for j in [0...4]: %>
+                                        <span class="author"><%= @["pubAuthors#{i}"].split(', ')[j] %></span>
+                                    <% end %>
+                                    &hellip;
+                                    <span class="author"><%= @["pubAuthors#{i}"].split(', ').pop() %></span>
+                                <% else: %>
+                                    <% for author in @["pubAuthors#{i}"].split(', '): %>
+                                        <span class="author"><%= author %></span>
+                                    <% end %>
+                                <% end %>
+                            </td>
+                        </tr>
+                        <% end %>
+                    <% end %>
+                    </tbody>
+                </table>
+            <% end %>
         </article>
     </div>
 
