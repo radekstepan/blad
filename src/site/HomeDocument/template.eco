@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="dark twelve columns">
-            <img class="right" src="/public/img/splashes/network-alt.jpg" />
+            <img class="right" src="/public/img/splashes/balloon.jpg" />
             <h1><%= @splashTitle %></h1>
             <h2><%= @splashSubtitle %></h2>
         </div>
