@@ -74,10 +74,10 @@
             <h1>Selected publications</h1>
 
             <ul>
-                <% for publication in @sub.HomePublicationDocument: %>
+                <% for publication in @publications: %>
                     <li>
                         <h2><a href="<%= publication.link %>"><%= publication.title %></a></h2>
-                        <h3><%= publication.journal %></h3>
+                        <h3><%= publication.journal %> (<%= publication.published %>)</h3>
                         <p><%= publication.authors %></p>
                     </li>
                 <% end %>

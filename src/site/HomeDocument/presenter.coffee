@@ -10,6 +10,27 @@ class HomeDocument extends Blað.Type
         # Markdown.
         @welcomeText = marked @welcomeText
 
+        # Our publications in chronological order.
+        pubs = []
+        for i in [0...10]
+            if @["pubTitle#{i}"]
+                pubs.push
+                    'link':      @["pubURL#{i}"] or ''
+                    'title':     @["pubTitle#{i}"] or ''
+                    'journal':   @["pubJournal#{i}"] or ''
+                    'authors':   @["pubAuthors#{i}"] or ''
+                    'published': @["pubDate#{i}"] or 0
+
+        @publications = pubs.sort (a, b) ->
+            parseDate = (date) ->
+                return 0 if date is 0
+                [ year, month, day] = date.split(' ')
+                day = day or 1
+                kronic.parse([ day, month, year ].join(' ')).getTime()
+
+            if parseDate(b.published) > parseDate(a.published) then 1
+            else -1
+
         # Children documents.
         @sub = {}
         for page in @children 1 # not direct descendants
