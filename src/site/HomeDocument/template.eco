@@ -82,7 +82,7 @@
                     </li>
                 <% end %>
                 <li>
-                    <h4>For a full list, see <a href="/publications">Publications</a>.</h4>
+                    <p>For a full list, see <a href="/publications">Publications</a>.</p>
                 </li>
             </ul>
         </article>
@@ -120,7 +120,7 @@
                         <p><%= @tweet.ago %></p>
                     </li>
                     <li>
-                        <h4>For more news visit our <a href="/news">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</h4>
+                        <p>For more news visit our <a href="/news">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</p>
                     </li>
                 </ul>
             </article>
