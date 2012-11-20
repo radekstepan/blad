@@ -213,7 +213,7 @@ app.router.path "/api/document", ->
             app.db (collection) =>
                 collection.findOne query, (err, doc) =>
                     throw err if err
-                    
+
                     @res.writeHead 200, "content-type": "application/json"
                     @res.write JSON.stringify doc
                     @res.end()

@@ -77,7 +77,7 @@ task "export", "export the database into a JSON file", ->
         # Dump the DB.
         collection.find({}, 'sort': 'url').toArray (err, docs) ->
             throw err if err
-            
+
             # Open file for writing.
             fs.open "./dump/data.json", 'w', 0o0666, (err, id) ->
                 throw err if err
@@ -95,6 +95,9 @@ task "import", "clears all! and imports the database from a JSON file", ->
 
             # Read file and make into JSON.
             docs = JSON.parse fs.readFileSync "./dump/data.json", "utf-8"
+
+            # Clean up docs from `_id` keys.
+            docs = ( ( delete doc._id ; doc ) for doc in docs )
 
             # Insert all.
             collection.insert docs, { 'safe': true }, (err, docs) ->

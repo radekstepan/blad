@@ -49,12 +49,6 @@ If you want to see all the message from the server when dealing with requests an
 $ ./node_modules/.bin/cake compile ; node server.js
 ```
 
-Or if you will be deploying to Heroku:
-
-```bash
-$ foreman start
-```
-
 ## Export/import a database
 
 ```bash
@@ -65,16 +59,61 @@ It uses the file in `./dump/data.json`.
 
 ## Deploying on Heroku
 
+For [Heroku](http://heroku.com) deployment, make sure you have an account, you do not need to pay for an entry level *Cedar* stack.
+
+Login to Heroku providing email and password:
+
+```bash
+$ heroku login
+```
+
+Create the app if does not exist already in your account:
+
+```bash
+$ heroku create
+```
+
 Configure environment variable for MongoDB database, in our case using [MongoHQ](http://mongohq.com):
 
 ```bash
 $ heroku config:add DATABASE_URL=mongodb://<user>:<password>@alex.mongohq.com:10052/micklem
 ```
 
-In case of trouble:
+Deploy your code:
+
+```bash
+$ git push heroku master
+```
+
+Check the app is running:
+
+```bash
+$ heroku ps
+```
+
+If not, see the logs:
+
+```bash
+$ heroku logs
+```
+
+To login to the console:
 
 ```bash
 $ heroku run bash
+```
+
+If you need to rename the app:
+
+```bash
+$ git remote rm heroku
+$ git remote add heroku git@heroku.com:<yourappname>.git
+```
+
+Finally, you can test running the app locally just like Heroku would do it; bear in mind it will start on port `5000`:
+
+```bash
+$ foreman start
 ```
 
 ## Creating custom document types
