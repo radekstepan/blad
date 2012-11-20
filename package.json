@@ -1,7 +1,7 @@
 {
     "name": "blad",
-    "author": "Radek <dev@radekstepan.com>",
-    "version": "1.4.1",
+    "author": "Radek <rs676@cam.ac.uk>",
+    "version": "1.5.0",
     "engines": {
         "node": "0.6.x"
     },
@@ -21,7 +21,8 @@
         "crypto": "0.0.3",
         "colors": "0.6.0-1",
         "forever": "0.10.0",
-        "sax": "0.4.2"
+        "sax": "0.4.2",
+        "q": "0.8.10"
     },
     "private": true,
     "repository": {

@@ -1,4 +1,5 @@
 # Blað
+
 A forms based [node.js](http://nodejs.org/) CMS ala [SilverStripe](http://www.silverstripe.com/), but smaller.
 
 The idea was to create a RESTful CMS API that would be edited using a client side app. On the backend, we use [flatiron](http://flatironjs.org/) and on the frontend [chaplin](https://github.com/chaplinjs/chaplin) that itself wraps [Backbone.js](http://documentcloud.github.com/backbone/).
@@ -47,6 +48,14 @@ If you want to see all the message from the server when dealing with requests an
 ```bash
 $ ./node_modules/.bin/cake compile ; node server.js
 ```
+
+## Export/import a database
+
+```bash
+$ ./node_modules/.bin/cake [export/import]
+```
+
+It uses the file in `./dump/data.json`.
 
 ## Creating custom document types
 

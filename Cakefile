@@ -3,10 +3,16 @@
 fs  = require 'fs'
 cs  = require 'coffee-script'
 eco = require 'eco'
+Q   = require 'q'
 require 'colors'
 
+blad = require('./server.coffee')
+
 task "compile", "compile API server and admin client code", ->
-    server = (done) ->
+    
+    server = ->
+        deferred = Q.defer()
+
         # Core server code.
         codez = [ fs.readFileSync('./server.coffee', "utf-8") ]
 
@@ -19,9 +25,12 @@ task "compile", "compile API server and admin client code", ->
             # Write it all.
             write './server.js', cs.compile codez.join("\n")
 
-            done()
+            deferred.resolve()
+        deferred.promise
 
     client = (done) ->
+        deferred = Q.defer()
+
         # Client side code.
         walk './src/admin', (files) ->
             for file in files
@@ -34,9 +43,12 @@ task "compile", "compile API server and admin client code", ->
                     js = cs.compile fs.readFileSync(file, "utf-8"), 'bare': 'on'
                     write file.replace('./src/admin', './public/admin/js').replace('.coffee', '.js'), js
 
-            done()
+            deferred.resolve()
+        deferred.promise
     
     forms = (done) ->
+        deferred = Q.defer()
+
         # Custom document forms.
         walk './src/site', (files) ->
             tml = []
@@ -52,30 +64,47 @@ task "compile", "compile API server and admin client code", ->
                 tml.push uglify "JST['form_#{name}.eco'] = #{js}"
 
             write './public/admin/js/templates/document_forms.js', tml.join("\n")
-            done()
+            deferred.resolve()
+        deferred.promise
 
-    queue [ server, client, forms ], (out) ->
+    Q.all([server(), client(), forms()]).done ->
         console.log 'All is well.'.green
+        # Finish.
+        process.exit(0)
+
+task "export", "export the database into a JSON file", ->
+    blad.app.db (collection) ->
+        # Dump the DB.
+        collection.find({}, 'sort': 'url').toArray (err, docs) ->
+            throw err if err
+            
+            # Open file for writing.
+            fs.open "./dump/data.json", 'w', 0o0666, (err, id) ->
+                throw err if err
+                
+                # Write file.
+                fs.write id, JSON.stringify(docs, null, "\t"), null, "utf8"
+
+                console.log "Dumped #{docs.length} documents".yellow
+
+task "import", "clears all! and imports the database from a JSON file", ->
+    blad.app.db (collection) ->
+        # Clear all
+        collection.remove {}, (err) ->
+            throw err if err
+
+            # Read file and make into JSON.
+            docs = JSON.parse fs.readFileSync "./dump/data.json", "utf-8"
+
+            # Insert all.
+            collection.insert docs, { 'safe': true }, (err, docs) ->
+                throw err if err
+
+                console.log "Inserted #{docs.length} documents".yellow
+
 
 # -------------------------------------------------------------------
 
-
-# A serial queue that waits until all resources have returned and then calls back.
-queue = (calls, cb) ->
-    make = (index) ->
-      ->
-        counter--
-        all[index] = arguments
-        cb(all) unless counter
-
-    # How many do we have?
-    counter = calls.length
-    # Store results here.
-    all = []
-
-    i = 0
-    for call in calls
-        call make i++
 
 # Traverse a directory and return a list of files (async, recursive).
 walk = (path, cb) ->
@@ -113,17 +142,21 @@ uglify = (input) ->
 
     pro.gen_code pro.ast_squeeze pro.ast_mangle jsp.parse input
 
-# Write to file.
+# Write to file, sync.
 write = (path, text, mode = "w") ->
     writeFile = (path) ->
-        fs.open path, mode, 0o0666, (err, id) ->
-            throw err if err
-            fs.write id, text, null, "utf8"
+        id = fs.openSync path, mode, 0o0666
+        fs.writeSync id, text, null, "utf8"
 
     # Create the directory if it does not exist first.
     dir = path.split('/').reverse()[1...].reverse().join('/')
     if dir isnt '.'
-        fs.mkdir dir, 0o0777, ->
-            writeFile path
+        console.log "Creating dir #{dir}".yellow
+        try
+            fs.mkdirSync dir, 0o0777
+        catch e
+            if e.code isnt 'EEXIST' then throw e
+        
+        writeFile path
     else
         writeFile path

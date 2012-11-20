@@ -383,7 +383,7 @@ Blað.get = ->
                 throw err if err
 
                 record = docs[0]
-                
+
                 # Any children?
                 if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
 
