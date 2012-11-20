@@ -65,7 +65,7 @@ app.use flatiron.plugins.http,
             # Go Union!
             union.errorHandler err, req, res
 
-app.start config.port, (err) ->
+app.start process.env.PORT or config.port, (err) ->
     throw err if err
     app.log.info "Listening on port #{app.server.address().port}".green if process.env.NODE_ENV isnt 'test'
 
