@@ -49,13 +49,33 @@ If you want to see all the message from the server when dealing with requests an
 $ ./node_modules/.bin/cake compile ; node server.js
 ```
 
+Or if you will be deploying to Heroku:
+
+```bash
+$ foreman start
+```
+
 ## Export/import a database
 
 ```bash
-$ ./node_modules/.bin/cake [export/import]
+$ ./node_modules/.bin/cake <export/import>
 ```
 
 It uses the file in `./dump/data.json`.
+
+## Deploying on Heroku
+
+Configure environment variable for MongoDB database, in our case using [MongoHQ](http://mongohq.com):
+
+```bash
+$ heroku config:add DATABASE_URL=mongodb://<user>:<password>@alex.mongohq.com:10052/micklem
+```
+
+In case of trouble:
+
+```bash
+$ heroku run bash
+```
 
 ## Creating custom document types
 
