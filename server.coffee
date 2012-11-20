@@ -96,7 +96,7 @@ app.use
                     done coll
 
             unless db?
-                mongodb.Db.connect config.mongodb, (err, connection) ->
+                mongodb.Db.connect process.env.DATABASE_URL or config.mongodb, (err, connection) ->
                     db = connection
                     throw err if err
                     collection done
