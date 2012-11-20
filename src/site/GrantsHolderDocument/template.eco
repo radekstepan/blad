@@ -30,15 +30,15 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns">
-            <img src="/public/img/splashes/server.jpg" />
-            <h1>Grants</h1>
-            <h2>Those that have been awarded to us and are current</h2>
+            <img src="/public/img/splashes/gluglo-less.jpg" />
+            <h1>Funding</h1>
+            <h2>Current funding sources</h2>
         </div>
     </div>
 
     <div class="row patina">
         <aside class="sidebar three columns">
-            <h2 class="primary">All current grants</h2>
+            <h2 class="primary">All current funding</h2>
             <nav>
                 <ul>
                     <% for grant in @grants: %>
@@ -56,6 +56,13 @@
             <h1><%= @title %></h1>
 
             <%- @body %>
+
+            <p>Current funding includes:</p>
+            <ul>
+                <% for grant in @grants: %>
+                    <li><a href="<%= grant.url %>"><%= grant.title %></a></li>
+                <% end %>
+            </ul>
         </article>
     </div>
 

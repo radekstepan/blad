@@ -64,7 +64,7 @@
                 <% end %>
             </ul>
 
-            <h4>Fore more details and a complete list, see <a href="/projects">Projects</a>.</h4>
+            <h4>For more details and a complete list, see <a href="/projects">Projects</a>.</h4>
         </article>
     </div>
 
@@ -107,6 +107,8 @@
                         </li>
                     <% end %>
                 </ul>
+
+                <h4>For more details and a complete list, see <a href="/funding">Funding</a>.</h4>
             </article>
 
             <!-- news -->

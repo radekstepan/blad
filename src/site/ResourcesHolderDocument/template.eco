@@ -30,7 +30,7 @@
     <!-- callout hero banner -->
     <div class="row">
         <div id="splash" class="twelve columns dark">
-            <img src="/public/img/splashes/sunflower.jpg" />
+            <img src="/public/img/splashes/sunflower-redux.jpg" />
             <h1>Resources</h1>
             <h2>Intermine-based data warehouses</h2>
         </div>
