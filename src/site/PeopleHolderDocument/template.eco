@@ -92,5 +92,30 @@
             </ul>
         </div>
     </footer>
+
+    <!-- footer funding -->
+    <footer class="row">
+        <div class="twelve columns">
+            <p>Work at Micklem Lab is funded by:</p>
+            <ul>
+                <li>
+                    <a target="_blank" href="http://www.epsrc.ac.uk/"><img src="/public/img/grants-color/epsrc.jpg" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.kaust.edu.sa/"><img src="/public/img/grants-color/kaust.jpg" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.genome.gov/"><img src="/public/img/grants-color/nhgri.jpg" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.nih.gov/"><img src="/public/img/grants-color/nih.jpg" /></a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://www.wellcome.ac.uk/"><img src="/public/img/grants-color/wellcome.jpg" /></a>
+                </li>
+            </ul>
+            <p>&copy; 2012, Micklem Lab</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -345,15 +345,27 @@ article.callout.shakespeare a {
 #news p {
   line-height: 18px;
 }
+footer p {
+  margin: 10px 0 30px 0;
+  text-align: center;
+  color: #7c7c7c;
+  font-size: 12px;
+}
 footer ul {
+  text-align: center;
   list-style-type: none;
-  margin: 0 auto;
   margin-top: 10px;
-  width: 70%;
 }
 footer ul li {
   display: inline-block;
   margin: 0 14px;
+}
+footer ul li a {
+  height: 51px;
+  display: block;
+}
+footer ul li a img {
+  vertical-align: middle;
 }
 div.row.rouge h1 {
   color: #9f5e86;
