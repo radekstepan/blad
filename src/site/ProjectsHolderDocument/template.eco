@@ -52,7 +52,7 @@
             <% end %>
             
             <% if @archive: %>
-                <h2 class="secondary"><a href="/projects/archive">Past projects</a></h2>
+                <h2 class="secondary link"><a href="/projects/archive">Past projects</a></h2>
             <% end %>
         </aside>
 

@@ -142,7 +142,9 @@ aside.sidebar
         color: #FFF
         font-weight: 400
         font-size: 18px
-        padding: 12px 10px
+        
+        &:not(.link)
+            padding: 12px 10px
 
         &.bismark
             background: #407083
@@ -152,6 +154,8 @@ aside.sidebar
 
         a
             color: #FFF
+            padding: 12px 10px
+            display: block
 
     ul
         list-style-type: none

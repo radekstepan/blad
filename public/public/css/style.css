@@ -136,6 +136,8 @@ aside.sidebar h2 {
   color: #fff;
   font-weight: 400;
   font-size: 18px;
+}
+aside.sidebar h2:not(.link) {
   padding: 12px 10px;
 }
 aside.sidebar h2.bismark {
@@ -146,6 +148,8 @@ aside.sidebar h2.patina {
 }
 aside.sidebar h2 a {
   color: #fff;
+  padding: 12px 10px;
+  display: block;
 }
 aside.sidebar ul {
   list-style-type: none;

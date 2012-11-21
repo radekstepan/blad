@@ -49,7 +49,7 @@
                 </ul>
             </nav>
             <% if @archive: %>
-                <h2 class="secondary"><a href="/news/archive">News archive</a></h2>
+                <h2 class="secondary link"><a href="/news/archive">News archive</a></h2>
             <% end %>
         </aside>
 
