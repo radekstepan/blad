@@ -79,6 +79,12 @@ Configure environment variable for MongoDB database, in our case using [MongoHQ]
 $ heroku config:add DATABASE_URL=mongodb://<user>:<password>@alex.mongohq.com:10052/micklem
 ```
 
+It is also a good idea to change the `API_SALT` key, otherwise it is pretty easy to make an attack against the app!
+
+```bash
+$ heroku config:add API_SALT=Gak2pha8aspebruPhuka
+```
+
 Deploy your code:
 
 ```bash

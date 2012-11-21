@@ -13,6 +13,13 @@ eco      = require 'eco'
 # Read the config file.
 config = JSON.parse fs.readFileSync './config.json'
 
+# Resolve config coming from environment and the config file.
+config.mongodb        = process.env.DATABASE_URL or config.mongodb    # MongoDB database
+config.port           = process.env.PORT or config.port               # port number
+config.env            = process.env.NODE_ENV or 'default'             # environment
+config.browserid     ?= {}
+config.browserid.salt = process.env.API_SALT or config.browserid.salt # API key salt
+
 # Validate file.
 if not config.browserid? or
   not config.browserid.provider? or
@@ -65,9 +72,9 @@ app.use flatiron.plugins.http,
             # Go Union!
             union.errorHandler err, req, res
 
-app.start process.env.PORT or config.port, (err) ->
+app.start config.port, (err) ->
     throw err if err
-    app.log.info "Listening on port #{app.server.address().port}".green if process.env.NODE_ENV isnt 'test'
+    app.log.info "Listening on port #{app.server.address().port}".green if config.env isnt 'test'
 
 # -------------------------------------------------------------------
 # Eco templating.
@@ -91,12 +98,12 @@ app.use
     attach: (options) ->
         app.db = (done) ->
             collection = (done) ->
-                db.collection process.env.NODE_ENV or 'documents', (err, coll) ->
+                db.collection config.env or 'documents', (err, coll) ->
                     throw err if err
                     done coll
 
             unless db?
-                mongodb.Db.connect process.env.DATABASE_URL or config.mongodb, (err, connection) ->
+                mongodb.Db.connect config.mongodb, (err, connection) ->
                     db = connection
                     throw err if err
                     collection done
@@ -108,7 +115,7 @@ app.db (collection) ->
     collection.find('public': true).toArray (err, docs) ->
         throw err if err
         for doc in docs
-            app.log.info "Mapping url " + doc.url.blue if process.env.NODE_ENV isnt 'test'
+            app.log.info "Mapping url " + doc.url.blue if config.env isnt 'test'
             app.router.path doc.url, Blað.get
 
 # -------------------------------------------------------------------
@@ -129,20 +136,20 @@ app.router.path "/auth", ->
             if body.status is 'okay'
                 # Authorize.
                 if body.email in config.browserid.users
-                    app.log.info 'Identity verified for ' + body.email.green if process.env.NODE_ENV isnt 'test'
+                    app.log.info 'Identity verified for ' + body.email.green if config.env isnt 'test'
                     # Create API Key from email and salt for the client.
                     @res.writeHead 200, 'application/json'
                     @res.write JSON.stringify
                         'email': body.email
                         'key':   crypto.createHash('md5').update(body.email + config.browserid.salt).digest('hex')
                 else
-                    app.log.info "#{body.email} tried to access the API".red if process.env.NODE_ENV isnt 'test'
+                    app.log.info "#{body.email} tried to access the API".red if config.env isnt 'test'
                     @res.writeHead 403, 'application/json'
                     @res.write JSON.stringify
                         'message': "Your email #{body.email} is not authorized to access the app"
             else
                 # Pass on the authentication error response to the client.
-                app.log.info body.message.red if process.env.NODE_ENV isnt 'test'
+                app.log.info body.message.red if config.env isnt 'test'
                 @res.writeHead 403, 'application/json'
                 @res.write JSON.stringify body
             
@@ -152,7 +159,7 @@ app.router.path "/auth", ->
 # Sitemap.xml
 app.router.path "/sitemap.xml", ->
     @get ->
-        app.log.info "Get sitemap.xml" if process.env.NODE_ENV isnt 'test'
+        app.log.info "Get sitemap.xml" if config.env isnt 'test'
 
         # Give me all public documents.
         app.db (collection) =>
@@ -172,7 +179,7 @@ app.router.path "/sitemap.xml", ->
 # Get all documents.
 app.router.path "/api/documents", ->
     @get ->
-        app.log.info "Get all documents" if process.env.NODE_ENV isnt 'test'
+        app.log.info "Get all documents" if config.env isnt 'test'
 
         app.db (collection) =>
             collection.find({}, 'sort': 'url').toArray (err, docs) =>
@@ -207,7 +214,7 @@ app.router.path "/api/document", ->
                 value = decodeURIComponent params.url
                 query = 'url': value
 
-            app.log.info "Get document " + new String(value).blue if process.env.NODE_ENV isnt 'test'
+            app.log.info "Get document " + new String(value).blue if config.env isnt 'test'
 
             # Actual grab.
             app.db (collection) =>
@@ -223,19 +230,19 @@ app.router.path "/api/document", ->
 
         if doc._id?
             # Editing existing.
-            app.log.info "Edit document " + doc._id.blue if process.env.NODE_ENV isnt 'test'
+            app.log.info "Edit document " + doc._id.blue if config.env isnt 'test'
             # Convert _id to object.
             doc._id = mongodb.ObjectID.createFromHexString doc._id
             cb = => @res.writeHead 200, "content-type": "application/json"
         else
             # Creating a new one.
-            app.log.info "Create new document" if process.env.NODE_ENV isnt 'test'
+            app.log.info "Create new document" if config.env isnt 'test'
             cb = => @res.writeHead 201, "content-type": "application/json"
 
         # One command to save/update and optionaly unmap.
         Blað.save doc, (err, reply) =>
             if err
-                app.log.info "I am different...".red if process.env.NODE_ENV isnt 'test'
+                app.log.info "I am different...".red if config.env isnt 'test'
 
                 @res.writeHead 400, "content-type": "application/json"
                 @res.write JSON.stringify reply
@@ -244,7 +251,7 @@ app.router.path "/api/document", ->
             else
                 if doc.public
                     # Map a document to a public URL.
-                    app.log.info "Mapping url " + reply.blue if process.env.NODE_ENV isnt 'test'
+                    app.log.info "Mapping url " + reply.blue if config.env isnt 'test'
                     app.router.path reply, Blað.get
 
                 # Stringify the new document so Backbone can see what has changed.
@@ -284,7 +291,7 @@ app.router.path "/api/document", ->
                 value = decodeURIComponent params.url
                 query = 'url': value
 
-            app.log.info "Delete document " + new String(value).blue if process.env.NODE_ENV isnt 'test'
+            app.log.info "Delete document " + new String(value).blue if config.env isnt 'test'
 
             # Find and delete.
             app.db (collection) =>
@@ -387,7 +394,7 @@ Blað.get = ->
                 # Any children?
                 if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
 
-                app.log.info 'Serving document ' + new String(record._id).blue if process.env.NODE_ENV isnt 'test'
+                app.log.info 'Serving document ' + new String(record._id).blue if config.env isnt 'test'
 
                 # Do we have this type?
                 if Blað.types[record.type]?
@@ -417,7 +424,7 @@ Blað.get = ->
 
 # Unmap document from router.
 Blað.unmap = (url) ->
-    app.log.info "Delete url " + url.yellow if process.env.NODE_ENV isnt 'test'
+    app.log.info "Delete url " + url.yellow if config.env isnt 'test'
 
     # A bit of hairy tweaking.
     if url is '/' then delete app.router.routes.get
@@ -498,7 +505,7 @@ class Blað.Type
         @store =
             # Get a key optionally on an object.
             get: (key, obj) =>
-                app.log.info 'Cache used for ' + key.grey if process.env.NODE_ENV isnt 'test'
+                app.log.info 'Cache used for ' + key.grey if config.env isnt 'test'
 
                 if obj? then obj.cache[key]?.value
                 else @cache?[key]?.value
