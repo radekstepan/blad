@@ -16,8 +16,8 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li class="active"><a href="/resources">Resources</a></li>
+                    <li class="active"><a href="/projects">Projects</a></li>
+                    <li><a href="/resources">Resources</a></li>
                     <li><a href="/publications">Publications</a></li>
                     <li><a href="/news">News</a></li>
                     <li><a class="people" href="/people">People</a></li>
@@ -29,34 +29,43 @@
 
     <!-- callout hero banner -->
     <div class="row">
-        <div id="splash" class="twelve columns dark">
-            <img src="/public/img/splashes/sunflower-redux.jpg" />
-            <h1>Resources</h1>
+        <div id="splash" class="twelve columns">
+            <img src="/public/img/splashes/stomach.jpg" />
+            <h1>Past projects</h1>
         </div>
     </div>
 
-    <div class="row patina">
-        <!-- main content -->
-        <article class="main twelve columns">
-            <% if @resources.length isnt 0: %>
-                <table>
-                    <tbody>
-                        <% for resource in @resources: %>
-                            <tr>
-                                <td>
-                                    <a target="_blank" href="<%= resource.link %>">
-                                        <img src="<%- resource.image  %>" title="<%= resource.title %> logo" />
-                                    </a>
-                                </td>
-                                <td>
-                                    <a target="_blank" href="<%= resource.link %>"><%= resource.title %></a>
-                                    <%- resource.summary %>
-                                </td>
-                            </tr>
+    <div class="row rouge">
+        <aside class="sidebar three columns">
+            <% if @projects.length isnt 0: %>
+                <h2 class="primary">Our past projects</h2>
+                <nav>
+                    <ul>
+                        <% for project in @projects: %>
+                            <li>
+                                <h3><a href="<%= project.url %>"><%= project.title %></a></h3>
+                                <%- project.summary %>
+                            </li>
                         <% end %>
-                    </tbody>
-                </table>
+                    </ul>
+                </nav>
             <% end %>
+            
+            <% if @current: %>
+                <h2 class="secondary"><a href="/projects">Current projects</a></h2>
+            <% end %>
+        </aside>
+
+        <!-- main content -->
+        <article class="main nine columns">
+            <h1>Past projects</h1>
+
+            <p>Past projects include:</p>
+            <ul>
+                <% for project in @projects: %>
+                    <li><a href="<%= project.url %>"><%= project.title %></a></li>
+                <% end %>
+            </ul>
         </article>
     </div>
 

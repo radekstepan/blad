@@ -5,8 +5,15 @@ class ProjectDocument extends Blað.Type
     render: (done) ->
         # Get other projects.
         @siblings (projects) =>
-            # Only the current ones.
-            @projects = ( (p.summary = marked p.summary ; p) for p in projects when p.current )
+            # Get all siblings of the same "currency".
+            @archive = false ; @notArchive = false
+            @projects = []
+            for p in projects
+                if @current and p.current
+                    if p.summary then p.summary = marked p.summary
+                    @projects.push p
+                else
+                    if @current then @archive = true else @notArchive = true
 
             # Markdown.
             @body = marked @body

@@ -31,25 +31,36 @@
     <div class="row">
         <div id="splash" class="twelve columns">
             <img src="/public/img/splashes/stomach.jpg" />
-            <h1>Projects</h1>
-            <h2>Applied biological data mining</h2>
+            <h1><% if @current: %>Projects<% else: %>Past projects<% end %></h1>
         </div>
     </div>
 
     <div class="row rouge">
         <aside class="sidebar three columns">
-            <h2 class="primary">Other current projects</h2>
-            <nav>
-                <ul>
-                    <% for project in @projects: %>
-                        <li>
-                            <h3><a href="<%= project.url %>"><%= project.title %></a></h3>
-                            <%- project.summary %>
-                        </li>
-                    <% end %>
-                </ul>
-            </nav>
-            <!--<h2 class="secondary"><a href="#">Past projects</a></h2>-->
+            <% if @projects.length isnt 0: %>
+                <% if @current: %>
+                    <h2 class="primary">Other current projects</h2>
+                <% else: %>
+                    <h2 class="primary">Other past projects</h2>
+                <% end %>
+                <nav>
+                    <ul>
+                        <% for project in @projects: %>
+                            <li>
+                                <h3><a href="<%= project.url %>"><%= project.title %></a></h3>
+                                <%- project.summary %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </nav>
+            <% end %>
+
+            <% if @archive: %>
+                <h2 class="secondary"><a href="/projects/archive">Past projects</a></h2>
+            <% end %>
+            <% if @notArchive: %>
+                <h2 class="secondary"><a href="/projects">Current projects</a></h2>
+            <% end %>
         </aside>
 
         <!-- main content -->
