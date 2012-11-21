@@ -27,9 +27,8 @@ if not config.browserid? or
       not config.browserid.users? or
         not config.browserid.users instanceof Array
             throw 'You need to create a valid `browserid` section in the config file'
-if not config.port? or
-    typeof config.port isnt 'number'
-        throw 'You need to specify the `port` to use by the server in the config file'
+if not config.port?
+    throw 'You need to specify the `port` to use by the server in the config file'
 if not config.mongodb?
     throw 'You need to specify the `mongodb` uri in the config file'
 
@@ -104,6 +103,7 @@ app.use
 
             unless db?
                 mongodb.Db.connect config.mongodb, (err, connection) ->
+                    app.log.info "Connected to #{config.mongodb}".green unless config.env is 'test'
                     db = connection
                     throw err if err
                     collection done
