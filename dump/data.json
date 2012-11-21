@@ -1,5 +1,6 @@
 [
 	{
+		"_id": "50abba42c623e00400000001",
 		"cache": {
 			"tweet": {
 				"value": {
@@ -67,7 +68,7 @@
 		},
 		"description": "root document, the label:homepage",
 		"markup": "We are an iterdisciplinary team focused on the applications of integrative genomics approaches. Our work ranges from developing open source community [resources](#) such as the data warehouse system InterMine, to undertaking and supporting [research projects](#) in a range of areas including functional genomics, synthetic biology, and cancer research.\r\nWe have a range of student projects available, and are open to collaborations. If you're interested [get in touch](#)!",
-		"modified": "2012-11-19T15:48:20.516Z",
+		"modified": "2012-11-21T15:45:11.203Z",
 		"pubAuthors0": "Boschetti C, Carr A, Crisp A, Eyres I, Wang-Koh Y, Lubzens E, Barraclough TG, Micklem G, Tunnacliffe A",
 		"pubAuthors1": "modENCODE Consortium",
 		"pubAuthors2": "Lim WK, Micklem G",
@@ -78,49 +79,49 @@
 		"pubJournal1": "Science",
 		"pubJournal2": "Molecular Biosystems",
 		"pubTitle0": "Biochemical Diversification through Foreign Gene Expression in Bdelloid Rotifers",
-		"pubTitle1": "Identification of functional elements and regulatory circuits by Drosophila modENCODE",
+		"pubTitle1": "Integrative Analysis of the Caenorhabditis elegans Genome by the modENCODE Project",
 		"pubTitle2": "MicroRNAs dysregulated in breast cancer preferentially target key oncogenic pathways.",
 		"pubURL0": "http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1003035",
-		"pubURL1": "http://www.ncbi.nlm.nih.gov/pubmed/21177974",
+		"pubURL1": "http://www.ncbi.nlm.nih.gov/pubmed/21177976",
 		"pubURL2": "http://www.ncbi.nlm.nih.gov/pubmed/21766137",
 		"public": true,
-		"splashSubtitle": "Cross-organism integrative genomics",
+		"splashSubtitle": "Integrative genomics",
 		"splashTitle": "Micklem lab",
 		"type": "HomeDocument",
 		"url": "/",
 		"welcomeImage": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAAyAAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3N0I2OEQ4QjE3QkExMUUyOTQ5Q0JDNzgwMDFDMjU1NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3N0I2OEQ4QzE3QkExMUUyOTQ5Q0JDNzgwMDFDMjU1NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjc3QjY4RDg5MTdCQTExRTI5NDlDQkM3ODAwMUMyNTU2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjc3QjY4RDhBMTdCQTExRTI5NDlDQkM3ODAwMUMyNTU2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQACAYGBgYGCAYGCAwIBwgMDgoICAoOEA0NDg0NEBEMDg0NDgwRDxITFBMSDxgYGhoYGCMiIiIjJycnJycnJycnJwEJCAgJCgkLCQkLDgsNCw4RDg4ODhETDQ0ODQ0TGBEPDw8PERgWFxQUFBcWGhoYGBoaISEgISEnJycnJycnJycn/8AAEQgAlABwAwEiAAIRAQMRAf/EAJcAAAEEAwEAAAAAAAAAAAAAAAUDBAYHAAIIAQEAAwEBAAAAAAAAAAAAAAAAAQIDAAQQAAIBAgQDBQUFBgQFBQAAAAECAxEEACESBTETBkFRIhQHYXEyIxWBkUJSFqHB0WIzJPCxgkPhciU1F6JTYzQIEQACAQQBBAICAwEAAAAAAAAAAREhMUECcVGBEjJhA5Gx8KHBIv/aAAwDAQACEQMRAD8AvnGY9whfX1ntlpNf7hOltaW6l5p5WCoqjtJOEKC9MVt1b6ybL03uUuz2dq+53tvVbjQwjiR6BtGsq2qn4tINOGK79S/VyfqGC42Tppmt9sZtD3YLxzXCKDq8NBSGSvA5kceNBTjOVA1DUF4VJoO3hhZmwyUV2qWr1L6xdU7yxe2d9os0Hy7azccwvwrLIRrbjwGkDtFcQRN7gv3nk3bXc3s4rHdSsXMZWhHFhkRke0dndgXqMcbSShgz6XXSPCK5rn3+HGphtoo45bhZdU9XRF0gcuumoLAniD2YHineZG8mo8YSymSdLpLmGw2WzZhy6yvM5oplcFtFuF8KgGgBbBPfLq4QR3c0l1aG7MptbaZ2c2sIGri3FJNTENnqpqHbiDIyLexi1VxCXQIlwwHiyrrZdIpX9mDV3f7tuVs88t4yW7oQ0SMxBFu8k8fMz0ppMmlKfxwr0qh9d5TpVC1vu42m6EU1mqOixluZG0UpK+MSHmVZJG4h+OJftfqj1ZaGeWxdmt2rJKaG6VSeNFndmBFDnrz4lcQu5uD1Ft1hDcXGq9toZFiXQpeR9YopZQG0iNRmzZcFHHDJ7Lfds50TWzQ6TodAoZgVA1DWNVDn4s/8sbxXWHybyfSdfhfs6J6b9Z9ov4A28I9sisiTXYSkcfMOlGlUO5VSRx7PvpZ8E8F1BHc2sizW8yiSGaNgyOjCqsrLkQR244ntNzeNEheOtWJZNPFDQsZCM2+HIcBifdGeoV/0LIYnSW825yGurRpSyrHUsZLWI1WJ/FnnRuB78FNqjr0Feq2U606nTtMeYabTudtvW2Wm7WdfL3kSTxq1NShwG0vpLDUtaHPjh5hyZtik/wD9B71NFZ2Oxx3awxyf3UtqoYyTMraYi5yVI0IJ4ks1MvCTi7ccmettxd3PX+4SzMzWsYjgsWOaaIkVZVQ8PDPzNQ7DjPCBrSXEwQITClH1aDk2efsOEnmLdmfEnvPfjVakgDt7MLLZzyn5UTH3AmuDRXNO21jUzM0IifxKp1J3ivEfbjRqZUOeDy9KbrJZC7W0kSNeLOpWteFK4FJt9xI7hUJEfxkfCKcanAW2uGM9N8obCSTKrsQOAqe3Dya+E5iEtXAiETBuAZcldQtPw0GNLixlhZYqDWewGuM+l34oxgYgmg7c8adXWQRuqQ2IrKIZldTqCsGoeGRrSnDD673i6vJvNSysWaRmMdTShOrI8eJOB7QTBtJQ1rThjxkdSEcaad/Zgxq4B5bKcEiG6W11BKs0KrI1W5kLOAKkZPrdvCOzIHCMcchJZAsduRy5db8wmv4+AovDAq2nNnMGCxzDMESDWjA91eGN5JUmcmICGP8A9qrEU/lOZxN6RaxVbze5fHpN1HLt24Q9PRbmN3s54g0kMoa3mtGQkfLSQukqkEZI1dOf4QDeWOI9h3mXYN6td2jZnnsJkkj5ZpzEVgHiJoTR4yy1pljtiGZbiGOdAQsqq6hhRgGGqhB4HDaqKCbtOqXItjjr1RFzD1nvdtNOJolvZ5olqKpz216aLwpQf59uOxcco+qW2ruHq/e7VCCrXt1YQFj+a4ht1qPZ4sM7p9BU6NdSW+nfppZx7FFum7QiW93GJZkVhURRONUYHZVlox7uGJ3t3SG22agclWetS2kDP/hiUNGq+ACir4VUcABkBjUaV/jjndXLOhOFCB77VbvGY2jFCKUoMC16P2gSO5tYy0go3hABHDMDI4k40HjUfbl+3HgAByJOBCD5MjFt0XtMVUW2iVSauNAzPtwQk6X2zyzQx20aK40uAi5r3HLBdXANKfYcbhwxoKhj+Fhl9+DCN5MqrqT0qtLhTe7aAtyhqEB0Bh7DnmOK1yxWHWOwrYWcMrI0UykiVHjZGD+9hw+3HVOhQhDChOeKh9bFVNljNKDVl3f47sZSmoeTTK2TWDn4NVWU0NTWh7+8Y9R2iZWUCvEasx78JE1OPVOdWz9mOmDkTFgCZtUhDaqvVjkx45k9uO6rOps7eooeUlR3eEY4h2IRSbxt8cqCZDdwfKYA6wZFDIdVRmMs8dy+7C54Q2OWbY549Q7ZU9cdjlMHK5022NzDT5xEpTmLTsGgJn+XHQ+KE9bzdbX110v1AqRtFBEJYA1FLTWU5nKO3xafmp+2mNtY2ly3ndA2kkVJp9uNMgeP2Y5jvut/UCRmWae6IkIKxpGyKKnWtNAFe8Yk/Tfq51ALlbPqGANpOjWImSQH+dR/DEYcSXpMZ4L1dVK5ivdTL76Y0RV1Up78z/HDKy3OC+tILmJiUkGruIBFcxiJ7l6gxWF1cBIiYIdehz/uMqFq5A+HVRcLKGWrJ+qRPWq1p3E/xwqixIuWoDv1E/51xzq/rZ1WlzIgt4H0tRVSNgKe0FmPD24ObV6z3bsEvFUmq11oUqDXUpoezsI7csNDVYFUOiZdrnSCCa14EZf4OKs9aIkl6eqWKsKFDTJiPwHuqOHtxN+n+qtp6nt2bb5NUkf9WFqalzoD7j2YQ6s2aHfNouNvnXUJUop7Q4+E/fgTnoFLDzQ5A4Y9p24WvbZ7K8uLSX44JGjb3qaYRyx1fJyRDh4Hm3Fku7aWIVkWWMxKMyXDrTLHdhxxt6ZbRDvvW+x7XcEpGbnzDkDNkt0a60ZUpr5Omtcq47JwuWPhHuKl9TFtd79QuiemXCyGMXd9dwyLVDEyfLqfb5aQYtrEc3jpexuuoLLqs1F9ZQPaKAMmSTUBU/y81vvwNvVm09lWCs91603V7ndbDpzbIbS32YSp5rcCUe6ktj8yCyXQ6u/aF/LmacMQU9ZT73C97dWMiyxKHu7nkAW6HUUCh4l1cNJqwOZIoANWL3vIJoLfydnZW88RYtynfl6Sx1Fh4GBJbMmoOBSbfuEzyNey8qEZLHG5dmPClWXIe7HO4tB1Kbye+nxlv+nYp7hAsgd0JWhDKPhYUy7cBOtNqSyia6trV7lUYtIi0oqjNmJOQxYe32kW3bckEK0Vch25k6mJ95wN3GyF7DJE8jQhjlIhoyk9tcZqiMtv+m8FN23UW4Wm2Xu87TtsbWe36Td8uOKNWUsEpzblZZZqV8RVFAxll6ldL7wwi6i2GMWpC8y+jtw3KY8Q4XUWVfzClfy4mTdObtt8gpBBucIry31NBJQ8Qyp4T9+JHttpOYyFtIbYyUWR2OttNKUWoav20xlFmv7DtN1t/QP6f6Q2nbdyG9bVpjimRTHJG/y5I3FePBlbIgDExljHKJJrQVr+/Dbadl2/aoVt7KBYYk/ppVnVK9kayFtA9i5YdXWpopAMiQQPtwYoI3LOO+rHSXqHcpoxQPcSNQcM2rhbpfp59/3O2tHD8iQ1cqQpKqcwGIPHhwOHW/dM76ep7rao7GWa6Z2kSOJS3gcllbUMtNO3E86Jsr/Z5bTaL+zQyxSF4LuE1JEhDMhPaBim28aKHUTX6/L7Nm1QmXpNf2F/1BfWlt05t+2/S4GihvbOMiYDWsZjnlarSs2muo55HvxcWK99Kenztlpuu7sQRul3IYABT5UUjqH/ANTE5ez24sLDaesvIn2R5NLB7hvfEiCo7HT9rAfvw4w23E0s3PcUP/rXDber4F19lyBrkhHYniO3sAwxtJReXTGNaxQmjv2FxwUe7icCeo9yvJLhNu25OZdzfCpyVQOLufyr24cWd0Nks02+UmWUVZJgDV3YmSQmlff7sc01OqKfLJXRWth7OFMDJy0aEsvh7sCb3rWx2uzSe6qVc6YkAJdz3Kvbhla9X3e7yNZLsd/bmUHTNOsYiUcNTukj6ad3HuwW0xVq0F7a6juHcAgFMpIzkQT7DgoiRFKrxpwxEd62+Xbp495sg0ixKI7qJalyg/3VA4kfiHdgltu5pdxRzwuHVgKU7R7MBPDGaygyHeM0yoe3jj2Rgcu3+ONIyWGqlQ2dT349lC0r+zBFGEghsRNucyFmjGYVS7FRmQAtSa+zAOLbnSS1vpotCupisFA0sgI1S3NzwCKg7K1OJVVgqcqQROGqrNnWgzAxVPrD10u37XJ0jt9wJN03Aj6kUNTBbsP6RYEaXmqKr+StR4hjLWXBnv4qS1uhNwTdOkdqvo4zFFLERDGwoeWjtHGTXvRQcSLFY+g19dXXQos7hRo228ntbeVSSJIyVn1AnjR5WXLKgxZ2LqyXShzurb61Mw23L/t9yaV0xs9O/SNX7sOM6+zHpAYFWFQciPYcG6aNZp9CB3k1ptnPv5wSzqKsoq2lc9Ip78CLncdj6gtCdr3KGRmXxICwZCctMikBk/1UwXuLUrI1hIfFauYiTxpxRsj+JCDgH1N0T07ucYvJYVhnSNYzNGTE4VK6WV0oaivbjl6ydadmgXsnRwtJEuZry3m0t4XZ6qqjMBCxNMWFb2yqlYgjHI6kYH7cjiqofTxJ5o3j3q8K94kidsq/7lMHrL0vEbBm6g3SIjxeCeMH3ALFl9+MjbMm050hRIOXU0oe/wB+BVtYRW13I0ChI2OtlXJdTZnSO48cJDonZ7bk3DS3V9ewV0Xd7dTzPn2BdYjH2KMP7ZUWPSvEEhh7Rgu4FYIxSeHSMq9hx68gaIqWFV4nDVXCgkkBuK4Qku/n8pPEzZU7qY0ggXuLIXrxA5pbI7KM6a38IJoRwAxz90z0Md09R7rZt2tpL2ztZWl3Awuy0EgLpVpG1MKtVl1ayAaVIx0ZNMm32bTMjySUFIIxqd3bJIo17WJyGI10hsnkN/u7uZlluFle63q7RomjG5XAEcW3DNZl8pbygIfEsnMYnSwUYfSaxlCbxCnDoTnZtnstisE22wQJBGWaiokYqxqfBCqIPsXD/GYzFiF6nmMx5jCQoqxAGQqcuOQwAkC3vqnpm46qtNksb5bnd5Y5VuY4PmxIINTcuaRCQkqkP4eP5qeGqt9byXUBhQ01duIJ6gWb9SdVW9h0rdDarGwuJZd23kKkNjHuORci4RAzXFABIms1NKhSGbB3Yurrfd9tW7DUkRmt7llFFW5jHzAurLSfjT+X21pH7Ilv8nR9cwl0sLw7GwlKEFNR1I6VUhvacSa1tpoYlRjq08CxrwwETd4cncsQe05GvcTgjFvsIRUINCc27M8ssIoH28mFGB00YgauIwMleG3cnKh409mGm89T7btNk93dSAKDojpUs7EZIigEknFX7p1pud/IY7YmygIOqRiDIV9rcE/05+3Bb6ASLDv99ht35MZ5s7fBEuZX/m/KPfhTbLqG3QbhdHmO7iG3iWmqad20rFFWgrqy7vuOILsNvfbojizhklgjzmcZSSuPFy0/GWb2VPu44ns5m6Yigls7A791FcJAsexVgU2MMmpHmBFdCVqrtWjU4hQxA1Tb4Du1qou2Pb273CKSHZ7KOG56sukS9l264d41trJ5PLzyQ3MCkLIitpDBq1zAOSsvs8KPcQ7Dt9w+4bRtDLPe7tculzLdXcTSoLOd1VaS2zxxSlvi8KrTtIq2gu7RbzpfaN2urh4gbveerZmSaaCIyajt8D6WrcaAciKRqdXEquHqHb9m2+3nZUtOmHa0k6e22LmR3su4SSGZYm1MNTTOR4STWrFyBiypREHWrJzjMJwmZoUadAk2leciEsquQCwViF1AHgaY3xQmJyzQ28MlxcSLFBEpkllkYKiIo1MzM1AABmScVxu3WT7nPdWe13NxNNZziaLbtqgnE5iis3uWiv7p10IzyUURx+INpVsy2lf1B3Lzhh2KRGm2eW4Sy3ayiYQ3l7LdLptbeweV41YRyUeZtQFBTVlIuG9qNzErve3cdlFvcZpdbYdNvZSlilvLzZTHUSuy6WKs91KfwxIKz2c0RTVRVkB3K4tXuLvY4rWHc5uXFuuybLY3McW0bSyBmuEvZGkiiLKF1NqyZifh1YA7luu6Pd3PW5uDvEhh/wCuWdkstnYWckii2s11t/8AZXgfCpGXxGtcL31lNc7R1PtcUG2WW27RHZz2kJ599cRSXIUi2sHmY8kzOjNICuqraWJpVdepNvuYzumzSytuvUN79MtJzdXASUXBjD0gs7b5dI0UKXlY6RXhXMU5m41axSLckp2fZtzudjj3IXyJeeNJ7WJknhquY0SxORXSQaZ0wDud53O2l5AXmMmQZwaA9uQpiabLtUXSHTNttivraMtJPIPxyyULsPZlQezDD6fbXLvdSpRDQsw4eIhV4AnxEgAAZnIZ4i4mhfWYqQu4jvtxnFxeymSQCis2QQfyIvDBzYelIri2Xdd68zBsrOscFxbRmWW5mfwpHaRKshKji0hUjsXvWUp05DzYoZYofq8kclxt3TV8o/uwgOh7tlLCOMkE8ulTTxGmpVKNd3e1ySnpu3ivevPK20d/02LgrZ2kVBqMMRYJEgyoAwqCD+Ian11eSe26VhGWybYG29t2tLL9aStPadInbI5xaxoyFgbkAUSpZjLqJqK6T8RG9q0+yzXKPPbT9biGF+suowhEVpY+J9aVQoZWjUCKPSNVAzKEVVDuJRt91ebX0xNJue877cM+/bxLIJodrPLoSykaVdQlI4T201UUIuE7Voumdlj3Ga2v9yt7GWaxntzEJr3eLlpYhHuJDuWdVZXMYYnwHUOC4pwSfzU2is7PYILO2e3W2u9mnuz0dsaXPj3GOSL451YsWkkd2LNT5ddR7anNqsGvb4bl1JLo3yeCOZNkaWOeDbTFlzbddJXm6nGqTOvAZDDK+tbzb9o3HqK/urPdd3g59xt+4z8m2i22GQKnIt5mjuCrKhPi0HWcnw9jiVOrtpvktmSW+2+Rbme1tVlQkaJALncZlWXQKeBQqknNuwYKx2A8/EhwPIiW8sJNzFLCdZVFLyyKFZX5sLLGpZNf4aEkeJaULxJI5USWFxJFIoeORSGVlYVDKwyIwC3Ox5dpZXEaxh7HcFn1vZSyy0kdkkMS2LRsjvzPFJQrprrUgnBTnTBpkZJD5aZRqJjCyQygNrBqBpi1HjR/B21GpkKyjIub+sP+q+Y+o+Ul/QfmuX5L6dom0+Zr82vL/qc35miurxacS/qHzf1WbynK0efttOvl1rpX6nq8x8v6jyNPL5mXlf6H4sZjMTw+EUd1yyKdV/RNNz9U+r8v9Un61r5/lfL1i018l8vR5fk8vV82nw4DdMfRv/J29+Y5PnedeeR8v/S18w87Tq8WrRWns1YzGYDs72GV8dyxt08voj8xXl1zp+/2Y82v6R5+5+tcnkUt/wBM69NfNaTzOVr+X5nmaeVq8VK6ctWMxmJ6+2O4+3rnsOdl/UX6Il06/wBb8q58l9T5fntHN/ny+HTp1+GunVlgZD9S/T8f6O5P/kjRB9f87yvqXL8PO5vNy010adeWj4fHpxmMxZY/mf2Seee1v0Ftn/Snktz+n6PonNl/V/mOd5nz9Yq87/4/i51Pl/Zrxu/P/XM39D9a+QPkq8zyP0fzZprr4ufX4qdvDw1xmMxlbPYDvjPsPt4895bqD6D8OleZ5PT5/n5czl+f/ttGn8vbqp48Kx+X+p9K/U/P/VPLycnzPM06+R83zHk/7XnUr8Xtp2YzGYy/3tcz/wA72HW5/Svou6a/Ncjnnm8j6jr5vMX+n5X59NdK8nw8fbh/F/3JtHM8t5CLm87l6aa5OXq1/wB1rpr1czw93i1YzGYb8dhX37n/2Q==",
-		"welcomeText": "We are an interdisciplinary research group, using computational and experimental methods to investigate basic biological processes. In particular, our team focuses on the development and application of integrative genomics approaches. \r\n\r\nOur work ranges from developing open source community [resources](/resources) such as the data warehouse system InterMine, to undertaking and supporting [research projects](/projects) in a range of areas including functional genomics, synthetic biology, and cancer research.\r\n\r\nTo find out more, check out our [projects](/projects) and [publications](/publications) pages, or [get in touch](/contact)!",
-		"welcomeTitle": "Welcome to the Micklem lab website!",
-		"_id": "50abb9846ed1135e18000001"
+		"welcomeText": "We are an interdisciplinary research group, using computational and experimental methods to investigate basic biological processes. In particular, our team focuses on the development and application of integrative genomics approaches. \r\n\r\nOur work ranges from developing open source community [resources](/resources) such as the data warehouse system InterMine, to collaborative [research projects](/projects) in a range of areas including functional genomics, synthetic biology, and cancer research.\r\n\r\nTo find out more, check out our [projects](/projects) and [publications](/publications) pages, or [get in touch](/contact)!",
+		"welcomeTitle": "Welcome to the Micklem lab website!"
 	},
 	{
-		"body": "    Cambridge Systems Biology Centre\r\n    Tennis Court Road\r\n    Cambridge\r\n    CB2 1QR",
+		"_id": "50abba42c623e00400000002",
+		"body": "    Dr Gos \tMicklem\r\n    Cambridge Systems Biology Centre\r\n    Tennis Court Road\r\n    Cambridge\r\n    CB2 1QR\r\n\r\n    Phone: (+44) 1223 760240\r\n    Fax:\t(+44) 1223 333992\r\n",
 		"description": "",
 		"email": "info@intermine.org",
-		"modified": "2012-11-13T17:31:50.142Z",
+		"modified": "2012-11-21T15:48:30.893Z",
 		"public": true,
 		"title": "Contact",
 		"type": "ContactsDocument",
-		"url": "/contact",
-		"_id": "50abb9846ed1135e18000002"
+		"url": "/contact"
 	},
 	{
-		"body": "#Funding\r\n\r\nВже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, \"Тут іде текст. Тут іде текст.\" Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном \"lorem ipsum\" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).",
+		"_id": "50abba42c623e00400000003",
+		"body": "#Funding\r\n\r\nThe Micklem Lab develops data integration tools and takes part in functional genomics projects. We develop and maintain the open-source data warehouse system InterMine, as well as running a number of data warehouses based on the system, including FlyMine, modMine and metabolicMine. We are also in the process of developing HumanMine - a comprehensive database of human genetic, genomic and proteomic data.",
 		"description": "has label:grants information",
-		"modified": "2012-11-20T12:24:58.020Z",
+		"modified": "2012-11-21T14:33:37.874Z",
 		"public": true,
 		"type": "GrantsHolderDocument",
-		"url": "/funding",
-		"_id": "50abb9846ed1135e18000003"
+		"url": "/funding"
 	},
 	{
-		"body": "InterMine is a data warehouse system developed by the Micklem group and already in use for a number of model organism databases, including for yeast, fruit fly, nematode worm (as part of modENCODE), mouse and rat. As such, InterMine is a good system to use for developing cross-species inter- operability, and indeed this is the aim of the NIH-funded [InterMOD project](/grants/intermod).\r\n\r\nThis grant covers the continuing development of the InterMine framework, as well as the development of HumanMine - an extensive *Homo sapiens* genetics, genomics and proteomics resource built using the InterMine framework. The existence of HumanMine will both provide a new resource for human genetic research, and facilitate easier cross-organism research by creating improved links with model organism data.",
+		"_id": "50abba42c623e00400000004",
+		"body": "InterMine is a data warehouse system developed by the Micklem group and already in use as a data warehouse framework by a number of model organism databases, including yeast (SGD), zebrafish (ZFIN), fly and nematode worm (as part of the [modENCODE project](/funding/modencode)), mouse (MGI) and rat (RGD). As such, InterMine is a good system to use for developing cross-species inter- operability, and indeed this is the aim of the NIH-funded [InterMOD project](/funding/intermod).\r\n\r\nThis grant covers the continuing development of the InterMine framework, as well as the development of HumanMine - an extensive *Homo sapiens* genetics, genomics and proteomics resource built using the InterMine framework. The existence of HumanMine will both provide a new resource for human genetic research, and facilitate easier cross-organism research by creating improved links with model organism data.",
 		"coinvestigators": "",
 		"current": true,
 		"description": "",
 		"funding": "Wellcome Trust",
 		"home": true,
-		"modified": "2012-11-19T14:06:11.193Z",
+		"modified": "2012-11-21T14:38:48.259Z",
 		"pi": "G. Micklem",
 		"public": true,
 		"received": "",
@@ -128,8 +129,7 @@
 		"summaryImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAUCAMAAABYpzQDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjEyOTE5RTdCMTdCQTExRTJCRDU5RTJDNkU0QUMzNEY1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjEyOTE5RTdDMTdCQTExRTJCRDU5RTJDNkU0QUMzNEY1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTI5MTlFNzkxN0JBMTFFMkJENTlFMkM2RTRBQzM0RjUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTI5MTlFN0ExN0JBMTFFMkJENTlFMkM2RTRBQzM0RjUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4cs1/8AAACnVBMVEUddXAid3MfdnEb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",
 		"title": "InterMine and HumanMine: enhancing the biomedical relevance of model organisms and enabling other data mining projects",
 		"type": "GrantDocument",
-		"url": "/funding/intermine-and-humanmine",
-		"_id": "50abb9846ed1135e18000004"
+		"url": "/funding/intermine-and-humanmine"
 	},
 	{
 		"body": "InterMOD is an international consortium composed of the InterMine team and five model organism databases: budding yeast, nematode worm, rat, mouse and zebrafish. The aim of this project is to improve the infrastructure available for cross-species research, in order to facilitate analyses and make tools more widely accessible. It aims to do so by establishing a common framework for the different model organism databases based around the [InterMine system](/grants/intermine-and-humanmine), implementing shared standards, and setting up a series of interoperability links, in order to reduce the time and effort required for performing cross-organism analysis.",
@@ -147,7 +147,7 @@
 		"title": "InterMOD: integrated data and tools to support model organism research",
 		"type": "GrantDocument",
 		"url": "/funding/intermod",
-		"_id": "50abb9846ed1135e18000005"
+		"_id": "50abba42c623e00400000005"
 	},
 	{
 		"body": "[metabolicMine](http://metabolicmine.org) is a data warehouse containing a selection of data from rat, mouse and human relevant to research into common metabolic diseases such as diabetes. The datasets include GWAS, information on disease phenotypes and associations across species, as well as standard genomic data such as gene functions and interactions. metabolicMine also includes all standard InterMine functionality, such as\r\nreport pages, list analysis and flexible querying, with the added special feature of a regions search tool, The project was created with close input from research collaborators, and is hoped that the integrated data combined with the analysis tools will be of utility to the common metabolic research community.",
@@ -165,16 +165,17 @@
 		"title": "The metabolicMine project: integrated data and tools for the Common Metabolic Disease community",
 		"type": "GrantDocument",
 		"url": "/funding/metabolicmine",
-		"_id": "50abb9846ed1135e18000006"
+		"_id": "50abba42c623e00400000006"
 	},
 	{
-		"body": "The modENCODE project is a large-scale international initiative to characterise the functional genomic elements in the model organisms *Drosophila* and *C. elegans* through a series of coordinated high throughput experiments. The role of the Data Coordination Centre (DCC) is to provide data management support in terms of data storage, processing, validation, metadata collection and making the data from the project publicly accessible.\r\n\r\nThe Micklem group created [modMine](http://intermine.modencode.org/), an InterMine based data warehouse for accessing and analysing the modENCODE data. It includes standard InterMine features such as list analysis and flexible query capabilities, as well as modENCODE specific resources, such as a gene interaction browser and a region search tool.",
+		"_id": "50abba42c623e00400000007",
+		"body": "The modENCODE project is a large-scale international initiative to characterise the functional genomic elements in the model organisms *Drosophila* and *C. elegans* through a series of coordinated high throughput experiments. The role of the Data Coordination Centre (DCC) is to provide data management support in terms of data storage, processing, validation, metadata collection and making the data from the project publicly accessible.\r\n\r\nThe Micklem group created [modMine](http://intermine.modencode.org/), an InterMine based data warehouse for accessing and analysing the modENCODE data. It includes standard InterMine features such as list analysis and flexible query capabilities, as well as tools such as a gene interaction browser and a region search tool.",
 		"coinvestigators": "S. Lewis (LBNL, Berkeley), J. Kent (UCSC), G. Micklem (U. Cambridge)",
 		"current": true,
 		"description": "",
 		"funding": "NIH/NHGRI",
 		"home": true,
-		"modified": "2012-11-19T12:53:29.898Z",
+		"modified": "2012-11-21T14:39:22.989Z",
 		"pi": "Lincoln Stein (OICR, Toronto)",
 		"public": true,
 		"received": "",
@@ -182,17 +183,17 @@
 		"summaryImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyCAMAAACJUtIoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFGNkNDNTUzMkU4MDExRTI5OTRDRDk2OTI5OThFM0VCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFGNkNDNTU0MkU4MDExRTI5OTRDRDk2OTI5OThFM0VCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUY2Q0M1NTEyRTgwMTFFMjk5NENEOTY5Mjk5OEUzRUIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUY2Q0M1NTIyRTgwMTFFMjk5NENEOTY5Mjk5OEUzRUIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5mge8XAAABgFBMVEWW5uF1tbFZlpKq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",
 		"title": "modENCODE DCC: A Data Coordination Centre for the model organism ENCODE project",
 		"type": "GrantDocument",
-		"url": "/funding/modencode",
-		"_id": "50abb9846ed1135e18000007"
+		"url": "/funding/modencode"
 	},
 	{
-		"body": "Exploitation of standard genetic parts from a range of organisms in order to design new systems is the basis of the field of synthetic biology. This is a very promising area of research, with the potential for both furthering our understanding of basic biology, and creating genetically engineered biological systems that have practical applications. This grant is aimed at doing a systematic analysis of bacterial genomes for useful genetic components, and creating a data warehouse resource containing this information, available for synthetic biology researchers. The role of the Micklem group within this collaboration is to analyse data from bacterial genomes, and set up SynBioMine - a data warehouse targeted specifically at the synthetic biology research community.",
+		"_id": "50abba42c623e00400000008",
+		"body": "Synthetic biology is an emerging field that seeks to apply engineering principles to the design of biological systems. This is a promising area of research, with the potential for both furthering our understanding of basic biology, and creating genetically engineered biological systems that have practical applications. This grant is aimed at doing a systematic analysis of bacterial genomes for useful genetic components, and creating a data warehouse resource containing this information, available for synthetic biology researchers. The role of the Micklem group within this collaboration is to analyse data from bacterial genomes, and set up SynBioMine - a data warehouse targeted specifically at the synthetic biology research community.",
 		"coinvestigators": "",
 		"current": true,
 		"description": "",
 		"funding": "EPSRC",
 		"home": true,
-		"modified": "2012-11-19T12:53:36.661Z",
+		"modified": "2012-11-21T14:44:07.730Z",
 		"pi": "",
 		"public": true,
 		"received": "Consortium of Imperial College, University of Cambridge, University of Edinburgh, Newcastle University, led by R. Kitney (Imperial College)",
@@ -200,8 +201,7 @@
 		"summaryImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAAAyCAMAAAAeL7e3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjA5N0QxNzQzMkU4MDExRTJCMEM3ODYwQURENkFBOTE4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjA5N0QxNzQ0MkU4MDExRTJCMEM3ODYwQURENkFBOTE4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDk3RDE3NDEyRTgwMTFFMkIwQzc4NjBBREQ2QUE5MTgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDk3RDE3NDIyRTgwMTFFMkIwQzc4NjBBREQ2QUE5MTgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6gJlIIAAABgFBMVEVkoJ1Bi4ez0c/y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",
 		"title": "An infrastructure for platform technology in synthetic biology",
 		"type": "GrantDocument",
-		"url": "/funding/platform-technology-in-synthetic-biology",
-		"_id": "50abb9846ed1135e18000008"
+		"url": "/funding/platform-technology-in-synthetic-biology"
 	},
 	{
 		"body": "Dinoflagellates are ubiquitous marine and freshwater protists. As free-living photosynthetic plankton, they account for ~50% of the primary productivity of oceans and lakes. As photosynthetic symbionts, they provide essential nutrients to corals that are the architects of one of the most productive ecosystems: coral reefs. Dinoflagellates are adapted to a wide variety of environments as reflected by a tremendous diversity in form and nutrition. Additionally, they play important roles as parasites and predators, and form the evolutionary sister group to the apicomplexans that are best known for being human and animal pathogens (e.g. Plasmodium as the agent of malaria).\r\n\r\nThe sequencing of a dinoflagellate genome will not only inform us about the supposedly enormous gene repertoire of dinoflagellates, it will also help us understand the capacities, weaknesses, and evolution of parasitism and mutualism. Furthermore, it will aid in explaining some remarkable features of dinoflagellate biology such as their unique genome structure and gene regulation. Additionally, dinoflagellates are directly associated with coral bleaching, red tides, and paralytic shellfish poisoning. Together these data will help establish an unprecedented perspective on the evolutionary dynamics of this mutualistic relationship and the genes and pathways involved in inter-species communication.",
@@ -219,25 +219,25 @@
 		"title": "Sequencing the genome of the dinoflagellate Symbiodinium, a symbiont of Red Sea corals",
 		"type": "GrantDocument",
 		"url": "/funding/symbiont-of-red-sea-corals",
-		"_id": "50abb9846ed1135e18000009"
+		"_id": "50abba42c623e00400000009"
 	},
 	{
-		"body": "Infection by members of the parasitic protozoan phylum Apicomplexa, such as *Plasmodium* (malaria) and *Toxoplasma* are major causes of morbidity and mortality worldwide. The problem is further compounded by the efficacy of drug treatment waning due to the  emergence of drug resistance in the parasites in questions.\r\n\r\nThe purpose of this grant is to enable the application of genomic and proteomic methods to further our understanding of host-parasite interactions during *Toxoplasma* infection. Specifically, we aim to study the manner in which the parasite controls gene expression for growth and development, and how the parasite disrupts host function through protein secretion. Insights into these mechanisms have the potential to be used for therapy development.",
+		"_id": "50abba42c623e0040000000a",
+		"body": "Infection by members of the parasitic protozoan phylum *Apicomplexa*, such as *Plasmodium* (malaria) and *Toxoplasma* are major causes of morbidity and mortality worldwide. The problem is further compounded by the efficacy of drug treatment waning due to the  emergence of drug resistance in the parasites in questions.\r\n\r\nThe purpose of this grant is to enable the application of genomic and proteomic methods to further our understanding of host-parasite interactions during *Toxoplasma* infection. Specifically, we aim to study the manner in which the parasite controls gene expression for growth and development, and how the parasite disrupts host function through protein secretion. Insights into these mechanisms have the potential to be used for therapy development.",
 		"coinvestigators": "V. Bajic (KAUST), S. Ali (KAUST), K. Lilley (U. Cambridge), G. Micklem (U. Cambridge)",
 		"current": true,
 		"description": "",
 		"funding": "KAUST",
 		"home": true,
-		"modified": "2012-11-19T12:53:48.929Z",
+		"modified": "2012-11-21T14:49:24.829Z",
 		"pi": "J. Ajioka (U. Cambridge) & A. Pain (KAUST)",
 		"public": true,
 		"received": "",
-		"summary": "a study of Toxoplasma parasitic subversion of host functions, using genomic and proteomic methods.",
+		"summary": "a study of *Toxoplasma* parasitic subversion of host functions, using genomic and proteomic methods.",
 		"summaryImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAAyCAMAAAByKeWyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE0MTg3QjczMkU4MDExRTI5RjczOEM4MjkxOUE1NEY5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjE0MTg3Qjc0MkU4MDExRTI5RjczOEM4MjkxOUE1NEY5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MTQxODdCNzEyRTgwMTFFMjlGNzM4QzgyOTE5QTU0RjkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTQxODdCNzIyRTgwMTFFMjlGNzM4QzgyOTE5QTU0RjkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5buXv0AAABgFBMVEVkoJ210tBZmZVF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",
-		"title": "Toxoplasma: Parasitic subversion of host functions",
+		"title": "*Toxoplasma*: Parasitic subversion of host functions",
 		"type": "GrantDocument",
-		"url": "/funding/toxoplasma",
-		"_id": "50abb9846ed1135e1800000a"
+		"url": "/funding/toxoplasma"
 	},
 	{
 		"authors": "Boschetti C, Carr A, Crisp A, Eyres I, Wang-Koh Y, Lubzens E, Barraclough TG, Micklem G, Tunnacliffe A",
@@ -249,7 +249,7 @@
 		"title": "Biochemical Diversification through Foreign Gene Expression in Bdelloid Rotifers",
 		"type": "HomePublicationDocument",
 		"url": "/home/biochemical-diversification-in-bdelloid-rotifers",
-		"_id": "50abb9846ed1135e1800000b"
+		"_id": "50abba42c623e0040000000b"
 	},
 	{
 		"type": "HomePublicationDocument",
@@ -261,7 +261,7 @@
 		"authors": "modENCODE Consortium",
 		"link": "http://www.ncbi.nlm.nih.gov/pubmed/21177974",
 		"modified": "2012-10-19T14:56:07.257Z",
-		"_id": "50abb9846ed1135e1800000c"
+		"_id": "50abba42c623e0040000000c"
 	},
 	{
 		"type": "HomePublicationDocument",
@@ -273,7 +273,7 @@
 		"authors": "Lim WK, Micklem G",
 		"modified": "2012-10-18T16:37:55.870Z",
 		"link": "http://www.ncbi.nlm.nih.gov/pubmed/21766137",
-		"_id": "50abb9846ed1135e1800000d"
+		"_id": "50abba42c623e0040000000d"
 	},
 	{
 		"description": "",
@@ -282,7 +282,7 @@
 		"public": true,
 		"type": "NewsHolderDocument",
 		"url": "/news",
-		"_id": "50abb9846ed1135e1800000e"
+		"_id": "50abba42c623e0040000000e"
 	},
 	{
 		"type": "NewsArchiveHolderDocument",
@@ -290,7 +290,7 @@
 		"url": "/news/archive",
 		"description": "",
 		"modified": "2012-10-29T16:46:25.810Z",
-		"_id": "50abb9846ed1135e1800000f"
+		"_id": "50abba42c623e0040000000f"
 	},
 	{
 		"body": "The InterMine 1.0 beta release is out today, with the official release expected to be out on the 13th July. InterMine 1.0 is a major release, bringing improvements to both the user interface and the web capabilities of InterMine software. More technical details are included in the ReleaseNotes, and there are upgrade instructions with details on how to update your Mine to the new version. Here we present a brief feature spotlight focusing on one of the major features of the new release - widget embedding.\r\n\r\n###Widget embedding\r\n\r\nCreated by popular demand – with just a few lines of code, users can now embed individual results widgets in their own websites.  Whether you want to present your results in an interactive table on your personal website, or you maintain a database and want to systematically retrieve information on a large set of genes – this feature is for you. Check out the documentation for more info, and do have a play with [embedding a widget onto your page](http://intermine.org/wiki/Widgets#a2.3Embeddingminewidgetsonacustompage) now.\r\n\r\nThe interactive embedding allows viewers to select their preferred statistical method and set their own custom enrichment thresholds. Graphical widgets are also supported, so for example, chromosome distribution, interactions and gene expression patterns for a given list of genes can be displayed and explored. To have a play with the code, and the functionality of the embedded widgets, we have created an [example](http://tinkerbin.com/Xb3SZhOK) for you - press ‘Run’ in the lower left corner to get started!",
@@ -301,7 +301,7 @@
 		"title": "InterMine 1.0 - Embeddable Widgets",
 		"type": "NewsDocument",
 		"url": "/news/embeddable-widgets",
-		"_id": "50abb9846ed1135e18000010"
+		"_id": "50abba42c623e00400000010"
 	},
 	{
 		"body": "The InterMine 1.0 official public release is now available! Check out the release notes for more details, and there are also upgrade instructions for updating your InterMine instance to the new version. \r\n\r\nAlongside the [widget embedding capabilities](http://intermine.org/blog/Embeddable%20Widgets), another major feature included in this release are the improved results tables.\r\n\r\n###Query Results\r\n\r\nIn order to improve the usability of our query results, we've made some major changes.\r\n\r\n**Sorting:** the tables are now easily sortable by different fields, making it easier to find and explore relevant information.\r\n\r\n**Filtering:** we’ve added a sophisticated faceted filtering system to all tables, making it easy to get an overview of the results, and narrow them down to the most interesting subset.\r\nThe tables can be filtered by values in any of the chosen fields, and the ‘Filters’ button includes an overview of all applied filters, with an option to add more.\r\n\r\n**Column summary:** the column summary function now includes a graph of the data distribution as well as a numerical summary of the column contents in relation to the original query.\r\n\r\nTo check this feature out for yourselves, run any template in [FlyMine](http://www.flymine.org/query/templates.do), and have a go at exploring and filtering the results!",
@@ -312,7 +312,7 @@
 		"title": "InterMine 1.0 - Query Results",
 		"type": "NewsDocument",
 		"url": "/news/query-results",
-		"_id": "50abb9846ed1135e18000011"
+		"_id": "50abba42c623e00400000011"
 	},
 	{
 		"type": "NewsDocument",
@@ -323,7 +323,7 @@
 		"published": "2012-05-16T23:00:00.000Z",
 		"body": "YeastMine has developed a new iPhone app. See [their site](http://www.yeastgenome.org/take-sgd-with-you-wherever-you-go) for details.",
 		"modified": "2012-11-12T11:37:00.193Z",
-		"_id": "50abb9846ed1135e18000012"
+		"_id": "50abba42c623e00400000012"
 	},
 	{
 		"type": "NewsDocument",
@@ -334,7 +334,7 @@
 		"published": "2012-07-01T23:00:00.000Z",
 		"body": "The InterMine team now has a Twitter feed:\r\n\r\n[https://twitter.com/#!/intermineorg](https://twitter.com/#!/intermineorg)\r\n\r\nFollow us to stay updated on InterMine developments and reports on new\r\nfeatures and resources.",
 		"modified": "2012-11-12T11:35:10.929Z",
-		"_id": "50abb9846ed1135e18000013"
+		"_id": "50abba42c623e00400000013"
 	},
 	{
 		"body": "#List of current staff",
@@ -344,7 +344,7 @@
 		"title": "People",
 		"type": "PeopleHolderDocument",
 		"url": "/people",
-		"_id": "50abb9846ed1135e18000014"
+		"_id": "50abba42c623e00400000014"
 	},
 	{
 		"type": "PersonDocument",
@@ -355,7 +355,7 @@
 		"position": "Postdoc",
 		"body": "",
 		"modified": "2012-11-13T18:04:48.969Z",
-		"_id": "50abb9846ed1135e18000015"
+		"_id": "50abba42c623e00400000015"
 	},
 	{
 		"type": "PersonDocument",
@@ -366,7 +366,7 @@
 		"position": "Developer",
 		"body": "",
 		"modified": "2012-11-13T18:06:15.559Z",
-		"_id": "50abb9846ed1135e18000016"
+		"_id": "50abba42c623e00400000016"
 	},
 	{
 		"type": "PersonDocument",
@@ -377,7 +377,7 @@
 		"position": "Graduate Student (Joint with Professor S. Tavaré)",
 		"body": "",
 		"modified": "2012-11-13T18:08:48.662Z",
-		"_id": "50abb9846ed1135e18000017"
+		"_id": "50abba42c623e00400000017"
 	},
 	{
 		"type": "PersonDocument",
@@ -388,7 +388,7 @@
 		"position": "",
 		"body": "",
 		"modified": "2012-11-13T18:01:42.460Z",
-		"_id": "50abb9846ed1135e18000018"
+		"_id": "50abba42c623e00400000018"
 	},
 	{
 		"type": "PersonDocument",
@@ -399,7 +399,7 @@
 		"position": "Developer",
 		"body": "",
 		"modified": "2012-11-13T18:05:47.681Z",
-		"_id": "50abb9846ed1135e18000019"
+		"_id": "50abba42c623e00400000019"
 	},
 	{
 		"body": "The most important question is: are you using an authenticated encryption mode? If you don’t know what authenticated encryption is, then you’ve probably already made a mistake. Here’s a hint: authenticated encryption has nothing to do with authenticating users into a webapp. It has everything to do with ensuring the integrity of your data hasn’t been compromised, i.e. no one has tampered with the message.\r\n\r\nWhy is authenticated encryption so poorly known despite being so important? I don’t know. Perhaps it’s because the need for it wasn’t formally proven until the year 2000. And chances are you’ve never heard of authenticated encryption at all, because despite the best efforts of the cryptographic community it remains a relatively poorly-known concept.",
@@ -427,7 +427,7 @@
 		"public": true,
 		"type": "PersonDocument",
 		"url": "/people/gos",
-		"_id": "50abb9846ed1135e1800001a"
+		"_id": "50abba42c623e0040000001a"
 	},
 	{
 		"body": "Jelena did her PhD in [Steve Russell’s lab](http://www.gen.cam.ac.uk/research/russell/) at the University of Cambridge, using a mixture of experimental and computational methods to study transcription factor binding and gene expression in the developing *Drosophila* nervous system. She has been with the InterMine team since 2012, and has been involved with a number of projects including modENCODE, metabolicMine and InterMOD. She is interested in understanding the regulatory logic of the genome and its evolution, as well as in applications of that understanding, such as synthetic biology and personalised medicine. She blogs about biology at http://genomicsadventures.wordpress.com/.",
@@ -455,7 +455,7 @@
 		"public": true,
 		"type": "PersonDocument",
 		"url": "/people/jelena",
-		"_id": "50abb9846ed1135e1800001b"
+		"_id": "50abba42c623e0040000001b"
 	},
 	{
 		"type": "PersonDocument",
@@ -466,7 +466,7 @@
 		"position": "Developer",
 		"body": "",
 		"modified": "2012-11-13T18:09:35.951Z",
-		"_id": "50abb9846ed1135e1800001c"
+		"_id": "50abba42c623e0040000001c"
 	},
 	{
 		"type": "PersonDocument",
@@ -477,7 +477,7 @@
 		"position": "Graduate Student (Joint with J. Ajioka, Pathology)",
 		"body": "",
 		"modified": "2012-11-13T18:10:05.039Z",
-		"_id": "50abb9846ed1135e1800001d"
+		"_id": "50abba42c623e0040000001d"
 	},
 	{
 		"type": "PersonDocument",
@@ -488,7 +488,7 @@
 		"position": "Postdoc",
 		"body": "",
 		"modified": "2012-11-13T18:07:04.630Z",
-		"_id": "50abb9846ed1135e1800001e"
+		"_id": "50abba42c623e0040000001e"
 	},
 	{
 		"type": "PersonDocument",
@@ -499,7 +499,7 @@
 		"position": "Postdoc",
 		"body": "",
 		"modified": "2012-11-13T18:07:36.975Z",
-		"_id": "50abb9846ed1135e1800001f"
+		"_id": "50abba42c623e0040000001f"
 	},
 	{
 		"type": "PersonDocument",
@@ -510,7 +510,7 @@
 		"position": "Developer",
 		"body": "",
 		"modified": "2012-11-13T18:09:11.225Z",
-		"_id": "50abb9846ed1135e18000020"
+		"_id": "50abba42c623e00400000020"
 	},
 	{
 		"type": "PersonDocument",
@@ -521,7 +521,7 @@
 		"position": "Developer",
 		"body": "",
 		"modified": "2012-11-13T18:05:18.375Z",
-		"_id": "50abb9846ed1135e18000021"
+		"_id": "50abba42c623e00400000021"
 	},
 	{
 		"type": "PersonDocument",
@@ -532,7 +532,7 @@
 		"position": "Administrator",
 		"body": "",
 		"modified": "2012-11-13T18:06:38.607Z",
-		"_id": "50abb9846ed1135e18000022"
+		"_id": "50abba42c623e00400000022"
 	},
 	{
 		"type": "PersonDocument",
@@ -543,7 +543,7 @@
 		"position": "Graduate Student (Joint with J. Ajioka, Pathology)",
 		"body": "",
 		"modified": "2012-11-13T18:10:38.433Z",
-		"_id": "50abb9846ed1135e18000023"
+		"_id": "50abba42c623e00400000023"
 	},
 	{
 		"type": "PersonDocument",
@@ -554,7 +554,7 @@
 		"position": "Graduate Student (Joint with J. Ajioka, Pathology)",
 		"body": "",
 		"modified": "2012-11-13T18:11:07.404Z",
-		"_id": "50abb9846ed1135e18000024"
+		"_id": "50abba42c623e00400000024"
 	},
 	{
 		"body": "# Projects\r\n\r\nThe Micklem group works in the field of integrative genomics – applying high throughput experimental methods and using bioinformatics analysis tools to solve real world problems. Some of our work focuses on solving data integration problems, developing new tools and providing community resources using our data warehouse system InterMine. As the tools used can be applied to many areas, our research ranges across a number of fields, and includes de novo genome sequencing and annotation to obtain insights into gene function and evolution, genomic studies of parasite action, cancer biology, as well as the application of synthetic biology methods in order to create biological devices.",
@@ -563,14 +563,23 @@
 		"public": true,
 		"type": "ProjectsHolderDocument",
 		"url": "/projects",
-		"_id": "50abb9846ed1135e18000025"
+		"_id": "50abba42c623e00400000025"
 	},
 	{
-		"body": "Bdelloid rotifers are microscopic animals that have apparently survived without sex for millions of years and are able to survive desiccation at all life stages through a process called anhydrobiosis. As such, their genomes contain unique adaptations, some of which are the focus of this project.\r\n\r\nAs part of this project, we investigated copy number and sequence divergence in alpha tubulin. Alpha tubulin is conserved and normally present in low copy numbers in animals, but multiplication of alpha tubulin copies has occurred in animals adapted to extreme environments, such as cold-adapted Antarctic fish. Using cloning and sequencing we compared alpha tubulin copy variation in four species of bdelloid rotifers and four species of monogonont rotifers, which are facultatively sexual and cannot survive desiccation as adults. Results were verified using transcriptome data from one bdelloid species, Adineta ricciae.",
+		"type": "ProjectsArchiveHolderDocument",
+		"public": true,
+		"url": "/projects/archive",
+		"description": "",
+		"modified": "2012-11-21T16:44:23.110Z",
+		"_id": "50ad04e714718c8a20000001"
+	},
+	{
+		"_id": "50abba42c623e00400000026",
+		"body": "Bdelloid rotifers are microscopic animals that have survived without sex for millions of years and are able to survive desiccation at all life stages through a process called anhydrobiosis. As such, their genomes contain unique adaptations, some of which are the focus of this project.\r\n\r\nA large scale transcriptome analysis indicates an extremely high rate of horizontal gene transfer.  Bdelloid rotifers express horizontally acquired genes on a scale unprecedented in animals, and foreign genes make a profound contribution to their metabolism. This represents a potential mechanism for ancient asexuals to adapt rapidly to changing environments and thereby persist over long evolutionary time periods in the absence of sex.",
 		"current": true,
 		"description": "",
 		"home": true,
-		"modified": "2012-11-19T18:04:03.005Z",
+		"modified": "2012-11-21T15:35:11.413Z",
 		"pubAuthors0": "Eyres I, Frangedakis E, Fontaneto D, Herniou DA, Boschetti C, Carr A, Micklem G, Tunnacliffe A, Barraclough TG",
 		"pubAuthors1": "Boschetti C, Carr A, Crisp A, Eyres I, Wang-Koh Y, Lubzens E, Barraclough TG, Micklem G, Tunnacliffe A",
 		"pubAuthors2": "",
@@ -589,17 +598,17 @@
 		"public": true,
 		"summary": "Bdelloid rotifers are microscopic animals that produce asexually and are able to survive dessication. As such, their genomes contain unique adaptations, some of which are the focus of this project.",
 		"summaryImage": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4NkIyM0RFQjJDQzYxMUUyODI0QkY1RTk5MjYxN0E2RiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4NkIyM0RFQzJDQzYxMUUyODI0QkY1RTk5MjYxN0E2RiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg2QjIzREU5MkNDNjExRTI4MjRCRjVFOTkyNjE3QTZGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg2QjIzREVBMkNDNjExRTI4MjRCRjVFOTkyNjE3QTZGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
-		"title": "Bdelloid rotifer genome sequencing",
+		"title": "Bdelloid rotifer genomics",
 		"type": "ProjectDocument",
-		"url": "/projects/bdelloid-rotifer-genome-sequencing",
-		"_id": "50abb9846ed1135e18000026"
+		"url": "/projects/bdelloid-rotifer-genomics"
 	},
 	{
-		"body": "We have created and continue to develop the data warehouse system InterMine, as well as a number of databases running on the system, including FlyMine for the Drosophila community, modMine for modENCODE project data, and metabolicMine for human, rat and mouse metabolic disease data. We are currently in the process of developing HumanMine for a wide range of human genetic data.\r\n\r\nAlongside a number of major model organism databases, we are also part of the InterMOD consortium – an initiative to implement InterMine databases for budding yeast, nematode worm, rat, mouse and zebrafish, as well as creating cross-organism analysis tools to enable users to benefit from there diverse datasets.\r\n\r\nMore information on the InterMine system is available at http://www.intermine.org.\r\nFor details of the current live Mines, see our Resources page.",
+		"_id": "50abba42c623e00400000027",
+		"body": "We have created and continue to develop the data warehouse system InterMine, as well as a number of databases running on the system, including FlyMine for the Drosophila community, modMine for modENCODE project data, and metabolicMine for human, rat and mouse metabolic disease data. We are currently in the process of developing HumanMine for a wide range of human genetic data.\r\n\r\nIn collaboration with a number of major model organism databases, we lead the InterMOD consortium – an initiative to implement InterMine databases for budding yeast, nematode worm, rat, mouse and zebrafish, as well as creating cross-organism analysis tools to enable users to benefit from there diverse datasets.\r\n\r\nMore information on the InterMine system is available at http://www.intermine.org.\r\nFor details of the current available InterMine databases, see our [Resources](/resources) page.",
 		"current": true,
 		"description": "",
 		"home": true,
-		"modified": "2012-11-19T18:07:36.400Z",
+		"modified": "2012-11-21T15:36:30.890Z",
 		"pubAuthors0": "Smith RN, Aleksic J, Butano D, Carr A, Contrino S, Hu F, Lyne M, Lyne R, Kalderimis A, Rutherford K, Stepan R, Sullivan J, Wakeling M, Watkins X, Micklem G",
 		"pubAuthors1": "Contrino S, Smith RN, Butano D, Carr A, Hu F, Lyne R, Rutherford K, Kalderimis A, Sullivan J, Carbon S, Kephart ET, Lloyd P, Stinson EO, Washington NL, Perry MD, Ruzanov P, Zha Z, Lewis SE, Stein LD, Micklem G",
 		"pubAuthors2": "Lyne R, Smith R, Rutherford K, Wakeling M, Varley A, Guillier F, Janssens H, Ji W, Mclaren P, North P, Rana D, Riley T, Sullivan J, Watkins X, Woodbridge M, Lilley K, Russell S, Ashburner M, Mizuguchi K, Micklem G",
@@ -618,45 +627,74 @@
 		"public": true,
 		"summary": "We have created and continue to develop the data warehouse system InterMine, as well as a number of databases running on the system.",
 		"summaryImage": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5NDJGRDFGQjJDQzYxMUUyOTlDQ0M2NEY1MzZFQUEzNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5NDJGRDFGQzJDQzYxMUUyOTlDQ0M2NEY1MzZFQUEzNiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjk0MkZEMUY5MkNDNjExRTI5OUNDQzY0RjUzNkVBQTM2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjk0MkZEMUZBMkNDNjExRTI5OUNDQzY0RjUzNkVBQTM2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
-		"title": "Data integration and management",
+		"title": "Data integration",
 		"type": "ProjectDocument",
-		"url": "/projects/data-integration-and-management",
-		"_id": "50abb9846ed1135e18000027"
+		"url": "/projects/data-integration"
 	},
 	{
-		"body": "We are in the process of sequencing the dinoflagellate (Symbiodinium) and the host Stylophora genomes. As well as providing insight into the symbiotic interactions of this important habitat, this group is also important for studying host-parasite relationships.\r\n\r\nDinoflagellates are ubiquitous marine and freshwater protists. As free-living photosynthetic plankton, they account for ~50% of the primary productivity of oceans and lakes. As photosynthetic symbionts, they provide essential nutrients to corals that are the architects of one of the most productive ecosystems: coral reefs. Dinoflagellates are adapted to a wide variety of environments as reflected by a tremendous diversity in form and nutrition. Additionally, they play important roles as parasites and predators, and form the evolutionary sister group to the apicomplexans that are best known for being human and animal pathogens (e.g. Plasmodium as the agent of malaria).\r\n\r\nThe sequencing of a dinoflagellate genome will not only inform us about the supposedly enormous gene repertoire of dinoflagellates, it will also help us understand the capacities, weaknesses, and evolution of parasitism and mutualism. Furthermore, it will aid in explaining some remarkable features of dinoflagellate biology such as their unique genome structure and gene regulation. Additionally, dinoflagellates are directly associated with coral bleaching, red tides, and paralytic shellfish poisoning. Together these data will help establish an unprecedented perspective on the evolutionary dynamics of this mutualistic relationship and the genes and pathways involved in inter-species communication.",
+		"_id": "50abba42c623e00400000028",
+		"body": "In collaboration with Chris Voolstra, Tim Ravasi and Vladimir Bajic from KAUST, we are in the process of sequencing the dinoflagellate (*Symbiodinium*) and the host *Stylophora* genomes. As well as providing insight into the symbiotic interactions of this important habitat, this group is also important for studying host-parasite relationships.\r\n\r\nDinoflagellates are ubiquitous marine and freshwater protists. As free-living photosynthetic plankton, they account for ~50% of the primary productivity of oceans and lakes. As photosynthetic symbionts, they provide essential nutrients to corals that are the architects of one of the most productive ecosystems: coral reefs. Dinoflagellates are adapted to a wide variety of environments as reflected by a tremendous diversity in form and nutrition. Additionally, they play important roles as parasites and predators, and form the evolutionary sister group to the apicomplexans that are best known for being human and animal pathogens (e.g. *Plasmodium* as the agent of malaria).\r\n\r\nThe sequencing of a dinoflagellate genome will not only inform us about the supposedly enormous gene repertoire of dinoflagellates, it will also help us understand the capacities, weaknesses, and evolution of parasitism and mutualism. Furthermore, it will aid in explaining some remarkable features of dinoflagellate biology such as their unique genome structure and gene regulation. Additionally, dinoflagellates are directly associated with coral bleaching, red tides, and paralytic shellfish poisoning. Together these data will help establish an unprecedented perspective on the evolutionary dynamics of this mutualistic relationship and the genes and pathways involved in inter-species communication.",
 		"current": true,
 		"description": "",
 		"home": true,
-		"modified": "2012-11-12T12:56:48.081Z",
+		"modified": "2012-11-21T14:50:14.935Z",
+		"pubAuthors0": "",
+		"pubAuthors1": "",
+		"pubAuthors2": "",
+		"pubDate0": "",
+		"pubDate1": "",
+		"pubDate2": "",
+		"pubJournal0": "",
+		"pubJournal1": "",
+		"pubJournal2": "",
+		"pubTitle0": "",
+		"pubTitle1": "",
+		"pubTitle2": "",
+		"pubURL0": "",
+		"pubURL1": "",
+		"pubURL2": "",
 		"public": true,
-		"summary": "We are sequencing the dinoflagellate (Symbiodinium) and the host Stylophora genomes, in order to study symbiotic interactions of coral reefs, as well as host-parasite dynamics.",
+		"summary": "We are sequencing the dinoflagellate (*Symbiodinium*) and the host *Stylophora* genomes, in order to study symbiotic interactions of coral reefs, as well as host-parasite dynamics.",
 		"summaryImage": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5RUY5MEIwQjJDQzYxMUUyOUZGN0Y5N0I5NDNBNjZBQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5RUY5MEIwQzJDQzYxMUUyOUZGN0Y5N0I5NDNBNjZBQyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjlFRjkwQjA5MkNDNjExRTI5RkY3Rjk3Qjk0M0E2NkFDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjlFRjkwQjBBMkNDNjExRTI5RkY3Rjk3Qjk0M0E2NkFDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
-		"title": "Genetics of coral reefs",
+		"title": "Genomics of coral reefs",
 		"type": "ProjectDocument",
-		"url": "/projects/genetics-of-coral-reefs",
-		"_id": "50abb9846ed1135e18000028"
+		"url": "/projects/genomics-of-coral-reefs"
 	},
 	{
-		"body": "Exploitation of standard genetic parts from a range of organisms in order to design new systems is the basis of the field of synthetic biology. This is a very promising area of research, with the potential for both furthering our understanding of basic biology, and creating genetically engineered biological systems that have practical applications. We are currently undertaking a systematic analysis of bacterial genomes for useful genetic components, and creating a data warehouse resource containing this information, targeted specifically at the synthetic biology research community.\r\n\r\nAs a lab, we also regularly support Cambridge University iGEM teams. We are also in the process of establishing a synthetic biology forum and running Cambridge based symposia, as part of [Cambridge BioDesign](http://www.cambridgebiodesign.org/).",
+		"_id": "50abba42c623e00400000029",
+		"body": "Synthetic biology is an emerging field that seeks to apply engineering principles to the design of biological systems. This is a promising area of research, with the potential for both furthering our understanding of basic biology, and creating genetically engineered biological systems that have practical applications. As part of the EPSRC funded [Flowers Consortium](http://www.epsrc.ac.uk/newsevents/news/2012/Pages/syntheticbiology.aspx) led by Imperial College, we are currently undertaking a systematic analysis of bacterial genomes for useful genetic components, and creating a data warehouse resource containing this information, targeted specifically at the synthetic biology research community. Further to this, in collaboration with the Ajioka Lab, we are investigating the use of aptamers as molecular recognition probes. \r\n\r\nWe have supported Cambridge University iGEM teams every year since 2005. We have also established a synthetic biology forum and run Cambridge based symposia, as part of [Cambridge BioDesign](http://www.cambridgebiodesign.org/).",
 		"current": true,
 		"description": "",
 		"home": true,
-		"modified": "2012-11-12T12:56:55.001Z",
+		"modified": "2012-11-21T15:52:00.099Z",
+		"pubAuthors0": "",
+		"pubAuthors1": "",
+		"pubAuthors2": "",
+		"pubDate0": "",
+		"pubDate1": "",
+		"pubDate2": "",
+		"pubJournal0": "",
+		"pubJournal1": "",
+		"pubJournal2": "",
+		"pubTitle0": "",
+		"pubTitle1": "",
+		"pubTitle2": "",
+		"pubURL0": "",
+		"pubURL1": "",
+		"pubURL2": "",
 		"public": true,
 		"summary": "We are developing a data warehouse for the exploitation of standard genetic parts from a range of organisms. We also support Cambridge iGEM teams, and are establishing a Cambridge synthetic biology forum.",
 		"summaryImage": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBOTYzOTg1QjJDQzYxMUUyOTQ3RkE4OEVERjk0REYxRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBOTYzOTg1QzJDQzYxMUUyOTQ3RkE4OEVERjk0REYxRCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkE5NjM5ODU5MkNDNjExRTI5NDdGQTg4RURGOTRERjFEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkE5NjM5ODVBMkNDNjExRTI5NDdGQTg4RURGOTRERjFEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
 		"title": "Synthetic biology",
 		"type": "ProjectDocument",
-		"url": "/projects/synthetic-biology",
-		"_id": "50abb9846ed1135e18000029"
+		"url": "/projects/synthetic-biology"
 	},
 	{
 		"body": "MicroRNA (miRNA) dysregulation has been associated with numerous cancers including breast cancer. The dysregulation of miRNAs in cancer has been shown to perturb various pathways, with oncogenic effects. Within this project, we have been investigating the relationship between dysregulated miRNAs and pathways involved in breast cancer by integrating miRNA and mRNA expression data.\r\n\r\nFrom a list of dysregulated miRNAs, we started by selecting the subset that appear to be regulating genes differentially expressed in breast cancer vs. normal tissue. Individually and as a group, this subset was found to target several canonical oncogenic pathways including the p53 signalling pathway, MAPK signalling pathway, TGFβ signalling pathway, focal adhesion and cell cycle progression. These results suggest that the dysregulation of miRNAs in breast cancer not only results in widespread changes to gene expression, but also the dysregulation of key oncogenic pathways.",
-		"current": true,
+		"current": false,
 		"description": "",
 		"home": true,
-		"modified": "2012-11-19T18:09:03.797Z",
+		"modified": "2012-11-21T16:44:47.590Z",
 		"pubAuthors0": "Lim WK, Micklem G",
 		"pubAuthors1": "",
 		"pubAuthors2": "",
@@ -678,21 +716,36 @@
 		"title": "The role of miRNAs in breast cancer development",
 		"type": "ProjectDocument",
 		"url": "/projects/the-role-of-mirnas-in-breast-cancer-development",
-		"_id": "50abb9846ed1135e1800002a"
+		"_id": "50abba42c623e0040000002a"
 	},
 	{
+		"_id": "50abba42c623e0040000002b",
 		"body": "Infection by members of the parasitic protozoan phylum Apicomplexa, such as *Plasmodium* (malaria) and *Toxoplasma* are major causes of morbidity and mortality worldwide. The problem is further compounded by the efficacy of drug treatment waning due to the emergence of drug resistance in the parasites in questions.\r\n\r\nThis project uses genomic and proteomic methods to further our understanding of host-parasite interactions during *Toxoplasma* infection. Specifically, we aim to study the manner in which the parasite controls gene expression for growth and development, and how the parasite disrupts host function through protein secretion. Insights into these mechanisms have the potential to be used for therapy development.",
 		"current": true,
 		"description": "",
 		"home": true,
-		"modified": "2012-11-12T12:57:07.881Z",
+		"modified": "2012-11-21T14:45:51.013Z",
+		"pubAuthors0": "",
+		"pubAuthors1": "",
+		"pubAuthors2": "",
+		"pubDate0": "",
+		"pubDate1": "",
+		"pubDate2": "",
+		"pubJournal0": "",
+		"pubJournal1": "",
+		"pubJournal2": "",
+		"pubTitle0": "",
+		"pubTitle1": "",
+		"pubTitle2": "",
+		"pubURL0": "",
+		"pubURL1": "",
+		"pubURL2": "",
 		"public": true,
-		"summary": "Infection by *Toxoplasma* are a cause of morbidity and mortality worldwide. This project focuses on the genomics and proteomics of *Toxoplasma* infection, and the changes it brings about in the host, with a focus on potential therapy targets.",
+		"summary": "Infection by *Toxoplasma* are a cause of morbidity and mortality worldwide. This project, in collaboration with Jim Ajioka in Pathology and Arnab Pain at KAUST, focuses on the genomics and proteomics of *Toxoplasma* infection, and the changes it brings about in the host, with a focus on potential therapy targets.",
 		"summaryImage": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCRkM5QTU1QjJDQzYxMUUyQjM1N0NDQ0I5MjNGMTExMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCRkM5QTU1QzJDQzYxMUUyQjM1N0NDQ0I5MjNGMTExMiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkJGQzlBNTU5MkNDNjExRTJCMzU3Q0NDQjkyM0YxMTEyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkJGQzlBNTVBMkNDNjExRTJCMzU3Q0NDQjkyM0YxMTEyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAWQBYAwERAAIRAQMRAf/EAIoAAAEFAQEBAAAAAAAAAAAAAAIAAQUGBwMECAEAAwEBAQAAAAAAAAAAAAAAAAECAwQFEAABAwMDAgQDBQQLAAAAAAABEQIDACEEEgUGMUFRIhMHYXGBkTJCIxTwUmIkocHR4XKydBUlNggRAQEAAgICAwEBAQAAAAAAAAABEQIhAzESQVEEYRMz/9oADAMBAAIRAxEAPwD6le0EgqvwprlBGXaVDUuiHpQe0N53SOL2oAPKVt9lB8ScDY0nq76UJtE5RYde1IoHW5rbhT8LUzxmhdE1zXNIBjeDqB7r1oP2YpvW4+4ft/zdmS6Z24cMzH6YoHyLpZbyNUHRI1SbWIFacV2Sa9k/rbMeWOaGOaMrHKwPYf4XAEVnXFtMXDqAB9aSS6fWgODfK03JVSVPjTaXkbHhzRouEse1BWfZ3AkBTbuKCh0UXpFkzyWsJaFcBZqotMTmha6UtaXt0uKamqClCrIIAKo69/CglX5xxnN5GzDwAYosGKUTzTOJMgcAWhrGoh8rjVa3Dfp3mst+Xs5ByXB41tsLnwvlJHp4+PGLnQ3u4+UAClJlOvXd7VBi/wDQ20Ye7swt+wX4cExAbkwH1vSun5zRdPi1aq6Ndvy/Vaxj5OPk40eTjyNlgmaJIpGlWua4KCD4EVnhyWWXDm57BL6ek6v6LqlU0kuMk+WLGhdLPK2KFqlz3kNaPmSlIvN4HBkY2TAyeB7ZYZAscjCrSPEEUJssuK60kubwXWIBANNc4ePcOQbJtYH+57hj4mpA0TyNjJUoLEijBzrt8Q03INjgi9eXcMdkZQAmViHwS60/Wj/LbxhB7r7i7Ri5TMbEx590lkeYv5QNeNQ6gXU/SnNG2v57jm4WRzY8jGb60SMkaCYJQCQoVCLhRSZS4vCp53tJwnN3ibdX4QblTN0yMaUiNuuhEX5U/dpP0WLFsG1N2ra8fA1D8kFrA0nSikgNXwFK3KOzf2uY9r2AOLxG0yOQarKQPj8KSZf6xP3G50Z+WzbMjv02MWx4zC9IpXi0hIHUhxQCtdZw7enTGrYeP4gxNjwMZNGiBit8CQpH2ms9vLj7bnapBwPYdalnDIPDrTCie5PtjHzCBv6bPft2exPzQC5jh0uAQQUHUGqm2HT193rOfCtZ3sXnxbE3GwN9158UehuRlsHptY0IEDfN07uJqvdpP0T6ZxjblyzjeDNhYG4nddww3ujfnY7A1kTX+VYdYBP+JLVTfGW1+00e5zcdG57vkyTblkI3IY8khhaPun43vUbOb9F8RedRaF6hfKlQ5sZdGmy0k0Jka0AvsB3NNXr9Mn2L2/wc3n2Vueez9S6B5lYSxGgPX8SI6/StbcR39m/rrlrViFAB8KxecTnBrSSelAkycEkA9FoKm9NoJcLE9aDy8m64r8zbsnDjm9B88boxMApbqCKlOL0uLlCbDwHZtqEb09edn43Dy/PT4261V3a7/ot8LHHDHGwsjY1jSSSGhASeptU5YXa3kQaVHYCgWn1AFPspFgibXC0xhxieywVSSSLdlp1ptKeef0IJZi1zhC1z9DGq4hoVGjufCkmTNR/Hd7bvW2M3FuPPiNlt+nyWGOVhbYgtNOzC+zT1uEq09gOlSypybgJQIAFb/G/zFNRFyEAd6CwL60iP5FXv40DkDwVFutM4F7ri6XuelByEIiuprr9loyd2dUNqTPJrpQZeYNsaAWpbd6YwEsU36UHkmtDXILAhaBacIlrXoAIwdRaenVCV6mg7fl0KonWkl5ZHymH8uJsshcFjJQItypB6CqayTPnD1N7p9tJlUZyHku18f26XP3GTRDE0uc1qF5aOpAJC0TXK9Oq7eEBxD3b4RyuYwbZmuZk6tDYMhhic49tJu0r86d1sXt0bazK5+U36pUsQOCnp0vTOUQBSkRIPmRQCcWqB40CQwabE2TtTPIiBakQTYqO/WmcM1xuO37y0CxDb5w/jm/yMdvGG3MdG3Q0SE6S1VQtBSnNsNNe26zhUt99keNy/zGw/8TlMOprI19Jz+xKeZpsiiqm7XT9N+Vy4xFvEey48W7kOz4lZK8EHUGlGuJHUkVOzLtszwl7IpqWJgHE/LtQZ0CrQQXWcLfWmcM5xX4fKg5BAaWgdaReVa5lyVmxYMWZLM2CIOJk1hQ8J9zxv/Der1jp6euXOUfk+6XGWRYn6OT9dJlCM+jAQS0PIABPRb9KfoqfnueVxj0oZEDS9C4IhVEvUVzbfQySf2vQlwyc/Cw2g5WRHjseUa6Z7Waj4DUQtGFTW3wPHzMTKi9THmZPH01xuDgvzatGCutjv16UklagAdq1BP7qaopHEvcbbeWcq3PbNuD2xbKolkOkiVxcY1spaFBQVVmI6N9PTX+1ebGocqI5LxnY+R7VJtm7Y4ycSX8Klrmn95rhdpqpcNdN7reFS4r7M8X45nRy40uRkRwuD8fHyHse0EXBs1pt8aq7N9u+3XhoQDe3zvUOUg0Ak9DQMs09xvaXdeb5+NNkb2MXHw3uONFHFdjHJ3W7lHWrm0jp07tdZjCW417eZ2wblBlY+8yTwIW5eNIwBrwltKfG96V2Lfvm0ssXgVDlMoSgGTtQbP/bnj8PHd+33ALQyad7chhRA9pc7zDx+9Wm3MdfffbWWNACms3IbtTM34hQBP/soKH7mgG/F9P66ATKBRUiMOgoBDrQEXL/2aD/TP/zCq+G0/wCdStSxf//Z",
 		"title": "Toxoplasma: parasitic subversion of host function",
 		"type": "ProjectDocument",
-		"url": "/projects/toxoplasma-parasitic-subversion-of-host-function",
-		"_id": "50abb9846ed1135e1800002b"
+		"url": "/projects/toxoplasma-parasitic-subversion-of-host-function"
 	},
 	{
 		"cache": {
@@ -1266,7 +1319,7 @@
 		"public": true,
 		"type": "PublicationsHolderDocument",
 		"url": "/publications",
-		"_id": "50abb9846ed1135e1800002c"
+		"_id": "50abba42c623e0040000002c"
 	},
 	{
 		"type": "ResourcesHolderDocument",
@@ -1274,19 +1327,19 @@
 		"url": "/resources",
 		"description": "",
 		"modified": "2012-11-12T16:23:28.955Z",
-		"_id": "50abb9846ed1135e1800002d"
+		"_id": "50abba42c623e0040000002d"
 	},
 	{
+		"_id": "50abba42c623e0040000002e",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyRkQ0MUQ0RDJDRjAxMUUyOUI3MEU0MkNEM0EyRkQzNyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyRkQ0MUQ0RTJDRjAxMUUyOUI3MEU0MkNEM0EyRkQzNyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjJGRDQxRDRCMkNGMDExRTI5QjcwRTQyQ0QzQTJGRDM3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjJGRDQxRDRDMkNGMDExRTI5QjcwRTQyQ0QzQTJGRDM3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAMAAxAwERAAIRAQMRAf/EAIQAAAMAAwEBAAAAAAAAAAAAAAAFBwIGCAQBAQEBAQEBAQEAAAAAAAAAAAAABAMFAQIGEAACAgECBAQEBQUAAAAAAAABAgMEBQARITESBkETFAdRYXEikaFScoKxQmIjCBEAAgEEAQQBBQAAAAAAAAAAAAECETEDBBIhQVEFQnGRIlJi/9oADAMBAAIRAxEAPwDqnQBoDF26VJHE8tvnoCPUP+jsDJ3pcwt6sauJjnNapmOvqVnQ9DNMm32IzD7WBOw56qeq+NVcqWrJxqiwxSrIgZTuDx3HHnqUlMtAGgDQBoDX+7Wv0ayZigQxrOgv1m4JLVZwsh+TxA+YrfIjkdAcZTY2WHI2q8w/2QzyxyA/qVyp/Ma7isfpMUVRHTHsF3Jav9svirbmSXEusMTsdya8gJiB/YVZfptrm7UKSr5OV7DCozqvkVXUpAGgPjEhSQOogcFHj+OgPFRzeMuzSV4J19XAdp6jHpmjP+UZ+4D4HkfDQEz7t7q7iizeRx7zgUwzQ+kaNDG0LryYEbnqU/HV2PDFxRbjxRcUT7uLtepl5rWXx6eRlD1T3aA4xzBRvJJBvxVwB1Mh334kHw1vF8enYv18vGkXYfe0OTGEGQnWrPes3Gr1aVGsoMks20km27FURVRSzOxAA1Ptuxn7S0V9S34yTMyx+bkooKzMNxWhdpivyaUhAT9F1Ecc92gJ37x+5GT7KwsFjHUPVWLcpgWxLv6eAheoGTpIJLf2LuN9jx1vgxKb6m+DFzdDny77o985m7Hbv2a0s0QKxMadY9Ck79Ks0bMB/LV61sfg6sNLH3RtuA7rTMwR08w0NO/AoSncVRFBJHzEU23BGBP2Py8DtwOvnhwtY8nq8F+FvBtUPVSeqkPpm64mM5Uwz2ZrEpdErwgF+gAbbsNtgSSeWppuTl/JJwySn4iu/Yd+3WY7P7dxkla3kI1tQnzr9rpbyEMjpAqrNtsQCygnlufhrHNk5My3dhZZ1VlYqoYMAQdweRGsiQNxoBfmsLQy9GaldgSzWsKUmglHUjr8CP6HmPDXsZNOqPYyadURTOf88eTZaXA3RHATuKlwM3T8lmQMSP3Lv89Ww3P2R1MXsV8l9hdJ7TZXFY+zkcrdq1qVONpZ5E82ZulfBUCL1MeQG/E69e1Eofs8asmUPtX2xoVsQ08kUsORt13US2Qokr+ahXhGhKq4DcfuJ8N9TZMzkQbG9PIqWiIu1u1/UCTHeknhqJKYM7Fka/lvZ2HCJE3kikgZTwKsfieO2vIOKi63JoOKi63KXU7N7ZgsG4mNgS3IQ0jqu27fHbl+WsjIc+VF+hfwGgMtABAPPQC7NYpMlWhquoMIsQTTKeTLBIJQD/JBoBjoBJUxZrd3ZC5Eu1e/UrmYeHnwNIgb6mNlB+g0A70AaA//2Q==",
 		"link": "http://flymine.org",
-		"modified": "2012-11-19T17:40:14.402Z",
+		"modified": "2012-11-21T15:49:28.398Z",
 		"public": false,
-		"summary": "A data warehouse of integrated fruit fly and other insect genetic, genomic and proteomic data. It provides access to integrated data at a number of different levels, from simple browsing to construction of complex queries, which can be executed on either single items or lists. The datasets range from gene and protein annotations to pathways, homology, interactions, a range of ontologies, gene expression, regulation and diseases among others.",
+		"summary": "A data warehouse of integrated fruit fly and other insect genetic, genomic and proteomic data, developed by the Micklem Lab using the InterMine data warehouse framework. It provides access to integrated data at a number of different levels, from simple browsing to construction of complex queries, which can be executed on either single items or lists. The datasets range from gene and protein annotations to pathways, homology, interactions, a range of ontologies, gene expression, regulation and diseases among others.",
 		"title": "FlyMine",
 		"type": "ResourceDocument",
-		"url": "/resources/flymine",
-		"_id": "50abb9846ed1135e1800002e"
+		"url": "/resources/flymine"
 	},
 	{
 		"description": "",
@@ -1298,7 +1351,7 @@
 		"title": "InterMine",
 		"type": "ResourceDocument",
 		"url": "/resources/intermine",
-		"_id": "50abb9846ed1135e1800002f"
+		"_id": "50abba42c623e0040000002f"
 	},
 	{
 		"description": "",
@@ -1310,78 +1363,78 @@
 		"title": "metabolicMine",
 		"type": "ResourceDocument",
 		"url": "/resources/metabolicmine",
-		"_id": "50abb9846ed1135e18000030"
+		"_id": "50abba42c623e00400000030"
 	},
 	{
+		"_id": "50abba42c623e00400000031",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OTk1ODk4MzMyNzExMUUyQkMyMzkxQTRCMTE3Q0Y4OCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OTk1ODk4NDMyNzExMUUyQkMyMzkxQTRCMTE3Q0Y4OCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OTU4OTgxMzI3MTExRTJCQzIzOTFBNEIxMTdDRjg4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OTU4OTgyMzI3MTExRTJCQzIzOTFBNEIxMTdDRjg4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
 		"link": "http://mitominer.mrc-mbu.cam.ac.uk",
-		"modified": "2012-11-19T17:50:46.145Z",
+		"modified": "2012-11-21T15:50:31.702Z",
 		"public": false,
-		"summary": "A data warehouse of mitochondrial proteomics data for a range of organisms, developed at the MRC Mitochondrial Biology Unit based on the InterMine framework. The purpose of this data warehouse is to facilitate storage and analysis of mitochondrial proteomics data gathered from publications of mass spectrometry and green fluorescent protein tagging studies. In MitoMiner, these data are integrated with data from UniProt, Gene Ontology, Online Mendelian Inheritance in Man, HomoloGene, Kyoto Encyclopaedia of Genes and Genomes and PubMed.",
+		"summary": "A data warehouse of mitochondrial proteomics data for a range of organisms, developed by Alan Robinson's group at the MRC Mitochondrial Biology Unit based on the InterMine framework. The purpose of this data warehouse is to facilitate storage and analysis of mitochondrial proteomics data gathered from publications of mass spectrometry and green fluorescent protein tagging studies. In MitoMiner, these data are integrated with data from UniProt, Gene Ontology, Online Mendelian Inheritance in Man, HomoloGene, Kyoto Encyclopaedia of Genes and Genomes and PubMed.",
 		"title": "mitoMiner",
 		"type": "ResourceDocument",
-		"url": "/resources/mitominer",
-		"_id": "50abb9846ed1135e18000031"
+		"url": "/resources/mitominer"
 	},
 	{
+		"_id": "50abba42c623e00400000032",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxMUI1NzEyRDJDRjAxMUUyQUM4NTg4NUJDNzI5MDkyQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxMUI1NzEyRTJDRjAxMUUyQUM4NTg4NUJDNzI5MDkyQiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjExQjU3MTJCMkNGMDExRTJBQzg1ODg1QkM3MjkwOTJCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjExQjU3MTJDMkNGMDExRTJBQzg1ODg1QkM3MjkwOTJCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAMQAxAwERAAIRAQMRAf/EAI8AAAICAwEBAAAAAAAAAAAAAAMEAgUAAQYIBwEBAQEBAQEAAAAAAAAAAAAAAAIDBQEEEAACAgAFAgMEBgoDAAAAAAABAgMEABESBQYhMUEiE1EjFBVxgZGhMgdhwdFSktIzU5MkVFUWEQACAgAFAwQCAwAAAAAAAAAAARECIUESAxMxkQVRgUIEcRQiUpL/2gAMAwEAAhEDEQA/APgUmwy+o3Vu58T7cAP7NwezuhuMLMdSGjB8TZmsOVUR61j8uWebanHTAFlP+U+8I3owW61y2RFItWvKXdopzlHIOg6eJ9gwBBfyv3CY6qV6tbrxMUu2Y5SI65Az1SEj8By8reJwALe+Ax7btG1Xoby3TuTWQzQsTGogZVUZdGDebzA4ApPkMvtb7TgCx+Qye1vtOAO3fbautunifA4APVjirQXIEUFLsIglJBzCh1k6fpzXAD1bdrFW4tyuFjsJBHWRwp6LF0B+k+OADRbzFWV4qNCCtVsHVfrKrFLHQ5I+Zz0LnmoHY4AU3Sepdp0qUVSKpUoGUwpGGLMZyGcux7ny4ArfltX2fccAPfLq3s+7AHqlOQQy8os7LBssbw05I4rN5pa6ZGSIS5rC3vGyDAdBgAO0cy2LcaEVkbb6EjXmoT15Fj1RMpYCRj2KMqZgjAG6XI3utDarcZkl2WxJoi3BTCWKE6RL8P8A1NGf3dcARn5TFlbtUePG7s9F3js7ihhTrCSJzHE3ncRlSOnfLpgCFjl1dZ7UlTj5ubTSjims7hE0GYjlT1CVhPvG0r4DADFTklS7ySfaamzxS1K5h17iZa6gieETKUhPvGADAdsAdP8AA0v+PH/Av7MAcunDbEfNLe++lQsRW5YpRLNCTbhEUIiyilz6ds8ALn8vJhJs8qXFD0pHG5LoOi1XLO6L36PGZPK3szwA5tWx8u22OttcG4Vm2mq40WHiY2mrg5iI+bRry6a8vqwAE8W5LVrXtp2y7XTaL0kzrJNG7WIBZYvMqkMFbzO2gnt454AG3DeQVmvU9qv1622XooYWkkjZ7KJHH6TlTqVNTDqCRln4YA3tvA227lc26QwUJaknwwhklhLXIVrwCHSkufjpzwB2eAPKc2z8zYVHp27l0XIfiMoZpj6YZyoV8279MY89cZcQa8NsIUgTtvNfl8N0WbhE9hqiQCab1fUTvmurtj3mrMSecVomCDbdztbTVSdwMyBXdVmlICscg2YbLLHvNSJkcVpiC5HEOVneq21jfH/2KpufFevP6aKDkUbrnq64z/Zrpkv9e0wVs2z809dYqdq7d8gd3jknAUsWAU6iP3cVz1zcE8NskKLX5o1GW8JL/wALAWEshmlGRU5N01Z+U98Xy1mJxJ47RMYAvnG8f9ha/wA8n82LIGJuVWTQjpKWVYhEuakDMQyGQduvjjmL6e7yOzstL1YR6qF2Oi/t7fGqqr1KMfw8TY5bYFgT6pNa2ZLC9Rl75dDfXljG3jt5106/gl7pzPubV+/tK06Pm37NdPYFZ5LZkry145ZhG0axJ1C5KH1kZL4YrY8fuVtW1rdG21i8oXUne+9t2ratVkkngs5fQJ/6qXVqzlLBlybV1EYUAr9ox878Ruv55PvOD7G68pt/0zXaMV3BScikaNVUyrk8THz/ANok/rxpt+L3E23bKy/1BnfyNGklXOr7SSk5LI8T5GRZcpEQgggrKczmT1+nEbfidyt09U1/jOLy9Mir+TpajWmLYxgsyu6Y7xxST/jb6TgDWAMwBmAMwBmAG8Af/9k=",
 		"link": "http://intermine.modencode.org/",
-		"modified": "2012-11-19T17:40:47.642Z",
+		"modified": "2012-11-21T15:39:00.794Z",
 		"public": false,
-		"summary": "the modENCODE project data warehouse. The aim of the modENCODE project was to characterise functional elements in the genomes of the model organisms *Drosophila* and *C. elegans*. modMine provides users with access to tools for data browsing and basic analysis, and a range of datasets generated by modENCODE can be downloaded from there. These include a wide range of genomics experiments such as ChIP-seq and gene expression profiling, as well as studies focusing on gene and chromatin structure, replication and copy number variation.",
+		"summary": "the modENCODE project data warehouse, developed by the Micklem Lab as part of the [modENCODE Data Coordination Centre](/funding/modencode). The aim of the modENCODE project was to characterise functional elements in the genomes of the model organisms *Drosophila* and *C. elegans*. modMine provides users with access to tools for data browsing and basic analysis, and a range of datasets generated by modENCODE can be downloaded from there. These include a wide range of genomics experiments such as ChIP-seq and gene expression profiling, as well as studies focusing on gene and chromatin structure, replication and copy number variation.",
 		"title": "modMine",
 		"type": "ResourceDocument",
-		"url": "/resources/modmine",
-		"_id": "50abb9846ed1135e18000032"
+		"url": "/resources/modmine"
 	},
 	{
+		"_id": "50abba42c623e00400000033",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTdCQzBDRDJDRjAxMUUyQkUyOEE1RTQwQ0QwQkE1MyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTdCQzBDRTJDRjAxMUUyQkUyOEE1RTQwQ0QwQkE1MyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5N0JDMENCMkNGMDExRTJCRTI4QTVFNDBDRDBCQTUzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5N0JDMENDMkNGMDExRTJCRTI4QTVFNDBDRDBCQTUzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
 		"link": "http://beta.mousemine.org",
-		"modified": "2012-11-19T17:42:27.963Z",
+		"modified": "2012-11-21T15:39:50.798Z",
 		"public": false,
-		"summary": "An integrated data warehouse of mouse genomic data. This data warehouse has been developed by the model organism database MGI, as part of the InterMOD project – an initiative to set up interoperability links between datasets from a number of major model organisms, including nematode worm, budding yeast, fruit fly, rat, mouse, zebrafish and human.",
+		"summary": "An integrated data warehouse of mouse genomic data. This data warehouse has been developed by Joel Richardson's group at the mouse model organism database MGI, as part of the InterMOD project – an initiative to set up interoperability links between datasets from a number of major model organisms, including nematode worm, budding yeast, fruit fly, rat, mouse, zebrafish and human.",
 		"title": "MouseMine Beta",
 		"type": "ResourceDocument",
-		"url": "/resources/mousemine",
-		"_id": "50abb9846ed1135e18000033"
+		"url": "/resources/mousemine"
 	},
 	{
+		"_id": "50abba42c623e00400000034",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMEQ1OTIxRDJDRjAxMUUyQTcxQUYyREJCQjYzOUMwOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMEQ1OTIxRTJDRjAxMUUyQTcxQUYyREJCQjYzOUMwOCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjAwRDU5MjFCMkNGMDExRTJBNzFBRjJEQkJCNjM5QzA4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjAwRDU5MjFDMkNGMDExRTJBNzFBRjJEQkJCNjM5QzA4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgALgAxAwERAAIRAQMRAf/EAIoAAAICAgMAAAAAAAAAAAAAAAUGBAcAAwECCAEAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBhAAAgECBAUCBAMJAAAAAAAAAQIDEQQAIRIFMUETFAYiFVFhMgdxgULwobFSYoIjMxYRAAICAQIFBAMBAAAAAAAAAAABAgMRITFBURIEBWFxgTLw8QYi/9oADAMBAAIRAxEAPwD1TiEF/dfJRGxhsiGIyaY5iv8ASOf44Wtvxog0a+YK9xv3BbUZWJUUc1rQ5ZcMsDjbPdM1t6BCw3DdHaR5loAPqU8SMHjZJg2Gra9DjTLRX5EcDXLBU8mcEvFmTMQgF8m3IwW62sTUnn+qhoVQcT+fDAL54WOYWuPERId1spbgxpMiSBtKrKdAPzB/Y4QUkxuVEks40N5vbeJke9vxbI76YIo0eaWVv5UjTM4Tp71XWyqq1cd3w/PklkOiKcuIX2byDaHMkcF6rpGdMivG8MkTfCWOT1AGnHB5eSXb2Rru069nw/Pn3AqlzjmPA32XkMVzfRrbUe2kJrKa1b4Mvyy54fV2ZYWxcu2ahl7jXbSiSIGtSOJPHDmcirNuIUJPk0zHepwc+msaoOQBWv8AE4Rvf+hmv6le3+xxW17JcXAEtpNUohJBz/Sx+A5HHn/L9zZRX1VrVvfkdbt7VOPSQrjym78e3e1324jW4spbaTbZ7VM5IzJIkolhqCp+jSwamX4UwP8AlboRU4c9ci3ka5PDR2Hk8vkG+XG9bdF2+22tr7fDHNRZ53MhmMswUaAAfSgWuROL/q7oSjCHrknjq5Jtj34ldJcWEqJFoisyugoPT665f20w34HvLb6m7F9Xo+f6K75KLST3HPapy8gUNVQpqAajlj0db0wc57BXGwZWHke8WsnlU0SyVinCRxycAZFWlAedTwxz7nmY3COIg+9VZoow4rpJDDnlx/dgEkno9gsRI2l/LbCxup9wmt0uu7l7M22rT2lR0i2lk9XEcMIWeL7dvMY49mFjdPZsJxWnkO87da3q30PWF5D3iypJJWzz6qqCzaZSQACeGN1eJ7b7STl7szO+xPCePgs61ex23bZkhCx26JqOo0oK1BdjxoMq47MIqMcRWEJvLepu8L3zb78PLHcRsalaah+pqJQ0AOog0wShppkshhDfgwAoz7rbNF4gTvrbhPfXO5XdLKydUCQ0DO4QL6mIWmnLKh+OE7aUtt2dGi3q0aSSBf29s/K9y8Yn3qSCSTazM627yD/LpSpedWqOpET6cl4ioqM8CnQ8ZRJ2x6sHMuts2cESsTq5BRwI+eARWgTiH/FYgElj1CSAxJLA4+rqMur1flkMMVRWMAbNxog2e/8AI7U2tvP2O1RErLeKiyPcOCyskatVQI3XNmBrwpzw0oZQs5dLzxJFn9sI7O5ga33m7SzgkMiWRWEpUur1yQeoMuTUyGXzxaqSNPuG+CHenzwUXAnl/wDyHtE3/U9r7d0ptXd6fo6TdXp19erpaq6M6YplrPAmbD7P7Dt/tGn2ftouw0109voHTpq9VNFOOIvQks513Kt+49j4bNFcSbfuK216pbVAkczRM1B/raNGVc/h6a1wndGDe+GPUSmsaZBf24sYNE6X240t41BMsaStJJD0/piHTXQNPPM8afEXTGKe+S+6lJ8MF2bZ7d7fb+29LsNA7boU6ejlp05Uw4c9knEIZiEP/9k=",
 		"link": "http://ratmine.mcw.edu/ratmine/begin.do",
-		"modified": "2012-11-19T17:41:08.929Z",
+		"modified": "2012-11-21T15:40:53.539Z",
 		"public": false,
-		"summary": "An integrated data warehouse of rat genomic data. This data warehouse has been developed by the model organism database RGD, as part of the InterMOD project – an initiative to set up interoperability links between datasets from a number of major model organisms, including nematode worm, budding yeast, fruit fly, rat, mouse, zebrafish and human.",
+		"summary": "An integrated data warehouse of rat genomic data. This data warehouse has been developed first by Simon Twigger's group, and now by Liz Worthey's group at the model organism database RGD. It is part of the InterMOD project – an initiative to set up interoperability links between datasets from a number of major model organisms, including nematode worm, budding yeast, fruit fly, rat, mouse, zebrafish and human.",
 		"title": "RatMine",
 		"type": "ResourceDocument",
-		"url": "/resources/ratmine",
-		"_id": "50abb9846ed1135e18000034"
+		"url": "/resources/ratmine"
 	},
 	{
+		"_id": "50abba42c623e00400000035",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGOEI0NTRCRDJDRUYxMUUyOTI3RTg0MUY2QjcwNzM5QSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGOEI0NTRCRTJDRUYxMUUyOTI3RTg0MUY2QjcwNzM5QSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkY4QjQ1NEJCMkNFRjExRTI5MjdFODQxRjZCNzA3MzlBIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY4QjQ1NEJDMkNFRjExRTI5MjdFODQxRjZCNzA3MzlBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAMQAxAwERAAIRAQMRAf/EAIsAAAIDAQEBAAAAAAAAAAAAAAAFBAYHAggDAQEAAwEBAQAAAAAAAAAAAAAAAwQFAgEGEAACAgEDAgUDAwUAAAAAAAABAgMEBQAREiEGMUEiEwdRMhRhIxVxkUIzFhEAAgIBAwMCBAUFAQAAAAAAAQIAEQMhMRJRYQRBE3EyQgWBocHhIvCR8VJigv/aAAwDAQACEQMRAD8A9HHIYn9u/lbUFflK0VSOaVY0VlPhsxAaX07/AFHl578lgNTJRjY6KCZ8sZ352pkstPiaV5ZbdbmJPS6xlon4SKkjAI7I33BSdOYuoOFgnP6dtxJeatYmfE3IbBNqF4ZFlr1zyldeB5KoU+O2+vHAIIMhuIcJ3Tg8pha9ynkEWWZ468UIb2BDMdvQ6EDkeuzdCCeg1xhK8aFabjpI8p47midtf6uPos9SXOrg5bcL5M1hZaqvSQIDxL7En0sfDXXMcuMkBjXUk9hpEzP5c7Fx95P+plglvDFwt+TiInSIWIzvyZXZSUlG/wBw23A20TCrtTbHTt8ZOnmPiW0+ZTYPr8L6HpGXxhTxMXY8VKGGtXtU2lW9XFgXhXsknlzmJbdttiw31PmwDE1Ly4/STuR1lceQcts1cvWtpVfgEyWDmbs87Wp539oZDqI5+LMxZdwuzbsSQPIjWf42Swwo6N8x+r9hLPmY6ZTY1X5Rsv7n1kf46xNu33pyklrZCvi2khuCVT+RFJXdhFMOb+4Gkk3ZvSV/odVPt6hGdQvEX8x3Y+plLzcAfLjcqGIvX/TpXcy3yNRy3ylT3hq2P4mCaWterANPFKB7MsFl+QIH7m6qFI+uxGp/eDZuAYaC69fxM95gtVy+6uySGkTmWKOWJ4pVDxSKVdGG6srDYgg+IOkTz3XlPYM2cwFTI1lNw/j18MKTo6w+8qNaeUlUnk/Fb0gP6j9OO2tEt7vH+Nnrep7fATPzt7SsSwUdxoO8U9s9yzdlxzS0bJgvW7HBMZYrzNDJW58YrKyMUjR3Tr49FPXfWO3IZmvQE0q9ANzLXkZSvjI2MHLkrU7ci23wAAmifHBt1+7ctF/Hblt7LzGYyyoLCCRQzgcHErKWDcvP6aplVXy9AzMRv9Kjp+Jknh5HfxwXX2zexNk97k74jgsTZPuPLWKr4qzYsiO7h2MjJFZG8jyIX3H7nudeHQ6k8UN7jk8R2G//AKPWR47s3U0rV+TQ0iGkTFfnWxksRm8LmIr0lehHIJBRjRZ3tXV9EarER9hjJR/Vt1HTz1q/bArEoQLIqz9PeZ3nsQBRA9dZG+Wc+coaP4EMvtYivHLl6TxcfxRdVCpkYEgPEvRlI2G/11j+UrqrFCOQ0B/Wd5DhyZUxZVf29zxsAV1I/tJNLG/z3ZuJzfb+FCZ7HSLVZ0tyQezFAjcZFb0I52YdCDxDEddtZpZs2IjE38wQC3w3M0sXjjAApFLVqLs0drMsHwbbeXBXY5LRnk92Od4pZVnnhM8QYq8qpHzXcboW3Pjrr7blGQOVUKnLTqa3JkIxFGIIoaH/ADNK1pzqGkQ0iZb821nsQ1IY5LMU00NhI5KcH5DKA0TF5OoZFjIDBl89WfHIBs1+MzvuBYcSvK/+a/MnYTP/AI9tJie0s5m0wzZR6Dfgxz2JWliuBpvVwAQt0kVWXl0P6E67+7ZdnsMzDUBdug03lLxwoLsrM9aUfl66Aesu3xhYzlZnFq0tLAAEJimieNoWmDStsZkjkIR2PI7n+3XWJiLhhqFStvWzPoMWfnhBdT7h37Rd8bYnubtvM2LcFerPg5ZhXu5E+9XksRKpZZ44nXY+15/48d9jqr42NlylwWKilA9NTZI7Cc4cgZCNbB3P6Ta45I5Y1kjYPG4DI6kEEHwII1sxOtIhpEW57BVMzRatY3U9eEillI3GxB4ld1YHYjXo0nGROQqU/s3syriajUqEUz3oZiJsxP7kI2Eh9MUbHdwqqFHTiw89SliN9pHgxlVo1fYUI6ztnM28eGTGNYryMzLTEhillRFJCS8l4qHPUry8Btv121XyJYkrg1OAvctXAY56WMQZ2cw17EMs3uV6it/ulOxHJVVftTqTsP11yikDXf8AKdITQ5Rj2/222HlssL9i1FOQYq8pAihHiREigBQSfDwHlqSekx1pPIaRDSIaRDSIaRDSIaRP/9k=",
 		"link": "http://targetmine.nibio.go.jp/",
-		"modified": "2012-11-19T17:43:25.807Z",
+		"modified": "2012-11-21T15:50:04.212Z",
 		"public": false,
-		"summary": "A data warehouse for candidate gene prioritisation and drug target discovery. This data warehouse has been developed at NIBIO, Japan, in order to facilitate a more efficient prioritisation of candidate genes for further exploration in biomedical studies, based on an integrated data approach. TargetMine utilises the InterMine framework, with new data models such as protein-DNA interactions integrated in a novel way. It enables complicated searches that are difficult to perform with existing tools and it also offers integration of custom annotations and in-house experimental data.",
+		"summary": "A data warehouse for candidate gene prioritisation and drug target discovery. This data warehouse has been developed by Kenji Mizuguchi's lab at NIBIO, Japan, in order to facilitate a more efficient prioritisation of candidate genes for further exploration in biomedical studies, based on an integrated data approach. TargetMine utilises the InterMine framework, with new data models such as protein-DNA interactions integrated in a novel way. It enables complicated searches that are difficult to perform with existing tools and it also offers integration of custom annotations and in-house experimental data.",
 		"title": "TargetMine",
 		"type": "ResourceDocument",
-		"url": "/resources/targetmine",
-		"_id": "50abb9846ed1135e18000035"
+		"url": "/resources/targetmine"
 	},
 	{
+		"_id": "50abba42c623e00400000036",
 		"description": "",
 		"image": "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFRUQxRDYzRDJDRUYxMUUyQkUwMkQxRjMwNUQ4RUI1QyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFRUQxRDYzRTJDRUYxMUUyQkUwMkQxRjMwNUQ4RUI1QyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkVFRDFENjNCMkNFRjExRTJCRTAyRDFGMzA1RDhFQjVDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkVFRDFENjNDMkNFRjExRTJCRTAyRDFGMzA1RDhFQjVDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggL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",
 		"link": "http://yeastmine.yeastgenome.org/yeastmine/begin.do",
-		"modified": "2012-11-19T17:41:58.123Z",
+		"modified": "2012-11-21T15:41:20.521Z",
 		"public": false,
-		"summary": "An integrated data warehouse of yeast genomic data. This data warehouse has been developed by the model organism database SGD, as part of the InterMOD project – an initiative to set up interoperability links between datasets from a number of major model organisms, including nematode worm, budding yeast, fruit fly, rat, mouse, zebrafish and human. YeastMine is also available as an iPhone app, [Yeast Genome](https://itunes.apple.com/us/app/yeastgenome/id520868597?mt=8).",
+		"summary": "An integrated data warehouse of yeast genomic data. This data warehouse has been developed by Mike Cherry's group at the model organism database SGD, as part of the InterMOD project – an initiative to set up interoperability links between datasets from a number of major model organisms, including nematode worm, budding yeast, fruit fly, rat, mouse, zebrafish and human. YeastMine is also available as an iPhone app, [Yeast Genome](https://itunes.apple.com/us/app/yeastgenome/id520868597?mt=8).",
 		"title": "YeastMine",
 		"type": "ResourceDocument",
-		"url": "/resources/yeastmine",
-		"_id": "50abb9846ed1135e18000036"
+		"url": "/resources/yeastmine"
 	}
 ]

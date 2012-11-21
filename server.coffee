@@ -16,7 +16,7 @@ config = JSON.parse fs.readFileSync './config.json'
 # Resolve config coming from environment and the config file.
 config.mongodb        = process.env.DATABASE_URL or config.mongodb    # MongoDB database
 config.port           = process.env.PORT or config.port               # port number
-config.env            = process.env.NODE_ENV or 'default'             # environment
+config.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
 config.browserid     ?= {}
 config.browserid.salt = process.env.API_SALT or config.browserid.salt # API key salt
 
@@ -97,7 +97,7 @@ app.use
     attach: (options) ->
         app.db = (done) ->
             collection = (done) ->
-                db.collection config.env or 'documents', (err, coll) ->
+                db.collection config.env, (err, coll) ->
                     throw err if err
                     done coll
 
