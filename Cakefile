@@ -6,8 +6,6 @@ eco = require 'eco'
 Q   = require 'q'
 require 'colors'
 
-blad = require('./server.coffee')
-
 task "compile", "compile API server and admin client code", ->
     
     server = ->
@@ -73,6 +71,8 @@ task "compile", "compile API server and admin client code", ->
         process.exit(0)
 
 task "export", "export the database into a JSON file", ->
+    blad = require('./server.coffee')
+
     blad.app.db (collection) ->
         # Dump the DB.
         collection.find({}, 'sort': 'url').toArray (err, docs) ->
@@ -88,6 +88,8 @@ task "export", "export the database into a JSON file", ->
                 console.log "Dumped #{docs.length} documents".yellow
 
 task "import", "clears all! and imports the database from a JSON file", ->
+    blad = require('./server.coffee')
+    
     blad.app.db (collection) ->
         # Clear all
         collection.remove {}, (err) ->
