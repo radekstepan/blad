@@ -40,6 +40,9 @@ header#top h2 {
   font-weight: 200;
   font-size: 24px;
 }
+header#top h2 a {
+  color: #fff;
+}
 header#top h2:before {
   content: "|";
   display: inline-block;
