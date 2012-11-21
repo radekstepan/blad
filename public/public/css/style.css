@@ -59,11 +59,10 @@ header#top nav {
 }
 header#top nav ul {
   list-style-type: none;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 10px;
 }
 header#top nav ul li {
   display: inline-block;
-  margin: 9px 10px;
   font-family: "Lato";
   font-size: 16px;
 }
@@ -71,20 +70,18 @@ header#top nav ul li:not(:last-child):after {
   content: "|";
   display: inline-block;
   color: #395b69;
-  margin-left: 22px;
 }
 header#top nav ul li.active {
   font-weight: 800;
 }
 header#top nav ul li a {
   color: #fff;
-  line-height: 25px;
-  height: 25px;
   display: inline-block;
+  padding: 9px 22px;
 }
 header#top nav ul li a.people {
-  background: url("../img/mini-flags.png") no-repeat top right;
-  padding-right: 46px;
+  background: url("../img/mini-flags.png") no-repeat 86px 11px;
+  padding-right: 68px;
 }
 header#top nav a.contact {
   font-family: "Lato";
