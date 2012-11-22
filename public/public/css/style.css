@@ -49,10 +49,6 @@ header#top h2:before {
   font-weight: 800;
   margin-right: 6px;
 }
-header#top h2 span {
-  font-style: italic;
-  margin-right: 2px;
-}
 header#top nav {
   background: #334d4b;
   position: relative;
