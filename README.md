@@ -190,6 +190,8 @@ Represented by a `template.eco` file.
 
 This file is populated with a context coming from the presenter. In the above Markdown example, we have passed only the `html` key - value forward.
 
+If a `/src/site/layout.eco` file is found, it will be used as a wrapping template around individual templates. The key `page` populated with the individual template is passed to it.
+
 ## Caching
 
 Sometimes new data may be fetched from within the Presenter and one would like to cache these for say a day. The following shows a workflow from within the Presneter's `render()` function.

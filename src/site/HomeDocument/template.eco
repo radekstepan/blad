@@ -1,178 +1,121 @@
-<!doctype html>
-<head>
-    <meta charset="utf-8" />
-
-    <title>Micklem Lab | University of Cambridge</title>
-
-    <link rel="stylesheet" href="/public/css/foundation3.css">
-    <link rel="stylesheet" href="/public/css/style.css">
-</head>
-<body>
-    <!-- head menu -->
-    <header id="top">
-        <div class="row">
-            <h1>Micklem Lab</h1>
-            <h2><a target="_blank" href="http://www.cam.ac.uk/">University <span>of</span> Cambridge</a></h2>
-            <nav>
-                <ul>
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li><a href="/resources">Resources</a></li>
-                    <li><a href="/publications">Publications</a></li>
-                    <li><a href="/news">News</a></li>
-                    <li><a class="people" href="/people">People</a></li>
-                </ul>
-                <a class="contact" href="/contact">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- callout hero banner -->
+<!-- head menu -->
+<header id="top">
     <div class="row">
-        <div id="splash" class="dark twelve columns">
-            <img class="right" src="/public/img/splashes/balloon.jpg" />
-            <h1><%= @splashTitle %></h1>
-            <h2><%= @splashSubtitle %></h2>
-        </div>
+        <h1>Micklem Lab</h1>
+        <h2><a target="_blank" href="http://www.cam.ac.uk/">University <span>of</span> Cambridge</a></h2>
+        <nav>
+            <ul>
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="/publications">Publications</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a class="people" href="/people">People</a></li>
+            </ul>
+            <a class="contact" href="/contact">Contact</a>
+        </nav>
     </div>
+</header>
 
-    <div class="row">
-        <!-- welcome -->
-        <article id="welcome" class="main six columns">
-            <h1><%= @welcomeTitle %></h1>
-            <img src="<%- @welcomeImage %>" />
-            <%- @welcomeText %>
-        </article>
+<!-- callout hero banner -->
+<div class="row">
+    <div id="splash" class="dark twelve columns">
+        <img class="right" src="/public/img/splashes/balloon.jpg" />
+        <h1><%= @splashTitle %></h1>
+        <h2><%= @splashSubtitle %></h2>
+    </div>
+</div>
 
-        <!-- projects -->
-        <article id="projects" class="callout rouge six columns">
-            <h1>Projects</h1>
+<div class="row">
+    <!-- welcome -->
+    <article id="welcome" class="main six columns">
+        <h1><%= @welcomeTitle %></h1>
+        <img src="<%- @welcomeImage %>" />
+        <%- @welcomeText %>
+    </article>
+
+    <!-- projects -->
+    <article id="projects" class="callout rouge six columns">
+        <h1>Projects</h1>
+
+        <ul>
+            <% for project in @sub.ProjectDocument[0...2]: %>
+                <li>
+                    <div class="row">
+                        <div class="nine columns">
+                            <h2><a href="<%= project.url %>"><%= project.title %></a></h2>
+                            <%- project.summary %>
+                        </div>
+                        <div class="three columns">
+                            <img src="<%- project.summaryImage %>" />
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+
+        <h4>For more details and a complete list, see <a href="/projects">Projects</a>.</h4>
+    </article>
+</div>
+
+<div class="row">
+    <!-- publications -->
+    <article id="projects" class="callout bismark six columns">
+        <h1>Selected publications</h1>
+
+        <ul>
+            <% for publication in @publications: %>
+                <li>
+                    <h2><a href="<%= publication.link %>"><%= publication.title %></a></h2>
+                    <h3><%= publication.journal %> (<%= publication.published %>)</h3>
+                    <p><%= publication.authors %></p>
+                </li>
+            <% end %>
+            <li>
+                <p>For a full list, see <a href="/publications">Publications</a>.</p>
+            </li>
+        </ul>
+    </article>
+
+    <div class="six columns">
+        <!-- grants -->
+        <article id="grants" class="callout patina">
+            <h1>Funding</h1>
 
             <ul>
-                <% for project in @sub.ProjectDocument[0...2]: %>
+                <% for grant in @sub.GrantDocument[0...2]: %>
                     <li>
                         <div class="row">
                             <div class="nine columns">
-                                <h2><a href="<%= project.url %>"><%= project.title %></a></h2>
-                                <%- project.summary %>
+                                <h2><a href="<%= grant.url %>"><%= grant.title %></a></h2>
+                                <%- grant.summary %>
                             </div>
                             <div class="three columns">
-                                <img src="<%- project.summaryImage %>" />
+                                <img src="<%- grant.summaryImage %>" />
                             </div>
                         </div>
                     </li>
                 <% end %>
             </ul>
 
-            <h4>For more details and a complete list, see <a href="/projects">Projects</a>.</h4>
+            <h4>For more details and a complete list, see <a href="/funding">Funding</a>.</h4>
         </article>
-    </div>
 
-    <div class="row">
-        <!-- publications -->
-        <article id="projects" class="callout bismark six columns">
-            <h1>Selected publications</h1>
+        <!-- news -->
+        <% if @tweet: %>
+        <article id="news" class="callout shakespeare">
+            <h1>Latest news from the team</h1>
 
             <ul>
-                <% for publication in @publications: %>
-                    <li>
-                        <h2><a href="<%= publication.link %>"><%= publication.title %></a></h2>
-                        <h3><%= publication.journal %> (<%= publication.published %>)</h3>
-                        <p><%= publication.authors %></p>
-                    </li>
-                <% end %>
                 <li>
-                    <p>For a full list, see <a href="/publications">Publications</a>.</p>
+                    <h2><a target="_blank" href="http://twitter.com/intermineorg/statuses/<%= @tweet.id_str %>"><%= @tweet.text %></a></h2>
+                    <p><%= @tweet.ago %></p>
+                </li>
+                <li>
+                    <p>For more news visit our <a href="/news">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</p>
                 </li>
             </ul>
         </article>
-
-        <div class="six columns">
-            <!-- grants -->
-            <article id="grants" class="callout patina">
-                <h1>Funding</h1>
-
-                <ul>
-                    <% for grant in @sub.GrantDocument[0...2]: %>
-                        <li>
-                            <div class="row">
-                                <div class="nine columns">
-                                    <h2><a href="<%= grant.url %>"><%= grant.title %></a></h2>
-                                    <%- grant.summary %>
-                                </div>
-                                <div class="three columns">
-                                    <img src="<%- grant.summaryImage %>" />
-                                </div>
-                            </div>
-                        </li>
-                    <% end %>
-                </ul>
-
-                <h4>For more details and a complete list, see <a href="/funding">Funding</a>.</h4>
-            </article>
-
-            <!-- news -->
-            <% if @tweet: %>
-            <article id="news" class="callout shakespeare">
-                <h1>Latest news from the team</h1>
-
-                <ul>
-                    <li>
-                        <h2><a target="_blank" href="http://twitter.com/intermineorg/statuses/<%= @tweet.id_str %>"><%= @tweet.text %></a></h2>
-                        <p><%= @tweet.ago %></p>
-                    </li>
-                    <li>
-                        <p>For more news visit our <a href="/news">Blog</a> or <a target="_blank" href="http://twitter.com/intermineorg/">@intermineorg</a> Twitter page.</p>
-                    </li>
-                </ul>
-            </article>
-            <% end %>
-        </div>
+        <% end %>
     </div>
-
-    <!-- footer links -->
-    <footer class="row">
-        <div class="twelve columns">
-            <ul>
-                <li>
-                    <a target="_blank" href="http://www.cam.ac.uk/"><img src="/public/img/logo-cam.png" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.gen.cam.ac.uk/"><img src="/public/img/logo-genetics.png" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.sysbiol.cam.ac.uk/"><img src="/public/img/logo-csbc.png" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.ccbi.cam.ac.uk/"><img src="/public/img/logo-ccbi.png" /></a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-
-    <!-- footer funding -->
-    <footer class="row">
-        <div class="twelve columns">
-            <p>Work at Micklem Lab is funded by:</p>
-            <ul>
-                <li>
-                    <a target="_blank" href="http://www.epsrc.ac.uk/"><img src="/public/img/grants-color/epsrc.jpg" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.kaust.edu.sa/"><img src="/public/img/grants-color/kaust.jpg" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.genome.gov/"><img src="/public/img/grants-color/nhgri.jpg" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.nih.gov/"><img src="/public/img/grants-color/nih.jpg" /></a>
-                </li>
-                <li>
-                    <a target="_blank" href="http://www.wellcome.ac.uk/"><img src="/public/img/grants-color/wellcome.jpg" /></a>
-                </li>
-            </ul>
-            <p>&copy; 2012, Micklem Lab</p>
-        </div>
-    </footer>
-</body>
-</html>
+</div>

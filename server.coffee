@@ -408,10 +408,11 @@ Blað.get = ->
                                     @res.writeHead 500
                                     @res.write err.message
                                 else
-                                    @res.writeHead 200, "content-type": "text/html"
-                                    @res.write html
-                                
-                                @res.end()
+                                    # Do we have a layout template to render to?
+                                    app.eco 'layout', 'page': html, (err, layout) =>
+                                        @res.writeHead 200, "content-type": "text/html"
+                                        @res.write if err then html else layout
+                                        @res.end()
                         else
                             # Render as is, JSON.
                             @res.writeHead 200, "content-type": "application/json"
