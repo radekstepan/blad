@@ -6,6 +6,18 @@
 
     <link rel="stylesheet" href="/public/css/foundation3.css">
     <link rel="stylesheet" href="/public/css/style.css">
+
+    <script src="/public/js/jquery-1.8.3.min.js"></script>
+    <script>
+    $(function() {
+        // For all links on the page that are not relative, open them in new window.
+        $('a[target!="_blank"]').each(function(i, el) {
+            if (~(el = $(el)).attr('href').indexOf('://')) {
+                el.attr('target', '_blank');
+            }
+        });
+    });
+    </script>
 </head>
 <body>
     <!-- page template goes here -->
