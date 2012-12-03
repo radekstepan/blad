@@ -25,30 +25,6 @@ $ npm start
 
 Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin) and modify port number as appropriate.
 
-### Stopping
-
-We use the fabulous module [forever](https://github.com/nodejitsu/forever) to automatically restart the service if it fails. This is useful as we cannot automatically handle all asynchronous exceptions that happen in the app. To list all running processes, execute:
-
-```bash
-$ node_modules/.bin/forever list
-```
-
-To **stop** the service, execute:
-
-```bash
-$ node_modules/.bin/forever stop 0
-```
-
-You can read more about the process in [this guide](http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever).
-
-### Debugging
-
-If you want to see all the message from the server when dealing with requests and do not want to auto-restart the app on an exception, use:
-
-```bash
-$ ./node_modules/.bin/cake compile ; node server.js
-```
-
 ## Export/import a database
 
 ```bash

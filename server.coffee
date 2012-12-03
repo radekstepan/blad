@@ -9,6 +9,7 @@ crypto   = require 'crypto'
 urlib    = require 'url'
 fs       = require 'fs'
 eco      = require 'eco'
+domain   = require 'domain' # experimental!
 
 # Read the config file.
 config = JSON.parse fs.readFileSync './config.json'
@@ -397,27 +398,51 @@ Blað.get = ->
                 app.log.info 'Serving document ' + new String(record._id).blue if config.env isnt 'test'
 
                 # Do we have this type?
-                if Blað.types[record.type]?
-                    presenter = new Blað.types[record.type](record)
-                    # Give us the data.
-                    presenter.render (context, template=true) =>
-                        if template
-                            # Render as HTML using template.
-                            app.eco "#{record.type}/template", context, (err, html) =>
-                                if err
-                                    @res.writeHead 500
-                                    @res.write err.message
-                                else
-                                    # Do we have a layout template to render to?
-                                    app.eco 'layout', 'page': html, (err, layout) =>
-                                        @res.writeHead 200, "content-type": "text/html"
-                                        @res.write if err then html else layout
-                                        @res.end()
-                        else
-                            # Render as is, JSON.
-                            @res.writeHead 200, "content-type": "application/json"
-                            @res.write JSON.stringify context
-                            @res.end()
+                if Blað.types[record.type]?                    
+                    # Create a new domain for the 'untrusted' presenter.
+                    doom = domain.create()
+
+                    # Handle this doom like this.
+                    doom.on 'error', (err) =>
+                        # Say what?
+                        app.log.info err.message.red if config.env isnt 'test'
+                        
+                        # Can we grace?
+                        try
+                            @res.writeHead 500
+                            @res.end 'Error occurred, sorry.'
+                            @res.on 'close', ->
+                                # Forcibly shut down any other things added to this domain.
+                                doom.dispose()
+
+                        catch err                            
+                            # Tried our best. Clean up anything remaining.
+                            doom.dispose()
+
+                    # Finally execute the presenter in the domain context.
+                    doom.run =>
+                        # Init new type.
+                        presenter = new Blað.types[record.type](record)
+
+                        # Give us the data.
+                        presenter.render (context, template=true) =>
+                            if template
+                                # Render as HTML using template.
+                                app.eco "#{record.type}/template", context, (err, html) =>
+                                    if err
+                                        @res.writeHead 500
+                                        @res.write err.message
+                                    else
+                                        # Do we have a layout template to render to?
+                                        app.eco 'layout', 'page': html, (err, layout) =>
+                                            @res.writeHead 200, "content-type": "text/html"
+                                            @res.write if err then html else layout
+                                            @res.end()
+                            else
+                                # Render as is, JSON.
+                                @res.writeHead 200, "content-type": "application/json"
+                                @res.write JSON.stringify context
+                                @res.end()
                 else
                     @res.writeHead 500
                     @res.write 'Non existent document type'
