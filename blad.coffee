@@ -7,18 +7,24 @@ request  = require 'request'
 crypto   = require 'crypto'
 urlib    = require 'url'
 fs       = require 'fs'
-cs       = require 'coffee-script'
 eco      = require 'eco'
 Q        = require 'q'
 domain   = require 'domain' # experimental!
 winston  = require 'winston'
 
+# The config once set.
+CONFIG = {}
+# The MongoDB connection once set.
+DB = null
+# Path to the site source code will be here.
+SITE_PATH = null
+# blað in da house.
+blað = 'types': {}
+
 # Internal flatiron app.
 service = flatiron.app
 
-# The config once set.
-config = {}
-
+# HTTP plugins.
 service.use flatiron.plugins.http,
     'before': [
         # Have a nice favicon.
@@ -35,7 +41,7 @@ service.use flatiron.plugins.http,
                     res.end()
                 else
                     # Is the key valid?
-                    if req.headers['x-blad-apikey'] in config.browserid.hashes
+                    if req.headers['x-blad-apikey'] in CONFIG.browserid.hashes
                         next()
                     else
                         res.writeHead 403
@@ -52,13 +58,12 @@ service.use flatiron.plugins.http,
             # Go Union!
             union.errorHandler err, req, res
 
-# -------------------------------------------------------------------
-# Eco templating.
+# Eco templating plugin.
 service.use
-    name: "eco-templating"
+    name: 'eco-templating'
     attach: (options) ->
         service.eco = (path, data, cb) ->
-            fs.readFile "./src/site/#{path}.eco", "utf8", (err, template) ->
+            fs.readFile "#{SITE_PATH}/src/types/#{path}.eco", "utf8", (err, template) ->
                 if err then cb err, null
                 else
                     try
@@ -66,42 +71,35 @@ service.use
                     catch e
                         cb e, null
 
-# Start MongoDB.
-db = null
-# Add a collection plugin.
+# MongoDB collection plugin.
 service.use
-    name: "mongodb"
+    name: 'mongodb'
     attach: (options) ->
         service.db = (done) ->
             collection = (done) ->
-                db.collection config.env, (err, coll) ->
+                DB.collection CONFIG.env, (err, coll) ->
                     throw err if err
                     done coll
 
-            unless db?
-                mongodb.Db.connect config.mongodb, (err, connection) ->
-                    winston.info "Connected to #{config.mongodb}"
-                    db = connection
+            unless DB?
+                winston.debug 'Connect to MongoDB'
+
+                mongodb.Db.connect CONFIG.mongodb, (err, connection) ->
                     throw err if err
+                    winston.info 'Connected to ' + CONFIG.mongodb.bold
+                    DB = connection
                     collection done
             else
                 collection done
 
-# Map all existing public documents.
-service.db (collection) ->
-    collection.find('public': true).toArray (err, docs) ->
-        throw err if err
-        for doc in docs
-            winston.info "Mapping url " + doc.url
-            service.router.path doc.url, Blað.get
-
 # -------------------------------------------------------------------
+
 # BrowserID auth.
 service.router.path "/auth", ->
     @post ->
         # Authenticate.
         request.post
-            'url': config.browserid.provider
+            'url': CONFIG.browserid.provider
             'form':
                 'assertion': @req.body.assertion
                 'audience':  "http://#{@req.headers.host}"
@@ -112,13 +110,13 @@ service.router.path "/auth", ->
             
             if body.status is 'okay'
                 # Authorize.
-                if body.email in config.browserid.users
+                if body.email in CONFIG.browserid.users
                     winston.info "Identity verified for #{body.email}"
                     # Create API Key from email and salt for the client.
                     @res.writeHead 200, 'application/json'
                     @res.write JSON.stringify
                         'email': body.email
-                        'key':   crypto.createHash('md5').update(body.email + config.browserid.salt).digest('hex')
+                        'key':   crypto.createHash('md5').update(body.email + CONFIG.browserid.salt).digest('hex')
                 else
                     winston.warning "#{body.email} tried to access the API"
                     @res.writeHead 403, 'application/json'
@@ -126,17 +124,18 @@ service.router.path "/auth", ->
                         'message': "Your email #{body.email} is not authorized to access the service"
             else
                 # Pass on the authentication error response to the client.
-                service.log.info body.message.red if config.env isnt 'test'
+                winston.error body.message
                 @res.writeHead 403, 'application/json'
                 @res.write JSON.stringify body
             
             @res.end()
 
 # -------------------------------------------------------------------
+
 # Sitemap.xml
 service.router.path "/sitemap.xml", ->
     @get ->
-        service.log.info "Get sitemap.xml" if config.env isnt 'test'
+        winston.info 'Get sitemap.xml'
 
         # Give me all public documents.
         service.db (collection) =>
@@ -153,6 +152,7 @@ service.router.path "/sitemap.xml", ->
                 @res.end()
 
 # -------------------------------------------------------------------
+
 # Get all documents.
 service.router.path "/api/documents", ->
     @get ->
@@ -164,6 +164,8 @@ service.router.path "/api/documents", ->
                 @res.writeHead 200, "content-type": "application/json"
                 @res.write JSON.stringify docs
                 @res.end()
+
+# -------------------------------------------------------------------
 
 # Get/update/create a document.
 service.router.path "/api/document", ->
@@ -217,7 +219,7 @@ service.router.path "/api/document", ->
             cb = => @res.writeHead 201, "content-type": "application/json"
 
         # One command to save/update and optionaly unmap.
-        Blað.save doc, (err, reply) =>
+        blað.save doc, (err, reply) =>
             if err
                 winston.error 'I am different...'
 
@@ -228,8 +230,8 @@ service.router.path "/api/document", ->
             else
                 if doc.public
                     # Map a document to a public URL.
-                    winston.info "Mapping url #{reply}"
-                    service.router.path reply, Blað.get
+                    winston.info 'Mapping url ' + reply.underline
+                    service.router.path reply, blað.get
 
                 # Stringify the new document so Backbone can see what has changed.
                 service.db (collection) =>
@@ -279,7 +281,7 @@ service.router.path "/api/document", ->
                     # Did this doc actually exist?
                     if doc
                         # Unmap the url.
-                        Blað.unmap doc.url
+                        blað.unmap doc.url
 
                         # Respond in kind.
                         @res.writeHead 200, "content-type": "application/json"
@@ -289,11 +291,9 @@ service.router.path "/api/document", ->
                         @res.end()
 
 # -------------------------------------------------------------------
-# Blað.
-Blað = {}
 
 # Save/update a document.
-Blað.save = (doc, cb) ->
+blað.save = (doc, cb) ->
     # Prefix URL with a forward slash if not present.
     if doc.url[0] isnt '/' then doc.url = '/' + doc.url
     # Remove trailing slash if present.
@@ -332,7 +332,7 @@ Blað.save = (doc, cb) ->
                         else
                             # Unmap the original URL if it was public.
                             old = docs.pop()
-                            if old.public then Blað.unmap old.url
+                            if old.public then blað.unmap old.url
 
                             # Get the id and remove the key as we cannot modify that one.
                             _id = doc._id
@@ -359,7 +359,7 @@ Blað.save = (doc, cb) ->
                                 cb false, records[0].url
 
 # Retrieve publicly mserviceed document.
-Blað.get = ->
+blað.get = ->
     @get ->
         # Get the doc(s) from the db. We want to get the whole 'group'.
         service.db (collection) =>
@@ -371,22 +371,20 @@ Blað.get = ->
                 # Any children?
                 if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
 
-                winston.info "Serving document #{record._id}"
+                winston.debug 'Render url ' + (record.url or record._id).underline
 
                 # Do we have this type?
-                if Blað.types[record.type]?                    
+                if blað.types[record.type]?                    
                     # Create a new domain for the 'untrusted' presenter.
                     doom = domain.create()
 
                     # Handle this doom like this.
-                    doom.on 'error', (err) =>
-                        # Say what?
-                        winston.error err.message
-                        
+                    doom.on 'error', (err) =>                        
                         # Can we grace?
                         try
+                            winston.error t = "Error occurred, sorry: #{err.message}"
                             @res.writeHead 500
-                            @res.end 'Error occurred, sorry.'
+                            @res.end t
                             @res.on 'close', ->
                                 # Forcibly shut down any other things added to this domain.
                                 doom.dispose()
@@ -398,7 +396,7 @@ Blað.get = ->
                     # Finally execute the presenter in the domain context.
                     doom.run =>
                         # Init new type.
-                        presenter = new Blað.types[record.type](record)
+                        presenter = new blað.types[record.type](record)
 
                         # Give us the data.
                         presenter.render (context, template=true) =>
@@ -408,25 +406,27 @@ Blað.get = ->
                                     if err
                                         @res.writeHead 500
                                         @res.write err.message
+                                        @res.end()
                                     else
                                         # Do we have a layout template to render to?
                                         service.eco 'layout', 'page': html, (err, layout) =>
-                                            @res.writeHead 200, "content-type": "text/html"
+                                            @res.writeHead 200, 'content-type': 'text/html'
                                             @res.write if err then html else layout
                                             @res.end()
                             else
                                 # Render as is, JSON.
-                                @res.writeHead 200, "content-type": "application/json"
+                                @res.writeHead 200, 'content-type': 'application/json'
                                 @res.write JSON.stringify context
                                 @res.end()
                 else
+                    winston.warn t = "Document type #{record.type} not one of #{Object.keys(blað.types).join(', ')}"
                     @res.writeHead 500
-                    @res.write 'Non existent document type'
+                    @res.write t
                     @res.end()
 
 # Unmap document from router.
-Blað.unmap = (url) ->
-    winston.info "Delete url #{url}"
+blað.unmap = (url) ->
+    winston.info 'Delete url ' + url.underline
 
     # A bit of hairy tweaking.
     if url is '/' then delete service.router.routes.get
@@ -440,10 +440,7 @@ Blað.unmap = (url) ->
             else
                 r = r[parts[i]]
 
-# Document types.
-Blað.types = {}
-
-class Blað.Type
+class blað.Type
 
     # Returns top level documents.
     menu: (cb) ->
@@ -549,78 +546,144 @@ class Blað.Type
                     true
 
 # A type that is always present, the default.
-class BasicDocument extends Blað.Type
+class blað.types.BasicDocument extends blað.Type
 
     # Presentation for the document.
     render: (done) -> done @, false
 
-Blað.types.BasicDocument = BasicDocument
-
 # -------------------------------------------------------------------
-
-# So we can inject our own types.
-exports.Blað = Blað
 
 # Exposed firestarter that builds the site and starts the service.
 exports.start = (cfg, dir, done) ->
+    # CLI output on the default output?
+    winston.cli()
+
+    # Set site path on us.
+    SITE_PATH = dir
+
+    # Welcome.
+    ( do ->
+        def = Q.defer()
+
+        winston.info "Welcome to #{'blað'.grey}"
+
+        fs.readFile "#{__dirname}/logo.txt", (err, data) ->
+            if err then def.reject err
+            
+            ( winston.help line.cyan.bold for line in data.toString('utf-8').split('\n') )
+
+            winston.help ''
+            winston.help 'A forms based Node.js CMS'
+            winston.help ''
+
+            def.resolve()
+
+        def.promise
+
     # Deep copy of config (and check dict passed in).
-    Q.fcall( ->
-        config = JSON.parse JSON.stringify cfg
+    ).then( ->
+        winston.debug 'Duplicate config'
+
+        CONFIG = JSON.parse JSON.stringify cfg
     
     # Go env or config? And validate.
     ).then( ->
-        # Resolve config coming from environment and the `cfg` dict.
-        config.mongodb        = process.env.DATABASE_URL or config.mongodb    # MongoDB database
-        config.port           = process.env.PORT or config.port               # port number
-        config.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
-        config.browserid     ?= {}
-        config.browserid.salt = process.env.API_SALT or config.browserid.salt # API key salt
+        winston.debug 'Validate config'
 
-        # CLI output on the default output?
-        winston.cli()
+        # Resolve config coming from environment and the `cfg` dict.
+        CONFIG.mongodb        = process.env.DATABASE_URL or CONFIG.mongodb    # MongoDB database
+        CONFIG.port           = process.env.PORT or CONFIG.port               # port number
+        CONFIG.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
+        CONFIG.browserid     ?= {}
+        CONFIG.browserid.salt = process.env.API_SALT or CONFIG.browserid.salt # API key salt
 
         # Validate file.
-        if not config.browserid? or
-          not config.browserid.provider? or
-            not config.browserid.salt? or
-              not config.browserid.users? or
-                not config.browserid.users instanceof Array
+        if not CONFIG.browserid? or
+          not CONFIG.browserid.provider? or
+            not CONFIG.browserid.salt? or
+              not CONFIG.browserid.users? or
+                not CONFIG.browserid.users instanceof Array
                     throw 'You need to create a valid `browserid` section'
-        if not config.mongodb?
+        if not CONFIG.mongodb?
             throw 'You need to specify the `mongodb` uri'
 
         # Create create hashes of salt + user emails.
-        config.browserid.hashes = []
-        for email in config.browserid.users
-            config.browserid.hashes.push crypto.createHash('md5').update(email + config.browserid.salt).digest('hex')
+        CONFIG.browserid.hashes = []
+        for email in CONFIG.browserid.users
+            CONFIG.browserid.hashes.push crypto.createHash('md5').update(email + CONFIG.browserid.salt).digest('hex')
 
+    # Code compilation.
     ).then( ->
+        winston.debug 'Compile code'
+
         utils = require './utils.coffee'
 
-        # Compile admin coffee files.
+        # Compile our and their code.
+        Q.all [ utils.compile.admin(), utils.compile.forms(SITE_PATH), utils.include.presenters(SITE_PATH) ]
 
-        # Compile in the site's type forms.
+    # Include site's presenters on us.
+    ).then( ([ α, β, presenters ]) ->
+        winston.debug 'Including custom presenters'
 
-        # Include all the site's type presenters.
+        # Class extends like in CoffeeScript.
+        ext = (child, parent) ->
+            ctor = -> @constructor = child
+            
+            for key of parent
+                child[key] = parent[key] if {}.hasOwnProperty.call(parent, key)
+            
+            ctor:: = parent::
+            child:: = new ctor()
+            child.__super__ = parent::
+            child
+
+        # Traverse all plain functions.
+        for f in presenters
+            # Require the file.
+            req = require f
+            # Get the first key - a document that will be exposed, hopefully.
+            key = Object.keys(req)[0]
+            # The function exposed.
+            fn = req[key]
+
+            # Extend the function on us.
+            blað.types[key] = fn extends blað.Type
 
     # Start flatiron service on a port.
     ).then( ->
+        winston.debug 'Start ' + 'flatiron'.grey
+
         def = Q.defer()
-        service.start config.port, (err) ->
+        service.start CONFIG.port, (err) ->
             if err then def.reject err
             else def.resolve()
         def.promise
     
+    # Map all existing public documents.
+    ).then( ->
+        winston.debug 'Map existing documents'
+
+        def = Q.defer()
+        service.db (collection) ->
+            collection.find('public': true).toArray (err, docs) ->
+                if err then def.reject errr
+                for doc in docs
+                    winston.info 'Mapping url ' + doc.url.underline
+                    service.router.path doc.url, blað.get
+                def.resolve()
+        def.promise
+
     # OK or bust.
     ).done(
         ->
-            winston.info "Listening on port #{service.server.address().port} " + 'ok'.green.bold
+            winston.info 'Listening on port ' + service.server.address().port.toString().bold
+            winston.info 'blað'.grey + ' started ' +  'ok'.green.bold
             # Callback?
             if done and typeof done is 'function' then done()
         , (err) ->
             try
                 err = JSON.parse(err)
-                winston.error(err.error.message or err.message or err)
+                winston.error err.error.message or err.message or err
             catch e
-                winston.error(err) if config.env isnt 'test'
+                winston.error err
     )

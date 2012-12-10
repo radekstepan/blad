@@ -4,16 +4,16 @@ querystring = require 'querystring'
 
 exported = require('../server.coffee')
 app = exported.app
-Blað = exported.Blað
+blað = exported.blað
 config = exported.config
 
 config.browserid.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class SitemapDocument extends Blað.Type
+class SitemapDocument extends blað.Type
 
-Blað.types.SitemapDocument = SitemapDocument
+blað.types.SitemapDocument = SitemapDocument
 
 # -------------------------------------------------------------------
 

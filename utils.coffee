@@ -4,40 +4,33 @@ cs     = require 'coffee-script'
 eco    = require 'eco'
 uglify = require 'uglify-js'
 Q      = require 'q'
-require 'colors'
 
 # Compile API server and admin client code.
-exports.compile =
-    # Core server code.
-    'server': ->
-        codez = [ fs.readFileSync('./server.coffee', "utf-8") ]
+exports.compile =    
+    #Admin client code.
+    'admin': ->
+        def = Q.defer()
 
-        # Custom presenters.
-        walk './src/site', (files) ->
-            for file in files when file.match /presenter\.coffee/
-                console.log file.grey
-                codez.push fs.readFileSync(file, "utf-8")
-
-            # Write it all.
-            write './server.js', cs.compile codez.join("\n")
-    
-    # Client side code.
-    'client': (done) ->
-        walk './src/admin', (files) ->
+        walk "#{__dirname}/src", (files) ->
             for file in files
-                console.log file.grey
                 if file.match /\.eco/
                     name = file.split('/').pop()
                     js = eco.precompile fs.readFileSync file, "utf-8"
                     js = (uglify.minify("JST['#{name}'] = #{js}", 'fromString': true)).code
-                    write file.replace('./src/admin', './public/admin/js').replace('.eco', '.js'), js
+                    write file.replace('/src/', '/public/admin/js/').replace('.eco', '.js'), js # what if we have /src/ in deeper?
                 else if file.match /\.coffee/
                     js = cs.compile fs.readFileSync(file, "utf-8"), 'bare': 'on'
-                    write file.replace('./src/admin', './public/admin/js').replace('.coffee', '.js'), js
-    
-    # Custom document forms.
-    'forms': (done) ->
-        walk './src/site', (files) ->
+                    write file.replace('/src/', '/public/admin/js/').replace('.coffee', '.js'), js # what if we have /src/ in deeper?
+
+            def.resolve()
+
+        def.promise
+
+    # Site's custom document type forms.
+    'forms': (dir) ->
+        def = Q.defer()
+
+        walk "#{dir}/src/types", (files) ->
             tml = []
 
             # Inject a BasicDocument form first.
@@ -45,12 +38,23 @@ exports.compile =
 
             # Do user's files.
             for file in files when file.match /form\.eco/
-                console.log file.grey
                 js = eco.precompile fs.readFileSync file, "utf-8"
                 p = file.split('/') ; name = p[p.length-2]
                 tml.push (uglify.minify("JST['form_#{name}.eco'] = #{js}", 'fromString': true)).code
 
-            write './public/admin/js/templates/document_forms.js', tml.join("\n")
+            write "#{__dirname}/public/admin/js/templates/document_forms.js", tml.join("\n")
+
+            def.resolve()
+
+        def.promise
+
+exports.include =
+    # Get a list of presenter paths to includ in super.
+    'presenters': (dir) ->
+        def = Q.defer()
+        walk "#{dir}/src/types", (files) ->
+            def.resolve ( f for f in files when f.match /presenter\.coffee/ )
+        def.promise
 
 exports.db =
     # Export the database into a JSON file.
@@ -66,8 +70,6 @@ exports.db =
                     
                     # Write file.
                     fs.write id, JSON.stringify(docs, null, "\t"), null, "utf8"
-
-                    console.log "Dumped #{docs.length} documents".yellow
     # Clears all! and imports the database from a JSON file.
     'import': ->
         blad.app.db (collection) ->
@@ -84,8 +86,6 @@ exports.db =
                 # Insert all.
                 collection.insert docs, { 'safe': true }, (err, docs) ->
                     throw err if err
-
-                    console.log "Inserted #{docs.length} documents".yellow
 
 # -------------------------------------------------------------------
 
@@ -127,7 +127,6 @@ write = (path, text, mode = "w") ->
     # Create the directory if it does not exist first.
     dir = path.split('/').reverse()[1...].reverse().join('/')
     if dir isnt '.'
-        console.log "Creating dir #{dir}".yellow
         try
             fs.mkdirSync dir, 0o0777
         catch e

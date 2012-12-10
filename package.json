@@ -29,6 +29,7 @@
         "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha --compilers coffee:coffee-script --ui bdd --reporter spec"
     },
     "bin": {
-        "blad": "./bin/blad"
-    }
+        "blad": "./bin/blad.js"
+    },
+    "main": "./blad.coffee"
 }

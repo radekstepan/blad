@@ -4,14 +4,14 @@ querystring = require 'querystring'
 
 exported = require('../server.coffee')
 app = exported.app
-Blað = exported.Blað
+blað = exported.blað
 config = exported.config
 
 config.browserid.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class HasChildrenDocument extends Blað.Type
+class HasChildrenDocument extends blað.Type
 
     render: (done) ->
         done
@@ -20,7 +20,7 @@ class HasChildrenDocument extends Blað.Type
             'lvl1': @children 1
         , false
 
-Blað.types.HasChildrenDocument = HasChildrenDocument
+blað.types.HasChildrenDocument = HasChildrenDocument
 
 # -------------------------------------------------------------------
 

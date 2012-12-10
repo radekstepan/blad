@@ -4,14 +4,14 @@ querystring = require 'querystring'
 
 exported = require('../server.coffee')
 app = exported.app
-Blað = exported.Blað
+blað = exported.blað
 config = exported.config
 
 config.browserid.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class BasicDocument extends Blað.Type
+class BasicDocument extends blað.Type
 
     # Render as JSON as is.
     render: (done) ->
@@ -21,7 +21,7 @@ class BasicDocument extends Blað.Type
             'url':  @url
         , false
 
-Blað.types.BasicDocument = BasicDocument
+blað.types.BasicDocument = BasicDocument
 
 # -------------------------------------------------------------------
 

@@ -4,7 +4,7 @@ querystring = require 'querystring'
 
 exported = require('../server.coffee')
 app = exported.app
-Blað = exported.Blað
+blað = exported.blað
 config = exported.config
 
 config.browserid.hashes = [ '@dummy' ]
@@ -13,14 +13,14 @@ config.browserid.hashes = [ '@dummy' ]
 
 marked = require 'marked'
 
-class MarkdownDocument extends Blað.Type
+class MarkdownDocument extends blað.Type
 
     render: (done) ->
         done
             'html': marked @markup
         , false
 
-Blað.types.MarkdownDocument = MarkdownDocument
+blað.types.MarkdownDocument = MarkdownDocument
 
 # -------------------------------------------------------------------
 

@@ -10,7 +10,7 @@ define [
 
         # Set your application name here so the document title is set to
         # “Controller title – Site title” (see Layout#adjustTitle)
-        title: 'Blað CMS'
+        title: 'blað CMS'
 
         # Store the X-Blad-ApiKey here. Application is global.
         apiKey: undefined

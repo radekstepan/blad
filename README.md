@@ -1,4 +1,4 @@
-# Blað
+# blað
 
 A forms based [node.js](http://nodejs.org/) CMS ala [SilverStripe](http://www.silverstripe.com/), but smaller.
 
@@ -82,15 +82,13 @@ Each document has a custom class that determines how it is rendered. It has to o
 ```coffeescript
 marked = require 'marked'
 
-class MarkdownDocument extends Blað.Type
+class exports.MarkdownDocument
 
     # Presentation for the document.
     render: (done) -> done 'html': marked @markup
-
-Blað.types.MarkdownDocument = MarkdownDocument
 ```
 
-Extending the `Blað.Type` class gives us the following helpers:
+Extending the `blað.Type` class gives us the following helpers:
 
 * `@children()` or `@children(n)` that returns public and private documents (optionally of a specific level) that begin with the same URL as the current document... its children.
 * `@menu()` that returns public and private top level documents; those documents that have only a leading slash in its URL.

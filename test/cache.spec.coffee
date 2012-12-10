@@ -4,14 +4,14 @@ querystring = require 'querystring'
 
 exported = require('../server.coffee')
 app = exported.app
-Blað = exported.Blað
+blað = exported.blað
 config = exported.config
 
 config.browserid.hashes = [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class CacheDocument extends Blað.Type
+class CacheDocument extends blað.Type
 
     render: (done) ->
         # Do we have cache already?
@@ -38,7 +38,7 @@ class CacheDocument extends Blað.Type
                     'was':  'new'
                 , false
 
-Blað.types.CacheDocument = CacheDocument
+blað.types.CacheDocument = CacheDocument
 
 # -------------------------------------------------------------------
 
