@@ -1,5 +1,4 @@
 #!/usr/bin/env coffee
-
 flatiron = require 'flatiron'
 union    = require 'union'
 connect  = require 'connect'
@@ -10,7 +9,9 @@ urlib    = require 'url'
 fs       = require 'fs'
 cs       = require 'coffee-script'
 eco      = require 'eco'
+Q        = require 'q'
 domain   = require 'domain' # experimental!
+winston  = require 'winston'
 
 # Internal flatiron app.
 service = flatiron.app
@@ -79,7 +80,7 @@ service.use
 
             unless db?
                 mongodb.Db.connect config.mongodb, (err, connection) ->
-                    service.log.info "Connected to #{config.mongodb}".green unless config.env is 'test'
+                    winston.info "Connected to #{config.mongodb}"
                     db = connection
                     throw err if err
                     collection done
@@ -91,7 +92,7 @@ service.db (collection) ->
     collection.find('public': true).toArray (err, docs) ->
         throw err if err
         for doc in docs
-            service.log.info "Mapping url " + doc.url.blue if config.env isnt 'test'
+            winston.info "Mapping url " + doc.url
             service.router.path doc.url, Blað.get
 
 # -------------------------------------------------------------------
@@ -112,21 +113,21 @@ service.router.path "/auth", ->
             if body.status is 'okay'
                 # Authorize.
                 if body.email in config.browserid.users
-                    service.log.info 'Identity verified for ' + body.email.green if config.env isnt 'test'
+                    winston.info "Identity verified for #{body.email}"
                     # Create API Key from email and salt for the client.
-                    @res.writeHead 200, 'servicelication/json'
+                    @res.writeHead 200, 'application/json'
                     @res.write JSON.stringify
                         'email': body.email
                         'key':   crypto.createHash('md5').update(body.email + config.browserid.salt).digest('hex')
                 else
-                    service.log.info "#{body.email} tried to access the API".red if config.env isnt 'test'
-                    @res.writeHead 403, 'servicelication/json'
+                    winston.warning "#{body.email} tried to access the API"
+                    @res.writeHead 403, 'application/json'
                     @res.write JSON.stringify
                         'message': "Your email #{body.email} is not authorized to access the service"
             else
                 # Pass on the authentication error response to the client.
                 service.log.info body.message.red if config.env isnt 'test'
-                @res.writeHead 403, 'servicelication/json'
+                @res.writeHead 403, 'application/json'
                 @res.write JSON.stringify body
             
             @res.end()
@@ -147,7 +148,7 @@ service.router.path "/sitemap.xml", ->
                     xml.push "<url><loc>http://#{@req.headers.host}#{doc.url}</loc><lastmod>#{doc.modified}</lastmod></url>"
                 xml.push '</urlset>'
 
-                @res.writeHead 200, "content-type": "servicelication/xml"
+                @res.writeHead 200, "content-type": "application/xml"
                 @res.write xml.join "\n"
                 @res.end()
 
@@ -155,12 +156,12 @@ service.router.path "/sitemap.xml", ->
 # Get all documents.
 service.router.path "/api/documents", ->
     @get ->
-        service.log.info "Get all documents" if config.env isnt 'test'
+        winston.info 'Get all documents'
 
         service.db (collection) =>
             collection.find({}, 'sort': 'url').toArray (err, docs) =>
                 throw err if err
-                @res.writeHead 200, "content-type": "servicelication/json"
+                @res.writeHead 200, "content-type": "application/json"
                 @res.write JSON.stringify docs
                 @res.end()
 
@@ -171,7 +172,7 @@ service.router.path "/api/document", ->
 
         # We can request a document using '_id' or 'url'.
         if !params._id? and !params.url?
-            @res.writeHead 404, "content-type": "servicelication/json"
+            @res.writeHead 404, "content-type": "application/json"
             @res.write JSON.stringify 'message': 'Use `_id` or `url` to fetch the document'
             @res.end()
         else
@@ -180,7 +181,7 @@ service.router.path "/api/document", ->
                 try
                     value = mongodb.ObjectID.createFromHexString params._id
                 catch e
-                    @res.writeHead 404, "content-type": "servicelication/json"
+                    @res.writeHead 404, "content-type": "application/json"
                     @res.write JSON.stringify 'message': 'The `_id` parameter is not a valid MongoDB id'
                     @res.end()
                     return
@@ -190,14 +191,14 @@ service.router.path "/api/document", ->
                 value = decodeURIComponent params.url
                 query = 'url': value
 
-            service.log.info "Get document " + new String(value).blue if config.env isnt 'test'
+            winston.info "Get document #{value}"
 
             # Actual grab.
             service.db (collection) =>
                 collection.findOne query, (err, doc) =>
                     throw err if err
 
-                    @res.writeHead 200, "content-type": "servicelication/json"
+                    @res.writeHead 200, "content-type": "application/json"
                     @res.write JSON.stringify doc
                     @res.end()
 
@@ -206,28 +207,28 @@ service.router.path "/api/document", ->
 
         if doc._id?
             # Editing existing.
-            service.log.info "Edit document " + doc._id.blue if config.env isnt 'test'
+            winston.info "Edit document #{doc._id}"
             # Convert _id to object.
             doc._id = mongodb.ObjectID.createFromHexString doc._id
-            cb = => @res.writeHead 200, "content-type": "servicelication/json"
+            cb = => @res.writeHead 200, "content-type": "application/json"
         else
             # Creating a new one.
-            service.log.info "Create new document" if config.env isnt 'test'
-            cb = => @res.writeHead 201, "content-type": "servicelication/json"
+            winston.info 'Create new document'
+            cb = => @res.writeHead 201, "content-type": "application/json"
 
         # One command to save/update and optionaly unmap.
         Blað.save doc, (err, reply) =>
             if err
-                service.log.info "I am different...".red if config.env isnt 'test'
+                winston.error 'I am different...'
 
-                @res.writeHead 400, "content-type": "servicelication/json"
+                @res.writeHead 400, "content-type": "application/json"
                 @res.write JSON.stringify reply
                 @res.end()
             
             else
                 if doc.public
                     # Map a document to a public URL.
-                    service.log.info "Mserviceing url " + reply.blue if config.env isnt 'test'
+                    winston.info "Mapping url #{reply}"
                     service.router.path reply, Blað.get
 
                 # Stringify the new document so Backbone can see what has changed.
@@ -248,7 +249,7 @@ service.router.path "/api/document", ->
 
         # We can request a document using '_id' or 'url'.
         if !params._id? and !params.url?
-            @res.writeHead 404, "content-type": "servicelication/json"
+            @res.writeHead 404, "content-type": "application/json"
             @res.write JSON.stringify 'message': 'Use `_id` or `url` to specify the document'
             @res.end()
         else
@@ -257,7 +258,7 @@ service.router.path "/api/document", ->
                 try
                     value = mongodb.ObjectID.createFromHexString params._id
                 catch e
-                    @res.writeHead 404, "content-type": "servicelication/json"
+                    @res.writeHead 404, "content-type": "application/json"
                     @res.write JSON.stringify 'message': 'The `_id` parameter is not a valid MongoDB id'
                     @res.end()
                     return
@@ -267,7 +268,7 @@ service.router.path "/api/document", ->
                 value = decodeURIComponent params.url
                 query = 'url': value
 
-            service.log.info "Delete document " + new String(value).blue if config.env isnt 'test'
+            winston.info "Delete document #{value}"
 
             # Find and delete.
             service.db (collection) =>
@@ -281,10 +282,10 @@ service.router.path "/api/document", ->
                         Blað.unmap doc.url
 
                         # Respond in kind.
-                        @res.writeHead 200, "content-type": "servicelication/json"
+                        @res.writeHead 200, "content-type": "application/json"
                         @res.end()
                     else
-                        @res.writeHead 404, "content-type": "servicelication/json"
+                        @res.writeHead 404, "content-type": "application/json"
                         @res.end()
 
 # -------------------------------------------------------------------
@@ -299,7 +300,7 @@ Blað.save = (doc, cb) ->
     if doc.url.length > 1 and doc.url[-1...] is '/' then doc.url = doc.url[...-1]
     # Are we trying to map to core URLs?
     if doc.url.match(new RegExp("^/admin|^/api|^/auth|^/sitemap.xml", 'i'))?
-        cb true, 'url': 'Is in use by core servicelication'
+        cb true, 'url': 'Is in use by core application'
     else
         # Is the URL mserviceable?
         m = doc.url.match(new RegExp(/^\/(\S*)$/))
@@ -370,7 +371,7 @@ Blað.get = ->
                 # Any children?
                 if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
 
-                service.log.info 'Serving document ' + new String(record._id).blue if config.env isnt 'test'
+                winston.info "Serving document #{record._id}"
 
                 # Do we have this type?
                 if Blað.types[record.type]?                    
@@ -380,7 +381,7 @@ Blað.get = ->
                     # Handle this doom like this.
                     doom.on 'error', (err) =>
                         # Say what?
-                        service.log.info err.message.red if config.env isnt 'test'
+                        winston.error err.message
                         
                         # Can we grace?
                         try
@@ -415,7 +416,7 @@ Blað.get = ->
                                             @res.end()
                             else
                                 # Render as is, JSON.
-                                @res.writeHead 200, "content-type": "servicelication/json"
+                                @res.writeHead 200, "content-type": "application/json"
                                 @res.write JSON.stringify context
                                 @res.end()
                 else
@@ -425,7 +426,7 @@ Blað.get = ->
 
 # Unmap document from router.
 Blað.unmap = (url) ->
-    service.log.info "Delete url " + url.yellow if config.env isnt 'test'
+    winston.info "Delete url #{url}"
 
     # A bit of hairy tweaking.
     if url is '/' then delete service.router.routes.get
@@ -506,7 +507,7 @@ class Blað.Type
         @store =
             # Get a key optionally on an object.
             get: (key, obj) =>
-                service.log.info 'Cache used for ' + key.grey if config.env isnt 'test'
+                winston.info "Cache used for #{key}"
 
                 if obj? then obj.cache[key]?.value
                 else @cache?[key]?.value
@@ -562,74 +563,64 @@ exports.Blað = Blað
 
 # Exposed firestarter that builds the site and starts the service.
 exports.start = (cfg, dir, done) ->
-    # Deep copy of config.
-    config = JSON.parse JSON.stringify cfg
+    # Deep copy of config (and check dict passed in).
+    Q.fcall( ->
+        config = JSON.parse JSON.stringify cfg
+    
+    # Go env or config? And validate.
+    ).then( ->
+        # Resolve config coming from environment and the `cfg` dict.
+        config.mongodb        = process.env.DATABASE_URL or config.mongodb    # MongoDB database
+        config.port           = process.env.PORT or config.port               # port number
+        config.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
+        config.browserid     ?= {}
+        config.browserid.salt = process.env.API_SALT or config.browserid.salt # API key salt
 
-    # Resolve config coming from environment and the `cfg` dict.
-    config.mongodb        = process.env.DATABASE_URL or config.mongodb    # MongoDB database
-    config.port           = process.env.PORT or config.port               # port number
-    config.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
-    config.browserid     ?= {}
-    config.browserid.salt = process.env.API_SALT or config.browserid.salt # API key salt
+        # CLI output on the default output?
+        winston.cli()
 
-    # Validate file.
-    if not config.browserid? or
-      not config.browserid.provider? or
-        not config.browserid.salt? or
-          not config.browserid.users? or
-            not config.browserid.users instanceof Array
-                throw 'You need to create a valid `browserid` section'
-    if not config.mongodb?
-        throw 'You need to specify the `mongodb` uri'
+        # Validate file.
+        if not config.browserid? or
+          not config.browserid.provider? or
+            not config.browserid.salt? or
+              not config.browserid.users? or
+                not config.browserid.users instanceof Array
+                    throw 'You need to create a valid `browserid` section'
+        if not config.mongodb?
+            throw 'You need to specify the `mongodb` uri'
 
-    # Create create hashes of salt + user emails.
-    config.browserid.hashes = []
-    for email in config.browserid.users
-        config.browserid.hashes.push crypto.createHash('md5').update(email + config.browserid.salt).digest('hex')
+        # Create create hashes of salt + user emails.
+        config.browserid.hashes = []
+        for email in config.browserid.users
+            config.browserid.hashes.push crypto.createHash('md5').update(email + config.browserid.salt).digest('hex')
 
-    # Compile admin coffee files.
-    fs.readdir './src', (err, files) ->
-        throw err if err
+    ).then( ->
+        utils = require './utils.coffee'
 
-        for file in files
-        console.log file.grey
-            if file.match /\.eco/
-                #name = file.split('/').pop()
-                #js = uglify "JST['#{name}'] = " + eco.precompile fs.readFileSync file, "utf-8"
-                #write file.replace('./src/admin', './public/admin/js').replace('.eco', '.js'), js
-                console.log 'eco'.bold, file
-            else if file.match /\.coffee/
-                #js = cs.compile fs.readFileSync(file, "utf-8"), 'bare': 'on'
-                #write file.replace('./src/admin', './public/admin/js').replace('.coffee', '.js'), js
-                console.log 'coffee'.bold, file
+        # Compile admin coffee files.
 
-    # Compile in the site's type forms.
+        # Compile in the site's type forms.
 
-    # Include all the site's type presenters.
+        # Include all the site's type presenters.
 
     # Start flatiron service on a port.
-    service.start config.port, (err) ->
-        throw err if err
-        service.log.info "Listening on port #{service.server.address().port}".green if config.env isnt 'test'
-        done()
-
-# -------------------------------------------------------------------
-
-# Write to file, sync.
-write = (path, text, mode = "w") ->
-    writeFile = (path) ->
-        id = fs.openSync path, mode, 0o0666
-        fs.writeSync id, text, null, "utf8"
-
-    # Create the directory if it does not exist first.
-    dir = path.split('/').reverse()[1...].reverse().join('/')
-    if dir isnt '.'
-        console.log "Creating dir #{dir}".yellow
-        try
-            fs.mkdirSync dir, 0o0777
-        catch e
-            if e.code isnt 'EEXIST' then throw e
-        
-        writeFile path
-    else
-        writeFile path
+    ).then( ->
+        def = Q.defer()
+        service.start config.port, (err) ->
+            if err then def.reject err
+            else def.resolve()
+        def.promise
+    
+    # OK or bust.
+    ).done(
+        ->
+            winston.info "Listening on port #{service.server.address().port} " + 'ok'.green.bold
+            # Callback?
+            if done and typeof done is 'function' then done()
+        , (err) ->
+            try
+                err = JSON.parse(err)
+                winston.error(err.error.message or err.message or err)
+            catch e
+                winston.error(err) if config.env isnt 'test'
+    )

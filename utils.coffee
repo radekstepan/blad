@@ -1,17 +1,15 @@
 #!/usr/bin/env coffee
-
-fs  = require 'fs'
-cs  = require 'coffee-script'
-eco = require 'eco'
-Q   = require 'q'
+fs     = require 'fs'
+cs     = require 'coffee-script'
+eco    = require 'eco'
+uglify = require 'uglify-js'
+Q      = require 'q'
 require 'colors'
 
-task "compile", "compile API server and admin client code", ->
-    
-    server = ->
-        deferred = Q.defer()
-
-        # Core server code.
+# Compile API server and admin client code.
+exports.compile =
+    # Core server code.
+    'server': ->
         codez = [ fs.readFileSync('./server.coffee', "utf-8") ]
 
         # Custom presenters.
@@ -22,94 +20,74 @@ task "compile", "compile API server and admin client code", ->
 
             # Write it all.
             write './server.js', cs.compile codez.join("\n")
-
-            deferred.resolve()
-        deferred.promise
-
-    client = (done) ->
-        deferred = Q.defer()
-
-        # Client side code.
+    
+    # Client side code.
+    'client': (done) ->
         walk './src/admin', (files) ->
             for file in files
                 console.log file.grey
                 if file.match /\.eco/
                     name = file.split('/').pop()
-                    js = uglify "JST['#{name}'] = " + eco.precompile fs.readFileSync file, "utf-8"
+                    js = eco.precompile fs.readFileSync file, "utf-8"
+                    js = (uglify.minify("JST['#{name}'] = #{js}", 'fromString': true)).code
                     write file.replace('./src/admin', './public/admin/js').replace('.eco', '.js'), js
                 else if file.match /\.coffee/
                     js = cs.compile fs.readFileSync(file, "utf-8"), 'bare': 'on'
                     write file.replace('./src/admin', './public/admin/js').replace('.coffee', '.js'), js
-
-            deferred.resolve()
-        deferred.promise
     
-    forms = (done) ->
-        deferred = Q.defer()
-
-        # Custom document forms.
+    # Custom document forms.
+    'forms': (done) ->
         walk './src/site', (files) ->
             tml = []
 
             # Inject a BasicDocument form first.
-            tml.push uglify "JST['form_BasicDocument.eco'] = #{eco.precompile("")}"
+            tml.push (uglify.minify("JST['form_BasicDocument.eco'] = #{eco.precompile("")}", 'fromString': true)).code
 
             # Do user's files.
             for file in files when file.match /form\.eco/
                 console.log file.grey
                 js = eco.precompile fs.readFileSync file, "utf-8"
                 p = file.split('/') ; name = p[p.length-2]
-                tml.push uglify "JST['form_#{name}.eco'] = #{js}"
+                tml.push (uglify.minify("JST['form_#{name}.eco'] = #{js}", 'fromString': true)).code
 
             write './public/admin/js/templates/document_forms.js', tml.join("\n")
-            deferred.resolve()
-        deferred.promise
 
-    Q.all([server(), client(), forms()]).done ->
-        console.log 'All is well.'.green
-        # Finish.
-        process.exit(0)
-
-task "export", "export the database into a JSON file", ->
-    blad = require('./server.coffee')
-
-    blad.app.db (collection) ->
-        # Dump the DB.
-        collection.find({}, 'sort': 'url').toArray (err, docs) ->
-            throw err if err
-
-            # Open file for writing.
-            fs.open "./dump/data.json", 'w', 0o0666, (err, id) ->
-                throw err if err
-                
-                # Write file.
-                fs.write id, JSON.stringify(docs, null, "\t"), null, "utf8"
-
-                console.log "Dumped #{docs.length} documents".yellow
-
-task "import", "clears all! and imports the database from a JSON file", ->
-    blad = require('./server.coffee')
-    
-    blad.app.db (collection) ->
-        # Clear all
-        collection.remove {}, (err) ->
-            throw err if err
-
-            # Read file and make into JSON.
-            docs = JSON.parse fs.readFileSync "./dump/data.json", "utf-8"
-
-            # Clean up docs from `_id` keys.
-            docs = ( ( delete doc._id ; doc ) for doc in docs )
-
-            # Insert all.
-            collection.insert docs, { 'safe': true }, (err, docs) ->
+exports.db =
+    # Export the database into a JSON file.
+    'export': ->
+        blad.app.db (collection) ->
+            # Dump the DB.
+            collection.find({}, 'sort': 'url').toArray (err, docs) ->
                 throw err if err
 
-                console.log "Inserted #{docs.length} documents".yellow
+                # Open file for writing.
+                fs.open "./dump/data.json", 'w', 0o0666, (err, id) ->
+                    throw err if err
+                    
+                    # Write file.
+                    fs.write id, JSON.stringify(docs, null, "\t"), null, "utf8"
 
+                    console.log "Dumped #{docs.length} documents".yellow
+    # Clears all! and imports the database from a JSON file.
+    'import': ->
+        blad.app.db (collection) ->
+            # Clear all
+            collection.remove {}, (err) ->
+                throw err if err
+
+                # Read file and make into JSON.
+                docs = JSON.parse fs.readFileSync "./dump/data.json", "utf-8"
+
+                # Clean up docs from `_id` keys.
+                docs = ( ( delete doc._id ; doc ) for doc in docs )
+
+                # Insert all.
+                collection.insert docs, { 'safe': true }, (err, docs) ->
+                    throw err if err
+
+                    console.log "Inserted #{docs.length} documents".yellow
 
 # -------------------------------------------------------------------
-
 
 # Traverse a directory and return a list of files (async, recursive).
 walk = (path, cb) ->
@@ -139,13 +117,6 @@ walk = (path, cb) ->
                 else
                     results.push file
                     cb results unless --pending # Done yet?
-
-# Compress using `uglify-js`.
-uglify = (input) ->
-    jsp = require("uglify-js").parser
-    pro = require("uglify-js").uglify
-
-    pro.gen_code pro.ast_squeeze pro.ast_mangle jsp.parse input
 
 # Write to file, sync.
 write = (path, text, mode = "w") ->

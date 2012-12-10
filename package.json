@@ -16,10 +16,10 @@
         "mocha": "1.3.0",
         "should": "0.6.3",
         "request": "2.9.203",
-        "uglify-js": "1.3.2",
+        "uglify-js": "2.2.1",
         "crypto": "0.0.3",
-        "colors": "0.6.0-1",
-        "q": "0.8.10"
+        "q": "0.8.10",
+        "winston": "0.6.2"
     },
     "repository": {
         "type": "git",
