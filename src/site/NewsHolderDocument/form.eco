@@ -1,8 +1,0 @@
-<div class="three columns">
-    <label>Show how many latest articles?</label>
-    <select name="latest">
-        <% for i in [1...11]: %>
-            <option value="<%= i %>" <% if parseInt(@latest) is i: %>selected="selected"<% end %>><%= i %></option>
-        <% end %>
-    </select>
-</div>
