@@ -616,6 +616,9 @@ exports.start = (cfg, dir, done) ->
 
         utils = require './utils.coffee'
 
+        # Attach my logger.
+        utils.log (message) -> winston.debug message
+
         # Compile our and their code.
         Q.all [
             utils.compile.admin(),

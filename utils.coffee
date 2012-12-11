@@ -4,12 +4,20 @@ cs     = require 'coffee-script'
 eco    = require 'eco'
 uglify = require 'uglify-js'
 wrench = require 'wrench'
+events = require 'events'
 Q      = require 'q'
 
-# Compile API server and admin client code.
+# Use events to capture what has happened.
+EE = new events.EventEmitter()
+
+exports.log = (cb) -> EE.on 'log', (msg) -> cb msg
+
+# Compile chaplin admin client code.
 exports.compile =
     #Admin client code.
     'admin': ->
+        EE.emit 'log', 'Compiling chaplin admin client code'
+
         def = Q.defer()
 
         walk "#{__dirname}/src", (files) ->
@@ -29,6 +37,8 @@ exports.compile =
 
     # Site's custom document type forms.
     'forms': (dir) ->
+        EE.emit 'log', 'Compiling custom document type forms'
+
         def = Q.defer()
 
         walk "#{dir}/src/types", (files) ->
@@ -51,11 +61,16 @@ exports.compile =
 
 exports.copy =
     # Copy over site's public files.
-    'public': (dir) -> wrench.copyDirSyncRecursive "#{dir}/src/public", "#{__dirname}/public/site"
+    'public': (dir) ->
+        EE.emit 'log', 'Copying site\'s public files'
+        
+        wrench.copyDirSyncRecursive "#{dir}/src/public", "#{__dirname}/public/site"
 
 exports.include =
     # Get a list of presenter paths to includ in super.
     'presenters': (dir) ->
+        EE.emit 'log', 'Returning a list of presenter paths'
+
         def = Q.defer()
         walk "#{dir}/src/types", (files) ->
             def.resolve ( f for f in files when f.match /presenter\.coffee/ )
@@ -64,6 +79,8 @@ exports.include =
 exports.db =
     # Export the database into a JSON file.
     'export': ->
+        EE.emit 'log', 'Exporting the database'
+
         blad.app.db (collection) ->
             # Dump the DB.
             collection.find({}, 'sort': 'url').toArray (err, docs) ->
@@ -77,6 +94,8 @@ exports.db =
                     fs.write id, JSON.stringify(docs, null, "\t"), null, "utf8"
     # Clears all! and imports the database from a JSON file.
     'import': ->
+        EE.emit 'log', 'Importing the database'
+
         blad.app.db (collection) ->
             # Clear all
             collection.remove {}, (err) ->
