@@ -18,6 +18,8 @@ CONFIG = {}
 DB = null
 # Path to the site source code will be here.
 SITE_PATH = null
+# This is where logger will be.
+LOG = null
 # blað in da house.
 blað = 'types': {}
 
@@ -80,12 +82,12 @@ setup = (SERVICE) ->
                         done coll
 
                 unless DB?
-                    winston.debug 'Connect to MongoDB'
+                    LOG.debug 'Connect to MongoDB'
 
                     mongodb.Db.connect CONFIG.mongodb, (err, connection) ->
                         throw err if err
                         mcfg = connection.serverConfig
-                        winston.info 'Connected to ' + "mongodb://#{mcfg.host}:#{mcfg.port}/#{mcfg.dbInstance.databaseName}".bold
+                        LOG.info 'Connected to ' + "mongodb://#{mcfg.host}:#{mcfg.port}/#{mcfg.dbInstance.databaseName}".bold
                         DB = connection
                         collection done
                 else
@@ -110,20 +112,20 @@ setup = (SERVICE) ->
                 if body.status is 'okay'
                     # Authorize.
                     if body.email in CONFIG.browserid.users
-                        winston.info "Identity verified for #{body.email}"
+                        LOG.info "Identity verified for #{body.email}"
                         # Create API Key from email and salt for the client.
                         @res.writeHead 200, 'application/json'
                         @res.write JSON.stringify
                             'email': body.email
                             'key':   crypto.createHash('md5').update(body.email + CONFIG.browserid.salt).digest('hex')
                     else
-                        winston.warning "#{body.email} tried to access the API"
+                        LOG.warning "#{body.email} tried to access the API"
                         @res.writeHead 403, 'application/json'
                         @res.write JSON.stringify
                             'message': "Your email #{body.email} is not authorized to access the SERVICE"
                 else
                     # Pass on the authentication error response to the client.
-                    winston.error body.message
+                    LOG.error body.message
                     @res.writeHead 403, 'application/json'
                     @res.write JSON.stringify body
                 
@@ -134,7 +136,7 @@ setup = (SERVICE) ->
     # Sitemap.xml
     SERVICE.router.path "/sitemap.xml", ->
         @get ->
-            winston.info 'Get sitemap.xml'
+            LOG.info 'Get sitemap.xml'
 
             # Give me all public documents.
             SERVICE.db (collection) =>
@@ -155,7 +157,7 @@ setup = (SERVICE) ->
     # Get all documents.
     SERVICE.router.path "/api/documents", ->
         @get ->
-            winston.info 'Get all documents'
+            LOG.info 'Get all documents'
 
             SERVICE.db (collection) =>
                 collection.find({}, 'sort': 'url').toArray (err, docs) =>
@@ -192,7 +194,7 @@ setup = (SERVICE) ->
                     value = decodeURIComponent params.url
                     query = 'url': value
 
-                winston.info "Get document #{value}"
+                LOG.info "Get document #{value}"
 
                 # Actual grab.
                 SERVICE.db (collection) =>
@@ -208,19 +210,19 @@ setup = (SERVICE) ->
 
             if doc._id?
                 # Editing existing.
-                winston.info "Edit document #{doc._id}"
+                LOG.info "Edit document #{doc._id}"
                 # Convert _id to object.
                 doc._id = mongodb.ObjectID.createFromHexString doc._id
                 cb = => @res.writeHead 200, "content-type": "application/json"
             else
                 # Creating a new one.
-                winston.info 'Create new document'
+                LOG.info 'Create new document'
                 cb = => @res.writeHead 201, "content-type": "application/json"
 
             # One command to save/update and optionaly unmap.
             blað.save doc, (err, reply) =>
                 if err
-                    winston.error 'I am different...'
+                    LOG.error 'I am different...'
 
                     @res.writeHead 400, "content-type": "application/json"
                     @res.write JSON.stringify reply
@@ -229,7 +231,7 @@ setup = (SERVICE) ->
                 else
                     if doc.public
                         # Map a document to a public URL.
-                        winston.info 'Mapping url ' + reply.underline
+                        LOG.info 'Mapping url ' + reply.underline
                         SERVICE.router.path reply, blað.get
 
                     # Stringify the new document so Backbone can see what has changed.
@@ -269,7 +271,7 @@ setup = (SERVICE) ->
                     value = decodeURIComponent params.url
                     query = 'url': value
 
-                winston.info "Delete document #{value}"
+                LOG.info "Delete document #{value}"
 
                 # Find and delete.
                 SERVICE.db (collection) =>
@@ -370,7 +372,7 @@ setup = (SERVICE) ->
                     # Any children?
                     if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
 
-                    winston.debug 'Render url ' + (record.url or record._id).underline
+                    LOG.debug 'Render url ' + (record.url or record._id).underline
 
                     # Do we have this type?
                     if blað.types[record.type]
@@ -381,7 +383,7 @@ setup = (SERVICE) ->
                         doom.on 'error', (err) =>
                             # Can we grace?
                             try
-                                winston.error t = "Error occurred, sorry: #{err}"
+                                LOG.error t = "Error occurred, sorry: #{err}"
                                 @res.writeHead 500
                                 @res.end t
                                 @res.on 'close', ->
@@ -418,14 +420,14 @@ setup = (SERVICE) ->
                                     @res.write JSON.stringify context
                                     @res.end()
                     else
-                        winston.warn t = "Document type #{record.type} not one of #{Object.keys(blað.types).join(', ')}"
+                        LOG.warn t = "Document type #{record.type} not one of #{Object.keys(blað.types).join(', ')}"
                         @res.writeHead 500
                         @res.write t
                         @res.end()
 
     # Unmap document from router.
     blað.unmap = (url) ->
-        winston.info 'Delete url ' + url.underline
+        LOG.info 'Delete url ' + url.underline
 
         # A bit of hairy tweaking.
         if url is '/' then delete SERVICE.router.routes.get
@@ -561,16 +563,16 @@ exports.start = (cfg, dir, done) ->
     welcome = ->
         def = Q.defer()
 
-        winston.info "Welcome to #{'blað'.grey}"
+        LOG.info "Welcome to #{'blað'.grey}"
 
         fs.readFile "#{__dirname}/logo.txt", (err, data) ->
             if err then def.reject err
             
-            ( winston.help line.cyan.bold for line in data.toString('utf-8').split('\n') )
+            ( LOG.help line.cyan.bold for line in data.toString('utf-8').split('\n') )
 
-            winston.help ''
-            winston.help 'A forms based Node.js CMS'
-            winston.help ''
+            LOG.help ''
+            LOG.help 'A forms based Node.js CMS'
+            LOG.help ''
 
             def.resolve()
 
@@ -578,13 +580,13 @@ exports.start = (cfg, dir, done) ->
 
     # Deep copy of config (and check dict passed in).
     config = ->
-        winston.debug 'Duplicate config'
+        LOG.debug 'Duplicate config'
         
         CONFIG = JSON.parse JSON.stringify cfg
     
     # Go env or config? And validate.
     welcome = ->
-        winston.debug 'Validate config'
+        LOG.debug 'Validate config'
 
         # Resolve config coming from environment and the `cfg` dict.
         CONFIG.mongodb        = process.env.DATABASE_URL or CONFIG.mongodb    # MongoDB database
@@ -610,7 +612,7 @@ exports.start = (cfg, dir, done) ->
 
     # Code compilation.
     compile = ->
-        winston.debug 'Compile code, copy public site files'
+        LOG.debug 'Compile code, copy public site files'
 
         utils = require './utils.coffee'
 
@@ -624,7 +626,7 @@ exports.start = (cfg, dir, done) ->
 
     # Include site's presenters on us.
     include = ->
-        winston.debug 'Including custom presenters'
+        LOG.debug 'Including custom presenters'
 
         # Get just the presenters received last.
         presenters = arguments[presenters.length - 1]
@@ -640,7 +642,7 @@ exports.start = (cfg, dir, done) ->
 
     # Start flatiron service on a port.
     startup = ->
-        winston.debug 'Setup & start ' + 'flatiron'.grey
+        LOG.debug 'Setup & start ' + 'flatiron'.grey
 
         def = Q.defer()
         service = flatiron.app
@@ -652,49 +654,49 @@ exports.start = (cfg, dir, done) ->
 
     # Map all existing public documents.
     map = ->
-        winston.debug 'Map existing documents'
+        LOG.debug 'Map existing documents'
 
         def = Q.defer()
         service.db (collection) ->
             collection.find('public': true).toArray (err, docs) ->
                 if err then def.reject err
                 for doc in docs
-                    winston.info 'Mapping url ' + doc.url.underline
+                    LOG.info 'Mapping url ' + doc.url.underline
                     service.router.path doc.url, blað.get
                 def.resolve service
         def.promise
 
     # OK or bust?
     ya = (service) ->
-        winston.debug 'Done'
+        LOG.debug 'Done'
 
-        winston.info 'Listening on port ' + service.server.address().port.toString().bold
-        winston.info 'blað'.grey + ' started ' +  'ok'.green.bold
+        LOG.info 'Listening on port ' + service.server.address().port.toString().bold
+        LOG.info 'blað'.grey + ' started ' +  'ok'.green.bold
         # Callback?
         if done and typeof done is 'function' then done service
     
     na = (err) ->
         try
             err = JSON.parse(err)
-            winston.error err.error.message or err.message or err
+            LOG.error err.error.message or err.message or err
         catch e
-            winston.error err
+            LOG.error err
 
     # What is the environment?
     if process.env.NODE_ENV isnt 'test'
         # CLI output on the default output?
-        winston.cli()
+        LOG = winston.loggers.get 'cli'
 
         # Set site path on us.
         SITE_PATH = dir
 
         # Actual sequence goes here.
-        Q.fcall(welcome).then(config).then(welcome).then(compile).then(include).then(startup).then(map).done(ya, na)
+        Q.fcall(welcome).then(config).then(compile).then(include).then(startup).then(map).done(ya, na)
     
     else
         # Go silent.
         winston.loggers.add 'dummy', 'console': 'silent': true
-        winston = winston.loggers.get 'dummy'
+        LOG = winston.loggers.get 'dummy'
 
         # Under test condition.
         Q.fcall(config).then(startup).done(ya, na)

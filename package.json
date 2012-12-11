@@ -20,7 +20,8 @@
         "crypto": "0.0.3",
         "q": "0.8.10",
         "winston": "0.6.2",
-        "wrench": "1.4.4"
+        "wrench": "1.4.4",
+        "marked": "0.2.6"
     },
     "repository": {
         "type": "git",

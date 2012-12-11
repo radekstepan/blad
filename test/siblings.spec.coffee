@@ -2,12 +2,9 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-exported = require('../server.coffee')
-app = exported.app
-blað = exported.blað
-config = exported.config
+{ start, blað } = require('../blad.coffee')
 
-config.browserid.hashes = [ '@dummy' ]
+config = 'env': 'test', 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
@@ -22,18 +19,20 @@ blað.types.SiblingsDocument = SiblingsDocument
 
 # -------------------------------------------------------------------
 
-url = "http://127.0.0.1:#{config.port}"
+url = 'http://127.0.0.1'
 
 describe "siblings of a document", ->
 
     before (done) ->
-        app.start()
-        
-        app.db (collection) ->
-            collection.remove {}, (error, removed) ->
-                collection.find({}).toArray (error, results) ->
-                    results.length.should.equal 0
-                    done()
+        start config, null, (service) ->
+            service.db (collection) ->
+                collection.remove {}, (error, removed) ->
+                    collection.find({}).toArray (error, results) ->
+                        results.length.should.equal 0
+                        # Set the service port on the main url.
+                        url = [ url , service.server.address().port ].join(':')
+                        # Callback.
+                        done()
 
     describe "create lvl0 document", ->
         it 'should return 201', (done) ->
