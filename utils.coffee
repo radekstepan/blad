@@ -80,62 +80,83 @@ exports.include =
 exports.db =
     # Export the database into a JSON file.
     'export': (cfg, dir, done) ->
-        EE.emit 'log', 'Exporting the database'
-
+        # Try to create folder if not exists.
+        ( do ->
+            EE.emit 'log', 'Create directory for dump'
+            def = Q.defer()
+            fs.mkdir "#{dir}/dump", (err) -> if err and err.code isnt 'EEXIST' then def.reject(err) else def.resolve()
+            def.promise
         # Connect to MongoDB.
-        mongodb.Db.connect cfg.mongodb, (err, connection) ->
-            throw err if err
-            
-            # Get the collection.
-            connection.collection 'documents', (err, collection) ->
-                throw err if err
-                
-                # Dump the DB.
-                collection.find({}, 'sort': 'url').toArray (err, docs) ->
-                    throw err if err
-                    
-                    # Try to create folder if not exists.
-                    fs.mkdir "#{dir}/dump", (err) ->
-                        if err and err.code isnt 'EEXIST' then throw err
-
-                        # Open file for writing.
-                        fs.open "#{dir}/dump/data.json", 'w', 0o0666, (err, id) ->
-                            throw err if err
-                            
-                            # Write file.
-                            fs.write id, JSON.stringify(docs, null, 4), null, 'utf8'
-
-                            # Callback?
-                            if done and typeof(done) is 'function' then done()
+        ).then( ->
+            connect(cfg.mongodb, 'documents')
+        # Dump the DB.
+        ).then( (collection) ->
+            EE.emit 'log', 'Dump the database'
+            def = Q.defer()
+            collection.find({}, 'sort': 'url').toArray (err, docs) -> if err then def.reject(err) else def.resolve(docs)
+            def.promise
+        # Open file for writing and write file.
+        ).then( (docs) ->
+            EE.emit 'log', 'Write file'
+            def = Q.defer()
+            fs.open "#{dir}/dump/data.json", 'w', 0o0666, (err, id) ->
+                if err then def.reject(err)
+                else
+                    fs.write id, JSON.stringify(docs, null, 4), null, 'utf8'
+                    def.resolve()
+            def.promise
+        # Callback or die.
+        ).done(
+            ->
+                if done and typeof(done) is 'function' then done()
+                else process.exit()
+            , (err) ->
+                try
+                    err = JSON.parse(err)
+                    console.log err.error.message or err.message or err
+                catch e
+                    console.log err
+                process.exit()
+        )
 
     # Clears all! and imports the database from a JSON file.
-    'import': ->
-        EE.emit 'log', 'Importing the database'
-
+    'import': (cfg, dir, done) ->
         # Connect to MongoDB.
-        mongodb.Db.connect cfg.mongodb, (err, connection) ->
-            throw err if err
-            
-            # Get the collection.
-            connection.collection 'documents', (err, collection) ->
-                throw err if err
-                
-                # Clear all
-                collection.remove {}, (err) ->
-                    throw err if err
+        connect(cfg.mongodb, 'documents'
+        # Clear all.
+        ).then( (collection) ->
+            EE.emit 'log', 'Clear database'
+            def = Q.defer()
+            collection.remove {}, (err) -> if err then def.reject(err) else def.resolve(collection)
+            def.promise
+        # Read file and make into JSON.
+        ).then( (collection) ->
+            EE.emit 'log', 'Read dump file'
+            [ collection, JSON.parse(fs.readFileSync("#{dir}/dump/data.json", 'utf-8')) ]
+        # Clean up docs from `_id` keys.
+        ).then( ([ collection, docs ]) ->
+            EE.emit 'log', 'Cleanup `_id`'
+            [ collection, ( ( delete doc._id ; doc ) for doc in docs ) ]
+        # Insert all.
+        ).then( ([ collection, docs ]) ->
+            EE.emit 'log', 'Insert into database'
+            def = Q.defer()
+            collection.insert docs, { 'safe': true }, (err, docs) -> if err then def.reject(err) else def.resolve()
+            def.promise
+        # Callback or die.
+        ).done(
+            ->
+                if done and typeof(done) is 'function' then done()
+                else process.exit()
+            , (err) ->
+                try
+                    err = JSON.parse(err)
+                    console.log err.error.message or err.message or err
+                catch e
+                    console.log err
+                process.exit()
+        )
 
-                    # Read file and make into JSON.
-                    docs = JSON.parse fs.readFileSync "#{dir}/dump/data.json", 'utf-8'
-
-                    # Clean up docs from `_id` keys.
-                    docs = ( ( delete doc._id ; doc ) for doc in docs )
-
-                    # Insert all.
-                    collection.insert docs, { 'safe': true }, (err, docs) ->
-                        throw err if err
-
-                        # Callback?
-                        if done and typeof(done) is 'function' then done()
 
 # -------------------------------------------------------------------
 
@@ -185,3 +206,20 @@ write = (path, text, mode = "w") ->
         writeFile path
     else
         writeFile path
+
+# Connect to a MongoDB database.
+connect = (uri, collection) ->
+    EE.emit 'log', 'Connect to MongoDB'
+
+    def = Q.defer()
+
+    # Connect to MongoDB.
+    mongodb.Db.connect uri, (err, connection) ->
+        if err then def.reject err
+        else    
+            # Get the collection.
+            connection.collection collection, (err, coll) ->
+                if err then def.reject err
+                else def.resolve coll
+
+    def.promise
