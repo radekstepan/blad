@@ -585,7 +585,7 @@ exports.start = (cfg, dir, done) ->
         CONFIG = JSON.parse JSON.stringify cfg
     
     # Go env or config? And validate.
-    welcome = ->
+    validate = ->
         LOG.debug 'Validate config'
 
         # Resolve config coming from environment and the `cfg` dict.
@@ -625,11 +625,8 @@ exports.start = (cfg, dir, done) ->
         ]
 
     # Include site's presenters on us.
-    include = ->
+    include = ([ undefineds..., presenters ]) ->
         LOG.debug 'Including custom presenters'
-
-        # Get just the presenters received last.
-        presenters = arguments[presenters.length - 1]
 
         # Traverse all plain functions.
         for f in presenters
@@ -653,7 +650,7 @@ exports.start = (cfg, dir, done) ->
         def.promise
 
     # Map all existing public documents.
-    map = ->
+    map = (service) ->
         LOG.debug 'Map existing documents'
 
         def = Q.defer()
@@ -684,15 +681,15 @@ exports.start = (cfg, dir, done) ->
 
     # What is the environment?
     if process.env.NODE_ENV isnt 'test'
-        # CLI output on the default output?
-        LOG = winston.loggers.get 'cli'
+        # CLI output.
+        winston.cli()
+        LOG = winston
 
         # Set site path on us.
         SITE_PATH = dir
 
         # Actual sequence goes here.
-        Q.fcall(welcome).then(config).then(compile).then(include).then(startup).then(map).done(ya, na)
-    
+        Q.fcall(welcome).then(config).then(validate).then(compile).then(include).then(startup).then(map).done(ya, na)
     else
         # Go silent.
         winston.loggers.add 'dummy', 'console': 'silent': true
