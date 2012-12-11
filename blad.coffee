@@ -28,7 +28,7 @@ setup = (SERVICE) ->
             # Have a nice favicon.
             connect.favicon()
             # Static file serving.
-            connect.static __dirname
+            connect.static __dirname + '/public'
             # Authorize all calls to the API.
             (req, res, next) ->
                 if req.url.match(new RegExp("^/api", 'i'))
@@ -49,7 +49,7 @@ setup = (SERVICE) ->
                     next()
         ]
         'onError': (err, req, res) ->
-            # Trying to reach a 'page' on admin
+            # Trying to reach a 'page' on admin?
             if err.status is 404 and req.url.match(new RegExp("^/admin", 'i'))?
                 res.redirect '/admin', 301
             else
