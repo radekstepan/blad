@@ -3,10 +3,11 @@ fs     = require 'fs'
 cs     = require 'coffee-script'
 eco    = require 'eco'
 uglify = require 'uglify-js'
+wrench = require 'wrench'
 Q      = require 'q'
 
 # Compile API server and admin client code.
-exports.compile =    
+exports.compile =
     #Admin client code.
     'admin': ->
         def = Q.defer()
@@ -47,6 +48,10 @@ exports.compile =
             def.resolve()
 
         def.promise
+
+exports.copy =
+    # Copy over site's public files.
+    'public': (dir) -> wrench.copyDirSyncRecursive "#{dir}/src/public", "#{__dirname}/public/site"
 
 exports.include =
     # Get a list of presenter paths to includ in super.

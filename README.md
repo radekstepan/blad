@@ -80,9 +80,10 @@ Represented by a `presenter.coffee` file.
 Each document has a custom class that determines how it is rendered. It has to only have a `render` function defined that takes a callback with contect that is passed to a template. As an example of Markdown rendering that returns the HTML result under the `html` key:
 
 ```coffeescript
-marked = require 'marked'
+{ blað } = require 'blad'
+marked   = require 'marked'
 
-class exports.MarkdownDocument
+class exports.MarkdownDocument extends blað.Type
 
     # Presentation for the document.
     render: (done) -> done 'html': marked @markup
