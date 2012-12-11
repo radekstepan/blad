@@ -12,6 +12,11 @@ Q        = require 'q'
 domain   = require 'domain' # experimental!
 winston  = require 'winston'
 
+# Our utilities.
+utils = require './utils.coffee'
+# Export the database in/out scripts.
+exports.db = utils.db
+
 # The config once set.
 CONFIG = {}
 # The MongoDB connection once set.
@@ -614,10 +619,8 @@ exports.start = (cfg, dir, done) ->
     compile = ->
         LOG.debug 'Compile code, copy public site files'
 
-        utils = require './utils.coffee'
-
         # Attach my logger.
-        utils.log (message) -> winston.debug message
+        utils.log (message) -> LOG.debug message
 
         # Compile our and their code.
         Q.all [

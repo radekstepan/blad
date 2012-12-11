@@ -1,11 +1,12 @@
 #!/usr/bin/env coffee
-fs     = require 'fs'
-cs     = require 'coffee-script'
-eco    = require 'eco'
-uglify = require 'uglify-js'
-wrench = require 'wrench'
-events = require 'events'
-Q      = require 'q'
+fs      = require 'fs'
+cs      = require 'coffee-script'
+eco     = require 'eco'
+uglify  = require 'uglify-js'
+wrench  = require 'wrench'
+events  = require 'events'
+mongodb = require 'mongodb'
+Q       = require 'q'
 
 # Use events to capture what has happened.
 EE = new events.EventEmitter()
@@ -63,7 +64,7 @@ exports.copy =
     # Copy over site's public files.
     'public': (dir) ->
         EE.emit 'log', 'Copying site\'s public files'
-        
+
         wrench.copyDirSyncRecursive "#{dir}/src/public", "#{__dirname}/public/site"
 
 exports.include =
@@ -78,38 +79,63 @@ exports.include =
 
 exports.db =
     # Export the database into a JSON file.
-    'export': ->
+    'export': (cfg, dir, done) ->
         EE.emit 'log', 'Exporting the database'
 
-        blad.app.db (collection) ->
-            # Dump the DB.
-            collection.find({}, 'sort': 'url').toArray (err, docs) ->
+        # Connect to MongoDB.
+        mongodb.Db.connect cfg.mongodb, (err, connection) ->
+            throw err if err
+            
+            # Get the collection.
+            connection.collection 'documents', (err, collection) ->
                 throw err if err
-
-                # Open file for writing.
-                fs.open "./dump/data.json", 'w', 0o0666, (err, id) ->
+                
+                # Dump the DB.
+                collection.find({}, 'sort': 'url').toArray (err, docs) ->
                     throw err if err
                     
-                    # Write file.
-                    fs.write id, JSON.stringify(docs, null, "\t"), null, "utf8"
+                    # Try to create folder if not exists.
+                    fs.mkdir "#{dir}/dump", (err) ->
+                        if err and err.code isnt 'EEXIST' then throw err
+
+                        # Open file for writing.
+                        fs.open "#{dir}/dump/data.json", 'w', 0o0666, (err, id) ->
+                            throw err if err
+                            
+                            # Write file.
+                            fs.write id, JSON.stringify(docs, null, 4), null, 'utf8'
+
+                            # Callback?
+                            if done and typeof(done) is 'function' then done()
+
     # Clears all! and imports the database from a JSON file.
     'import': ->
         EE.emit 'log', 'Importing the database'
 
-        blad.app.db (collection) ->
-            # Clear all
-            collection.remove {}, (err) ->
+        # Connect to MongoDB.
+        mongodb.Db.connect cfg.mongodb, (err, connection) ->
+            throw err if err
+            
+            # Get the collection.
+            connection.collection 'documents', (err, collection) ->
                 throw err if err
-
-                # Read file and make into JSON.
-                docs = JSON.parse fs.readFileSync "./dump/data.json", "utf-8"
-
-                # Clean up docs from `_id` keys.
-                docs = ( ( delete doc._id ; doc ) for doc in docs )
-
-                # Insert all.
-                collection.insert docs, { 'safe': true }, (err, docs) ->
+                
+                # Clear all
+                collection.remove {}, (err) ->
                     throw err if err
+
+                    # Read file and make into JSON.
+                    docs = JSON.parse fs.readFileSync "#{dir}/dump/data.json", 'utf-8'
+
+                    # Clean up docs from `_id` keys.
+                    docs = ( ( delete doc._id ; doc ) for doc in docs )
+
+                    # Insert all.
+                    collection.insert docs, { 'safe': true }, (err, docs) ->
+                        throw err if err
+
+                        # Callback?
+                        if done and typeof(done) is 'function' then done()
 
 # -------------------------------------------------------------------
 
