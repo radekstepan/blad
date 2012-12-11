@@ -84,7 +84,8 @@ setup = (SERVICE) ->
 
                     mongodb.Db.connect CONFIG.mongodb, (err, connection) ->
                         throw err if err
-                        winston.info 'Connected to ' + CONFIG.mongodb.bold
+                        mcfg = connection.serverConfig
+                        winston.info 'Connected to ' + "mongodb://#{mcfg.host}:#{mcfg.port}/#{mcfg.dbInstance.databaseName}".bold
                         DB = connection
                         collection done
                 else
@@ -556,14 +557,8 @@ exports.blað = blað
 
 # Exposed firestarter that builds the site and starts the SERVICE.
 exports.start = (cfg, dir, done) ->
-    # CLI output on the default output?
-    winston.cli()
-
-    # Set site path on us.
-    SITE_PATH = dir
-
     # Welcome.
-    ( do ->
+    welcome = ->
         def = Q.defer()
 
         winston.info "Welcome to #{'blað'.grey}"
@@ -582,13 +577,13 @@ exports.start = (cfg, dir, done) ->
         def.promise
 
     # Deep copy of config (and check dict passed in).
-    ).then( ->
+    config = ->
         winston.debug 'Duplicate config'
-
+        
         CONFIG = JSON.parse JSON.stringify cfg
     
     # Go env or config? And validate.
-    ).then( ->
+    welcome = ->
         winston.debug 'Validate config'
 
         # Resolve config coming from environment and the `cfg` dict.
@@ -614,7 +609,7 @@ exports.start = (cfg, dir, done) ->
             CONFIG.browserid.hashes.push crypto.createHash('md5').update(email + CONFIG.browserid.salt).digest('hex')
 
     # Code compilation.
-    ).then( ->
+    compile = ->
         winston.debug 'Compile code, copy public site files'
 
         utils = require './utils.coffee'
@@ -628,8 +623,11 @@ exports.start = (cfg, dir, done) ->
         ]
 
     # Include site's presenters on us.
-    ).then( ([ α, β, γ, presenters ]) ->
+    include = ->
         winston.debug 'Including custom presenters'
+
+        # Get just the presenters received last.
+        presenters = arguments[presenters.length - 1]
 
         # Traverse all plain functions.
         for f in presenters
@@ -641,7 +639,7 @@ exports.start = (cfg, dir, done) ->
             blað.types[key] = req[key]
 
     # Start flatiron service on a port.
-    ).then( ->
+    startup = ->
         winston.debug 'Setup & start ' + 'flatiron'.grey
 
         def = Q.defer()
@@ -653,7 +651,7 @@ exports.start = (cfg, dir, done) ->
         def.promise
 
     # Map all existing public documents.
-    ).then( (service) ->
+    map = ->
         winston.debug 'Map existing documents'
 
         def = Q.defer()
@@ -666,17 +664,37 @@ exports.start = (cfg, dir, done) ->
                 def.resolve service
         def.promise
 
-    # OK or bust.
-    ).done(
-        (service) ->
-            winston.info 'Listening on port ' + service.server.address().port.toString().bold
-            winston.info 'blað'.grey + ' started ' +  'ok'.green.bold
-            # Callback?
-            if done and typeof done is 'function' then done()
-        , (err) ->
-            try
-                err = JSON.parse(err)
-                winston.error err.error.message or err.message or err
-            catch e
-                winston.error err
-    )
+    # OK or bust?
+    ya = (service) ->
+        winston.debug 'Done'
+
+        winston.info 'Listening on port ' + service.server.address().port.toString().bold
+        winston.info 'blað'.grey + ' started ' +  'ok'.green.bold
+        # Callback?
+        if done and typeof done is 'function' then done service
+    
+    na = (err) ->
+        try
+            err = JSON.parse(err)
+            winston.error err.error.message or err.message or err
+        catch e
+            winston.error err
+
+    # What is the environment?
+    if process.env.NODE_ENV isnt 'test'
+        # CLI output on the default output?
+        winston.cli()
+
+        # Set site path on us.
+        SITE_PATH = dir
+
+        # Actual sequence goes here.
+        Q.fcall(welcome).then(config).then(welcome).then(compile).then(include).then(startup).then(map).done(ya, na)
+    
+    else
+        # Go silent.
+        winston.loggers.add 'dummy', 'console': 'silent': true
+        winston = winston.loggers.get 'dummy'
+
+        # Under test condition.
+        Q.fcall(config).then(startup).done(ya, na)
