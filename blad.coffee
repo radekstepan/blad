@@ -124,10 +124,10 @@ setup = (SERVICE) ->
                             'email': body.email
                             'key':   crypto.createHash('md5').update(body.email + CONFIG.browserid.salt).digest('hex')
                     else
-                        LOG.warning "#{body.email} tried to access the API"
+                        LOG.warn "#{body.email} tried to access the API"
                         @res.writeHead 403, 'application/json'
                         @res.write JSON.stringify
-                            'message': "Your email #{body.email} is not authorized to access the SERVICE"
+                            'message': "Your email #{body.email} is not authorized to access the admin backend"
                 else
                     # Pass on the authentication error response to the client.
                     LOG.error body.message

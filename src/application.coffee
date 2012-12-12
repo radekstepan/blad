@@ -73,7 +73,7 @@ define [
                     # Let us know...
                     $('#app').append $ '<div/>',
                         'class': 'alert-box alert'
-                        'text':  res.message
+                        'text':  JSON.parse(res.responseText).message
 
         # Override standard layout initializer
         # ------------------------------------
