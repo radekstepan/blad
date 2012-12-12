@@ -6,32 +6,17 @@ The idea was to create a RESTful CMS API that would be edited using a client sid
 
 ![image](https://raw.github.com/radekstepan/blad/master/example.png)
 
-## Start the service and admin app
+## Getting started
 
-Configure the `salt` and emails of `users` that are allowed access to the admin area and `port` number for the server and uri for `mongodb` in `config.json`.
+The way to use this CMS is to require it as a package. See [blað example site](https://github.com/radekstepan/blad-example-site) for a guide on how to do so. If you know what you are doing, require and start the service like so:
 
-Install [MongoDB](http://www.mongodb.org/display/DOCS/Quickstart) and start the service.
+```coffeescript
+fs      = require 'fs'
+service = require 'blad'
 
-```bash
-$ sudo mongod
+config = JSON.parse fs.readFileSync './config.json'
+service.start config, __dirname
 ```
-
-We wrap the compilation of user code and core code using `cake` but first, dependencies need to be met.
-
-```bash
-$ npm install -d
-$ npm start
-```
-
-Visit [http://127.0.0.1:1118/admin](http://127.0.0.1:1118/admin) and modify port number as appropriate.
-
-## Export/import a database
-
-```bash
-$ ./node_modules/.bin/cake <export/import>
-```
-
-It uses the file in `./dump/data.json`.
 
 ## Creating custom document types
 
