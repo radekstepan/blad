@@ -34,12 +34,7 @@ setup = (SERVICE) ->
         'before': [
             # Have a nice favicon.
             connect.favicon()
-            
-            # Remove the custom root prefix from all public URLs so we can map to internal routes.
-            (req, res, next) ->
-                if req.url.indexOf(CONFIG.root) is 0 then req.url = req.url.replace CONFIG.root, ''
-                next()
-            
+
             # Static file serving.
             connect.static __dirname + '/public'
             
@@ -607,7 +602,6 @@ exports.start = (cfg, dir, done) ->
         CONFIG.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
         CONFIG.browserid     ?= {}
         CONFIG.browserid.salt = process.env.API_SALT or CONFIG.browserid.salt # API key salt
-        CONFIG.root           = CONFIG.root or '/'                            # root directory where the service is deployed
 
         # Validate file.
         if not CONFIG.browserid? or
@@ -641,7 +635,7 @@ exports.start = (cfg, dir, done) ->
 
     # Include site's presenters on us.
     include = ([ undefineds..., presenters ]) ->
-        LOG.debug 'Including custom presenters'
+        LOG.debug 'Including custom presenters: ' + ( ( p = f.split('/'); p[p.length - 2] ) for f in presenters ).join(', ')
 
         # Traverse all plain functions.
         for f in presenters
@@ -698,6 +692,9 @@ exports.start = (cfg, dir, done) ->
     if process.env.NODE_ENV isnt 'test'
         # CLI output.
         winston.cli()
+        # File output.
+        winston.add winston.transports.File, 'filename': "#{__dirname}/blad.log"
+        # Expose.
         LOG = winston
 
         # Set site path on us.
