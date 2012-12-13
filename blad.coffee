@@ -29,13 +29,20 @@ LOG = null
 blað = 'types': {}
 
 setup = (SERVICE) ->
-    # HTTP plugins.
+    # HTTP plugin.
     SERVICE.use flatiron.plugins.http,
         'before': [
             # Have a nice favicon.
             connect.favicon()
+            
+            # Remove the custom root prefix from all public URLs so we can map to internal routes.
+            (req, res, next) ->
+                if req.url.indexOf(CONFIG.root) is 0 then req.url = req.url.replace CONFIG.root, ''
+                next()
+            
             # Static file serving.
             connect.static __dirname + '/public'
+            
             # Authorize all calls to the API.
             (req, res, next) ->
                 if req.url.match(new RegExp("^/api", 'i'))
@@ -600,6 +607,7 @@ exports.start = (cfg, dir, done) ->
         CONFIG.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
         CONFIG.browserid     ?= {}
         CONFIG.browserid.salt = process.env.API_SALT or CONFIG.browserid.salt # API key salt
+        CONFIG.root           = CONFIG.root or '/'                            # root directory where the service is deployed
 
         # Validate file.
         if not CONFIG.browserid? or
