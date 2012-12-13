@@ -56,6 +56,7 @@ setup = (SERVICE) ->
                     next()
         ]
         'onError': (err, req, res) ->
+            LOG.error err.message
             # Trying to reach a 'page' on admin?
             if err.status is 404 and req.url.match(new RegExp("^/admin", 'i'))?
                 res.redirect '/admin', 301
