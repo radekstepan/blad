@@ -409,6 +409,13 @@ setup = (SERVICE) ->
 
                             # Give us the data.
                             presenter.render (context, template=true) =>
+                                # http://www.w3.org/Protocols/HTTP/HTRQ_Headers.html#z3
+                                accept = @req?.headers?.accept
+                                if accept
+                                    for part in accept.split(';')
+                                        if part.indexOf('application/json') isnt -1
+                                            template = false
+
                                 if template
                                     # Render as HTML using template.
                                     SERVICE.eco "#{record.type}/template", context, (err, html) =>
@@ -423,6 +430,9 @@ setup = (SERVICE) ->
                                                 @res.write if err then html else layout
                                                 @res.end()
                                 else
+                                    # Remove functions from context.
+                                    ( delete context[key] for key in [ 'store', 'service' ] )
+
                                     # Render as is, JSON.
                                     @res.writeHead 200, 'content-type': 'application/json'
                                     @res.write JSON.stringify context
