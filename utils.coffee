@@ -102,8 +102,7 @@ exports.db =
             fs.open "#{dir}/dump/data.json", 'w', 0o0666, (err, id) ->
                 if err then def.reject(err)
                 else
-                    fs.write id, JSON.stringify(docs, null, 4), null, 'utf8'
-                    def.resolve()
+                    fs.write id, JSON.stringify(docs, null, 4), null, 'utf8', -> def.resolve()
             def.promise
         # Callback or die.
         ).done(
@@ -123,16 +122,16 @@ exports.db =
     'import': (cfg, dir, done) ->
         # Connect to MongoDB.
         connect(cfg.mongodb, 'documents'
-        # Clear all.
-        ).then( (collection) ->
-            EE.emit 'log', 'Clear database'
-            def = Q.defer()
-            collection.remove {}, (err) -> if err then def.reject(err) else def.resolve(collection)
-            def.promise
         # Read file and make into JSON.
         ).then( (collection) ->
             EE.emit 'log', 'Read dump file'
             [ collection, JSON.parse(fs.readFileSync("#{dir}/dump/data.json", 'utf-8')) ]
+        # Clear all.
+        ).then( ([ collection, docs ]) ->
+            EE.emit 'log', 'Clear database'
+            def = Q.defer()
+            collection.remove {}, (err) -> if err then def.reject(err) else def.resolve([ collection, docs ])
+            def.promise
         # Clean up docs from `_id` keys.
         ).then( ([ collection, docs ]) ->
             EE.emit 'log', 'Cleanup `_id`'
