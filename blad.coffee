@@ -373,10 +373,14 @@ setup = (SERVICE) ->
         @get ->
             # Get the doc(s) from the db. We want to get the whole 'group'.
             SERVICE.db (collection) =>
-                collection.find({'url': new RegExp('^' + @req.url.toLowerCase())}, {'sort': 'url'}).toArray (err, docs) =>
+                # A URL might have parameters, only keep the pathname; #80
+                url = urlib.parse(@req.url, true).pathname.toLowerCase()
+
+                collection.find({'url': new RegExp('^' + url)}, {'sort': 'url'}).toArray (err, docs) =>
                     throw err if err
 
-                    record = docs[0]
+                    # Did we actually get anything?
+                    unless record = docs[0] then throw 'Bad request URL, need to get a pathname only'
 
                     # Any children?
                     if docs.length > 1 then record._children = (d for d in docs[1...docs.length])
