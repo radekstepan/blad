@@ -3,7 +3,7 @@
     "description": "A forms based node.js CMS ala SilverStripe, but smaller",
     "keywords": [ "cms" ],
     "author": "Radek <rs676@cam.ac.uk>",
-    "version": "2.1.1",
+    "version": "2.2.0",
     "engines": {
         "node": "0.8.x",
         "npm": "1.1.x"
@@ -23,7 +23,8 @@
         "q": "0.8.10",
         "winston": "0.6.2",
         "wrench": "1.4.4",
-        "marked": "0.2.6"
+        "marked": "0.2.6",
+        "underscore": "1.4.4"
     },
     "repository": {
         "type": "git",

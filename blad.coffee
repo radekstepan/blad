@@ -11,6 +11,7 @@ eco      = require 'eco'
 Q        = require 'q'
 domain   = require 'domain' # experimental!
 winston  = require 'winston'
+{ _ }    = require 'underscore'
 
 # Our utilities.
 utils = require './utils.coffee'
@@ -311,7 +312,7 @@ setup = (SERVICE) ->
         if doc.url.match(new RegExp("^/admin|^/api|^/auth|^/sitemap.xml", 'i'))?
             cb true, 'url': 'Is in use by core application'
         else
-            # Is the URL mSERVICEable?
+            # Is the URL mappable?
             m = doc.url.match(new RegExp(/^\/(\S*)$/))
             if !m then cb true, 'url': 'Does that look valid to you?'
             else
@@ -424,8 +425,10 @@ setup = (SERVICE) ->
                                             @res.write err.message
                                             @res.end()
                                         else
+                                            # Create a new context boosted with the page html.
+                                            context = _.extend 'page': html, context
                                             # Do we have a layout template to render to?
-                                            SERVICE.eco 'layout', 'page': html, (err, layout) =>
+                                            SERVICE.eco 'layout', context, (err, layout) =>
                                                 @res.writeHead 200, 'content-type': 'text/html'
                                                 @res.write if err then html else layout
                                                 @res.end()
