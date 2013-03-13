@@ -313,7 +313,11 @@ setup = (SERVICE) ->
             cb true, 'url': 'Is in use by core application'
         else
             # Is the URL mappable?
-            m = doc.url.match(new RegExp(/^\/(\S*)$/))
+            try
+                decodeURIComponent(doc.url) # issue #85
+                m = doc.url.match(new RegExp(/^\/(\S*)$/))
+            catch e
+                # Silence!
             if !m then cb true, 'url': 'Does that look valid to you?'
             else
                 SERVICE.db (collection) ->
@@ -675,7 +679,7 @@ exports.start = (cfg, dir, done) ->
             else def.resolve service
         def.promise
 
-    # Map all existing public documents.
+    # Map all existing public documents, no checking whether they are OK...
     map = (service) ->
         LOG.debug 'Map existing documents'
 
