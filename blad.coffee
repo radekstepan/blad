@@ -32,7 +32,7 @@ blað = 'types': {}
 setup = (SERVICE) ->
     # HTTP plugin.
     SERVICE.use flatiron.plugins.http,
-        'before': [
+        'before': CONFIG.middleware.concat [
             # Have a nice favicon.
             connect.favicon()
 
@@ -623,6 +623,7 @@ exports.start = (cfg, dir, done) ->
         CONFIG.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
         CONFIG.browserid     ?= {}
         CONFIG.browserid.salt = process.env.API_SALT or CONFIG.browserid.salt # API key salt
+        CONFIG.middleware    ?= []
 
         # Validate file.
         if not CONFIG.browserid? or
@@ -638,6 +639,16 @@ exports.start = (cfg, dir, done) ->
         CONFIG.browserid.hashes = []
         for email in CONFIG.browserid.users
             CONFIG.browserid.hashes.push crypto.createHash('md5').update(email + CONFIG.browserid.salt).digest('hex')
+
+        # Using middleware?
+        use = (pkg) ->            
+            switch pkg
+                when 'connect-baddies'
+                    return do require pkg
+                else
+                    throw new Error "Unknown middleware `#{pkg}`"
+        
+        CONFIG.middleware = ( use('connect-' + suffix) for suffix in CONFIG.middleware)
 
     # Code compilation.
     compile = ->
