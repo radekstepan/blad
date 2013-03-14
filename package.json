@@ -32,7 +32,7 @@
         "url": "https://github.com/radekstepan/blad.git"
     },
     "scripts": {
-        "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha --compilers coffee:coffee-script --ui bdd --reporter spec"
+        "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha --compilers coffee:coffee-script --ui bdd --reporter spec --bail"
     },
     "bin": {
         "blad": "./bin/blad"

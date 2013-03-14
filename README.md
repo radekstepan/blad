@@ -2,6 +2,8 @@
 
 A forms based [node.js](http://nodejs.org/) CMS ala [SilverStripe](http://www.silverstripe.com/), but smaller.
 
+[ ![Codeship Status for radekstepan/blad](https://www.codeship.io/projects/2629dad0-6f02-0130-c859-22000a1d8b6d/status?branch=master)](https://www.codeship.io/projects/1939)
+
 The idea was to create a RESTful CMS API that would be edited using a client side app. On the backend, we use [flatiron](http://flatironjs.org/) and on the frontend [chaplin](https://github.com/chaplinjs/chaplin) that itself wraps [Backbone.js](http://documentcloud.github.com/backbone/).
 
 ![image](https://raw.github.com/radekstepan/blad/master/example.png)

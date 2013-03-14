@@ -4,7 +4,7 @@ querystring = require 'querystring'
 
 { start, blað } = require('../blad.coffee')
 
-config = 'env': 'test', 'browserid': 'hashes': [ '@dummy' ]
+config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
