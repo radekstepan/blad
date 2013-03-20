@@ -2,20 +2,20 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class ParentDocument extends blað.Type
+class ParentDocument extends blad.Type
 
     # Render as JSON as is.
     render: (done) ->
         @parent (doc) ->
             done doc, false
 
-blað.types.ParentDocument = ParentDocument
+blad.types.ParentDocument = ParentDocument
 
 # -------------------------------------------------------------------
 

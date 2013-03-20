@@ -2,15 +2,15 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class SitemapDocument extends blað.Type
+class SitemapDocument extends blad.Type
 
-blað.types.SitemapDocument = SitemapDocument
+blad.types.SitemapDocument = SitemapDocument
 
 # -------------------------------------------------------------------
 

@@ -2,13 +2,13 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class HasChildrenDocument extends blað.Type
+class HasChildrenDocument extends blad.Type
 
     render: (done) ->
         done
@@ -17,7 +17,7 @@ class HasChildrenDocument extends blað.Type
             'lvl1': @children 1
         , false
 
-blað.types.HasChildrenDocument = HasChildrenDocument
+blad.types.HasChildrenDocument = HasChildrenDocument
 
 # -------------------------------------------------------------------
 

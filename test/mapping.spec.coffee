@@ -2,13 +2,13 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class DummyDocument extends blað.Type
+class DummyDocument extends blad.Type
 
     # Render as JSON as is.
     render: (done) ->
@@ -18,7 +18,7 @@ class DummyDocument extends blað.Type
             '_id':    @_id
         , false
 
-blað.types.DummyDocument = DummyDocument
+blad.types.DummyDocument = DummyDocument
 
 # -------------------------------------------------------------------
 

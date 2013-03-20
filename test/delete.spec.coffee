@@ -2,13 +2,13 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class DeleteDocument extends blað.Type
+class DeleteDocument extends blad.Type
 
     # Render as JSON as is.
     render: (done) ->
@@ -17,7 +17,7 @@ class DeleteDocument extends blað.Type
             'url':  @url
         , false
 
-blað.types.DeleteDocument = DeleteDocument
+blad.types.DeleteDocument = DeleteDocument
 
 # -------------------------------------------------------------------
 

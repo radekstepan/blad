@@ -9,12 +9,12 @@ urlib    = require 'url'
 fs       = require 'fs'
 eco      = require 'eco'
 Q        = require 'q'
-domain   = require 'domain' # experimental!
+domain   = require 'domain'
 winston  = require 'winston'
 { _ }    = require 'underscore'
 
 # Our utilities.
-utils = require './utils.coffee'
+utils = require './utils.js'
 # Export the database in/out scripts.
 exports.db = utils.db
 
@@ -26,8 +26,8 @@ DB = null
 SITE_PATH = null
 # This is where logger will be.
 LOG = null
-# blað in da house.
-blað = 'types': {}
+# blad in da house.
+blad = 'types': {}
 
 setup = (SERVICE) ->
     # HTTP plugin.
@@ -229,7 +229,7 @@ setup = (SERVICE) ->
                 cb = => @res.writeHead 201, "content-type": "application/json"
 
             # One command to save/update and optionaly unmap.
-            blað.save doc, (err, reply) =>
+            blad.save doc, (err, reply) =>
                 if err
                     LOG.error 'I am different...'
 
@@ -241,7 +241,7 @@ setup = (SERVICE) ->
                     if doc.public
                         # Map a document to a public URL.
                         LOG.info 'Mapping url ' + reply.underline
-                        SERVICE.router.path reply, blað.get
+                        SERVICE.router.path reply, blad.get
 
                     # Stringify the new document so Backbone can see what has changed.
                     SERVICE.db (collection) =>
@@ -291,7 +291,7 @@ setup = (SERVICE) ->
                         # Did this doc actually exist?
                         if doc
                             # Unmap the url.
-                            blað.unmap doc.url
+                            blad.unmap doc.url
 
                             # Respond in kind.
                             @res.writeHead 200, "content-type": "application/json"
@@ -303,7 +303,7 @@ setup = (SERVICE) ->
     # -------------------------------------------------------------------
 
     # Save/update a document.
-    blað.save = (doc, cb) ->
+    blad.save = (doc, cb) ->
         # Prefix URL with a forward slash if not present.
         if doc.url[0] isnt '/' then doc.url = '/' + doc.url
         # Remove trailing slash if present.
@@ -346,7 +346,7 @@ setup = (SERVICE) ->
                             else
                                 # Unmap the original URL if it was public.
                                 old = docs.pop()
-                                if old.public then blað.unmap old.url
+                                if old.public then blad.unmap old.url
 
                                 # Get the id and remove the key as we cannot modify that one.
                                 _id = doc._id
@@ -373,7 +373,7 @@ setup = (SERVICE) ->
                                     cb false, records[0].url
 
     # Retrieve publicly mSERVICEed document.
-    blað.get = ->
+    blad.get = ->
         @get ->
             # Get the doc(s) from the db. We want to get the whole 'group'.
             SERVICE.db (collection) =>
@@ -392,7 +392,7 @@ setup = (SERVICE) ->
                     LOG.debug 'Render url ' + (record.url or record._id).underline
 
                     # Do we have this type?
-                    if blað.types[record.type]
+                    if blad.types[record.type]
                         # Create a new domain for the 'untrusted' presenter.
                         doom = domain.create()
 
@@ -414,7 +414,7 @@ setup = (SERVICE) ->
                         # Finally execute the presenter in the domain context.
                         doom.run =>
                             # Init new type passing the data and "this" SERVICE.
-                            presenter = new blað.types[record.type](record, SERVICE)
+                            presenter = new blad.types[record.type](record, SERVICE)
 
                             # Give us the data.
                             presenter.render (context, template=true) =>
@@ -449,13 +449,13 @@ setup = (SERVICE) ->
                                     @res.write JSON.stringify context
                                     @res.end()
                     else
-                        LOG.warn t = "Document type #{record.type} not one of #{Object.keys(blað.types).join(', ')}"
+                        LOG.warn t = "Document type #{record.type} not one of #{Object.keys(blad.types).join(', ')}"
                         @res.writeHead 500
                         @res.write t
                         @res.end()
 
     # Unmap document from router.
-    blað.unmap = (url) ->
+    blad.unmap = (url) ->
         LOG.info 'Delete url ' + url.underline
 
         # A bit of hairy tweaking.
@@ -471,7 +471,7 @@ setup = (SERVICE) ->
                     r = r[parts[i]]
 
 # This gets used circullarly, you DO NOT have access to anything beyond this class.
-class blað.Type
+class blad.Type
 
     # Returns top level documents.
     menu: (cb) ->
@@ -576,7 +576,7 @@ class blað.Type
                     true
 
 # A type that is always present, the default.
-class blað.types.BasicDocument extends blað.Type
+class blad.types.BasicDocument extends blad.Type
 
     # Presentation for the document.
     render: (done) -> done @, false
@@ -584,7 +584,7 @@ class blað.types.BasicDocument extends blað.Type
 # -------------------------------------------------------------------
 
 # Export in order to define custom document types.
-exports.blað = blað
+exports.blad = blad
 
 # Exposed firestarter that builds the site and starts the SERVICE.
 exports.start = (cfg, dir, done) ->
@@ -592,7 +592,7 @@ exports.start = (cfg, dir, done) ->
     welcome = ->
         def = Q.defer()
 
-        LOG.info "Welcome to #{'blað'.grey}"
+        LOG.info "Welcome to #{'blad'.grey}"
 
         fs.readFile "#{__dirname}/logo.txt", (err, data) ->
             if err then def.reject err
@@ -676,7 +676,7 @@ exports.start = (cfg, dir, done) ->
             # Get the first key - a document that will be exposed, hopefully.
             key = Object.keys(req)[0]
             # Extend the function on us.
-            blað.types[key] = req[key]
+            blad.types[key] = req[key]
 
     # Start flatiron service on a port.
     startup = ->
@@ -700,7 +700,7 @@ exports.start = (cfg, dir, done) ->
                 if err then def.reject err
                 for doc in docs
                     LOG.info 'Mapping url ' + doc.url.underline
-                    service.router.path doc.url, blað.get
+                    service.router.path doc.url, blad.get
                 def.resolve service
         def.promise
 
@@ -709,7 +709,7 @@ exports.start = (cfg, dir, done) ->
         LOG.debug 'Done'
 
         LOG.info 'Listening on port ' + service.server.address().port.toString().bold
-        LOG.info 'blað'.grey + ' started ' +  'ok'.green.bold
+        LOG.info 'blad'.grey + ' started ' +  'ok'.green.bold
         # Callback?
         if done and typeof done is 'function' then done service
     

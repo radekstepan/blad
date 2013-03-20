@@ -21,16 +21,16 @@ exports.compile =
 
         def = Q.defer()
 
-        walk "#{__dirname}/src", (files) ->
+        walk "#{__dirname}/admin", (files) ->
             for file in files
                 if file.match /\.eco/
                     name = file.split('/').pop()
                     js = eco.precompile fs.readFileSync file, "utf-8"
                     js = (uglify.minify("JST['#{name}'] = #{js}", 'fromString': true)).code
-                    write file.replace('/src/', '/public/admin/js/').replace('.eco', '.js'), js # what if we have /src/ in deeper?
+                    write file.replace('/admin/', '/public/admin/js/').replace('.eco', '.js'), js # what if we have /admin/ in deeper?
                 else if file.match /\.coffee/
                     js = cs.compile fs.readFileSync(file, "utf-8"), 'bare': 'on'
-                    write file.replace('/src/', '/public/admin/js/').replace('.coffee', '.js'), js # what if we have /src/ in deeper?
+                    write file.replace('/admin/', '/public/admin/js/').replace('.coffee', '.js'), js # what if we have /admin/ in deeper?
 
             def.resolve()
 

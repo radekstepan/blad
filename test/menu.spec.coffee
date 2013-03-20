@@ -2,20 +2,20 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class MenuDocument extends blað.Type
+class MenuDocument extends blad.Type
 
     # Render as JSON as is.
     render: (done) ->
         @menu (docs) ->
             done docs, false
 
-blað.types.MenuDocument = MenuDocument
+blad.types.MenuDocument = MenuDocument
 
 # -------------------------------------------------------------------
 

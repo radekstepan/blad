@@ -2,7 +2,7 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
@@ -10,14 +10,14 @@ config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 marked = require 'marked'
 
-class MarkdownDocument extends blað.Type
+class MarkdownDocument extends blad.Type
 
     render: (done) ->
         done
             'html': marked @markup
         , false
 
-blað.types.MarkdownDocument = MarkdownDocument
+blad.types.MarkdownDocument = MarkdownDocument
 
 # -------------------------------------------------------------------
 

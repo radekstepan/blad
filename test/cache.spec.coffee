@@ -2,13 +2,13 @@ should = require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
-{ start, blað } = require('../blad.coffee')
+{ start, blad } = require '../index.js'
 
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class CacheDocument extends blað.Type
+class CacheDocument extends blad.Type
 
     render: (done) ->
         # Do we have cache already?
@@ -35,7 +35,7 @@ class CacheDocument extends blað.Type
                     'was':  'new'
                 , false
 
-blað.types.CacheDocument = CacheDocument
+blad.types.CacheDocument = CacheDocument
 
 # -------------------------------------------------------------------
 

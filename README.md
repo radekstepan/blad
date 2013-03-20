@@ -119,6 +119,7 @@ Sometimes new data may be fetched from within the Presenter and one would like t
 To run the tests execute the following.
 
 ```bash
+$ npm install
 $ npm test
 ```
 
