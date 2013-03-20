@@ -22,12 +22,13 @@ blad.types.BasicDocument = BasicDocument
 
 # -------------------------------------------------------------------
 
-url = 'http://127.0.0.1'
+url = 'http://127.0.0.1'; app = null
 
 describe "URL parsing vulnerabilities", ->
 
     before (done) ->
         start config, null, (service) ->
+            app = service
             service.db (collection) ->
                 collection.remove {}, (error, removed) ->
                     collection.find({}).toArray (error, results) ->
@@ -36,6 +37,8 @@ describe "URL parsing vulnerabilities", ->
                         url = [ url , service.server.address().port ].join(':')
                         # Callback.
                         done()
+
+    after (done) -> app.server.close done
 
     describe 'create document on /%NETHOOD%/', ->
         it 'should fail mapping', (done) ->

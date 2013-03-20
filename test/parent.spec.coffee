@@ -19,12 +19,13 @@ blad.types.ParentDocument = ParentDocument
 
 # -------------------------------------------------------------------
 
-url = 'http://127.0.0.1'
+url = 'http://127.0.0.1'; app = null
 
 describe "parent document", ->
 
     before (done) ->
         start config, null, (service) ->
+            app = service
             service.db (collection) ->
                 collection.remove {}, (error, removed) ->
                     collection.find({}).toArray (error, results) ->
@@ -33,6 +34,8 @@ describe "parent document", ->
                         url = [ url , service.server.address().port ].join(':')
                         # Callback.
                         done()
+
+    after (done) -> app.server.close done
 
     describe "create lvl0 document", ->
         it 'should return 201', (done) ->

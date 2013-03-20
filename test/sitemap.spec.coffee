@@ -14,12 +14,13 @@ blad.types.SitemapDocument = SitemapDocument
 
 # -------------------------------------------------------------------
 
-url = 'http://127.0.0.1'
+url = 'http://127.0.0.1'; app = null
 
 describe "sitemap.xml", ->
 
     before (done) ->
         start config, null, (service) ->
+            app = service
             service.db (collection) ->
                 collection.remove {}, (error, removed) ->
                     collection.find({}).toArray (error, results) ->
@@ -28,6 +29,8 @@ describe "sitemap.xml", ->
                         url = [ url , service.server.address().port ].join(':')
                         # Callback.
                         done()
+
+    after (done) -> app.server.close done
 
     describe "create a public document", ->
         it 'should return 201', (done) ->
