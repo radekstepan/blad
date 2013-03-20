@@ -3,12 +3,11 @@ request = require 'request'
 querystring = require 'querystring'
 
 { start, blad } = require '../index.js'
-
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class HasChildrenDocument extends blad.Type
+class HasNestedChildrenDocument extends blad.Type
 
     render: (done) ->
         done
@@ -17,7 +16,7 @@ class HasChildrenDocument extends blad.Type
             'lvl1': @children 1
         , false
 
-blad.types.HasChildrenDocument = HasChildrenDocument
+blad.types.HasNestedChildrenDocument = HasNestedChildrenDocument
 
 # -------------------------------------------------------------------
 
@@ -44,7 +43,7 @@ describe "document that has children actions", ->
             request.post
                 'url': "#{url}/api/document"
                 'form':
-                    'type':   'HasChildrenDocument'
+                    'type':   'HasNestedChildrenDocument'
                     'name':   "parent"
                     'url':    "/group1"
                     'public': true
@@ -59,7 +58,7 @@ describe "document that has children actions", ->
             request.post
                 'url': "#{url}/api/document"
                 'form':
-                    'type':   'HasChildrenDocument'
+                    'type':   'HasNestedChildrenDocument'
                     'name':   "child0"
                     'url':    "/group1/child0"
                 'headers':
@@ -73,7 +72,7 @@ describe "document that has children actions", ->
             request.post
                 'url': "#{url}/api/document"
                 'form':
-                    'type':   'HasChildrenDocument'
+                    'type':   'HasNestedChildrenDocument'
                     'name':   "child1"
                     'url':    "/group1/rubbish/child1"
                 'headers':
@@ -91,6 +90,10 @@ describe "document that has children actions", ->
                 # Parse response.
                 children = JSON.parse(body)
 
+                children.should.have.property 'all'
+                children.should.have.property 'lvl0'
+                children.should.have.property 'lvl1'
+
                 clean = []
                 for doc in children.lvl0
                     delete doc._id
@@ -98,7 +101,7 @@ describe "document that has children actions", ->
                     clean.push doc
 
                 clean.should.includeEql
-                    "type": "HasChildrenDocument"
+                    "type": "HasNestedChildrenDocument"
                     "name": "child0"
                     "url":  "/group1/child0"
 
@@ -109,7 +112,7 @@ describe "document that has children actions", ->
                     clean.push doc
 
                 clean.should.includeEql
-                    "type": "HasChildrenDocument"
+                    "type": "HasNestedChildrenDocument"
                     "name": "child1"
                     "url":  "/group1/rubbish/child1"
 
@@ -120,7 +123,7 @@ describe "document that has children actions", ->
             request.post
                 'url': "#{url}/api/document"
                 'form':
-                    'type':   'HasChildrenDocument'
+                    'type':   'HasNestedChildrenDocument'
                     'name':   "parent"
                     'url':    "/"
                     'public': true
@@ -146,7 +149,7 @@ describe "document that has children actions", ->
                 delete clean.modified
 
                 clean.should.eql
-                    "type": "HasChildrenDocument"
+                    "type": "HasNestedChildrenDocument"
                     "name": "parent"
                     "url":  "/group1"
                     "public": true

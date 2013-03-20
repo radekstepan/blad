@@ -3,7 +3,6 @@ request = require 'request'
 querystring = require 'querystring'
 
 { start, blad } = require '../index.js'
-
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------

@@ -3,12 +3,11 @@ request = require 'request'
 querystring = require 'querystring'
 
 { start, blad } = require '../index.js'
-
 config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
 
 # -------------------------------------------------------------------
 
-class BasicDocument extends blad.Type
+class URLDocument extends blad.Type
 
     # Render as JSON as is.
     render: (done) ->
@@ -18,7 +17,7 @@ class BasicDocument extends blad.Type
             'url':  @url
         , false
 
-blad.types.BasicDocument = BasicDocument
+blad.types.URLDocument = URLDocument
 
 # -------------------------------------------------------------------
 
@@ -46,7 +45,7 @@ describe "URL parsing vulnerabilities", ->
                 request.post
                     'url': "#{url}/api/document"
                     'form':
-                        'type':   'BasicDocument'
+                        'type':   'URLDocument'
                         'name':   'nessus'
                         'url':    '/%NETHOOD%/'
                         'public': true
