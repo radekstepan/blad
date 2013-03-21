@@ -23,6 +23,6 @@ cs-compile:
 # Enhance compiled source with jscoverage.
 node-coverage:
 	rm -fr build-cov/
-	@jscoverage build build-cov
+	@jscoverage build build-cov --encoding=UTF-8
 
 .PHONY: test
