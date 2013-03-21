@@ -1,6 +1,6 @@
 node_modules/
-public/site/
-lib-cov/
+build/public/
+build-cov/
 coverage.html
 *.log
 .DS_Store

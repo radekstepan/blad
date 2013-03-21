@@ -1,5 +1,9 @@
 REPORTER = spec
 
+# Run an example site.
+example: cs-compile
+	node ./test/example_site/start.js
+
 # Run Mocha test suite.
 test: cs-compile
 	@NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script --reporter $(REPORTER) --bail
@@ -13,11 +17,12 @@ prep-coverage: cs-compile node-coverage
 
 # Compile CoffeeScript source.
 cs-compile:
-	@./node_modules/.bin/coffee -c -o lib/ src/
+	@rm -fr build/
+	@./node_modules/.bin/coffee -c -o build/server src/server
 
 # Enhance compiled source with jscoverage.
 node-coverage:
-	rm -fr lib-cov/
-	@jscoverage lib lib-cov
+	rm -fr build-cov/
+	@jscoverage build build-cov --encoding=UTF-8
 
 .PHONY: test

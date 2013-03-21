@@ -3,7 +3,7 @@
     "description": "A forms based node.js CMS ala SilverStripe, but smaller",
     "keywords": [ "cms" ],
     "author": "Radek <rs676@cam.ac.uk>",
-    "version": "2.3.3",
+    "version": "3.0.0",
     "preferGlobal": false,
     "engines": {
         "node": "0.8.x",
@@ -12,6 +12,7 @@
     "dependencies": {
         "flatiron": "0.3.4",
         "union": "0.3.7",
+        "director": "1.1.10",
         "winston": "0.6.2",
         "connect": "2.7.3",
         "mongodb": "1.0.2",
@@ -19,7 +20,7 @@
         "request": "2.14.0",
         "uglify-js": "2.2.1",
         "crypto": "0.0.3",
-        "q": "0.9.2",
+        "async": "0.2.6",
         "wrench": "1.4.4",
         "marked": "0.2.8",
         "underscore": "1.4.4",
@@ -36,7 +37,7 @@
     },
     "scripts": {
         "test": "make test",
-        "start": "not allowed; use the `blad-example-site` repo example"
+        "start": "make example"
     },
     "main": "./index.js"
 }
