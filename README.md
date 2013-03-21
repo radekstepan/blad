@@ -67,16 +67,16 @@ Represented by a `presenter.coffee` file.
 Each document has a custom class that determines how it is rendered. It has to only have a `render` function defined that takes a callback with contect that is passed to a template. As an example of Markdown rendering that returns the HTML result under the `html` key:
 
 ```coffeescript
-{ blað } = require 'blad'
+{ blad } = require 'blad'
 marked   = require 'marked'
 
-class exports.MarkdownDocument extends blað.Type
+class exports.MarkdownDocument extends blad.Type
 
     # Presentation for the document.
     render: (done) -> done 'html': marked @markup
 ```
 
-Extending the `blað.Type` class gives us the following helpers:
+Extending the `blad.Type` class gives us the following helpers:
 
 * `@children()` or `@children(n)` that returns public and private documents (optionally of a specific level) that begin with the same URL as the current document... its children.
 * `@menu()` that returns public and private top level documents; those documents that have only a leading slash in its URL.
@@ -131,4 +131,10 @@ app.db (collection) ->
         collection.find({}).toArray (error, results) ->
             results.length.should.equal 0
             done()
+```
+
+If you want to test the UI through an example app, execute the following:
+
+```bash
+$ PORT=5200 npm start
 ```
