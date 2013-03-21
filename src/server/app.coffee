@@ -265,7 +265,7 @@ exports.start = (cfg, site_src, done) ->
             try
                 err = JSON.parse(err)
                 log.error err.error.message or err.message or err
-            catch err
+            catch e
                 log.error err
         else
             log.debug 'Done'

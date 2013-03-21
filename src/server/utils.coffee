@@ -17,7 +17,7 @@ exports.log = (cb) -> EE.on 'log', (msg) -> cb msg
 # Compile chaplin admin client code.
 exports.compile =
     # Admin client code.
-    'admin': (cb) ->
+    'admin': (whateva..., cb) ->
         EE.emit 'log', 'Compiling Chaplin.js admin client app code'
 
         # Make a dir for us.
@@ -29,99 +29,101 @@ exports.compile =
                 _cb err
 
         # CSS & vendor JS.
-        , async.apply wrench.copyDirRecursive, "#{__dirname}/../../src/admin/assets", "#{__dirname}/../public/admin"
+        , async.apply(wrench.copyDirRecursive, "#{__dirname}/../../src/admin/assets", "#{__dirname}/../public/admin")
         
         # CoffeeScript & Eco.
         , (_cb) ->
-            # If there are no more jobs then continue.
-            jobs = 0 ; canExit = false
-            exit = -> if jobs is 0 and canExit then _cb null
-
             # Where from/to?
-            root = "#{__dirname}/../../src/admin"
+            root = "#{__dirname}/../../src/admin/chaplin"
             target = path.resolve "#{__dirname}/../../build/public/admin/js"
 
-            wrench.readdirRecursive root, (err, files) ->
-                # Crap?
-                if err then return _cb err
+            apply = (file, __cb) ->
+                # Eco templates.
+                if file.match /\.eco/
+                    name = file.split('/').pop()
+                    # Read.
+                    fs.readFile path.resolve(root + '/' + file), 'utf8', (err, data) ->
+                        if err then return __cb err
+                        # Eco precompile.
+                        js = eco.precompile data
+                        # Minify.
+                        js = (uglify.minify("JST['#{name}'] = #{js}", 'fromString': true)).code
+                        # Write.
+                        write (target + '/' + file).replace('.eco', '.js'), js, __cb
                 
-                # Are we done?
-                unless files
-                    canExit = true
-                    exit()
-                else
-                    # Moar jobs.
-                    jobs++ ; fns = []
-                    # Compilez mich.
-                    for file in files then do (file) ->
-                        # Make into full path.
-                        file = root + '/' + file
+                # CoffeeScript files.
+                else if file.match /\.coffee/
+                    # Read.
+                    fs.readFile path.resolve(root + '/' + file), 'utf8', (err, data) ->
+                        if err then return __cb err
+                        # CoffeeScript compile.
+                        js = cs.compile data, 'bare': 'on'
+                        # Write.
+                        write (target + '/' + file).replace('.coffee', '.js'), js, __cb
 
-                        console.log file
+                # Useless.
+                else __cb null
 
-                        # Assume we are a file if we have a good extension.
-                        if file.match /\.eco/
-                            fns.push (__cb) ->
-                                name = file.split('/').pop()
-                                js = eco.precompile fs.readFileSync file, "utf8"
-                                js = (uglify.minify("JST['#{name}'] = #{js}", 'fromString': true)).code
-                                write (target + '/' + file).replace('.eco', '.js'), js
-                                __cb null
-                        
-                        else if file.match /\.coffee/
-                            fns.push (__cb) ->
-                                js = cs.compile fs.readFileSync(file, "utf8"), 'bare': 'on'
-                                write (target + '/' + file).replace('.coffee', '.js'), js
-                                __cb null
-
-                    # Run all of them in parallel.
-                    async.parallel fns, (err) ->
-                        if err then _cb err
-                        else
-                            # One more thing done.
-                            jobs--
-                            # Exit?
-                            exit()
+            asyncWalk root, apply, _cb
 
         ], cb
 
     # Site's custom document type forms.
     'forms': ({ site_src }) ->
-        (cb) ->
+        (whateva..., cb) ->
             EE.emit 'log', 'Compiling custom document type forms'
 
-            walk path.join(site_src, '/src/types'), (files) ->
-                tml = []
+            # Where from?
+            root = path.join site_src, '/src/types'
+            # All them templates.
+            tml = []
+            # Inject a BasicDocument form first.
+            tml.push (uglify.minify("JST['form_BasicDocument.eco'] = #{eco.precompile("")}", 'fromString': true)).code
 
-                # Inject a BasicDocument form first.
-                tml.push (uglify.minify("JST['form_BasicDocument.eco'] = #{eco.precompile("")}", 'fromString': true)).code
+            apply = (file, _cb) ->
+                # A form Eco file?
+                if file.match /form\.eco/
+                    fs.readFile path.resolve(root + '/' + file), 'utf8', (err, data) ->
+                        # Get the name of the document form.
+                        p = file.split('/') ; name = p[p.length-2]
+                        # Eco precompile.
+                        js = eco.precompile data
+                        # Push on templates stack.
+                        tml.push (uglify.minify("JST['form_#{name}.eco'] = #{js}", 'fromString': true)).code
+                        _cb null
 
-                # Do site files.
-                for file in files when file.match /form\.eco/
-                    js = eco.precompile fs.readFileSync file, "utf-8"
-                    p = file.split('/') ; name = p[p.length-2]
-                    tml.push (uglify.minify("JST['form_#{name}.eco'] = #{js}", 'fromString': true)).code
+                else _cb null
 
-                write "#{__dirname}/../public/admin/js/templates/document_forms.js", tml.join("\n")
-
-                cb null
+            asyncWalk root, apply, (err) ->
+                if err then return cb err
+                write "#{__dirname}/../public/admin/js/templates/document_forms.js", tml.join("\n"), cb
 
 exports.copy =
     # Copy over site's public files.
     'public': ({ site_src }) ->
-        (cb) ->
+        (whateva..., cb) ->
             EE.emit 'log', "Copying site's public files"
-            wrench.copyDirSyncRecursive path.join(site_src, '/src/public'), "#{__dirname}/../public/site"
-            cb null
+            wrench.copyDirRecursive path.join(site_src, '/src/public'), "#{__dirname}/../public/site", cb
 
 exports.include =
     # Get a list of presenter paths to include in super.
     'presenters': ({ site_src }) ->
-        (cb) ->
+        (whateva..., cb) ->
             EE.emit 'log', 'Returning a list of presenter paths'
-            walk path.join(site_src, '/src/types'), (files) ->
-                files = ( f for f in files when f.match /presenter\.coffee/ )
-                cb null, files
+
+            # Where from?
+            root = path.join site_src, '/src/types'
+
+            # All paths.
+            paths = []
+
+            apply = (file, _cb) ->
+                if file.match /presenter\.coffee/ then paths.push root + '/' + file
+                _cb null
+
+            asyncWalk root, apply, (err) ->
+                if err then return cb err
+                cb null, paths
 
 exports.db =
     # Export the database into a JSON file.
@@ -143,9 +145,7 @@ exports.db =
         # Open file for writing and write file.
         , (docs, cb) ->
             EE.emit 'log', 'Write file'
-            fs.open "#{dir}/dump/data.json", 'w', 0o0666, (err, id) ->
-                if err then cb err
-                else fs.write id, JSON.stringify(docs, null, 4), null, 'utf8', -> cb null
+            write "#{dir}/dump/data.json", JSON.stringify(docs, null, 4), cb
 
         # Callback or die.
         ], (err) ->
@@ -192,53 +192,56 @@ exports.db =
                 try
                     err = JSON.parse(err)
                     console.log err.error.message or err.message or err
-                catch err
+                catch e
                     console.log err
                 process.exit()
             else
                 if done and typeof(done) is 'function' then done()
                 else process.exit()
 
-# Traverse a directory and return a list of files (async, recursive).
-walk = (path, cb) ->
-    results = []
-    # Read directory.
-    fs.readdir path, (err, list) ->
-        throw err if err
-        
-        # Get listing length.
-        pending = list.length
-        
-        return cb results unless pending # Done already?
-        
-        # Traverse.
-        list.forEach (file) ->
-            # Form path
-            file = "#{path}/#{file}"
-            fs.stat file, (err, stat) ->
-                throw err if err
-                # Subdirectory.
-                if stat and stat.isDirectory()
-                    walk file, (res) ->
-                        # Append result from sub.
-                        results = results.concat(res)
-                        cb results unless --pending # Done yet?
-                # A file.
-                else
-                    results.push file
-                    cb results unless --pending # Done yet?
+# A recursive directory walk using async applying a fn on each.
+asyncWalk = (path, apply, cb) ->
+    # If there are no more jobs then continue.
+    jobs = 0 ; canExit = false
+    exit = -> if jobs is 0 and canExit then cb null
 
-# Write to file, sync.
-write = (path, text, mode = "w") ->
+    # Wrench to the rescue.
+    wrench.readdirRecursive path, (err, files) ->
+        # Crap?
+        if err then return cb err
+        
+        # Are we done?
+        unless files
+            canExit = true
+            exit()
+        else
+            # Moar jobs.
+            jobs++ ; fns = []
+            # Do something.
+            for file in files then do (file) ->
+                fns.push (_cb) -> apply file, _cb
+
+            # Run all of them in parallel.
+            async.parallel fns, (err) ->
+                if err then cb err
+                else
+                    # One more thing done.
+                    jobs--
+                    # Exit?
+                    exit()
+
+# Write to file, async.
+write = (path, text, cb) ->
     # Grab the directory path.
     dir = path.split('/').reverse()[1...].reverse().join('/')
 
     # Create the directory if it does not exist yet.
     wrench.mkdirSyncRecursive dir, 0o0777
-    
+
     # Write the file.
-    id = fs.openSync path, mode, 0o0666
-    fs.writeSync id, text, null, "utf8"
+    fs.open path, 'w', 0o0666, (err, id) ->
+        if err then cb err
+        else fs.write id, text, null, 'utf8', cb
 
 # Connect to a MongoDB database.
 connect = (uri, collection, cb) ->

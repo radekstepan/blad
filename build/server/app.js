@@ -309,7 +309,7 @@
         try {
           err = JSON.parse(err);
           return log.error(err.error.message || err.message || err);
-        } catch (err) {
+        } catch (e) {
           return log.error(err);
         }
       } else {
