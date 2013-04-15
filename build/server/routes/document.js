@@ -213,7 +213,7 @@
                 var presenter;
                 presenter = new blad.types[record.type](record, app);
                 return presenter.render(function(context, template) {
-                  var accept, clean, part, _i, _len, _ref, _ref1, _ref2;
+                  var accept, key, part, value, _i, _len, _ref, _ref1, _ref2;
                   if (template == null) {
                     template = true;
                   }
@@ -247,36 +247,14 @@
                       }
                     });
                   } else {
-                    context = (clean = function(obj) {
-                      var item, key, tmp, value, _j, _len1, _results;
-                      if (obj instanceof Array) {
-                        _results = [];
-                        for (_j = 0, _len1 = obj.length; _j < _len1; _j++) {
-                          item = obj[_j];
-                          _results.push(clean(item));
-                        }
-                        return _results;
-                      } else {
-                        switch (typeof obj) {
-                          case 'object':
-                            tmp = {};
-                            for (key in obj) {
-                              value = obj[key];
-                              tmp[key] = clean(value);
-                            }
-                            return tmp;
-                          case 'function':
-                            return null;
-                          default:
-                            try {
-                              JSON.stringify(obj);
-                              return obj;
-                            } catch (err) {
-                              return null;
-                            }
-                        }
+                    for (key in context) {
+                      value = context[key];
+                      try {
+                        JSON.stringify(value);
+                      } catch (err) {
+                        delete context[key];
                       }
-                    })(context);
+                    }
                     _this.res.writeHead(200, {
                       'content-type': 'application/json'
                     });
