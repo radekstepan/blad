@@ -183,29 +183,11 @@ module.exports = ({ app, log, blad }) ->
                                                 @res.end()
                                 else
                                     # Remove functions from context.
-                                    context = (clean = (obj) ->
-                                        # Deep clean Arrays.
-                                        if obj instanceof Array
-                                            ( clean(item) for item in obj )
-                                        else
-                                            switch typeof obj
-                                                # Deep clean Objects.
-                                                when 'object'
-                                                    tmp = {}
-                                                    for key, value of obj
-                                                        tmp[key] = clean value
-                                                    tmp
-                                                # Remove functions.
-                                                when 'function' then null
-                                                # Accept everything else (String, Number etc.)
-                                                else
-                                                    # Well, just to be safe, let us try to serialize.
-                                                    try
-                                                        JSON.stringify obj
-                                                        obj
-                                                    catch err
-                                                        null
-                                    ) context
+                                    for key, value of context
+                                        try
+                                            JSON.stringify value
+                                        catch err
+                                            delete context[key]
 
                                     # Render as is, JSON.
                                     @res.writeHead 200, 'content-type': 'application/json'
