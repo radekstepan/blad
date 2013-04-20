@@ -141,7 +141,7 @@ exports.db =
         # Dump the DB.
         , (collection, cb) ->
             EE.emit 'log', 'Dump the database'
-            collection.find({}, 'sort': 'url').toArray (err, docs) -> if err then cb(err) else cb(docs)
+            collection.find({}, 'sort': 'url').toArray (err, docs) -> if err then cb(err) else cb(null, docs)
         
         # Open file for writing and write file.
         , (docs, cb) ->

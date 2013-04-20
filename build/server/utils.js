@@ -179,7 +179,7 @@
             if (err) {
               return cb(err);
             } else {
-              return cb(docs);
+              return cb(null, docs);
             }
           });
         }, function(docs, cb) {
