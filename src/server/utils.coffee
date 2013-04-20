@@ -135,7 +135,8 @@ exports.db =
             fs.mkdir "#{dir}/dump", (err) -> if err and err.code isnt 'EEXIST' then cb(err) else cb(null)
         
         # Connect to MongoDB.
-        , (cb) -> connect cfg.mongodb, 'documents', cb
+        , (cb) ->
+            connect cfg.mongodb, 'documents', cb
 
         # Dump the DB.
         , (collection, cb) ->
@@ -164,7 +165,8 @@ exports.db =
     'import': (cfg, dir, done) ->
 
         # Connect to MongoDB.        
-        async.waterfall [ (cb) -> connect cfg.mongodb, 'documents', cb
+        async.waterfall [ (cb) ->
+            connect cfg.mongodb, 'documents', cb
 
         # Read file and make into JSON.
         , (collection, cb) ->

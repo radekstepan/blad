@@ -170,21 +170,21 @@
             }
           });
         }, function(cb) {
-          return connect(cfg.mongodb, 'documents', cb, function(collection, cb) {
-            EE.emit('log', 'Dump the database');
-            return collection.find({}, {
-              'sort': 'url'
-            }).toArray(function(err, docs) {
-              if (err) {
-                return cb(err);
-              } else {
-                return cb(docs);
-              }
-            });
-          }, function(docs, cb) {
-            EE.emit('log', 'Write file');
-            return write("" + dir + "/dump/data.json", JSON.stringify(docs, null, 4), cb);
+          return connect(cfg.mongodb, 'documents', cb);
+        }, function(collection, cb) {
+          EE.emit('log', 'Dump the database');
+          return collection.find({}, {
+            'sort': 'url'
+          }).toArray(function(err, docs) {
+            if (err) {
+              return cb(err);
+            } else {
+              return cb(docs);
+            }
           });
+        }, function(docs, cb) {
+          EE.emit('log', 'Write file');
+          return write("" + dir + "/dump/data.json", JSON.stringify(docs, null, 4), cb);
         }
       ], function(err) {
         if (err) {
@@ -207,41 +207,41 @@
     'import': function(cfg, dir, done) {
       return async.waterfall([
         function(cb) {
-          return connect(cfg.mongodb, 'documents', cb, function(collection, cb) {
-            EE.emit('log', 'Read dump file');
-            return cb(null, collection, JSON.parse(fs.readFileSync("" + dir + "/dump/data.json", 'utf-8')));
-          }, function(collection, docs, cb) {
-            EE.emit('log', 'Clear database');
-            return collection.remove({}, function(err) {
-              if (err) {
-                return cb(err);
-              } else {
-                return cb(null, collection, docs);
-              }
-            });
-          }, function(collection, docs, cb) {
-            var doc;
-            EE.emit('log', 'Cleanup `_id`');
-            return cb(null, collection, (function() {
-              var _i, _len, _results;
-              _results = [];
-              for (_i = 0, _len = docs.length; _i < _len; _i++) {
-                doc = docs[_i];
-                _results.push((delete doc._id, doc));
-              }
-              return _results;
-            })());
-          }, function(collection, docs, cb) {
-            EE.emit('log', 'Insert into database');
-            return collection.insert(docs, {
-              'safe': true
-            }, function(err, docs) {
-              if (err) {
-                return cb(err);
-              } else {
-                return cb(null);
-              }
-            });
+          return connect(cfg.mongodb, 'documents', cb);
+        }, function(collection, cb) {
+          EE.emit('log', 'Read dump file');
+          return cb(null, collection, JSON.parse(fs.readFileSync("" + dir + "/dump/data.json", 'utf-8')));
+        }, function(collection, docs, cb) {
+          EE.emit('log', 'Clear database');
+          return collection.remove({}, function(err) {
+            if (err) {
+              return cb(err);
+            } else {
+              return cb(null, collection, docs);
+            }
+          });
+        }, function(collection, docs, cb) {
+          var doc;
+          EE.emit('log', 'Cleanup `_id`');
+          return cb(null, collection, (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = docs.length; _i < _len; _i++) {
+              doc = docs[_i];
+              _results.push((delete doc._id, doc));
+            }
+            return _results;
+          })());
+        }, function(collection, docs, cb) {
+          EE.emit('log', 'Insert into database');
+          return collection.insert(docs, {
+            'safe': true
+          }, function(err, docs) {
+            if (err) {
+              return cb(err);
+            } else {
+              return cb(null);
+            }
           });
         }
       ], function(err) {
