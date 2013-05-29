@@ -7,7 +7,7 @@ a { cursor:pointer; }
 #top { line-height:45px; background:#111; vertical-align:bottom; }
 #top a.name { color:#FFF; font-weight:800; font-size:19px; }
 #top a.name:hover { color:#2795B6 }
-#top a.new { margin:8px 0 0 0; height:26px; }
+#top a.new, #top a.export { margin:11px 0 0 0; height:26px; }
 #top input { margin:7px 0 0 0; }
 
 ul.list { list-style-type:none; }

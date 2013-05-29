@@ -5,8 +5,6 @@ define [
 
     class MessageView extends Chaplin.View
 
-        # Template name on global `JST` object.
-        templateName: 'message.eco'
 
         # Automatically prepend before the DOM on render.
         container: '#app'
@@ -15,6 +13,9 @@ define [
 
         # Automatically render after initialization
         autoRender: true
+
+        # Template name on global `JST` object.
+        templateName: 'message.eco'
 
         getTemplateFunction: -> JST[@templateName]
 

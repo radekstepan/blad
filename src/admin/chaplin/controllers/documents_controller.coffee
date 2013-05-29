@@ -4,7 +4,8 @@ define [
     'models/documents'
     'views/documents_list_view'
     'views/document_edit_view'
-], (Chaplin, Document, Documents, DocumentsListView, DocumentEditView) ->
+    'views/document_export_view'
+], (Chaplin, Document, Documents, DocumentsListView, DocumentEditView, DocumentExportView) ->
 
     class DocumentsController extends Chaplin.Controller
 
@@ -26,5 +27,21 @@ define [
                     @view = new DocumentEditView 'model': model, 'message': params?.message
 
         # Create a new document.
-        new: (params) ->
+        new: ->
             @view = new DocumentEditView()
+
+        # Export all documents in JSON.
+        export: ->
+            @collection = new Documents()
+            @collection.fetch
+                'error': (collection, response) ->
+                    @view = new DocumentExportView 'message':
+                        'type': 'alert', 'text': 'There was a problem getting your documents. Server offline?'
+                
+                'success': (collection, response) ->
+                    if (count = collection.length) > 0
+                        message = 'type': 'success', 'text': "#{count} document#{if count isnt 1 then 's' else ''} exported."
+                    else
+                        message = 'type': 'notify', 'text': 'Nothing to export.'
+                    
+                    @view = new DocumentExportView 'collection': collection, 'message': message

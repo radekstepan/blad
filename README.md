@@ -138,3 +138,5 @@ If you want to test the UI through an example app, execute the following:
 ```bash
 $ PORT=5200 npm start
 ```
+
+Then visit [http://127.0.0.1:5200/admin](http://127.0.0.1:5200/admin).

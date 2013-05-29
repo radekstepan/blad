@@ -15,8 +15,9 @@
             <div class="two columns">
                 <a class="name" href="/admin">blað CMS</a>
             </div>
-            <div class="two column">
-                <a href="/admin/new" class="small blue nice button right new">New Document</a></a>
+            <div class="four column">
+                <a href="/admin/export" class="small nice secondary button right export">Export all Documents</a></a>
+                <a href="/admin/new" class="small nice primary button new">New Document</a></a>
             </div>
         </div>
     </div>
@@ -42,7 +43,8 @@ requirejs.config({
         'foundation': 'vendor/foundation',
         'modernizr':  'vendor/modernizr.foundation',
         'browserid':  'vendor/browserid',
-        'kronic':     'vendor/kronic'
+        'kronic':     'vendor/kronic',
+        'filesaver':  'vendor/filesaver'
     },
     // Underscore and Backbone are not AMD-capable per default,
     // so we need to use the AMD wrapping of RequireJS
@@ -63,8 +65,8 @@ requirejs.config({
     //, urlArgs: 'bust=' +  (new Date()).getTime()
 });
 
-// Bootstrap the application requiring Foundation3, BrowserID and Kronic for dates.
-require(['application', 'foundation', 'browserid', 'kronic'], function (Application) {
+// Bootstrap the application requiring Foundation3, BrowserID, Kronic and FileSaver.
+require(['application', 'foundation', 'browserid', 'kronic', 'filesaver'], function (Application) {
     window.app = new Application();
     window.app.initialize();
 });
