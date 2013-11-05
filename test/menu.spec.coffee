@@ -3,7 +3,16 @@ request = require 'request'
 querystring = require 'querystring'
 
 { start, blad } = require '../index.js'
-config = 'env': 'test', 'middleware': [], 'browserid': 'hashes': [ '@dummy' ]
+config =
+    'env':
+        'test'
+    'middleware':
+        []
+    'browserid':
+        'hashes':
+            [ '@dummy' ]
+    'mongodb':
+        'mongodb://127.0.0.1:27017/test'
 
 # -------------------------------------------------------------------
 

@@ -95,7 +95,7 @@ configureApp = ({ config, log }) ->
                     mongodb.Db.connect config.mongodb, (err, connection) ->
                         throw err if err
                         mcfg = connection.serverConfig
-                        log.info 'Connected to ' + "mongodb://#{mcfg.host}:#{mcfg.port}/#{mcfg.dbInstance.databaseName}".bold
+                        log.info 'Connected to ' + "mongodb://#{mcfg.host}:#{mcfg.port}/#{mcfg.db.databaseName}".bold
                         db = connection
                         collection done
                 else
