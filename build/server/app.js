@@ -262,7 +262,7 @@
       utils.log(function(message) {
         return log.data(message);
       });
-      return async.waterfall([utils.compile.admin, utils.compile.forms(config), utils.copy["public"](config), utils.include.presenters(config)], function(err, presenters) {
+      return async.waterfall([utils.compile.admin, utils.compile.forms(config), utils.copy["public"](config), utils.copy.additions(config), utils.include.presenters(config)], function(err, presenters) {
         if (err) {
           return cb(err);
         } else {

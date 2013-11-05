@@ -89,6 +89,10 @@ This file is populated with a context coming from the presenter. In the above Ma
 
 If a `/src/site/layout.eco` file is found, it will be used as a wrapping template around individual templates. The key `page` populated with the individual template is passed to it.
 
+### Additions file
+
+One can save a file in `src/types/additions.coffee` that exports an object. Then, this file can be included from within a Presenter. This way, you can re-use common functionality across types.
+
 ## Caching
 
 Sometimes new data may be fetched from within the Presenter and one would like to cache these for say a day. The following shows a workflow from within the Presneter's `render()` function.
@@ -113,6 +117,8 @@ Sometimes new data may be fetched from within the Presenter and one would like t
             'was':  'fresh'
         , false
 ```
+
+It may be useful to know that cache is per document specific, so one can use the same cache key in different document types.
 
 ## Mocha test suite
 

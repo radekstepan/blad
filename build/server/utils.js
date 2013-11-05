@@ -132,7 +132,45 @@
         EE.emit('log', "Copying site's public files");
         return wrench.copyDirRecursive(path.join(site_src, '/src/public'), "" + __dirname + "/../public/site", {
           'forceDelete': true
-        }, cb);
+        }, function(err) {
+          return cb(err);
+        });
+      };
+    },
+    'additions': function(_arg) {
+      var site_src;
+      site_src = _arg.site_src;
+      return function() {
+        var cb, source, target, whateva, _i;
+        whateva = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), cb = arguments[_i++];
+        source = path.join(site_src, '/src/types/additions.coffee');
+        target = path.resolve("" + __dirname + "/../../build/server/additions.js");
+        return fs.stat(source, function(err, stats) {
+          if (err) {
+            return cb(null);
+          }
+          if (stats.isDirectory()) {
+            return cb(null);
+          }
+          EE.emit('log', 'Including additions file');
+          return fs.readFile(source, 'utf-8', function(err, data) {
+            var js;
+            if (err) {
+              return cb(null);
+            }
+            try {
+              js = cs.compile(data, {
+                'bare': 'on'
+              });
+            } catch (_error) {}
+            if (!js) {
+              return cb(null);
+            }
+            return fs.writeFile(target, js, function(err) {
+              return cb(null);
+            });
+          });
+        });
       };
     }
   };

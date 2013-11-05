@@ -107,7 +107,34 @@ exports.copy =
         (whateva..., cb) ->
             EE.emit 'log', "Copying site's public files"
             wrench.copyDirRecursive path.join(site_src, '/src/public'), "#{__dirname}/../public/site"
-            , { 'forceDelete': yes }, cb
+            , { 'forceDelete': yes }, (err) ->
+                cb err
+
+    # Copy presenter additions?
+    'additions': ({ site_src }) ->
+        (whateva..., cb) ->
+            source = path.join site_src, '/src/types/additions.coffee'
+            target = path.resolve "#{__dirname}/../../build/server/additions.js"
+
+            fs.stat source, (err, stats) ->
+                # No additions.
+                return cb null if err
+                # Not a file.
+                return cb null if do stats.isDirectory
+
+                EE.emit 'log', 'Including additions file'
+
+                # Load it.
+                fs.readFile source, 'utf-8', (err, data) ->
+                    # Ah well.
+                    return cb null if err
+                    # Compile.
+                    try js = cs.compile data, 'bare': 'on'
+                    # Write?
+                    return cb null unless js
+                    fs.writeFile target, js, (err) ->
+                        # Silence.
+                        cb null
 
 exports.include =
     # Get a list of presenter paths to include in super.

@@ -226,6 +226,7 @@ exports.start = (cfg, site_src, done) ->
             utils.compile.admin,
             utils.compile.forms(config),
             utils.copy.public(config),
+            utils.copy.additions(config),
             utils.include.presenters(config)
         ], (err, presenters) ->
             if err then cb err

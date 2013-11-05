@@ -3,7 +3,7 @@
     "description": "A forms based node.js CMS ala SilverStripe, but smaller",
     "keywords": [ "cms" ],
     "author": "Radek <rs676@cam.ac.uk>",
-    "version": "3.0.5",
+    "version": "3.0.6-alpha",
     "preferGlobal": false,
     "dependencies": {
         "coffee-script": "~1.6.3",
