@@ -44,7 +44,9 @@
             err = _error;
             return _cb(err);
           }
-        }, async.apply(wrench.copyDirRecursive, "" + __dirname + "/../../src/admin/assets", "" + __dirname + "/../public/admin"), function(_cb) {
+        }, async.apply(wrench.copyDirRecursive, "" + __dirname + "/../../src/admin/assets", "" + __dirname + "/../public/admin", {
+          'forceDelete': true
+        }), function(_cb) {
           var apply, root, target;
           root = "" + __dirname + "/../../src/admin/chaplin";
           target = path.resolve("" + __dirname + "/../../build/public/admin/js");
@@ -128,7 +130,9 @@
         var cb, whateva, _i;
         whateva = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), cb = arguments[_i++];
         EE.emit('log', "Copying site's public files");
-        return wrench.copyDirRecursive(path.join(site_src, '/src/public'), "" + __dirname + "/../public/site", cb);
+        return wrench.copyDirRecursive(path.join(site_src, '/src/public'), "" + __dirname + "/../public/site", {
+          'forceDelete': true
+        }, cb);
       };
     }
   };

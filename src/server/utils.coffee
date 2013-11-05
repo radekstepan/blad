@@ -29,7 +29,10 @@ exports.compile =
                 _cb err
 
         # CSS & vendor JS.
-        , async.apply(wrench.copyDirRecursive, "#{__dirname}/../../src/admin/assets", "#{__dirname}/../public/admin")
+        , async.apply(wrench.copyDirRecursive,
+            "#{__dirname}/../../src/admin/assets", "#{__dirname}/../public/admin"
+            , { 'forceDelete': yes }
+        )
         
         # CoffeeScript & Eco.
         , (_cb) ->
@@ -103,7 +106,8 @@ exports.copy =
     'public': ({ site_src }) ->
         (whateva..., cb) ->
             EE.emit 'log', "Copying site's public files"
-            wrench.copyDirRecursive path.join(site_src, '/src/public'), "#{__dirname}/../public/site", cb
+            wrench.copyDirRecursive path.join(site_src, '/src/public'), "#{__dirname}/../public/site"
+            , { 'forceDelete': yes }, cb
 
 exports.include =
     # Get a list of presenter paths to include in super.
