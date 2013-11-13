@@ -1,0 +1,18 @@
+body,h1,h2,h3,h4,h5{font-family:"OpenSans","Helvetica Neue","Helvetica",Arial,Verdana,sans-serif;font-weight:400}
+a{cursor:pointer}
+#top{line-height:45px;background:#111;vertical-align:bottom;}
+#top a.name{color:#fff;font-weight:800;font-size:19px;}
+#top a.name:hover{color:#2795b6}
+#top a.new,#top a.export{margin:11px 0 0 0;height:26px}
+#top input{margin:7px 0 0 0}
+ul.list{list-style-type:none;}
+ul.list li{border-bottom:1px solid #ddd;padding:4px 8px;}
+ul.list li:nth-child(even){background:#f9f9f9}
+ul.list li a.private{color:#c5c5c5;}
+ul.list li a.private:hover{color:#999}
+ul.list li span.type{font-size:10px;font-weight:normal;margin-left:18px}
+#app{margin-top:10px;}
+#app .row{margin-bottom:6px}
+select{font-size:14px;height:32px;border:1px solid #ccc;color:rgba(0,0,0,0.75)}
+textarea{height:195px}
+pre{margin-bottom:10px;font-size:12px}

@@ -1,39 +1,39 @@
 {
     "name": "blad",
     "description": "A forms based node.js CMS ala SilverStripe, but smaller",
-    "keywords": [ "cms" ],
+    "keywords": [ "cms", "blog" ],
     "author": "Radek <rs676@cam.ac.uk>",
-    "version": "3.0.6",
-    "preferGlobal": false,
+    "version": "4.0.0-alpha",
     "dependencies": {
-        "coffee-script": "~1.6.3",
         "flatiron": "~0.3.8",
         "union": "~0.3.7",
         "director": "~1.2.0",
         "winston": "~0.7.2",
         "connect": "~2.11.0",
+
         "mongodb": "~1.3.19",
-        "eco": "~1.1.0-rc-3",
+        
         "request": "~2.27.0",
-        "uglify-js": "~2.4.2",
         "crypto": "~0.0.3",
-        "async": "~0.2.9",
-        "wrench": "~1.5.4",
         "marked": "~0.2.10",
-        "underscore": "~1.5.2",
-        "connect-baddies": "~0.0.3"
+        
+        "lodash": "~2.3.0",
+        "async": "~0.2.9",
+        "wrench": "~1.5.4"
     },
     "devDependencies": {
         "mocha": "~1.14.0",
-        "should": "~2.0.2"
+
+        "bower": "~1.2.7",
+        "grunt": "~0.4.1",
+        
+        "grunt-apps-c": "radekstepan/grunt-apps-c",
+        "grunt-contrib-stylus": "~0.9.0",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-uglify": "~0.2.5"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/radekstepan/blad.git"
-    },
-    "scripts": {
-        "test": "make test",
-        "start": "make example"
-    },
-    "main": "index.js"
+    }
 }

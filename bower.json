@@ -1,0 +1,14 @@
+{
+    "name": "blad",
+    "version": "4.0.0-alpha",
+    "dependencies": {
+        "jquery": "2.0.3",
+        "backbone": "1.1.0",
+        "chaplin": "0.11.3",
+        "underscore": "1.5.2",
+        "foundation3": "https://raw.github.com/intermine/CDN/master/css/foundation/3.1.1/stylesheets/foundation.css",
+        "browserid": "https://login.persona.org/include.orig.js",
+        "kronic": "https://raw.github.com/xaviershay/kronic/master/lib/js/kronic.js",
+        "FileSaver": null
+    }
+}

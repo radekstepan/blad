@@ -1,0 +1,29 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8" />
+    <title>blað CMS</title>
+    <link rel="stylesheet" href="app.bundle.css">
+    <script src="app.bundle.js"></script>
+</head>
+<body>
+    <div id="top">
+        <div class="row">
+            <div class="two columns">
+                <a class="name" href="/admin">blað CMS</a>
+            </div>
+            <div class="four column">
+                <a href="/admin/export" class="small nice secondary button right export">Export all Documents</a></a>
+                <a href="/admin/new" class="small nice primary button new">New Document</a></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns">
+            <div id="app"></div>
+        </div>
+    </div>
+
+    <script>(window.app = require('blad')).initialize();</script>
+</body>
+</html>
