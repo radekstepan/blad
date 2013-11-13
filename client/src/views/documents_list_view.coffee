@@ -1,37 +1,36 @@
-define [
-    'chaplin'
-    'views/document_list_view'
-    'views/message_view'
-], (Chaplin, DocumentListView, MessageView) ->
+DocumentListView = require './document_list_view'
+MessageView      = require './message_view'
 
-    class DocumentsListView extends Chaplin.CollectionView
+class DocumentsListView extends Chaplin.CollectionView
 
-        tagName: 'ul'
+    tagName: 'ul'
 
-        className: 'list'
+    className: 'list'
 
-        # Automatically append to the DOM on render
-        container: '#app'
+    # Automatically append to the DOM on render
+    container: '#app'
+    
+    # Clear existing.
+    containerMethod: 'html'
+
+    # Automatically render after initialization
+    autoRender: true
+
+    # The most important method a class inheriting from CollectionView
+    getView: (item) ->
+        # Instantiate an item view
+        new DocumentListView 'model': item
+
+    initialize: (params) ->
+        super
         
-        # Clear existing.
-        containerMethod: 'html'
+        # Any message to display?
+        if params?.message? then @message = params.message
 
-        # Automatically render after initialization
-        autoRender: true
+    afterRender: ->
+        super
 
-        # The most important method a class inheriting from CollectionView
-        getView: (item) ->
-            # Instantiate an item view
-            new DocumentListView 'model': item
+        # Show a message?
+        if @message? then new MessageView @message
 
-        initialize: (params) ->
-            super
-            
-            # Any message to display?
-            if params?.message? then @message = params.message
-
-        afterRender: ->
-            super
-
-            # Show a message?
-            if @message? then new MessageView @message
+module.exports = DocumentsListView

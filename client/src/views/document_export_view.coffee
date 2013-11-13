@@ -1,35 +1,34 @@
-define [
-    'chaplin'
-    'views/message_view'
-], (Chaplin, MessageView) ->
+MessageView = require './message_view'
 
-    # Used for exporting all documents.
-    class DocumentExportView extends Chaplin.View
+# Used for exporting all documents.
+class DocumentExportView extends Chaplin.View
 
-        # Automatically append to the DOM on render.
-        container: '#app'
+    # Automatically append to the DOM on render.
+    container: '#app'
 
-        # Clear existing.
-        containerMethod: 'html'
+    # Clear existing.
+    containerMethod: 'html'
 
-        # Automatically render after initialization
-        autoRender: true
+    # Automatically render after initialization
+    autoRender: true
 
-        getTemplateFunction: ->
+    getTemplateFunction: ->
 
-        initialize: (params) ->
-            super
+    initialize: (params) ->
+        super
 
-            # Any message to display?
-            if params?.message? then @message = params.message
+        # Any message to display?
+        if params?.message? then @message = params.message
 
-        afterRender: ->
-            super
+    afterRender: ->
+        super
 
-            # Show a message?
-            if @message? then new MessageView @message
+        # Show a message?
+        if @message? then new MessageView @message
 
-            # FileSaver.js
-            if @collection and @collection.length isnt 0
-                blob = new Blob [ JSON.stringify(@collection.toJSON()) ], 'type': "application/json;charset=utf-8"
-                saveAs blob, "blad-cms-dump-#{(new Date).toISOString()}.json"
+        # FileSaver.js
+        if @collection and @collection.length isnt 0
+            blob = new Blob [ JSON.stringify(@collection.toJSON()) ], 'type': "application/json;charset=utf-8"
+            saveAs blob, "blad-cms-dump-#{(new Date).toISOString()}.json"
+
+module.exports = DocumentExportView

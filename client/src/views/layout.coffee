@@ -1,9 +1,3 @@
-define [
-    'chaplin'
-], (Chaplin) ->
+class Layout extends Chaplin.Layout
 
-    class Layout extends Chaplin.Layout
-
-        initialize: ->
-            super
-            #@subscribeEvent 'startupController', @doSomething
+module.exports = Layout

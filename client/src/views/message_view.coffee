@@ -1,31 +1,24 @@
-define [
-    'chaplin'
-    'templates/message'
-], (Chaplin) ->
+class MessageView extends Chaplin.View
 
-    class MessageView extends Chaplin.View
+    # Automatically prepend before the DOM on render.
+    container: '#app'
 
+    containerMethod: 'prepend'
 
-        # Automatically prepend before the DOM on render.
-        container: '#app'
+    # Automatically render after initialization
+    autoRender: true
 
-        containerMethod: 'prepend'
+    getTemplateFunction: -> require '../templates/message'
 
-        # Automatically render after initialization
-        autoRender: true
+    # Not model, but params babe.
+    getTemplateData: -> @params
 
-        # Template name on global `JST` object.
-        templateName: 'message.eco'
+    # Save these.
+    initialize: (@params) -> super
 
-        getTemplateFunction: -> JST[@templateName]
+    # Events.
+    afterRender: ->
+        super
+        @delegate 'click', @dispose
 
-        # Not model, but params babe.
-        getTemplateData: -> @params
-
-        # Save these.
-        initialize: (@params) -> super
-
-        # Events.
-        afterRender: ->
-            super
-            @delegate 'click', @dispose
+module.exports = MessageView

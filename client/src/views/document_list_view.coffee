@@ -1,14 +1,7 @@
-define [
-    'chaplin'
-    'templates/document_row'
-], (Chaplin) ->
+class DocumentListView extends Chaplin.View
 
-    class DocumentListView extends Chaplin.View
+    tagName: 'li'
 
-        tagName: 'li'
+    getTemplateFunction: -> require '../templates/document_row'
 
-        # Template name on global `JST` object.
-        templateName: 'document_row.eco'
-
-        getTemplateFunction: -> JST[@templateName]
-
+module.exports = DocumentListView

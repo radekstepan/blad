@@ -205,106 +205,110 @@
     // app.coffee
     require.register('blad/client/src/app.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var App, Layout, routes, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'views/layout', 'routes'], function(Chaplin, Layout, routes) {
-        var Application, _ref;
-        return Application = (function(_super) {
-          __extends(Application, _super);
+      Layout = require('../views/layout');
       
-          function Application() {
-            _ref = Application.__super__.constructor.apply(this, arguments);
-            return _ref;
-          }
+      routes = require('routes');
       
-          Application.prototype.title = 'blað CMS';
+      App = (function(_super) {
+        __extends(App, _super);
       
-          Application.prototype.apiKey = void 0;
+        function App() {
+          _ref = App.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
       
-          Application.prototype.auth = function(signedIn) {
-            var cookie, k, v, _i, _len, _ref1, _ref2;
-            _ref1 = document.cookie.split(';');
-            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-              cookie = _ref1[_i];
-              _ref2 = cookie.split('='), k = _ref2[0], v = _ref2[1];
-              if (k === 'X-Blad-ApiKey') {
-                return signedIn(true, v);
-              }
+        App.prototype.title = 'blað CMS';
+      
+        App.prototype.apiKey = void 0;
+      
+        App.prototype.auth = function(signedIn) {
+          var cookie, k, v, _i, _len, _ref1, _ref2;
+          _ref1 = document.cookie.split(';');
+          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+            cookie = _ref1[_i];
+            _ref2 = cookie.split('='), k = _ref2[0], v = _ref2[1];
+            if (k === 'X-Blad-ApiKey') {
+              return signedIn(true, v);
             }
-            $('#app').append($('<div/>', {
-              'class': 'alert-box',
-              'text': 'Signing-in to Persona.org (Mozilla), make sure pop-ups are allowed'
-            }));
-            return navigator.id.get(function(assertion) {
-              if (assertion) {
-                return $.ajax({
-                  url: '/auth',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                    'assertion': assertion
-                  },
-                  success: function(data) {
-                    var d;
-                    d = new Date();
-                    d.setDate(d.getDate() + 1);
-                    d = d.toUTCString();
-                    document.cookie = "X-Blad-ApiKey=" + data.key + ";expires=" + d;
-                    return signedIn(true, data.key);
-                  },
-                  error: function(data) {
-                    return signedIn(false, data);
-                  }
-                });
-              } else {
-                return signedIn(false, {
-                  'message': 'Cancelled sign-in'
-                });
-              }
-            });
-          };
+          }
+          $('#app').append($('<div/>', {
+            'class': 'alert-box',
+            'text': 'Signing-in to Persona.org (Mozilla), make sure pop-ups are allowed'
+          }));
+          return navigator.id.get(function(assertion) {
+            if (assertion) {
+              return $.ajax({
+                url: '/auth',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  'assertion': assertion
+                },
+                success: function(data) {
+                  var d;
+                  d = new Date();
+                  d.setDate(d.getDate() + 1);
+                  d = d.toUTCString();
+                  document.cookie = "X-Blad-ApiKey=" + data.key + ";expires=" + d;
+                  return signedIn(true, data.key);
+                },
+                error: function(data) {
+                  return signedIn(false, data);
+                }
+              });
+            } else {
+              return signedIn(false, {
+                'message': 'Cancelled sign-in'
+              });
+            }
+          });
+        };
       
-          Application.prototype.initialize = function() {
-            var _this = this;
-            Application.__super__.initialize.apply(this, arguments);
-            this.initDispatcher();
-            this.initLayout();
-            this.initTemplates();
-            this.initMediator();
-            return this.auth(function(isSignedIn, res) {
-              if (isSignedIn) {
-                _this.apiKey = res;
-                _this.initRouter(routes);
-                return typeof Object.freeze === "function" ? Object.freeze(_this) : void 0;
-              } else {
-                return $('#app').append($('<div/>', {
-                  'class': 'alert-box alert',
-                  'text': JSON.parse(res.responseText).message
-                }));
-              }
-            });
-          };
+        App.prototype.initialize = function() {
+          var _this = this;
+          App.__super__.initialize.apply(this, arguments);
+          this.initDispatcher();
+          this.initLayout();
+          this.initTemplates();
+          this.initMediator();
+          return this.auth(function(isSignedIn, res) {
+            if (isSignedIn) {
+              _this.apiKey = res;
+              _this.initRouter(routes);
+              return typeof Object.freeze === "function" ? Object.freeze(_this) : void 0;
+            } else {
+              return $('#app').append($('<div/>', {
+                'class': 'alert-box alert',
+                'text': JSON.parse(res.responseText).message
+              }));
+            }
+          });
+        };
       
-          Application.prototype.initLayout = function() {
-            return this.layout = new Layout({
-              title: this.title
-            });
-          };
+        App.prototype.initLayout = function() {
+          return this.layout = new Layout({
+            title: this.title
+          });
+        };
       
-          Application.prototype.initTemplates = function() {
-            return window.JST = {};
-          };
+        App.prototype.initTemplates = function() {
+          return window.JST = {};
+        };
       
-          Application.prototype.initMediator = function() {
-            Chaplin.mediator.user = null;
-            return Chaplin.mediator.seal();
-          };
+        App.prototype.initMediator = function() {
+          Chaplin.mediator.user = null;
+          return Chaplin.mediator.seal();
+        };
       
-          return Application;
+        return App;
       
-        })(Chaplin.Application);
-      });
+      })(Chaplin.Application);
+      
+      module.exports = App;
       
     });
 
@@ -312,98 +316,108 @@
     // documents_controller.coffee
     require.register('blad/client/src/controllers/documents_controller.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var Document, DocumentEditView, DocumentExportView, Documents, DocumentsController, DocumentsListView, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'models/document', 'models/documents', 'views/documents_list_view', 'views/document_edit_view', 'views/document_export_view'], function(Chaplin, Document, Documents, DocumentsListView, DocumentEditView, DocumentExportView) {
-        var DocumentsController, _ref;
-        return DocumentsController = (function(_super) {
-          __extends(DocumentsController, _super);
+      Document = require('../models/document');
       
-          function DocumentsController() {
-            _ref = DocumentsController.__super__.constructor.apply(this, arguments);
-            return _ref;
+      Documents = require('../models/documents');
+      
+      DocumentsListView = require('../views/documents_list_view');
+      
+      DocumentEditView = require('../views/document_edit_view');
+      
+      DocumentExportView = require('../views/document_export_view');
+      
+      DocumentsController = (function(_super) {
+        __extends(DocumentsController, _super);
+      
+        function DocumentsController() {
+          _ref = DocumentsController.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
+      
+        DocumentsController.prototype.historyURL = function(params) {
+          return '';
+        };
+      
+        DocumentsController.prototype.index = function(params) {
+          if (params == null) {
+            params = {};
           }
-      
-          DocumentsController.prototype.historyURL = function(params) {
-            return '';
-          };
-      
-          DocumentsController.prototype.index = function(params) {
-            if (params == null) {
-              params = {};
+          this.collection = new Documents();
+          return this.collection.fetch({
+            'error': function(collection, response) {
+              throw response;
+            },
+            'success': function(collection, response) {
+              return this.view = new DocumentsListView({
+                'collection': collection,
+                'message': params != null ? params.message : void 0
+              });
             }
-            this.collection = new Documents();
-            return this.collection.fetch({
-              'error': function(collection, response) {
-                throw response;
-              },
-              'success': function(collection, response) {
-                return this.view = new DocumentsListView({
-                  'collection': collection,
-                  'message': params != null ? params.message : void 0
-                });
-              }
-            });
-          };
+          });
+        };
       
-          DocumentsController.prototype.edit = function(params) {
-            if (params == null) {
-              params = {};
+        DocumentsController.prototype.edit = function(params) {
+          if (params == null) {
+            params = {};
+          }
+          this.model = new Document({
+            '_id': params._id
+          });
+          return this.model.fetch({
+            'success': function(model) {
+              return this.view = new DocumentEditView({
+                'model': model,
+                'message': params != null ? params.message : void 0
+              });
             }
-            this.model = new Document({
-              '_id': params._id
-            });
-            return this.model.fetch({
-              'success': function(model) {
-                return this.view = new DocumentEditView({
-                  'model': model,
-                  'message': params != null ? params.message : void 0
-                });
-              }
-            });
-          };
+          });
+        };
       
-          DocumentsController.prototype["new"] = function() {
-            return this.view = new DocumentEditView();
-          };
+        DocumentsController.prototype["new"] = function() {
+          return this.view = new DocumentEditView();
+        };
       
-          DocumentsController.prototype["export"] = function() {
-            this.collection = new Documents();
-            return this.collection.fetch({
-              'error': function(collection, response) {
-                return this.view = new DocumentExportView({
-                  'message': {
-                    'type': 'alert',
-                    'text': 'There was a problem getting your documents. Server offline?'
-                  }
-                });
-              },
-              'success': function(collection, response) {
-                var count, message;
-                if ((count = collection.length) > 0) {
-                  message = {
-                    'type': 'success',
-                    'text': "" + count + " document" + (count !== 1 ? 's' : '') + " exported."
-                  };
-                } else {
-                  message = {
-                    'type': 'notify',
-                    'text': 'Nothing to export.'
-                  };
+        DocumentsController.prototype["export"] = function() {
+          this.collection = new Documents();
+          return this.collection.fetch({
+            'error': function(collection, response) {
+              return this.view = new DocumentExportView({
+                'message': {
+                  'type': 'alert',
+                  'text': 'There was a problem getting your documents. Server offline?'
                 }
-                return this.view = new DocumentExportView({
-                  'collection': collection,
-                  'message': message
-                });
+              });
+            },
+            'success': function(collection, response) {
+              var count, message;
+              if ((count = collection.length) > 0) {
+                message = {
+                  'type': 'success',
+                  'text': "" + count + " document" + (count !== 1 ? 's' : '') + " exported."
+                };
+              } else {
+                message = {
+                  'type': 'notify',
+                  'text': 'Nothing to export.'
+                };
               }
-            });
-          };
+              return this.view = new DocumentExportView({
+                'collection': collection,
+                'message': message
+              });
+            }
+          });
+        };
       
-          return DocumentsController;
+        return DocumentsController;
       
-        })(Chaplin.Controller);
-      });
+      })(Chaplin.Controller);
+      
+      module.exports = DocumentsController;
       
     });
 
@@ -411,76 +425,76 @@
     // document.coffee
     require.register('blad/client/src/models/document.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var Document, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin'], function(Chaplin) {
-        var Document, _ref;
-        return Document = (function(_super) {
-          __extends(Document, _super);
+      Document = (function(_super) {
+        __extends(Document, _super);
       
-          function Document() {
-            _ref = Document.__super__.constructor.apply(this, arguments);
-            return _ref;
+        function Document() {
+          _ref = Document.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
+      
+        Document.prototype.idAttribute = "_id";
+      
+        Document.prototype.defaults = {
+          'type': 'BasicDocument',
+          'public': true
+        };
+      
+        Document.prototype.url = function() {
+          if (this.get('_id') != null) {
+            return '/api/document?_id=' + this.get('_id');
+          } else {
+            return '/api/document';
           }
+        };
       
-          Document.prototype.idAttribute = "_id";
-      
-          Document.prototype.defaults = {
-            'type': 'BasicDocument',
-            'public': true
+        Document.prototype.sync = function(method, model, options) {
+          options = options || {};
+          options.headers = {
+            'X-Blad-ApiKey': window.app.apiKey
           };
+          return Backbone.sync(method, this, options);
+        };
       
-          Document.prototype.url = function() {
-            if (this.get('_id') != null) {
-              return '/api/document?_id=' + this.get('_id');
-            } else {
-              return '/api/document';
-            }
-          };
+        Document.prototype.getAttributes = function() {
+          return _.extend({
+            '_description': this.attrDescription(),
+            '_types': this.attrTypes()
+          }, this.attributes);
+        };
       
-          Document.prototype.sync = function(method, model, options) {
-            options = options || {};
-            options.headers = {
-              'X-Blad-ApiKey': window.app.apiKey
-            };
-            return Backbone.sync(method, this, options);
-          };
+        Document.prototype.attrDescription = function() {
+          if (this.get('description') == null) {
+            return {};
+          }
+          return this.get('description').replace(/label:(\S*)/g, '<span class="radius label">$1</span>');
+        };
       
-          Document.prototype.getAttributes = function() {
-            return _.extend({
-              '_description': this.attrDescription(),
-              '_types': this.attrTypes()
-            }, this.attributes);
-          };
-      
-          Document.prototype.attrDescription = function() {
-            if (this.get('description') == null) {
-              return {};
-            }
-            return this.get('description').replace(/label:(\S*)/g, '<span class="radius label">$1</span>');
-          };
-      
-          Document.prototype.attrTypes = function() {
-            var key, value;
-            return ((function() {
-              var _ref1, _results;
-              _ref1 = window.JST;
-              _results = [];
-              for (key in _ref1) {
-                value = _ref1[key];
-                if (key.indexOf('form_') === 0) {
-                  _results.push(key.slice(5, key.length - 4));
-                }
+        Document.prototype.attrTypes = function() {
+          var key, value;
+          return ((function() {
+            var _ref1, _results;
+            _ref1 = window.JST;
+            _results = [];
+            for (key in _ref1) {
+              value = _ref1[key];
+              if (key.indexOf('form_') === 0) {
+                _results.push(key.slice(5, key.length - 4));
               }
-              return _results;
-            })()).sort();
-          };
+            }
+            return _results;
+          })()).sort();
+        };
       
-          return Document;
+        return Document;
       
-        })(Chaplin.Model);
-      });
+      })(Chaplin.Model);
+      
+      module.exports = Document;
       
     });
 
@@ -488,35 +502,37 @@
     // documents.coffee
     require.register('blad/client/src/models/documents.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var Document, Documents, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'models/document'], function(Chaplin, Document) {
-        var Documents, _ref;
-        return Documents = (function(_super) {
-          __extends(Documents, _super);
+      Document = require('./document');
       
-          function Documents() {
-            _ref = Documents.__super__.constructor.apply(this, arguments);
-            return _ref;
-          }
+      Documents = (function(_super) {
+        __extends(Documents, _super);
       
-          Documents.prototype.url = '/api/documents';
+        function Documents() {
+          _ref = Documents.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
       
-          Documents.prototype.sync = function(method, model, options) {
-            options = options || {};
-            options.headers = {
-              'X-Blad-ApiKey': window.app.apiKey
-            };
-            return Backbone.sync(method, this, options);
+        Documents.prototype.url = '/api/documents';
+      
+        Documents.prototype.sync = function(method, model, options) {
+          options = options || {};
+          options.headers = {
+            'X-Blad-ApiKey': window.app.apiKey
           };
+          return Backbone.sync(method, this, options);
+        };
       
-          Documents.prototype.model = Document;
+        Documents.prototype.model = Document;
       
-          return Documents;
+        return Documents;
       
-        })(Chaplin.Collection);
-      });
+      })(Chaplin.Collection);
+      
+      module.exports = Documents;
       
     });
 
@@ -524,14 +540,12 @@
     // routes.coffee
     require.register('blad/client/src/routes.js', function(exports, require, module) {
     
-      define(function() {
-        return function(match) {
-          match('admin/', 'documents#index');
-          match('admin/edit/:_id', 'documents#edit');
-          match('admin/new', 'documents#new');
-          return match('admin/export', 'documents#export');
-        };
-      });
+      module.exports = function(match) {
+        match('admin/', 'documents#index');
+        match('admin/edit/:_id', 'documents#edit');
+        match('admin/new', 'documents#new');
+        return match('admin/export', 'documents#export');
+      };
       
     });
 
@@ -806,77 +820,77 @@
     // document_custom_view.coffee
     require.register('blad/client/src/views/document_custom_view.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var DocumentCustomView, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'templates/document_forms'], function(Chaplin) {
-        var DocumentCustomView, _ref;
-        return DocumentCustomView = (function(_super) {
-          __extends(DocumentCustomView, _super);
+      DocumentCustomView = (function(_super) {
+        __extends(DocumentCustomView, _super);
       
-          function DocumentCustomView() {
-            _ref = DocumentCustomView.__super__.constructor.apply(this, arguments);
-            return _ref;
+        function DocumentCustomView() {
+          _ref = DocumentCustomView.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
+      
+        DocumentCustomView.prototype.container = '#custom';
+      
+        DocumentCustomView.prototype.containerMethod = 'html';
+      
+        DocumentCustomView.prototype.autoRender = true;
+      
+        DocumentCustomView.prototype.getTemplateFunction = function() {
+          return require('../templates/form_' + this.model.get('type'));
+        };
+      
+        DocumentCustomView.prototype.initialize = function(params) {
+          this.model = params.model;
+          return this.subviews != null ? this.subviews : this.subviews = [];
+        };
+      
+        DocumentCustomView.prototype.afterRender = function() {
+          DocumentCustomView.__super__.afterRender.apply(this, arguments);
+          this.delegate('change', '[data-custom="file"]', this.loadFileHandler);
+          return this.delegate('change', '[data-custom="date"]', this.niceDateHandler);
+        };
+      
+        DocumentCustomView.prototype.loadFileHandler = function(e) {
+          var file,
+            _this = this;
+          file = new FileReader();
+          file.readAsDataURL($(e.target)[0].files[0]);
+          return file.onload = function(event) {
+            var target;
+            target = $(e.target).attr('data-target');
+            return $(_this.el).find("[name=" + target + "]").val(event.target.result);
+          };
+        };
+      
+        DocumentCustomView.prototype.niceDateHandler = function(e) {
+          var d, div, j, t, target, _ref1;
+          target = $(e.target);
+          target.closest('div').removeClass('error');
+          if ((_ref1 = this.error) != null) {
+            _ref1.remove();
           }
+          d = Kronic.parse(target.val());
+          if (d == null) {
+            div = target.closest('div');
+            div.addClass('error');
+            return div.append(this.error = $('<small/>', {
+              'text': 'Do not understand this date'
+            }));
+          } else {
+            j = new Date(d).toJSON();
+            t = target.attr('data-target');
+            return $(this.el).find("[name=" + t + "]").val(j);
+          }
+        };
       
-          DocumentCustomView.prototype.container = '#custom';
+        return DocumentCustomView;
       
-          DocumentCustomView.prototype.containerMethod = 'html';
+      })(Chaplin.View);
       
-          DocumentCustomView.prototype.autoRender = true;
-      
-          DocumentCustomView.prototype.getTemplateFunction = function() {
-            return JST["form_" + (this.model.get('type')) + ".eco"];
-          };
-      
-          DocumentCustomView.prototype.initialize = function(params) {
-            this.model = params.model;
-            return this.subviews != null ? this.subviews : this.subviews = [];
-          };
-      
-          DocumentCustomView.prototype.afterRender = function() {
-            DocumentCustomView.__super__.afterRender.apply(this, arguments);
-            this.delegate('change', '[data-custom="file"]', this.loadFileHandler);
-            return this.delegate('change', '[data-custom="date"]', this.niceDateHandler);
-          };
-      
-          DocumentCustomView.prototype.loadFileHandler = function(e) {
-            var file,
-              _this = this;
-            file = new FileReader();
-            file.readAsDataURL($(e.target)[0].files[0]);
-            return file.onload = function(event) {
-              var target;
-              target = $(e.target).attr('data-target');
-              return $(_this.el).find("[name=" + target + "]").val(event.target.result);
-            };
-          };
-      
-          DocumentCustomView.prototype.niceDateHandler = function(e) {
-            var d, div, j, t, target, _ref1;
-            target = $(e.target);
-            target.closest('div').removeClass('error');
-            if ((_ref1 = this.error) != null) {
-              _ref1.remove();
-            }
-            d = Kronic.parse(target.val());
-            if (d == null) {
-              div = target.closest('div');
-              div.addClass('error');
-              return div.append(this.error = $('<small/>', {
-                'text': 'Do not understand this date'
-              }));
-            } else {
-              j = new Date(d).toJSON();
-              t = target.attr('data-target');
-              return $(this.el).find("[name=" + t + "]").val(j);
-            }
-          };
-      
-          return DocumentCustomView;
-      
-        })(Chaplin.View);
-      });
+      module.exports = DocumentCustomView;
       
     });
 
@@ -884,149 +898,153 @@
     // document_edit_view.coffee
     require.register('blad/client/src/views/document_edit_view.js', function(exports, require, module) {
     
-      var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+      var Document, DocumentCustomView, DocumentEditView, MessageView, _ref,
+        __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
         __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'models/document', 'views/document_custom_view', 'views/message_view', 'templates/document_edit', 'templates/document_forms'], function(Chaplin, Document, DocumentCustomView, MessageView) {
-        var DocumentEditView, _ref;
-        return DocumentEditView = (function(_super) {
-          __extends(DocumentEditView, _super);
+      Document = require('../models/document');
       
-          function DocumentEditView() {
-            this.deleteHandler = __bind(this.deleteHandler, this);
-            this.saveHandler = __bind(this.saveHandler, this);
-            _ref = DocumentEditView.__super__.constructor.apply(this, arguments);
-            return _ref;
+      DocumentCustomView = require('./document_custom_view');
+      
+      MessageView = require('./message_view');
+      
+      DocumentEditView = (function(_super) {
+        __extends(DocumentEditView, _super);
+      
+        function DocumentEditView() {
+          this.deleteHandler = __bind(this.deleteHandler, this);
+          this.saveHandler = __bind(this.saveHandler, this);
+          _ref = DocumentEditView.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
+      
+        DocumentEditView.prototype.clearThese = [];
+      
+        DocumentEditView.prototype.tagName = 'form';
+      
+        DocumentEditView.prototype.container = '#app';
+      
+        DocumentEditView.prototype.containerMethod = 'html';
+      
+        DocumentEditView.prototype.autoRender = true;
+      
+        DocumentEditView.prototype.getTemplateFunction = function() {
+          return require('../templates/document_edit');
+        };
+      
+        DocumentEditView.prototype.initialize = function(params) {
+          if (this.subviews == null) {
+            this.subviews = [];
           }
+          this.model = (params != null ? params.model : void 0) || new Document();
+          if ((params != null ? params.message : void 0) != null) {
+            return this.message = params.message;
+          }
+        };
       
-          DocumentEditView.prototype.clearThese = [];
+        DocumentEditView.prototype.afterRender = function() {
+          DocumentEditView.__super__.afterRender.apply(this, arguments);
+          this.undelegate();
+          this.delegate('click', '.save', this.saveHandler);
+          this.delegate('click', '.delete', this.deleteHandler);
+          this.delegate('change', '.changeType', this.changeTypeHandler);
+          this.subviews.push(new DocumentCustomView({
+            'model': this.model
+          }));
+          if (this.message != null) {
+            return this.subviews.push(new MessageView(this.message));
+          }
+        };
       
-          DocumentEditView.prototype.tagName = 'form';
-      
-          DocumentEditView.prototype.container = '#app';
-      
-          DocumentEditView.prototype.containerMethod = 'html';
-      
-          DocumentEditView.prototype.autoRender = true;
-      
-          DocumentEditView.prototype.templateName = 'document_edit.eco';
-      
-          DocumentEditView.prototype.getTemplateFunction = function() {
-            return JST[this.templateName];
-          };
-      
-          DocumentEditView.prototype.initialize = function(params) {
-            if (this.subviews == null) {
-              this.subviews = [];
+        DocumentEditView.prototype.saveHandler = function() {
+          var attr, element, object, _i, _j, _len, _len1, _ref1, _ref2,
+            _this = this;
+          attr = {};
+          _ref1 = $("" + this.container + " " + this.tagName).serializeArray();
+          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+            object = _ref1[_i];
+            switch (object.value) {
+              case 'true':
+                attr[object.name] = true;
+                break;
+              case 'false':
+                attr[object.name] = false;
+                break;
+              default:
+                attr[object.name] = object.value;
             }
-            this.model = (params != null ? params.model : void 0) || new Document();
-            if ((params != null ? params.message : void 0) != null) {
-              return this.message = params.message;
-            }
-          };
-      
-          DocumentEditView.prototype.afterRender = function() {
-            DocumentEditView.__super__.afterRender.apply(this, arguments);
-            this.undelegate();
-            this.delegate('click', '.save', this.saveHandler);
-            this.delegate('click', '.delete', this.deleteHandler);
-            this.delegate('change', '.changeType', this.changeTypeHandler);
-            this.subviews.push(new DocumentCustomView({
-              'model': this.model
-            }));
-            if (this.message != null) {
-              return this.subviews.push(new MessageView(this.message));
-            }
-          };
-      
-          DocumentEditView.prototype.saveHandler = function() {
-            var attr, element, object, _i, _j, _len, _len1, _ref1, _ref2,
-              _this = this;
-            attr = {};
-            _ref1 = $("" + this.container + " " + this.tagName).serializeArray();
-            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-              object = _ref1[_i];
-              switch (object.value) {
-                case 'true':
-                  attr[object.name] = true;
-                  break;
-                case 'false':
-                  attr[object.name] = false;
-                  break;
-                default:
-                  attr[object.name] = object.value;
+          }
+          $(this.container).find("" + this.tagName + " .error").removeClass('error');
+          _ref2 = this.clearThese;
+          for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
+            element = _ref2[_j];
+            element.remove();
+          }
+          return this.model.save(attr, {
+            'wait': true,
+            'success': function(model, response) {
+              Chaplin.mediator.publish('!startupController', 'documents', 'edit', {
+                '_id': response._id,
+                'message': {
+                  'type': 'success',
+                  'text': "Document " + (model.get('url')) + " saved."
+                }
+              });
+              return Chaplin.mediator.publish('!router:changeURL', "admin/edit/" + response._id);
+            },
+            'error': function(model, response) {
+              var div, field, message, small, _ref3;
+              _ref3 = JSON.parse(response.responseText);
+              for (field in _ref3) {
+                message = _ref3[field];
+                div = $(_this.container).find("" + _this.tagName + " [name=" + field + "]").closest('div');
+                div.addClass('error');
+                div.append(small = $('<small/>', {
+                  'text': message
+                }));
+                _this.clearThese.push(small);
               }
+              return _this.subviews.push(new MessageView({
+                'type': 'alert',
+                'text': "You no want dis."
+              }));
             }
-            $(this.container).find("" + this.tagName + " .error").removeClass('error');
-            _ref2 = this.clearThese;
-            for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
-              element = _ref2[_j];
-              element.remove();
-            }
-            return this.model.save(attr, {
-              'wait': true,
+          });
+        };
+      
+        DocumentEditView.prototype.deleteHandler = function() {
+          if (confirm('Are you sure you want to delete this document?')) {
+            return this.model.destroy({
               'success': function(model, response) {
-                Chaplin.mediator.publish('!startupController', 'documents', 'edit', {
-                  '_id': response._id,
+                Chaplin.mediator.publish('!startupController', 'documents', 'index', {
                   'message': {
                     'type': 'success',
-                    'text': "Document " + (model.get('url')) + " saved."
+                    'text': "Document " + (model.get('url')) + " deleted."
                   }
                 });
-                return Chaplin.mediator.publish('!router:changeURL', "admin/edit/" + response._id);
+                return Chaplin.mediator.publish('!router:changeURL', "admin/");
               },
               'error': function(model, response) {
-                var div, field, message, small, _ref3;
-                _ref3 = JSON.parse(response.responseText);
-                for (field in _ref3) {
-                  message = _ref3[field];
-                  div = $(_this.container).find("" + _this.tagName + " [name=" + field + "]").closest('div');
-                  div.addClass('error');
-                  div.append(small = $('<small/>', {
-                    'text': message
-                  }));
-                  _this.clearThese.push(small);
-                }
-                return _this.subviews.push(new MessageView({
+                return this.subviews.push(new MessageView({
                   'type': 'alert',
                   'text': "You no want dis."
                 }));
               }
             });
-          };
+          }
+        };
       
-          DocumentEditView.prototype.deleteHandler = function() {
-            if (confirm('Are you sure you want to delete this document?')) {
-              return this.model.destroy({
-                'success': function(model, response) {
-                  Chaplin.mediator.publish('!startupController', 'documents', 'index', {
-                    'message': {
-                      'type': 'success',
-                      'text': "Document " + (model.get('url')) + " deleted."
-                    }
-                  });
-                  return Chaplin.mediator.publish('!router:changeURL', "admin/");
-                },
-                'error': function(model, response) {
-                  return this.subviews.push(new MessageView({
-                    'type': 'alert',
-                    'text': "You no want dis."
-                  }));
-                }
-              });
-            }
-          };
+        DocumentEditView.prototype.changeTypeHandler = function(e) {
+          this.model.set('type', $(e.target).find('option:selected').text());
+          return this.render();
+        };
       
-          DocumentEditView.prototype.changeTypeHandler = function(e) {
-            this.model.set('type', $(e.target).find('option:selected').text());
-            return this.render();
-          };
+        return DocumentEditView;
       
-          return DocumentEditView;
+      })(Chaplin.View);
       
-        })(Chaplin.View);
-      });
+      module.exports = DocumentEditView;
       
     });
 
@@ -1034,52 +1052,54 @@
     // document_export_view.coffee
     require.register('blad/client/src/views/document_export_view.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var DocumentExportView, MessageView, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'views/message_view'], function(Chaplin, MessageView) {
-        var DocumentExportView, _ref;
-        return DocumentExportView = (function(_super) {
-          __extends(DocumentExportView, _super);
+      MessageView = require('./message_view');
       
-          function DocumentExportView() {
-            _ref = DocumentExportView.__super__.constructor.apply(this, arguments);
-            return _ref;
+      DocumentExportView = (function(_super) {
+        __extends(DocumentExportView, _super);
+      
+        function DocumentExportView() {
+          _ref = DocumentExportView.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
+      
+        DocumentExportView.prototype.container = '#app';
+      
+        DocumentExportView.prototype.containerMethod = 'html';
+      
+        DocumentExportView.prototype.autoRender = true;
+      
+        DocumentExportView.prototype.getTemplateFunction = function() {};
+      
+        DocumentExportView.prototype.initialize = function(params) {
+          DocumentExportView.__super__.initialize.apply(this, arguments);
+          if ((params != null ? params.message : void 0) != null) {
+            return this.message = params.message;
           }
+        };
       
-          DocumentExportView.prototype.container = '#app';
+        DocumentExportView.prototype.afterRender = function() {
+          var blob;
+          DocumentExportView.__super__.afterRender.apply(this, arguments);
+          if (this.message != null) {
+            new MessageView(this.message);
+          }
+          if (this.collection && this.collection.length !== 0) {
+            blob = new Blob([JSON.stringify(this.collection.toJSON())], {
+              'type': "application/json;charset=utf-8"
+            });
+            return saveAs(blob, "blad-cms-dump-" + ((new Date).toISOString()) + ".json");
+          }
+        };
       
-          DocumentExportView.prototype.containerMethod = 'html';
+        return DocumentExportView;
       
-          DocumentExportView.prototype.autoRender = true;
+      })(Chaplin.View);
       
-          DocumentExportView.prototype.getTemplateFunction = function() {};
-      
-          DocumentExportView.prototype.initialize = function(params) {
-            DocumentExportView.__super__.initialize.apply(this, arguments);
-            if ((params != null ? params.message : void 0) != null) {
-              return this.message = params.message;
-            }
-          };
-      
-          DocumentExportView.prototype.afterRender = function() {
-            var blob;
-            DocumentExportView.__super__.afterRender.apply(this, arguments);
-            if (this.message != null) {
-              new MessageView(this.message);
-            }
-            if (this.collection && this.collection.length !== 0) {
-              blob = new Blob([JSON.stringify(this.collection.toJSON())], {
-                'type': "application/json;charset=utf-8"
-              });
-              return saveAs(blob, "blad-cms-dump-" + ((new Date).toISOString()) + ".json");
-            }
-          };
-      
-          return DocumentExportView;
-      
-        })(Chaplin.View);
-      });
+      module.exports = DocumentExportView;
       
     });
 
@@ -1087,31 +1107,29 @@
     // document_list_view.coffee
     require.register('blad/client/src/views/document_list_view.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var DocumentListView, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'templates/document_row'], function(Chaplin) {
-        var DocumentListView, _ref;
-        return DocumentListView = (function(_super) {
-          __extends(DocumentListView, _super);
+      DocumentListView = (function(_super) {
+        __extends(DocumentListView, _super);
       
-          function DocumentListView() {
-            _ref = DocumentListView.__super__.constructor.apply(this, arguments);
-            return _ref;
-          }
+        function DocumentListView() {
+          _ref = DocumentListView.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
       
-          DocumentListView.prototype.tagName = 'li';
+        DocumentListView.prototype.tagName = 'li';
       
-          DocumentListView.prototype.templateName = 'document_row.eco';
+        DocumentListView.prototype.getTemplateFunction = function() {
+          return require('../templates/document_row');
+        };
       
-          DocumentListView.prototype.getTemplateFunction = function() {
-            return JST[this.templateName];
-          };
+        return DocumentListView;
       
-          return DocumentListView;
+      })(Chaplin.View);
       
-        })(Chaplin.View);
-      });
+      module.exports = DocumentListView;
       
     });
 
@@ -1119,53 +1137,57 @@
     // documents_list_view.coffee
     require.register('blad/client/src/views/documents_list_view.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var DocumentListView, DocumentsListView, MessageView, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'views/document_list_view', 'views/message_view'], function(Chaplin, DocumentListView, MessageView) {
-        var DocumentsListView, _ref;
-        return DocumentsListView = (function(_super) {
-          __extends(DocumentsListView, _super);
+      DocumentListView = require('./document_list_view');
       
-          function DocumentsListView() {
-            _ref = DocumentsListView.__super__.constructor.apply(this, arguments);
-            return _ref;
+      MessageView = require('./message_view');
+      
+      DocumentsListView = (function(_super) {
+        __extends(DocumentsListView, _super);
+      
+        function DocumentsListView() {
+          _ref = DocumentsListView.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
+      
+        DocumentsListView.prototype.tagName = 'ul';
+      
+        DocumentsListView.prototype.className = 'list';
+      
+        DocumentsListView.prototype.container = '#app';
+      
+        DocumentsListView.prototype.containerMethod = 'html';
+      
+        DocumentsListView.prototype.autoRender = true;
+      
+        DocumentsListView.prototype.getView = function(item) {
+          return new DocumentListView({
+            'model': item
+          });
+        };
+      
+        DocumentsListView.prototype.initialize = function(params) {
+          DocumentsListView.__super__.initialize.apply(this, arguments);
+          if ((params != null ? params.message : void 0) != null) {
+            return this.message = params.message;
           }
+        };
       
-          DocumentsListView.prototype.tagName = 'ul';
+        DocumentsListView.prototype.afterRender = function() {
+          DocumentsListView.__super__.afterRender.apply(this, arguments);
+          if (this.message != null) {
+            return new MessageView(this.message);
+          }
+        };
       
-          DocumentsListView.prototype.className = 'list';
+        return DocumentsListView;
       
-          DocumentsListView.prototype.container = '#app';
+      })(Chaplin.CollectionView);
       
-          DocumentsListView.prototype.containerMethod = 'html';
-      
-          DocumentsListView.prototype.autoRender = true;
-      
-          DocumentsListView.prototype.getView = function(item) {
-            return new DocumentListView({
-              'model': item
-            });
-          };
-      
-          DocumentsListView.prototype.initialize = function(params) {
-            DocumentsListView.__super__.initialize.apply(this, arguments);
-            if ((params != null ? params.message : void 0) != null) {
-              return this.message = params.message;
-            }
-          };
-      
-          DocumentsListView.prototype.afterRender = function() {
-            DocumentsListView.__super__.afterRender.apply(this, arguments);
-            if (this.message != null) {
-              return new MessageView(this.message);
-            }
-          };
-      
-          return DocumentsListView;
-      
-        })(Chaplin.CollectionView);
-      });
+      module.exports = DocumentsListView;
       
     });
 
@@ -1173,27 +1195,23 @@
     // layout.coffee
     require.register('blad/client/src/views/layout.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var Layout, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin'], function(Chaplin) {
-        var Layout, _ref;
-        return Layout = (function(_super) {
-          __extends(Layout, _super);
+      Layout = (function(_super) {
+        __extends(Layout, _super);
       
-          function Layout() {
-            _ref = Layout.__super__.constructor.apply(this, arguments);
-            return _ref;
-          }
+        function Layout() {
+          _ref = Layout.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
       
-          Layout.prototype.initialize = function() {
-            return Layout.__super__.initialize.apply(this, arguments);
-          };
+        return Layout;
       
-          return Layout;
+      })(Chaplin.Layout);
       
-        })(Chaplin.Layout);
-      });
+      module.exports = Layout;
       
     });
 
@@ -1201,49 +1219,47 @@
     // message_view.coffee
     require.register('blad/client/src/views/message_view.js', function(exports, require, module) {
     
-      var __hasProp = {}.hasOwnProperty,
+      var MessageView, _ref,
+        __hasProp = {}.hasOwnProperty,
         __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
       
-      define(['chaplin', 'templates/message'], function(Chaplin) {
-        var MessageView, _ref;
-        return MessageView = (function(_super) {
-          __extends(MessageView, _super);
+      MessageView = (function(_super) {
+        __extends(MessageView, _super);
       
-          function MessageView() {
-            _ref = MessageView.__super__.constructor.apply(this, arguments);
-            return _ref;
-          }
+        function MessageView() {
+          _ref = MessageView.__super__.constructor.apply(this, arguments);
+          return _ref;
+        }
       
-          MessageView.prototype.container = '#app';
+        MessageView.prototype.container = '#app';
       
-          MessageView.prototype.containerMethod = 'prepend';
+        MessageView.prototype.containerMethod = 'prepend';
       
-          MessageView.prototype.autoRender = true;
+        MessageView.prototype.autoRender = true;
       
-          MessageView.prototype.templateName = 'message.eco';
+        MessageView.prototype.getTemplateFunction = function() {
+          return require('../templates/message');
+        };
       
-          MessageView.prototype.getTemplateFunction = function() {
-            return JST[this.templateName];
-          };
+        MessageView.prototype.getTemplateData = function() {
+          return this.params;
+        };
       
-          MessageView.prototype.getTemplateData = function() {
-            return this.params;
-          };
+        MessageView.prototype.initialize = function(params) {
+          this.params = params;
+          return MessageView.__super__.initialize.apply(this, arguments);
+        };
       
-          MessageView.prototype.initialize = function(params) {
-            this.params = params;
-            return MessageView.__super__.initialize.apply(this, arguments);
-          };
+        MessageView.prototype.afterRender = function() {
+          MessageView.__super__.afterRender.apply(this, arguments);
+          return this.delegate('click', this.dispose);
+        };
       
-          MessageView.prototype.afterRender = function() {
-            MessageView.__super__.afterRender.apply(this, arguments);
-            return this.delegate('click', this.dispose);
-          };
+        return MessageView;
       
-          return MessageView;
+      })(Chaplin.View);
       
-        })(Chaplin.View);
-      });
+      module.exports = MessageView;
       
     });
   })();
