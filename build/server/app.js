@@ -210,7 +210,7 @@
     validateConfig = function(cb) {
       var email, err, suffix, use, _i, _len, _ref;
       log.debug('Validate config');
-      config.mongodb = process.env.DATABASE_URL || config.mongodb;
+      config.mongodb = process.env.MONGO_URL || process.env.DATABASE_URL || config.mongodb;
       config.port = process.env.PORT || config.port;
       config.env = process.env.NODE_ENV || 'documents';
       if (config.browserid == null) {
