@@ -178,11 +178,11 @@ exports.start = (cfg, site_src, done) ->
         log.debug 'Validate config'
 
         # Resolve config coming from environment and the `cfg` dict.
-        config.mongodb        = process.env.DATABASE_URL or config.mongodb    # MongoDB database
-        config.port           = process.env.PORT or config.port               # port number
-        config.env            = process.env.NODE_ENV or 'documents'           # environment/collection to use
+        config.mongodb        = process.env.MONGO_URL or process.env.DATABASE_URL or config.mongodb # MongoDB database
+        config.port           = process.env.PORT or config.port                                     # port number
+        config.env            = process.env.NODE_ENV or 'documents'                                 # environment/collection to use
         config.browserid     ?= {}
-        config.browserid.salt = process.env.API_SALT or config.browserid.salt # API key salt
+        config.browserid.salt = process.env.API_SALT or config.browserid.salt                       # API key salt
         config.middleware    ?= []
 
         # Validate file.
