@@ -146,3 +146,6 @@ $ PORT=5200 npm start
 ```
 
 Then visit [http://127.0.0.1:5200/admin](http://127.0.0.1:5200/admin).
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/radekstepan/blad/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
