@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -103,27 +103,26 @@ describe "document that has children actions", ->
                 children.should.have.property 'lvl0'
                 children.should.have.property 'lvl1'
 
-                clean = []
-                for doc in children.lvl0
+                fn = (doc) ->
                     delete doc._id
                     delete doc.modified
-                    clean.push doc
+                    doc
 
-                clean.should.includeEql
+                clean = ( fn(doc) for doc in children.lvl0 )
+
+                clean.should.eql [
                     "type": "HasNestedChildrenDocument"
                     "name": "child0"
                     "url":  "/group1/child0"
+                ]
 
-                clean = []
-                for doc in children.lvl1
-                    delete doc._id
-                    delete doc.modified
-                    clean.push doc
+                clean = ( fn(doc) for doc in children.lvl1 )
 
-                clean.should.includeEql
+                clean.should.eql [
                     "type": "HasNestedChildrenDocument"
                     "name": "child1"
                     "url":  "/group1/rubbish/child1"
+                ]
 
                 done()
 

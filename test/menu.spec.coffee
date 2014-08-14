@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -106,21 +106,25 @@ describe "menu document actions", ->
 
                 documents.length.should.equal 2
 
-                clean = []
-                for doc in documents
+                fn = (doc) ->
                     delete doc._id
                     delete doc.modified
-                    clean.push doc
+                    doc
 
-                clean.should.includeEql
-                    "type":   "MenuDocument"
-                    "name":   "root"
-                    "url":    "/"
-                    'public': true
-                clean.should.includeEql
-                    "type":   "MenuDocument"
-                    "name":   "another-root"
-                    "url":    "/yup"
-                    'public': true
+                clean = ( fn(doc) for doc in documents )
+
+                clean.should.eql [
+                    {
+                        "type":   "MenuDocument"
+                        "name":   "root"
+                        "url":    "/"
+                        'public': true
+                    }, {
+                        "type":   "MenuDocument"
+                        "name":   "another-root"
+                        "url":    "/yup"
+                        'public': true
+                    }
+                ]
 
                 done()

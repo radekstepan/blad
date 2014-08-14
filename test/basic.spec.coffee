@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -107,15 +107,18 @@ describe "basic document actions", ->
                     delete doc.modified
                     clean.push doc
 
-                clean.should.includeEql
-                    "type":   "BasicDocument"
-                    "name":   "document-0"
-                    "url":    "/documents/0"
-                    'public': true
-                clean.should.includeEql
-                    "type":   "BasicDocument"
-                    "name":   "document-1"
-                    "url":    "/documents/1"
-                    'public': true
+                clean.should.eql [
+                    {                        
+                        "type":   "BasicDocument"
+                        "name":   "document-0"
+                        "url":    "/documents/0"
+                        'public': true
+                    },{                        
+                        "type":   "BasicDocument"
+                        "name":   "document-1"
+                        "url":    "/documents/1"
+                        'public': true
+                    }
+                ]
 
                 done()

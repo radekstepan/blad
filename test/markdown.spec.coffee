@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -92,11 +92,12 @@ describe "markdown document actions", ->
                 delete documents[0]._id
                 delete documents[0].modified
 
-                documents.should.includeEql
+                documents.should.eql [
                     'type':   'MarkdownDocument'
                     "name":   "markdown"
                     "url":    "/documents/markdown"
                     "markup": "__hello__"
                     'public': true
+                ]
 
                 done()

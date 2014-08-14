@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -84,23 +84,27 @@ describe "document that has children actions", ->
                 # Parse response.
                 children = JSON.parse(body)
 
-                clean = []
-                for doc in children.all
+                fn = (doc) ->
                     delete doc._id
                     delete doc.modified
-                    clean.push doc
+                    doc
 
-                clean.should.includeEql
-                    "type": "HasChildrenDocument"
-                    "name": "child1"
-                    "url":  "/group1/child1"
-                clean.should.includeEql
-                    "type": "HasChildrenDocument"
-                    "name": "child2"
-                    "url":  "/group1/child2"
-                clean.should.includeEql
-                    "type": "HasChildrenDocument"
-                    "name": "child3"
-                    "url":  "/group1/child3"
+                clean = ( fn(doc) for doc in children.all )
+
+                clean.should.eql [
+                    {
+                        "type": "HasChildrenDocument"
+                        "name": "child1"
+                        "url":  "/group1/child1"
+                    }, {
+                        "type": "HasChildrenDocument"
+                        "name": "child2"
+                        "url":  "/group1/child2"
+                    }, {
+                        "type": "HasChildrenDocument"
+                        "name": "child3"
+                        "url":  "/group1/child3"
+                    }
+                ]
 
                 done()

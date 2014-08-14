@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -122,16 +122,18 @@ describe "siblings of a document", ->
 
                 documents.length.should.equal 1
 
-                clean = []
-                for doc in documents
+                fn = (doc) ->
                     delete doc._id
                     delete doc.modified
-                    clean.push doc
+                    doc
 
-                clean.should.includeEql
+                clean = ( fn(doc) for doc in documents )
+
+                clean.should.eql [
                     "type":   "SiblingsDocument"
                     "name":   "article-2"
                     "url":    "/blog/article-2"
                     'public': true
+                ]
 
                 done()

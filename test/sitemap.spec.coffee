@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -90,8 +90,11 @@ describe "sitemap.xml", ->
 
                 matches = ( match.replace(/<lastmod>.+?<\/lastmod>/, '') for match in body.match /<url>(.+?)<\/url>/g )
 
-                matches.should.includeEql "<url><loc>#{url}/one</loc></url>"
-                matches.should.includeEql "<url><loc>#{url}/two</loc></url>"
-                matches.should.not.includeEql "<url><loc>#{url}/three</loc></url>"
+                matches.should.eql [
+                    "<url><loc>#{url}/one</loc></url>"
+                    "<url><loc>#{url}/two</loc></url>"
+                ]
+
+                matches.length.should.equal 2
 
                 done()

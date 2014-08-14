@@ -1,4 +1,4 @@
-should = require 'should'
+should = do require 'should'
 request = require 'request'
 querystring = require 'querystring'
 
@@ -101,6 +101,20 @@ describe "document URL un-/mapping", ->
                     'x-blad-apikey': '@dummy'
             , (error, response, body) ->
                 response.statusCode.should.equal 400
+                done()
+
+        it "should lowercase the URL", (done) ->
+            request.post
+                'url': "#{url}/api/document"
+                'form':
+                    'type':   'DummyDocument'
+                    'url':    "/Test"
+                    'public': true
+                'headers':
+                    'x-blad-apikey': '@dummy'
+            , (error, response, body) ->
+                response.statusCode.should.equal 201
+                JSON.parse(body).url.should.equal '/test'
                 done()
 
     describe "create root public document", ->

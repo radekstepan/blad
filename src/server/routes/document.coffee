@@ -45,6 +45,8 @@ module.exports = ({ app, log, blad }) ->
 
     # Save/update a document.
     blad.save = (doc, cb) ->
+        # Lowercase all URLs.
+        doc.url = do doc.url.toLowerCase
         # Prefix URL with a forward slash if not present.
         if doc.url[0] isnt '/' then doc.url = '/' + doc.url
         # Remove trailing slash if present.

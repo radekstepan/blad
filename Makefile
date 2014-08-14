@@ -6,7 +6,7 @@ example: build
 
 # Run Mocha test suite.
 test: build
-	@NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script --reporter $(REPORTER) --bail
+	@NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script/register --reporter $(REPORTER) --bail
 
 # Run Mocha test suite in jscoverage mode.
 test-cov: prep-coverage
