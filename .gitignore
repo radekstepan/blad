@@ -1,6 +1,0 @@
-node_modules/
-build/public/
-build-cov/
-coverage.html
-*.log
-.DS_Store
