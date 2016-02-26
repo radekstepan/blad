@@ -1,0 +1,35 @@
+{
+  "name": "blad",
+  "version": "4.0.0-alpha",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^1.5.2",
+    "compression": "^1.6.1",
+    "connect": "^3.4.1",
+    "consolidate": "^0.14.0",
+    "front-matter": "^2.0.6",
+    "glob": "^7.0.0",
+    "gray-matter": "^2.0.2",
+    "lodash": "^4.5.1",
+    "lru-cache": "^4.0.0",
+    "node-dir": "^0.1.11",
+    "remarkable": "^1.6.2",
+    "serve-static": "^1.10.2",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radekstepan/blad.git"
+  },
+  "author": "Radek Stepan <rs676@cam.ac.uk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radekstepan/blad/issues"
+  },
+  "homepage": "https://github.com/radekstepan/blad#readme"
+}

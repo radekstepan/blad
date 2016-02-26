@@ -1,0 +1,10 @@
+{% extends 'page.html' %}
+
+{% block content %}
+  {% parent %}
+  <ul>
+  {% for person in people %}
+    <li>{{person}}</li>
+  {% endfor %}
+  </ul>
+{% endblock content %}
