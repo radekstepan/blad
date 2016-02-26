@@ -7,6 +7,7 @@ let as = require('async');
 
 let helpers = require('./lib/helpers.js');
 let content = require('./lib/content.js');
+let relations = require('./lib/relations.js');
 let server = require('./lib/server.js');
 
 module.exports = (opts) => {
@@ -29,6 +30,7 @@ module.exports = (opts) => {
   as.waterfall([
     _.partial(helpers, opts),
     _.partial(content, opts),
+    _.partial(relations),
     _.partial(server, opts),
   ], (err) => {
     throw err;

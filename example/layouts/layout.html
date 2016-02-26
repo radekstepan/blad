@@ -9,6 +9,14 @@
   </script>
 </head>
 <body>
+  <ul>
+  {% for page in rel.menu %}
+    <li><a href="{{page.url}}">{{page.title}}</a></li>
+  {% endfor %}
+  </ul>
+
+  <hr />
+
   {% block content %}{% endblock content %}
 </body>
 </html>
