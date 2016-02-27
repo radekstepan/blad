@@ -7,7 +7,7 @@ let rel = require('../lib/relations.js');
 let docs = {
   '/': { 'data': '/' },
   '/dogs': { 'data': '/dogs' },
-  '/dogs/tim': { 'data': '/dogs/tim' },
+  '/dogs/jim': { 'data': '/dogs/jim' },
   '/cats': { 'data': '/cats' },
   '/cats/tim': { 'data': '/cats/tim' },
   '/cats/liz': { 'data': '/cats/liz' },
@@ -20,13 +20,21 @@ module.exports = {
     done();
   },
 
-  'relations - children(1)': (done) => {
+  'relations - children': (done) => {
     assert.deepEqual(rel.children(docs, '/cats', 1), [ '/cats/tim', '/cats/liz' ]);
+    assert.deepEqual(rel.children(docs, '/pets', 2), [ '/pets/pip/8' ]);
     done();
   },
 
-  'relations - children(2)': (done) => {
-    assert.deepEqual(rel.children(docs, '/pets', 2), [ '/pets/pip/8' ]);
+  'relations - siblings': (done) => {
+    assert.deepEqual(rel.siblings(docs, '/cats/tim'), [ '/cats/liz' ]);
+    done();
+  },
+
+  'relations - parent': (done) => {
+    assert.deepEqual(rel.parent(docs, '/dogs/jim'), '/dogs');
+    assert.deepEqual(rel.parent(docs, '/pets/pip/8'), '/');
+    assert.deepEqual(rel.parent(docs, '/'), '/');
     done();
   }
 };
