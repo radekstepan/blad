@@ -10,7 +10,15 @@
 </head>
 <body>
   <ul>
-  {% for page in rel.menu %}
+  {% for page in rel.menu() %}
+    <li><a href="{{page.url}}">{{page.title}}</a></li>
+  {% endfor %}
+  </ul>
+
+  <hr />
+
+  <ul>
+  {% for page in rel.children('1') %}
     <li><a href="{{page.url}}">{{page.title}}</a></li>
   {% endfor %}
   </ul>
