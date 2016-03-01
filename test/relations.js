@@ -1,6 +1,7 @@
 "use strict";
 
 let assert = require('chai').assert;
+let _ = require('lodash');
 
 let rel = require('../lib/relations.js');
 
@@ -35,6 +36,13 @@ module.exports = {
     assert.deepEqual(rel.parent(docs, '/dogs/jim'), '/dogs');
     assert.deepEqual(rel.parent(docs, '/pets/pip/8'), '/');
     assert.deepEqual(rel.parent(docs, '/'), '/');
+    done();
+  },
+
+  'relations - isChild': (done) => {
+    assert.ok(rel.isChild(null, '/a/b', '/a/b/c'));
+    assert.notOk(rel.isChild(null, '/a/b', '/a/ble/c'));
+    assert.notOk(rel.isChild(null, '/a/b', '/a/b'));
     done();
   }
 };
