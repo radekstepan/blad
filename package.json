@@ -1,7 +1,7 @@
 {
   "name": "blad",
   "version": "4.0.0-alpha",
-  "description": "",
+  "description": "A minimalist flat-file CMS with dynamic content",
   "author": "Radek Stepan <rs676@cam.ac.uk>",
   "license": "AGPL-3.0",
   "main": "index.js",
