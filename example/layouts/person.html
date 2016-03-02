@@ -1,5 +1,7 @@
-{% extends 'page.html' %}
+{% extends 'layout.html' %}
 
 {% block content %}
-  First name: {{name.first}}
+  <h3>{{ title }}</h3>
+
+  {% parent %}
 {% endblock content %}

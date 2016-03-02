@@ -19,6 +19,7 @@
     "gray-matter": "^2.0.2",
     "lodash": "^4.5.1",
     "lru-cache": "^4.0.0",
+    "milligram": "^1.1.0",
     "minimist": "^1.2.0",
     "node-dir": "^0.1.11",
     "remarkable": "^1.6.2",
@@ -30,7 +31,7 @@
     "mocha": "^2.4.5"
   },
   "scripts": {
-    "start": "./bin/blad.js --port 5050 --source ./example/",
+    "start": "./bin/blad.js --port 5050 --source example/",
     "test": "./node_modules/.bin/mocha --ui exports --bail --reporter spec"
   },
   "repository": {

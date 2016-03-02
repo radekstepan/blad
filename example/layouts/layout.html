@@ -1,30 +1,13 @@
 <!doctype html>
 <html>
 <head>
-  <title>{{title}}</title>
+  <title>{{ title }} | {{ subtitle }}</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="/public/style.css">
-  <script type="text/javascript">
-    {% include "functions.js" %}
-  </script>
 </head>
 <body>
-  <ul>
-  {% for page in rel.menu() %}
-    <li><a href="{{page.url}}">{{page.title}}</a></li>
-  {% endfor %}
-  </ul>
-
-  <hr />
-
-  <ul>
-  {% for page in rel.children('1') %}
-    <li><a href="{{page.url}}">{{page.title}}</a></li>
-  {% endfor %}
-  </ul>
-
-  <hr />
-
-  {% block content %}{% endblock content %}
+  {% block content %}
+    {{ contents|raw }}
+  {% endblock content %}
 </body>
 </html>
