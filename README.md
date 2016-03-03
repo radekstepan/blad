@@ -45,6 +45,52 @@ If a `404.html` template is provided together with a document entitled `404.md`,
 
 You can access the URL of a page you are on by using the `url` key.
 
+####Relations
+
+You can access content in other documents by using the relations helper object.
+
+To get a list of top-level pages in the CMS use:
+
+```
+{% for page in rel.menu() %}
+  {{ page.url }}
+{% endfor %}
+```
+
+To get a list of sibling documents:
+
+```
+{% for page in rel.siblings(url) %}
+  {{ page.url }}
+{% endfor %}
+```
+
+You can get a list of children of depth `n`:
+
+```
+{% for page in rel.children(url, n) %}
+  {{ page.url }}
+{% endfor %}
+```
+
+Access the first existing parent document:
+
+```
+{% set parent = rel.parent(url) %}
+```
+
+Check if one document is the same as another or one of its descendants:
+
+```
+{% set isFamily = rel.isFamily('/people', '/people') %}
+```
+
+Or just check if one document is a child of another:
+
+```
+{% set isChild = rel.isChild('/people', '/people/radek') %}
+```
+
 ###Helpers
 
 Are modules (in JS or CoffeeScript) that can be accessed at page render stage. Typically they will be used to access remote data to then be rendered in a page. In a YAML front-matter we would request a helper like so:
@@ -56,14 +102,14 @@ helpers:
 ---
 ```
 
-The first time a page is rendered, the helper in `my_helper.js` is called. It is expected to be a function with two parameters, `docs` and `cb`. The former is a map of all documents in the CMS, the latter a callback for when the helper has done its job. As an example:
+The first time a page is rendered, the helper in `my_helper.js` is called. It is expected to be a function with two parameters, `data` and `cb`. The former is a map of key-value fields from the front-matter, the latter a callback for when the helper has done its job. As an example:
 
 ```js
-module.exports = (docs, cb) => {
+module.exports = (data, cb) => {
   // Do some work...
 
   // Call back.
-  cb(null, data);
+  cb(null, result);
 };
 ```
 
