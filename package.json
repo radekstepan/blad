@@ -24,7 +24,8 @@
     "node-dir": "^0.1.11",
     "remarkable": "^1.6.2",
     "serve-static": "^1.10.2",
-    "swig": "^1.4.2"
+    "swig": "^1.4.2",
+    "snyk": "^1.28.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -32,7 +33,9 @@
   },
   "scripts": {
     "start": "./bin/blad.js --port 5050 --source example/",
-    "test": "./node_modules/.bin/mocha --ui exports --bail --reporter spec"
+    "test": "./node_modules/.bin/mocha --ui exports --bail --reporter spec",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -41,5 +44,6 @@
   "bugs": {
     "url": "https://github.com/radekstepan/blad/issues"
   },
-  "homepage": "https://github.com/radekstepan/blad#readme"
+  "homepage": "https://github.com/radekstepan/blad#readme",
+  "snyk": true
 }
