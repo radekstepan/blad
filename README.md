@@ -1,4 +1,4 @@
-#blað
+# blað
 
 A minimalist flat-file CMS with dynamic content.
 
@@ -6,14 +6,14 @@ A minimalist flat-file CMS with dynamic content.
 [![Dependencies](http://img.shields.io/david/radekstepan/blad.svg?style=flat)](https://david-dm.org/radekstepan/blad)
 [![License](http://img.shields.io/badge/license-AGPL--3.0-red.svg?style=flat)](LICENSE)
 
-##Features
+## Features
 
 1. Reads content from Markdown files and YAML front-matter.
 1. No database or write access to disk needed.
 1. In-memory cache maintains dynamic content defined in helper functions.
 1. Powerful [Swig](http://paularmstrong.github.io/swig/) templating.
 
-##Quickstart
+## Quickstart
 
 ```bash
 $ npm install blad -g
@@ -21,7 +21,7 @@ $ blad --port 8080
 # blad/4.0.0-alpha started on port 8080
 ```
 
-##Configuration
+## Configuration
 
 The following command will launch a blad server on port `5050`, sourcing files from the `example/` directory and keep all cached content for a period of `1` day.
 
@@ -29,7 +29,7 @@ The following command will launch a blad server on port `5050`, sourcing files f
 $ ./bin/blad.js --port 5050 --source example/ --cache 1440
 ```
 
-###Content
+### Content
 
 The site pages are maintained as sets of Markdown files with YAML front-matter. The name corresponds to the url of the page so, for example, `/content/people/radek.md` will get mapped to the `/people/radek` URL.
 
@@ -37,7 +37,7 @@ Among the fields one can set in the front-matter, `template` is the most importa
 
 Fields are represented as key-value pairs of arbitrary depth.
 
-###Layouts
+### Layouts
 
 Is a place where [Swig](http://paularmstrong.github.io/swig/) templates live. They can be extended and macros work too.
 
@@ -45,7 +45,7 @@ If a `404.html` template is provided together with a document entitled `404.md`,
 
 You can access the URL of a page you are on by using the `url` key.
 
-####Relations
+#### Relations
 
 You can access content in other documents by using the relations helper object.
 
@@ -91,7 +91,7 @@ Or just check if one document is a child of another:
 {% set isChild = rel.isChild('/people', '/people/radek') %}
 ```
 
-###Helpers
+### Helpers
 
 Are modules (in JS or CoffeeScript) that can be accessed at page render stage. Typically they will be used to access remote data to then be rendered in a page. In a YAML front-matter we would request a helper like so:
 
@@ -117,6 +117,6 @@ You can access 3rd party libraries here by defining them in `package.json` of th
 
 The data is then accessible under the key `people` (in the example above) in the page layout and saved for `--cache` amount of time. This is a startup parameter and saves having us make potentially expensive operations every time a page is requested.
 
-###Public
+### Public
 
 All static content, like CSS and JS files, can be accessed here. Use `/public/path` in layouts when accessing these files.
