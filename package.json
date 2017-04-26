@@ -1,6 +1,6 @@
 {
   "name": "blad",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "A minimalist flat-file CMS with dynamic content",
   "author": "Radek Stepan <rs676@cam.ac.uk>",
   "license": "AGPL-3.0",
@@ -9,7 +9,7 @@
     "blad": "./bin/blad.js"
   },
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "2.3.0",
     "coffee-script": "^1.10.0",
     "colors": "^1.1.2",
     "compression": "^1.6.1",
@@ -22,14 +22,14 @@
     "milligram": "^1.1.0",
     "minimist": "^1.2.0",
     "node-dir": "^0.1.11",
-    "remarkable": "^1.6.2",
+    "remarkable": "1.7.1",
     "serve-static": "^1.10.2",
     "swig": "^1.4.2",
     "snyk": "^1.28.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "3.3.0"
   },
   "scripts": {
     "start": "./bin/blad.js --port 5050 --source example/",
