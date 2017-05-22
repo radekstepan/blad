@@ -6,3 +6,6 @@ patch:
   'npm:uglify-js:20151024':
     - swig > uglify-js:
         patched: '2017-04-17T03:17:27.726Z'
+  'npm:ms:20170412':
+    - compression > debug > ms:
+        patched: '2017-05-22T18:33:15.774Z'
